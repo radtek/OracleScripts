@@ -1,0 +1,3045 @@
+ 
+Type: SERVICE 
+File: C:\HotCopy\Service.bat 
+Log: C:\HotCopy\Service.log 
+Directory: C:\HotCopy 
+Computer: KMINB1 
+Version: 1.9 
+Started: 10.07.2019  9:00:03,72 
+Username: Orapetronics 
+PATH: d:\oracle\bin;d:\oracle\bin;D:\ORACLE\bin;C:\Program Files\Oracle\jre\1.1.7\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\Windows Imaging\;c:\program files\winrar;;C:\WINDOWS\system32\WindowsPowerShell\v1.0;D:\ORACLE\BIN; D:\ORACLE\NETWORK\ADMIN; D:\ORACLE\bin;C:\Program Files\Oracle\jre\1.1.7\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\Windows Imaging\;c:\program files\winrar;;C:\WINDOWS\system32\WindowsPowerShell\v1.0 
+ 
+---------------------------------------------------------- 
+
+C:\HotCopy>SET ORACLE_SID=NB 
+
+C:\HotCopy>SET ORACLE_HOME=d:\oracle 
+
+C:\HotCopy>SET PATH=d:\oracle\bin;d:\oracle\bin;d:\oracle\bin;D:\ORACLE\bin;C:\Program Files\Oracle\jre\1.1.7\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\Windows Imaging\;c:\program files\winrar;;C:\WINDOWS\system32\WindowsPowerShell\v1.0;D:\ORACLE\BIN; D:\ORACLE\NETWORK\ADMIN; D:\ORACLE\bin;C:\Program Files\Oracle\jre\1.1.7\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\Windows Imaging\;c:\program files\winrar;;C:\WINDOWS\system32\WindowsPowerShell\v1.0 
+
+C:\HotCopy>SET DIR_ORADATA=d:\oracle\oradata\NB\ 
+
+C:\HotCopy>SET TEMP_DBFILE='D:\ORACLE\ORADATA\NB\TEMP01.DBF' 
+
+C:\HotCopy>SET DIR_PFILE=d:\oracle\ADMIN\NB\PFILE\ 
+
+C:\HotCopy>SET DIR_BDUMP=d:\oracle\ADMIN\NB\BDUMP\ 
+
+C:\HotCopy>SET DIR_DATABASE=d:\oracle\DATABASE\ 
+
+C:\HotCopy>SET DIR_ARCHIVE=D:\ARCHIVE\NB\ARCHIVELOG\ 
+
+C:\HotCopy>SET DIR_AREMOTE_OUT=\\KMISQL1\d$\AREMOTE\AZS\BACKUP_LOG\ 
+
+C:\HotCopy>SET DIR_BACKUP=D:\ARCHIVE\NB\ 
+
+C:\HotCopy>SET DIR_HOTCOPY=c:\hotcopy\ 
+
+C:\HotCopy>SET DIR_CONFIG=c:\hotcopy\config\ 
+
+C:\HotCopy>SET DIR_TMP=c:\hotcopy\oradata\ 
+
+C:\HotCopy>SET ORA805_NETA=\ORANT\Net80\Admin\ 
+
+C:\HotCopy>SET ORA817_NETA=\ORACLE\network\ADMIN\ 
+
+C:\HotCopy>SET TEMP_BACKUPFILE=c:\hotcopy\oradata\HotCopyTmp.rar 
+
+C:\HotCopy>SET USB_DRIVE= 
+
+C:\HotCopy>SET IS_SERVER=YES 
+
+C:\HotCopy>SET SERVER_HOTCOPY=c:\hotcopy\ 
+
+C:\HotCopy>SET ARGUS_SERVER=KMINB1 
+
+C:\HotCopy>SET USE_RMAN=YES 
+
+C:\HotCopy>set nls_lang=AMERICAN_AMERICA.CL8MSWIN1251 
+
+C:\HotCopy>rem --- èÆ§™´ÓÁ†•¨·Ô ™ ·Æ·•§≠®¨ Äêå†¨ (§´Ô ™ÆØ®‡Æ¢†≠®Ô °†™†ØÆ¢) 
+
+C:\HotCopy>SET IP_ARM0=127.0.0.1\diskc 
+
+C:\HotCopy>SET IP_ARM1=0.0.0.0\diskc 
+
+C:\HotCopy>SET IP_ARM2=0.0.0.0\diskc 
+
+C:\HotCopy>SET USER_ARM0=oracle 
+
+C:\HotCopy>SET USER_ARM1=oracle 
+
+C:\HotCopy>SET USER_ARM2=oracle 
+
+C:\HotCopy>SET PWD_ARM0=master 
+
+C:\HotCopy>SET PWD_ARM1=master 
+
+C:\HotCopy>SET PWD_ARM2=master 
+
+C:\HotCopy>echo y   | net use \\127.0.0.1\diskc master /user:oracle 
+System error 1326 has occurred.
+
+Logon failure: unknown user name or bad password.
+
+
+C:\HotCopy>echo y   | net use \\0.0.0.0\diskc master /user:oracle 
+System error 1214 has occurred.
+
+The format of the specified network name is invalid.
+
+
+C:\HotCopy>echo y   | net use \\0.0.0.0\diskc master /user:oracle 
+System error 1214 has occurred.
+
+The format of the specified network name is invalid.
+
+
+C:\HotCopy>echo y   | net use \\127.0.0.1\diskc  
+System error 67 has occurred.
+
+The network name cannot be found.
+
+
+C:\HotCopy>echo y   | net use \\0.0.0.0\diskc  
+System error 1214 has occurred.
+
+The format of the specified network name is invalid.
+
+
+C:\HotCopy>echo y   | net use \\0.0.0.0\diskc  
+System error 1214 has occurred.
+
+The format of the specified network name is invalid.
+
+
+C:\HotCopy>rem --- ëÆß§†•¨ ≠•Æ°ÂÆ§®¨Î• ™†‚†´Æ£® --- 
+
+C:\HotCopy>mkdir c:\temp 
+A subdirectory or file c:\temp already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\config\ 
+A subdirectory or file c:\hotcopy\config\ already exists.
+
+C:\HotCopy>mkdir D:\ARCHIVE\NB\ 
+A subdirectory or file D:\ARCHIVE\NB\ already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\ 
+A subdirectory or file c:\hotcopy\ already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata 
+A subdirectory or file c:\hotcopy\oradata already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\archive 
+A subdirectory or file c:\hotcopy\archive already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\backup 
+A subdirectory or file c:\hotcopy\backup already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\ 
+A subdirectory or file c:\hotcopy\oradata\ already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\admin 
+A subdirectory or file c:\hotcopy\oradata\admin already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\database 
+A subdirectory or file c:\hotcopy\oradata\database already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\archive 
+A subdirectory or file c:\hotcopy\oradata\archive already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\config 
+A subdirectory or file c:\hotcopy\oradata\config already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\move 
+A subdirectory or file c:\hotcopy\oradata\move already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\config 
+A subdirectory or file c:\hotcopy\oradata\config already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\config\LUKNET 
+A subdirectory or file c:\hotcopy\oradata\config\LUKNET already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\config\ORANT\Net80\Admin\ 
+A subdirectory or file c:\hotcopy\oradata\config\ORANT\Net80\Admin\ already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\config\ORACLE\network\ADMIN\ 
+A subdirectory or file c:\hotcopy\oradata\config\ORACLE\network\ADMIN\ already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\config\PFILE 
+A subdirectory or file c:\hotcopy\oradata\config\PFILE already exists.
+
+C:\HotCopy>MONTH.EXE
+
+C:\HotCopy>IF ERRORLEVEL 1 SET NUM_MON=01 
+
+C:\HotCopy>IF ERRORLEVEL 2 SET NUM_MON=02 
+
+C:\HotCopy>IF ERRORLEVEL 3 SET NUM_MON=03 
+
+C:\HotCopy>IF ERRORLEVEL 4 SET NUM_MON=04 
+
+C:\HotCopy>IF ERRORLEVEL 5 SET NUM_MON=05 
+
+C:\HotCopy>IF ERRORLEVEL 6 SET NUM_MON=06 
+
+C:\HotCopy>IF ERRORLEVEL 7 SET NUM_MON=07 
+
+C:\HotCopy>IF ERRORLEVEL 8 SET NUM_MON=08 
+
+C:\HotCopy>IF ERRORLEVEL 9 SET NUM_MON=09 
+
+C:\HotCopy>IF ERRORLEVEL 10 SET NUM_MON=10 
+
+C:\HotCopy>IF ERRORLEVEL 11 SET NUM_MON=11 
+
+C:\HotCopy>IF ERRORLEVEL 12 SET NUM_MON=12 
+
+C:\HotCopy>DAY.EXE
+
+C:\HotCopy>IF ERRORLEVEL 1 SET NUM_DAY=01 
+
+C:\HotCopy>IF ERRORLEVEL 2 SET NUM_DAY=02 
+
+C:\HotCopy>IF ERRORLEVEL 3 SET NUM_DAY=03 
+
+C:\HotCopy>IF ERRORLEVEL 4 SET NUM_DAY=04 
+
+C:\HotCopy>IF ERRORLEVEL 5 SET NUM_DAY=05 
+
+C:\HotCopy>IF ERRORLEVEL 6 SET NUM_DAY=06 
+
+C:\HotCopy>IF ERRORLEVEL 7 SET NUM_DAY=07 
+
+C:\HotCopy>IF ERRORLEVEL 8 SET NUM_DAY=08 
+
+C:\HotCopy>IF ERRORLEVEL 9 SET NUM_DAY=09 
+
+C:\HotCopy>IF ERRORLEVEL 10 SET NUM_DAY=10 
+
+C:\HotCopy>IF ERRORLEVEL 11 SET NUM_DAY=11 
+
+C:\HotCopy>IF ERRORLEVEL 12 SET NUM_DAY=12 
+
+C:\HotCopy>IF ERRORLEVEL 13 SET NUM_DAY=13 
+
+C:\HotCopy>IF ERRORLEVEL 14 SET NUM_DAY=14 
+
+C:\HotCopy>IF ERRORLEVEL 15 SET NUM_DAY=15 
+
+C:\HotCopy>IF ERRORLEVEL 16 SET NUM_DAY=16 
+
+C:\HotCopy>IF ERRORLEVEL 17 SET NUM_DAY=17 
+
+C:\HotCopy>IF ERRORLEVEL 18 SET NUM_DAY=18 
+
+C:\HotCopy>IF ERRORLEVEL 19 SET NUM_DAY=19 
+
+C:\HotCopy>IF ERRORLEVEL 20 SET NUM_DAY=20 
+
+C:\HotCopy>IF ERRORLEVEL 21 SET NUM_DAY=21 
+
+C:\HotCopy>IF ERRORLEVEL 22 SET NUM_DAY=22 
+
+C:\HotCopy>IF ERRORLEVEL 23 SET NUM_DAY=23 
+
+C:\HotCopy>IF ERRORLEVEL 24 SET NUM_DAY=24 
+
+C:\HotCopy>IF ERRORLEVEL 25 SET NUM_DAY=25 
+
+C:\HotCopy>IF ERRORLEVEL 26 SET NUM_DAY=26 
+
+C:\HotCopy>IF ERRORLEVEL 27 SET NUM_DAY=27 
+
+C:\HotCopy>IF ERRORLEVEL 28 SET NUM_DAY=28 
+
+C:\HotCopy>IF ERRORLEVEL 29 SET NUM_DAY=29 
+
+C:\HotCopy>IF ERRORLEVEL 30 SET NUM_DAY=30 
+
+C:\HotCopy>IF ERRORLEVEL 31 SET NUM_DAY=31 
+---------------------------------------------------------- 
+ 
+
+C:\HotCopy>rem -- ë°Æ‡ ®≠‰Æ‡¨†Ê®® Æ ™Æ¨ØÏÓ‚•‡• 
+
+C:\HotCopy>SET STATUS=OK 
+
+C:\HotCopy>SET COMPDIAGAPP=MSINFO32.EXE 
+
+C:\HotCopy>echo.  1>Computer.log 2>&1 
+
+C:\HotCopy>echo Type: COMPUTER_INFO  1>>Computer.log 2>&1 
+
+C:\HotCopy>echo File: MSINFO32.EXE  1>>Computer.log 2>&1 
+
+C:\HotCopy>echo Log: C:\HotCopy\Computer.log  1>>Computer.log 2>&1 
+
+C:\HotCopy>echo Directory: C:\HotCopy  1>>Computer.log 2>&1 
+
+C:\HotCopy>echo Computer: KMINB1  1>>Computer.log 2>&1 
+
+C:\HotCopy>echo Version: 1.9  1>>Computer.log 2>&1 
+
+C:\HotCopy>echo Started: 10.07.2019  9:00:04,62  1>>Computer.log 2>&1 
+
+C:\HotCopy>echo Username: Orapetronics  1>>Computer.log 2>&1 
+
+C:\HotCopy>echo.  1>>Computer.log 2>&1 
+
+C:\HotCopy>echo ----------------------------------------------------------  1>>Computer.log 2>&1 
+
+C:\HotCopy>echo.  1>>Computer.log 2>&1 
+
+C:\HotCopy>start /wait MSINFO32.EXE /report c:\hotcopy\oradata\computer.txt 
+
+C:\HotCopy>IF NOT 0 EQU 0 SET STATUS=COMPUTER_INFO_ERROR 
+
+C:\HotCopy>echo Status: OK 
+Status: OK
+
+C:\HotCopy>type c:\hotcopy\oradata\computer.txt  1>>Computer.log 2>&1 
+
+C:\HotCopy>del /Q c:\hotcopy\oradata\computer.txt 
+
+C:\HotCopy>rem ÑÆ°†¢®¨ ®≠‰Æ‡¨†Ê®Ó Æ° †≠‚®¢®‡„·• 
+
+C:\HotCopy>xcopy /F /R /Y /D "C:\Program Files\Alwil Software\Avast5\defs\aswdefs.ini" c:\hotcopy\oradata\ 
+File not found - aswdefs.ini
+0 File(s) copied
+
+C:\HotCopy>xcopy /F /R /Y /D "C:\Program Files\AVAST Software\Avast\defs\aswdefs.ini" c:\hotcopy\oradata\ 
+File not found - aswdefs.ini
+0 File(s) copied
+
+C:\HotCopy>type c:\hotcopy\oradata\aswdefs.ini  1>>Computer.log 2>&1 
+
+C:\HotCopy>del /Q c:\hotcopy\oradata\aswdefs.ini 
+Could Not Find c:\hotcopy\oradata\aswdefs.ini
+
+C:\HotCopy>rem ÑÆ°†¢®¨ ®≠‰Æ‡¨†Ê®Ó Æ Time Zone 
+
+C:\HotCopy>echo.  1>>Computer.log 2>&1 
+
+C:\HotCopy>echo [TIME_ZONE]  1>>Computer.log 2>&1 
+
+C:\HotCopy>cscript.exe timezone.vbs  1>>Computer.log 2>&1 
+
+C:\HotCopy>echo.  1>>Computer.log 2>&1 
+
+C:\HotCopy>echo ----------------------------------------------------------  1>>Computer.log 2>&1 
+
+C:\HotCopy>echo.  1>>Computer.log 2>&1 
+
+C:\HotCopy>echo Finished: 10.07.2019  9:03:28,42  1>>Computer.log 2>&1 
+
+C:\HotCopy>echo Status: OK  1>>Computer.log 2>&1 
+
+C:\HotCopy>exit /B 0 
+
+C:\HotCopy>rem -- Ñ®†£≠Æ·‚®™† §®·™Æ¢ 
+
+C:\HotCopy>SET STATUS=OK 
+
+C:\HotCopy>SET HDDTYPE=HP_ARRAY_INFO 
+
+C:\HotCopy>SET HDDDIAGAPP="C:\Program Files\Compaq\hpadu\bin\hpaducli.exe" 
+
+C:\HotCopy>SET DD=10.07.2019 
+
+C:\HotCopy>SET TT= 9:03:28,43 
+
+C:\HotCopy>IF EXIST "C:\Program Files\Compaq\hpadu\bin\hpaducli.exe" (CALL :GetArrayInfo "C:\Program Files\Compaq\hpadu\bin\hpaducli.exe" c:\hotcopy\oradata\hdd.txt )  ELSE CALL :GetSmartInfo c:\hotcopy\oradata\hdd.txt 
+
+C:\HotCopy>SET HDDTYPE=DISK_INFO 
+
+C:\HotCopy>SET HDDDIAGAPP=smartctl.exe 
+
+C:\HotCopy>echo.  1>c:\hotcopy\oradata\hdd.txt 
+
+C:\HotCopy>echo smart info - disk C:  1>>c:\hotcopy\oradata\hdd.txt 
+
+C:\HotCopy>smartctl.exe -son C:  1>>c:\hotcopy\oradata\hdd.txt 
+
+C:\HotCopy>smartctl.exe -a C:  1>>c:\hotcopy\oradata\hdd.txt 
+
+C:\HotCopy>IF NOT 4 EQU 0 SET STATUS=HDD_INFO_ERROR 
+
+C:\HotCopy>echo Status: HDD_INFO_ERROR 
+Status: HDD_INFO_ERROR
+
+C:\HotCopy>echo.  1>>c:\hotcopy\oradata\hdd.txt 
+
+C:\HotCopy>echo smart info - disk D:  1>>c:\hotcopy\oradata\hdd.txt 
+
+C:\HotCopy>smartctl.exe -son D:  1>>c:\hotcopy\oradata\hdd.txt 
+
+C:\HotCopy>smartctl.exe -a D:  1>>c:\hotcopy\oradata\hdd.txt 
+
+C:\HotCopy>IF NOT 2 EQU 0 SET STATUS=HDD_INFO_ERROR 
+
+C:\HotCopy>echo Status: HDD_INFO_ERROR 
+Status: HDD_INFO_ERROR
+
+C:\HotCopy>echo.  1>>c:\hotcopy\oradata\hdd.txt 
+
+C:\HotCopy>echo smart info - disk E:  1>>c:\hotcopy\oradata\hdd.txt 
+
+C:\HotCopy>smartctl.exe -a E:  1>>c:\hotcopy\oradata\hdd.txt 
+
+C:\HotCopy>echo.  1>>c:\hotcopy\oradata\hdd.txt 
+
+C:\HotCopy>echo smart info - disk F:  1>>c:\hotcopy\oradata\hdd.txt 
+
+C:\HotCopy>smartctl.exe -a F:  1>>c:\hotcopy\oradata\hdd.txt 
+
+C:\HotCopy>echo.  1>>c:\hotcopy\oradata\hdd.txt 
+
+C:\HotCopy>echo smart info - disk G:  1>>c:\hotcopy\oradata\hdd.txt 
+
+C:\HotCopy>smartctl.exe -a G:  1>>c:\hotcopy\oradata\hdd.txt 
+
+C:\HotCopy>echo.  1>>c:\hotcopy\oradata\hdd.txt 
+
+C:\HotCopy>echo smart info - disk H:  1>>c:\hotcopy\oradata\hdd.txt 
+
+C:\HotCopy>smartctl.exe -a H:  1>>c:\hotcopy\oradata\hdd.txt 
+
+C:\HotCopy>echo.  1>>c:\hotcopy\oradata\hdd.txt 
+
+C:\HotCopy>echo smart info - disk I:  1>>c:\hotcopy\oradata\hdd.txt 
+
+C:\HotCopy>smartctl.exe -a I:  1>>c:\hotcopy\oradata\hdd.txt 
+
+C:\HotCopy>exit /B 0 
+
+C:\HotCopy>echo.  1>Hdd.log 2>&1 
+
+C:\HotCopy>echo Type: DISK_INFO  1>>Hdd.log 2>&1 
+
+C:\HotCopy>echo File: smartctl.exe  1>>Hdd.log 2>&1 
+
+C:\HotCopy>echo Log: C:\HotCopy\Hdd.log  1>>Hdd.log 2>&1 
+
+C:\HotCopy>echo Directory: C:\HotCopy  1>>Hdd.log 2>&1 
+
+C:\HotCopy>echo Computer: KMINB1  1>>Hdd.log 2>&1 
+
+C:\HotCopy>echo Version: 1.9  1>>Hdd.log 2>&1 
+
+C:\HotCopy>echo Started: 10.07.2019  9:03:28,43  1>>Hdd.log 2>&1 
+
+C:\HotCopy>echo Username: Orapetronics  1>>Hdd.log 2>&1 
+
+C:\HotCopy>echo.  1>>Hdd.log 2>&1 
+
+C:\HotCopy>echo ----------------------------------------------------------  1>>Hdd.log 2>&1 
+
+C:\HotCopy>echo.  1>>Hdd.log 2>&1 
+
+C:\HotCopy>type c:\hotcopy\oradata\hdd.txt  1>>Hdd.log 2>&1 
+
+C:\HotCopy>del /Q c:\hotcopy\oradata\hdd.txt 
+
+C:\HotCopy>del /Q c:\hotcopy\oradata\hdd.bat 
+Could Not Find c:\hotcopy\oradata\hdd.bat
+
+C:\HotCopy>rem --- à≠‰Æ‡¨†Ê®Ô Æ §®·™†Â 
+
+C:\HotCopy>IF EXIST GetDeviceInfo.exe (GetDeviceInfo.exe /disk /log /test  1>>Hdd.log 2>&1 )  ELSE (
+GetDiskInfo.exe C:  1>>Hdd.log 2>&1  
+ GetDiskInfo.exe D:  1>>Hdd.log 2>&1  
+ GetDiskInfo.exe E:  1>>Hdd.log 2>&1 
+) 
+
+C:\HotCopy>echo.  1>>Hdd.log 2>&1 
+
+C:\HotCopy>echo ----------------------------------------------------------  1>>Hdd.log 2>&1 
+
+C:\HotCopy>echo.  1>>Hdd.log 2>&1 
+
+C:\HotCopy>echo Finished: 10.07.2019  9:03:30,34  1>>Hdd.log 2>&1 
+
+C:\HotCopy>echo Status: HDD_INFO_ERROR  1>>Hdd.log 2>&1 
+
+C:\HotCopy>exit /B 0 
+
+C:\HotCopy>SET STATUS=OK 
+
+C:\HotCopy>rem -- Á®‚†•¨ ‰†©´Î Alert.log 
+
+C:\HotCopy>DEL /Q ORALOGFILES1 
+Could Not Find C:\HotCopy\ORALOGFILES1
+
+C:\HotCopy>FOR %I IN (d:\oracle\ADMIN\NB\BDUMP\*ALRT.log) DO CALL :ReadLastDay %I %~nI ALERT_LOG 
+
+C:\HotCopy>DEL /Q ORALOGFILES2 
+Could Not Find C:\HotCopy\ORALOGFILES2
+
+C:\HotCopy>FOR %I IN (d:\oracle\ADMIN\NB\BDUMP\alert*.log) DO CALL :ReadLastDay %I %~nI ALERT_LOG 
+
+C:\HotCopy>CALL :ReadLastDay d:\oracle\ADMIN\NB\BDUMP\alert_nb.log alert_nb ALERT_LOG 
+
+C:\HotCopy>SET rldLOG=alert_nb.log 
+
+C:\HotCopy>SET rldTYPE=ALERT_LOG 
+
+C:\HotCopy>echo.  1>alert_nb.log 2>&1 
+
+C:\HotCopy>echo Type: ALERT_LOG  1>>alert_nb.log 2>&1 
+
+C:\HotCopy>echo File: d:\oracle\ADMIN\NB\BDUMP\alert_nb.log  1>>alert_nb.log 2>&1 
+
+C:\HotCopy>echo Log: C:\HotCopy\alert_nb.log  1>>alert_nb.log 2>&1 
+
+C:\HotCopy>echo Directory: C:\HotCopy  1>>alert_nb.log 2>&1 
+
+C:\HotCopy>echo Computer: KMINB1  1>>alert_nb.log 2>&1 
+
+C:\HotCopy>echo Version: 1.9  1>>alert_nb.log 2>&1 
+
+C:\HotCopy>echo Started: 10.07.2019  9:03:30,36  1>>alert_nb.log 2>&1 
+
+C:\HotCopy>echo Username: Orapetronics  1>>alert_nb.log 2>&1 
+
+C:\HotCopy>echo.  1>>alert_nb.log 2>&1 
+
+C:\HotCopy>echo ----------------------------------------------------------  1>>alert_nb.log 2>&1 
+
+C:\HotCopy>echo.  1>>alert_nb.log 2>&1 
+
+C:\HotCopy>SET Line=0 
+
+C:\HotCopy>For /F "usebackq" %A In (`Type d:\oracle\ADMIN\NB\BDUMP\alert_nb.log | Find /V /C ""`) Do Set /A Line=%A - 20000 
+
+C:\HotCopy>Set /A Line=158124 - 20000 
+
+C:\HotCopy>IF 138124 LSS 0 SET Line=0 
+
+C:\HotCopy>More +138124 d:\oracle\ADMIN\NB\BDUMP\alert_nb.log   1>c:\hotcopy\oradata\rldLOGs.txt 
+
+C:\HotCopy>type c:\hotcopy\oradata\rldLOGs.txt  1>>alert_nb.log 2>&1 
+
+C:\HotCopy>del /Q c:\hotcopy\oradata\rldLOGs.txt 
+
+C:\HotCopy>echo.  1>>alert_nb.log 2>&1 
+
+C:\HotCopy>echo ----------------------------------------------------------  1>>alert_nb.log 2>&1 
+
+C:\HotCopy>echo.  1>>alert_nb.log 2>&1 
+
+C:\HotCopy>echo Finished: 10.07.2019  9:03:33,28  1>>alert_nb.log 2>&1 
+
+C:\HotCopy>echo Status: OK  1>>alert_nb.log 2>&1 
+
+C:\HotCopy>goto :eof 
+
+C:\HotCopy>rem -- Á®‚†•¨ ‰†©´ C:\REPL\error.log 
+
+C:\HotCopy>DEL /Q error*.log 
+
+C:\HotCopy>FOR %I IN (C:\REPL\error*.log) DO CALL :ReadLastDay %I %~nI REPL_LOG 
+
+C:\HotCopy>CALL :ReadLastDay C:\REPL\error.log error REPL_LOG 
+
+C:\HotCopy>SET rldLOG=error.log 
+
+C:\HotCopy>SET rldTYPE=REPL_LOG 
+
+C:\HotCopy>echo.  1>error.log 2>&1 
+
+C:\HotCopy>echo Type: REPL_LOG  1>>error.log 2>&1 
+
+C:\HotCopy>echo File: C:\REPL\error.log  1>>error.log 2>&1 
+
+C:\HotCopy>echo Log: C:\HotCopy\error.log  1>>error.log 2>&1 
+
+C:\HotCopy>echo Directory: C:\HotCopy  1>>error.log 2>&1 
+
+C:\HotCopy>echo Computer: KMINB1  1>>error.log 2>&1 
+
+C:\HotCopy>echo Version: 1.9  1>>error.log 2>&1 
+
+C:\HotCopy>echo Started: 10.07.2019  9:03:33,28  1>>error.log 2>&1 
+
+C:\HotCopy>echo Username: Orapetronics  1>>error.log 2>&1 
+
+C:\HotCopy>echo.  1>>error.log 2>&1 
+
+C:\HotCopy>echo ----------------------------------------------------------  1>>error.log 2>&1 
+
+C:\HotCopy>echo.  1>>error.log 2>&1 
+
+C:\HotCopy>SET Line=0 
+
+C:\HotCopy>For /F "usebackq" %A In (`Type C:\REPL\error.log | Find /V /C ""`) Do Set /A Line=%A - 20000 
+
+C:\HotCopy>Set /A Line=32661 - 20000 
+
+C:\HotCopy>IF 12661 LSS 0 SET Line=0 
+
+C:\HotCopy>More +12661 C:\REPL\error.log   1>c:\hotcopy\oradata\rldLOGs.txt 
+
+C:\HotCopy>type c:\hotcopy\oradata\rldLOGs.txt  1>>error.log 2>&1 
+
+C:\HotCopy>del /Q c:\hotcopy\oradata\rldLOGs.txt 
+
+C:\HotCopy>echo.  1>>error.log 2>&1 
+
+C:\HotCopy>echo ----------------------------------------------------------  1>>error.log 2>&1 
+
+C:\HotCopy>echo.  1>>error.log 2>&1 
+
+C:\HotCopy>echo Finished: 10.07.2019  9:03:34,59  1>>error.log 2>&1 
+
+C:\HotCopy>echo Status: OK  1>>error.log 2>&1 
+
+C:\HotCopy>goto :eof 
+
+C:\HotCopy>rem -- Á®‚†•¨ ‰†©´ C:\REPL\rrr.log 
+
+C:\HotCopy>DEL /Q rrr*.log 
+Could Not Find C:\HotCopy\rrr*.log
+
+C:\HotCopy>FOR %I IN (C:\REPL\rrr*.log) DO CALL :ReadLastDay %I %~nI RRR_LOG 
+
+C:\HotCopy>rem -- Á®‚†•¨ ‰†©´ C:\JOB\job.log 
+
+C:\HotCopy>DEL /Q job*.log 
+
+C:\HotCopy>FOR %I IN (C:\JOB\job*.log) DO CALL :ReadLastDay %I %~nI JOB_LOG 
+
+C:\HotCopy>CALL :ReadLastDay C:\JOB\job.log job JOB_LOG 
+
+C:\HotCopy>SET rldLOG=job.log 
+
+C:\HotCopy>SET rldTYPE=JOB_LOG 
+
+C:\HotCopy>echo.  1>job.log 2>&1 
+
+C:\HotCopy>echo Type: JOB_LOG  1>>job.log 2>&1 
+
+C:\HotCopy>echo File: C:\JOB\job.log  1>>job.log 2>&1 
+
+C:\HotCopy>echo Log: C:\HotCopy\job.log  1>>job.log 2>&1 
+
+C:\HotCopy>echo Directory: C:\HotCopy  1>>job.log 2>&1 
+
+C:\HotCopy>echo Computer: KMINB1  1>>job.log 2>&1 
+
+C:\HotCopy>echo Version: 1.9  1>>job.log 2>&1 
+
+C:\HotCopy>echo Started: 10.07.2019  9:03:34,60  1>>job.log 2>&1 
+
+C:\HotCopy>echo Username: Orapetronics  1>>job.log 2>&1 
+
+C:\HotCopy>echo.  1>>job.log 2>&1 
+
+C:\HotCopy>echo ----------------------------------------------------------  1>>job.log 2>&1 
+
+C:\HotCopy>echo.  1>>job.log 2>&1 
+
+C:\HotCopy>SET Line=0 
+
+C:\HotCopy>For /F "usebackq" %A In (`Type C:\JOB\job.log | Find /V /C ""`) Do Set /A Line=%A - 20000 
+
+C:\HotCopy>Set /A Line=26 - 20000 
+
+C:\HotCopy>IF -19974 LSS 0 SET Line=0 
+
+C:\HotCopy>More +0 C:\JOB\job.log   1>c:\hotcopy\oradata\rldLOGs.txt 
+
+C:\HotCopy>type c:\hotcopy\oradata\rldLOGs.txt  1>>job.log 2>&1 
+
+C:\HotCopy>del /Q c:\hotcopy\oradata\rldLOGs.txt 
+
+C:\HotCopy>echo.  1>>job.log 2>&1 
+
+C:\HotCopy>echo ----------------------------------------------------------  1>>job.log 2>&1 
+
+C:\HotCopy>echo.  1>>job.log 2>&1 
+
+C:\HotCopy>echo Finished: 10.07.2019  9:03:34,70  1>>job.log 2>&1 
+
+C:\HotCopy>echo Status: OK  1>>job.log 2>&1 
+
+C:\HotCopy>goto :eof 
+
+C:\HotCopy>CALL :ReadLastDay C:\JOB\job2.log job2 JOB_LOG 
+
+C:\HotCopy>SET rldLOG=job2.log 
+
+C:\HotCopy>SET rldTYPE=JOB_LOG 
+
+C:\HotCopy>echo.  1>job2.log 2>&1 
+
+C:\HotCopy>echo Type: JOB_LOG  1>>job2.log 2>&1 
+
+C:\HotCopy>echo File: C:\JOB\job2.log  1>>job2.log 2>&1 
+
+C:\HotCopy>echo Log: C:\HotCopy\job2.log  1>>job2.log 2>&1 
+
+C:\HotCopy>echo Directory: C:\HotCopy  1>>job2.log 2>&1 
+
+C:\HotCopy>echo Computer: KMINB1  1>>job2.log 2>&1 
+
+C:\HotCopy>echo Version: 1.9  1>>job2.log 2>&1 
+
+C:\HotCopy>echo Started: 10.07.2019  9:03:34,71  1>>job2.log 2>&1 
+
+C:\HotCopy>echo Username: Orapetronics  1>>job2.log 2>&1 
+
+C:\HotCopy>echo.  1>>job2.log 2>&1 
+
+C:\HotCopy>echo ----------------------------------------------------------  1>>job2.log 2>&1 
+
+C:\HotCopy>echo.  1>>job2.log 2>&1 
+
+C:\HotCopy>SET Line=0 
+
+C:\HotCopy>For /F "usebackq" %A In (`Type C:\JOB\job2.log | Find /V /C ""`) Do Set /A Line=%A - 20000 
+
+C:\HotCopy>Set /A Line=24 - 20000 
+
+C:\HotCopy>IF -19976 LSS 0 SET Line=0 
+
+C:\HotCopy>More +0 C:\JOB\job2.log   1>c:\hotcopy\oradata\rldLOGs.txt 
+
+C:\HotCopy>type c:\hotcopy\oradata\rldLOGs.txt  1>>job2.log 2>&1 
+
+C:\HotCopy>del /Q c:\hotcopy\oradata\rldLOGs.txt 
+
+C:\HotCopy>echo.  1>>job2.log 2>&1 
+
+C:\HotCopy>echo ----------------------------------------------------------  1>>job2.log 2>&1 
+
+C:\HotCopy>echo.  1>>job2.log 2>&1 
+
+C:\HotCopy>echo Finished: 10.07.2019  9:03:34,76  1>>job2.log 2>&1 
+
+C:\HotCopy>echo Status: OK  1>>job2.log 2>&1 
+
+C:\HotCopy>goto :eof 
+
+C:\HotCopy>exit /B 0 
+
+C:\HotCopy>rem -- ë°Æ‡ ·‚†‚®·‚®™® Ø‡Æ®ß¢Æ§®‚•´Ï≠Æ·‚® Oracle 
+
+C:\HotCopy>SQLPLUS /nolog @GetAWR.sql c:\hotcopy\ 10.07.2019 html AWR.html  1>nul 
+
+C:\HotCopy>SQLPLUS /nolog @GetAWR.sql c:\hotcopy\oradata\ 10.07.2019 text awr.txt 
+
+SQL*Plus: Release 10.2.0.4.0 - Production on Wed Jul 10 09:03:42 2019
+
+Copyright (c) 1982, 2007, Oracle.  All Rights Reserved.
+
+Connected.
+
+
+Instances in this Workload Repository schema
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   DB Id     Inst Num DB Name	   Instance	Host
+------------ -------- ------------ ------------ ------------
+* 2378935397	    1 NB	   nb		KMINB2
+* 2378935397	    1 NB	   nb		ASTEPASYUK
+* 2378935397	    1 NB	   nb		KMINB1
+* 2378935397	    1 NB	   nb		AZS-SERVER-T
+						EST
+
+Using 2378935397 for database Id
+Using 1 for instance number
+
+
+Specify the number of days of snapshots to choose from
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Entering the number of days (n) will result in the most recent
+(n) days of snapshots being listed.  Pressing <return> without
+specifying a number lists all completed snapshots.
+
+
+
+Listing the last 3 days of Completed Snapshots
+
+							Snap
+Instance     DB Name	    Snap Id    Snap Started    Level
+------------ ------------ --------- ------------------ -----
+nb	     NB 	     110915 08 Jul 2019 00:00	   1
+			     110916 08 Jul 2019 00:30	   1
+			     110917 08 Jul 2019 01:00	   1
+			     110918 08 Jul 2019 01:30	   1
+			     110919 08 Jul 2019 02:00	   1
+			     110920 08 Jul 2019 02:30	   1
+			     110921 08 Jul 2019 03:00	   1
+			     110922 08 Jul 2019 03:30	   1
+			     110923 08 Jul 2019 04:00	   1
+			     110924 08 Jul 2019 04:30	   1
+			     110925 08 Jul 2019 05:00	   1
+			     110926 08 Jul 2019 05:30	   1
+			     110927 08 Jul 2019 06:00	   1
+			     110928 08 Jul 2019 06:30	   1
+			     110929 08 Jul 2019 07:00	   1
+			     110930 08 Jul 2019 07:30	   1
+			     110931 08 Jul 2019 08:00	   1
+			     110932 08 Jul 2019 08:30	   1
+			     110933 08 Jul 2019 09:00	   1
+			     110934 08 Jul 2019 09:30	   1
+			     110935 08 Jul 2019 10:00	   1
+			     110936 08 Jul 2019 10:30	   1
+			     110937 08 Jul 2019 11:00	   1
+			     110938 08 Jul 2019 11:30	   1
+			     110939 08 Jul 2019 12:00	   1
+			     110940 08 Jul 2019 12:30	   1
+			     110941 08 Jul 2019 13:00	   1
+			     110942 08 Jul 2019 13:30	   1
+			     110943 08 Jul 2019 14:00	   1
+			     110944 08 Jul 2019 14:30	   1
+			     110945 08 Jul 2019 15:00	   1
+			     110946 08 Jul 2019 15:30	   1
+			     110947 08 Jul 2019 16:00	   1
+			     110948 08 Jul 2019 16:30	   1
+			     110949 08 Jul 2019 17:00	   1
+			     110950 08 Jul 2019 17:30	   1
+			     110951 08 Jul 2019 18:00	   1
+			     110952 08 Jul 2019 18:31	   1
+			     110953 08 Jul 2019 19:00	   1
+			     110954 08 Jul 2019 19:30	   1
+			     110955 08 Jul 2019 20:00	   1
+			     110956 08 Jul 2019 20:30	   1
+			     110957 08 Jul 2019 21:00	   1
+			     110958 08 Jul 2019 21:30	   1
+			     110959 08 Jul 2019 22:00	   1
+			     110960 08 Jul 2019 22:30	   1
+			     110961 08 Jul 2019 23:00	   1
+			     110962 08 Jul 2019 23:30	   1
+			     110963 09 Jul 2019 00:01	   1
+			     110964 09 Jul 2019 00:30	   1
+			     110965 09 Jul 2019 01:00	   1
+			     110966 09 Jul 2019 01:30	   1
+			     110967 09 Jul 2019 02:00	   1
+			     110968 09 Jul 2019 02:30	   1
+			     110969 09 Jul 2019 03:00	   1
+			     110970 09 Jul 2019 03:30	   1
+
+							Snap
+Instance     DB Name	    Snap Id    Snap Started    Level
+------------ ------------ --------- ------------------ -----
+nb	     NB 	     110971 09 Jul 2019 04:00	   1
+			     110972 09 Jul 2019 04:30	   1
+			     110973 09 Jul 2019 05:00	   1
+			     110974 09 Jul 2019 05:30	   1
+			     110975 09 Jul 2019 06:00	   1
+			     110976 09 Jul 2019 06:30	   1
+			     110977 09 Jul 2019 07:00	   1
+			     110978 09 Jul 2019 07:30	   1
+			     110979 09 Jul 2019 08:00	   1
+			     110980 09 Jul 2019 08:31	   1
+			     110981 09 Jul 2019 09:00	   1
+			     110982 09 Jul 2019 09:30	   1
+			     110983 09 Jul 2019 10:00	   1
+			     110984 09 Jul 2019 10:30	   1
+			     110985 09 Jul 2019 11:00	   1
+			     110986 09 Jul 2019 11:30	   1
+			     110987 09 Jul 2019 12:00	   1
+			     110988 09 Jul 2019 12:30	   1
+			     110989 09 Jul 2019 13:00	   1
+			     110990 09 Jul 2019 13:30	   1
+			     110991 09 Jul 2019 14:00	   1
+			     110992 09 Jul 2019 14:30	   1
+			     110993 09 Jul 2019 15:00	   1
+			     110994 09 Jul 2019 15:30	   1
+			     110995 09 Jul 2019 16:00	   1
+			     110996 09 Jul 2019 16:30	   1
+			     110997 09 Jul 2019 17:00	   1
+			     110998 09 Jul 2019 17:30	   1
+			     110999 09 Jul 2019 18:00	   1
+			     111000 09 Jul 2019 18:30	   1
+			     111001 09 Jul 2019 19:00	   1
+			     111002 09 Jul 2019 19:30	   1
+			     111003 09 Jul 2019 20:00	   1
+			     111004 09 Jul 2019 20:30	   1
+			     111005 09 Jul 2019 21:00	   1
+			     111006 09 Jul 2019 21:30	   1
+			     111007 09 Jul 2019 22:00	   1
+			     111008 09 Jul 2019 22:30	   1
+			     111009 09 Jul 2019 23:00	   1
+			     111010 09 Jul 2019 23:30	   1
+			     111011 10 Jul 2019 00:00	   1
+			     111012 10 Jul 2019 00:30	   1
+			     111013 10 Jul 2019 01:00	   1
+			     111014 10 Jul 2019 01:30	   1
+			     111015 10 Jul 2019 02:00	   1
+			     111016 10 Jul 2019 02:30	   1
+			     111017 10 Jul 2019 03:00	   1
+			     111018 10 Jul 2019 03:30	   1
+			     111019 10 Jul 2019 04:00	   1
+			     111020 10 Jul 2019 04:30	   1
+			     111021 10 Jul 2019 05:00	   1
+			     111022 10 Jul 2019 05:30	   1
+			     111023 10 Jul 2019 06:00	   1
+			     111024 10 Jul 2019 06:30	   1
+			     111025 10 Jul 2019 07:00	   1
+			     111026 10 Jul 2019 07:30	   1
+
+							Snap
+Instance     DB Name	    Snap Id    Snap Started    Level
+------------ ------------ --------- ------------------ -----
+nb	     NB 	     111027 10 Jul 2019 08:00	   1
+			     111028 10 Jul 2019 08:30	   1
+			     111029 10 Jul 2019 09:01	   1
+
+
+
+Specify the Begin and End Snapshot Ids
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Begin Snapshot Id specified: 110965
+
+End   Snapshot Id specified: 111029
+
+
+
+Specify the Report Name
+~~~~~~~~~~~~~~~~~~~~~~~
+The default report file name is awrrpt_1_110965_111029.txt.  To use this name,
+press <return> to continue, otherwise enter an alternative.
+
+
+Using the report name c:\hotcopy\oradata\awr.txt
+
+WORKLOAD REPOSITORY report for
+
+DB Name 	DB Id	 Instance     Inst Num Release	   RAC Host
+------------ ----------- ------------ -------- ----------- --- ------------
+NB	      2378935397 nb		     1 10.2.0.4.0  NO  KMINB1
+
+	      Snap Id	   Snap Time	  Sessions Curs/Sess
+	    --------- ------------------- -------- ---------
+Begin Snap:    110965 09-Jul-19 01:00:33	22	11.4
+  End Snap:    111029 10-Jul-19 09:01:02	29	20.9
+   Elapsed:	       1,920.48 (mins)
+   DB Time:		  87.58 (mins)
+
+Cache Sizes
+~~~~~~~~~~~			  Begin        End
+			     ---------- ----------
+	       Buffer Cache:	   624M       584M  Std Block Size:	    8K
+	   Shared Pool Size:	   856M       896M	Log Buffer:	6,920K
+
+Load Profile
+~~~~~~~~~~~~				Per Second	 Per Transaction
+				   ---------------	 ---------------
+		  Redo size:		 11,837.43	       11,050.83
+	      Logical reads:		    528.06		  492.97
+	      Block changes:		     73.64		   68.74
+	     Physical reads:		     24.32		   22.70
+	    Physical writes:		      1.70		    1.59
+		 User calls:		      3.66		    3.42
+		     Parses:		     17.29		   16.14
+		Hard parses:		      0.69		    0.65
+		      Sorts:		      7.84		    7.32
+		     Logons:		      0.04		    0.03
+		   Executes:		     59.43		   55.48
+	       Transactions:		      1.07
+
+  % Blocks changed per Read:   13.94	Recursive Call %:    98.49
+ Rollback per transaction %:	0.15	   Rows per Sort:    61.41
+
+Instance Efficiency Percentages (Target 100%)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	    Buffer Nowait %:  100.00	   Redo NoWait %:  100.00
+	    Buffer  Hit   %:   95.43	In-memory Sort %:  100.00
+	    Library Hit   %:   97.86	    Soft Parse %:   95.99
+	 Execute to Parse %:   70.91	     Latch Hit %:   99.99
+Parse CPU to Parse Elapsd %:   16.11	 % Non-Parse CPU:   90.67
+
+ Shared Pool Statistics        Begin	End
+			      ------  ------
+	     Memory Usage %:   68.70   66.38
+    % SQL with executions>1:   98.28   77.71
+  % Memory for SQL w/exec>1:   97.76   73.59
+
+Top 5 Timed Events					   Avg %Total
+~~~~~~~~~~~~~~~~~~					  wait	 Call
+Event				      Waits    Time (s)   (ms)	 Time Wait Class
+------------------------------ ------------ ----------- ------ ------ ----------
+CPU time					  1,924 	 36.6
+db file sequential read 	    573,371	  1,133      2	 21.6	User I/O
+db file scattered read		    157,577	    393      2	  7.5	User I/O
+log file parallel write 	    212,861	    104      0	  2.0 System I/O
+control file sequential read	    147,349	     79      1	  1.5 System I/O
+	  -------------------------------------------------------------
+Time Model Statistics			  DB/Inst: NB/nb  Snaps: 110965-111029
+-> Total time in database user-calls (DB Time): 5255s
+-> Statistics including the word "background" measure background process
+   time, and so do not contribute to the DB time statistic
+-> Ordered by % or DB time desc, Statistic name
+
+Statistic Name					     Time (s) % of DB Time
+------------------------------------------ ------------------ ------------
+sql execute elapsed time			      6,085.0	     115.8
+parse time elapsed				      2,077.0	      39.5
+hard parse elapsed time 			      2,016.2	      38.4
+DB CPU						      1,924.1	      36.6
+failed parse elapsed time			      1,735.3	      33.0
+PL/SQL execution elapsed time				680.8	      13.0
+RMAN cpu time (backup/restore)				 71.5	       1.4
+PL/SQL compilation elapsed time 			 19.4		.4
+hard parse (sharing criteria) elapsed time		  8.3		.2
+repeated bind elapsed time				  8.0		.2
+sequence load elapsed time				  6.8		.1
+connection management call elapsed time 		  4.9		.1
+inbound PL/SQL rpc elapsed time 			  3.2		.1
+hard parse (bind mismatch) elapsed time 		  2.1		.0
+DB time 					      5,255.0	       N/A
+background elapsed time 				540.4	       N/A
+background cpu time					289.9	       N/A
+	  -------------------------------------------------------------
+
+Wait Class				  DB/Inst: NB/nb  Snaps: 110965-111029
+-> s  - second
+-> cs - centisecond -	  100th of a second
+-> ms - millisecond -	 1000th of a second
+-> us - microsecond - 1000000th of a second
+-> ordered by wait time desc, waits desc
+
+								  Avg
+				       %Time	   Total Wait	 wait	  Waits
+Wait Class			Waits  -outs	     Time (s)	 (ms)	   /txn
+-------------------- ---------------- ------ ---------------- ------- ---------
+User I/O		      743,018	  .0		1,541	    2	    6.0
+System I/O		      427,820	  .0		  252	    1	    3.5
+Network 		      466,635	  .0		   46	    0	    3.8
+Concurrency			1,506	  .5		    9	    6	    0.0
+Commit			       14,412	  .0		    9	    1	    0.1
+Application			3,521	  .0		    6	    2	    0.0
+Other				7,690	  .0		    2	    0	    0.1
+Administrative			    9	  .0		    2	  172	    0.0
+Configuration			  143	30.1		    0	    3	    0.0
+	  -------------------------------------------------------------
+
+Wait Events				  DB/Inst: NB/nb  Snaps: 110965-111029
+-> s  - second
+-> cs - centisecond -	  100th of a second
+-> ms - millisecond -	 1000th of a second
+-> us - microsecond - 1000000th of a second
+-> ordered by wait time desc, waits desc (idle events last)
+
+								   Avg
+					     %Time  Total Wait	  wait	   Waits
+Event				      Waits  -outs    Time (s)	  (ms)	    /txn
+---------------------------- -------------- ------ ----------- ------- ---------
+db file sequential read 	    573,371	.0	 1,133	     2	     4.6
+db file scattered read		    157,577	.0	   393	     2	     1.3
+log file parallel write 	    212,861	.0	   104	     0	     1.7
+control file sequential read	    147,349	.0	    79	     1	     1.2
+SQL*Net more data to client	     58,894	.0	    35	     1	     0.5
+control file parallel write	     39,367	.0	    34	     1	     0.3
+log file sequential read	      1,387	.0	    15	    11	     0.0
+db file parallel write		     24,931	.0	    14	     1	     0.2
+SQL*Net more data from clien	     16,645	.0	    11	     1	     0.1
+log file sync			     14,412	.0	     9	     1	     0.1
+local write wait		      8,576	.0	     9	     1	     0.1
+os thread startup			911	.0	     8	     8	     0.0
+direct path read		      2,983	.0	     5	     2	     0.0
+enq: RO - fast object reuse	      2,510	.0	     5	     2	     0.0
+Log archive I/O 		      1,352	.0	     4	     3	     0.0
+latch: shared pool			427	.0	     2	     4	     0.0
+switch logfile command			  9	.0	     2	   172	     0.0
+RMAN backup & recovery I/O		459	.0	     1	     3	     0.0
+enq: KO - fast object checkp		146	.0	     1	     4	     0.0
+recovery area: computing obs		 66	.0	     1	     9	     0.0
+SQL*Net message to client	    391,096	.0	     1	     0	     3.2
+enq: TX - row lock contentio		  1	.0	     1	   586	     0.0
+SQL*Net break/reset to clien		850	.0	     0	     1	     0.0
+latch free				 64	.0	     0	     6	     0.0
+log file switch completion		 10	.0	     0	    35	     0.0
+reliable message		      2,655	.0	     0	     0	     0.0
+rdbms ipc reply 			217	.0	     0	     1	     0.0
+Data file init write			 72	.0	     0	     3	     0.0
+control file single write		 96	.0	     0	     2	     0.0
+LGWR wait for redo copy 	      4,659	.0	     0	     0	     0.0
+cursor: pin S wait on X 		  8  100.0	     0	    14	     0.0
+enq: CF - contention			 16	.0	     0	     6	     0.0
+direct path write			258	.0	     0	     0	     0.0
+direct path read temp			 72	.0	     0	     1	     0.0
+direct path write temp			 85	.0	     0	     1	     0.0
+latch: library cache			103	.0	     0	     1	     0.0
+log buffer space			 85	.0	     0	     1	     0.0
+db file parallel read			 16	.0	     0	     3	     0.0
+read by other session			  7	.0	     0	     3	     0.0
+recovery area: computing bac		  4	.0	     0	     3	     0.0
+recovery area: computing app		  4	.0	     0	     3	     0.0
+recovery area: computing dro		  4	.0	     0	     3	     0.0
+log file single write			 18	.0	     0	     0	     0.0
+enq: TM - contention			 14	.0	     0	     0	     0.0
+library cache load lock 		  1	.0	     0	     3	     0.0
+buffer busy waits			 52	.0	     0	     0	     0.0
+enq: JS - queue lock			  1	.0	     0	     2	     0.0
+db file single write			  1	.0	     0	     0	     0.0
+enq: SQ - contention			  5	.0	     0	     0	     0.0
+undo segment extension			 43  100.0	     0	     0	     0.0
+row cache lock				  1	.0	     0	     0	     0.0
+latch: cache buffers chains		  2	.0	     0	     0	     0.0
+cursor: mutex S 			  1	.0	     0	     0	     0.0
+SQL*Net message from client	    390,970	.0     138,533	   354	     3.2
+jobq slave wait 		     39,192   96.5     116,781	  2980	     0.3
+virtual circuit status		      3,841  100.0     114,712	 29865	     0.0
+Streams AQ: qmn slave idle w	      4,113	.0     114,650	 27875	     0.0
+Streams AQ: qmn coordinator	      8,250   50.1     114,650	 13897	     0.1
+Streams AQ: waiting for time		278   95.7	43,480	156402	     0.0
+HS message to agent		      5,426	.0	    50	     9	     0.0
+Wait Events				  DB/Inst: NB/nb  Snaps: 110965-111029
+-> s  - second
+-> cs - centisecond -	  100th of a second
+-> ms - millisecond -	 1000th of a second
+-> us - microsecond - 1000000th of a second
+-> ordered by wait time desc, waits desc (idle events last)
+
+								   Avg
+					     %Time  Total Wait	  wait	   Waits
+Event				      Waits  -outs    Time (s)	  (ms)	    /txn
+---------------------------- -------------- ------ ----------- ------- ---------
+PL/SQL lock timer			  1  100.0	     1	   998	     0.0
+single-task message			 34	.0	     0	     4	     0.0
+SGA: MMAN sleep for componen		 30    3.3	     0	     1	     0.0
+class slave wait			132	.0	     0	     0	     0.0
+	  -------------------------------------------------------------
+
+Background Wait Events 		  DB/Inst: NB/nb  Snaps: 110965-111029
+-> ordered by wait time desc, waits desc (idle events last)
+
+								   Avg
+					     %Time  Total Wait	  wait	   Waits
+Event				      Waits  -outs    Time (s)	  (ms)	    /txn
+---------------------------- -------------- ------ ----------- ------- ---------
+log file parallel write 	    212,861	.0	   104	     0	     1.7
+control file sequential read	     83,347	.0	    54	     1	     0.7
+control file parallel write	     38,604	.0	    34	     1	     0.3
+db file parallel write		     24,931	.0	    14	     1	     0.2
+db file sequential read 	      8,592	.0	    13	     2	     0.1
+log file sequential read	      1,026	.0	    10	    10	     0.0
+os thread startup			911	.0	     8	     8	     0.0
+Log archive I/O 			995	.0	     3	     3	     0.0
+events in waitclass Other	      4,847	.0	     0	     0	     0.0
+db file scattered read			 74	.0	     0	     2	     0.0
+direct path read			 90	.0	     0	     1	     0.0
+log buffer space			 85	.0	     0	     1	     0.0
+latch: shared pool			 18	.0	     0	     1	     0.0
+direct path write			 90	.0	     0	     0	     0.0
+log file single write			 18	.0	     0	     0	     0.0
+buffer busy waits			 20	.0	     0	     0	     0.0
+rdbms ipc message		    599,875   61.9   1,230,414	  2051	     4.9
+pmon timer			     39,605  100.0     115,152	  2907	     0.3
+Streams AQ: qmn slave idle w	      4,113	.0     114,650	 27875	     0.0
+Streams AQ: qmn coordinator	      8,250   50.1     114,650	 13897	     0.1
+smon timer			      2,817    5.5     110,346	 39171	     0.0
+Streams AQ: waiting for time		278   95.7	43,480	156402	     0.0
+SGA: MMAN sleep for componen		 30    3.3	     0	     1	     0.0
+	  -------------------------------------------------------------
+
+Operating System Statistics		  DB/Inst: NB/nb  Snaps: 110965-111029
+
+Statistic					Total
+-------------------------------- --------------------
+AVG_BUSY_TIME				      161,017
+AVG_IDLE_TIME				   11,355,761
+AVG_SYS_TIME			 ####################
+AVG_USER_TIME				       89,225
+BUSY_TIME				      655,610
+IDLE_TIME				   45,434,995
+SYS_TIME				      288,055
+USER_TIME				      367,555
+RSRC_MGR_CPU_WAIT_TIME				    0
+VM_IN_BYTES				4,817,485,824
+VM_OUT_BYTES				   26,562,560
+PHYSICAL_MEMORY_BYTES			3,220,590,592
+NUM_CPUS					    4
+NUM_CPU_CORES					    2
+	  -------------------------------------------------------------
+
+Service Statistics			  DB/Inst: NB/nb  Snaps: 110965-111029
+-> ordered by DB Time
+
+							     Physical	 Logical
+Service Name			  DB Time (s)	DB CPU (s)	Reads	   Reads
+-------------------------------- ------------ ------------ ---------- ----------
+SYS$USERS			      5,255.0	   1,924.1  2,767,475 ##########
+NB					  0.0	       0.0	    0	       0
+NB.WORLD				  0.0	       0.0	    0	       0
+NBXDB					  0.0	       0.0	    0	       0
+SYS$BACKGROUND				  0.0	       0.0     34,704  2,027,835
+	  -------------------------------------------------------------
+
+Service Wait Class Stats		  DB/Inst: NB/nb  Snaps: 110965-111029
+-> Wait Class info for services in the Service Statistics section.
+-> Total Waits and Time Waited displayed for the following wait
+   classes:  User I/O, Concurrency, Administrative, Network
+-> Time Waited (Wt Time) in centisecond (100th of a second)
+
+Service Name
+----------------------------------------------------------------
+ User I/O  User I/O  Concurcy  Concurcy     Admin     Admin   Network	Network
+Total Wts   Wt Time Total Wts	Wt Time Total Wts   Wt Time Total Wts	Wt Time
+--------- --------- --------- --------- --------- --------- --------- ---------
+SYS$USERS
+   717374    146452	  556	    178 	9	155    463126	   4601
+SYS$BACKGROUND
+    25640      7691	  950	    769 	0	  0	    0	      0
+	  -------------------------------------------------------------
+
+SQL ordered by Elapsed Time		  DB/Inst: NB/nb  Snaps: 110965-111029
+-> Resources reported for PL/SQL code includes the resources used by all SQL
+   statements called by the code.
+-> % Total DB Time is the Elapsed Time of the SQL statement divided
+   into the Total Database Time multiplied by 100
+
+  Elapsed      CPU		    Elap per  % Total
+  Time (s)   Time (s)  Executions   Exec (s)  DB Time	 SQL Id
+---------- ---------- ------------ ---------- ------- -------------
+       868	    0		32	 27.1	 16.5 0vng7g88zxhra
+DECLARE job BINARY_INTEGER := :job; next_date DATE := :mydate; broken BOOLEAN :
+= FALSE; BEGIN begin FBU_VNP1C8.GAZ_LDR; EXCEPTION WHEN OTHERS THEN
+null; end; :mydate := next_date; IF broken THEN :b := 1; ELSE :b
+:= 0; END IF; END;
+
+       844	  160		 2	422.1	 16.1 dtthhbnnrfzyy
+Module: DBMS_SCHEDULER
+DECLARE job BINARY_INTEGER := :job; next_date TIMESTAMP WITH TIME ZONE := :myda
+te; broken BOOLEAN := FALSE; job_name VARCHAR2(30) := :job_name; job_subname
+VARCHAR2(30) := :job_subname; job_owner VARCHAR2(30) := :job_owner; job_start
+TIMESTAMP WITH TIME ZONE := :job_start; job_scheduled_start TIMESTAMP WITH TIME
+
+       337	  222	       384	  0.9	  6.4 7g1qfx3j7gdcr
+Module: cag_repl1.exe
+BEGIN pck_cag_transfer1.import; END;
+
+       209	   17		 1	208.8	  4.0 6mcpb06rctk0x
+Module: DBMS_SCHEDULER
+call dbms_space.auto_space_advisor_job_proc ( )
+
+       203	   14		44	  4.6	  3.9 8szmwam7fysa3
+Module: DBMS_SCHEDULER
+insert into wri$_adv_objspace_trend_data select timepoint, space_usage, space_a
+lloc, quality from table(dbms_space.object_growth_trend(:1, :2, :3, :4, NULL, N
+ULL, NULL, 'FALSE', :5, 'FALSE'))
+
+       136	  124	       203	  0.7	  2.6 1yn0b4zk93v0u
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+UPDATE V_OUT_WBILL_MO_OS_I SET METER_OUT_ID = :B6 , PURE_WEIGHT = :B5 , TOTAL_WE
+IGHT = :B5 , VOLUME = DECODE(:B3 , 0, VOLUME, :B3 ), DENCITY = DECODE(:B4 , 0, D
+ENCITY, :B4 ), TEMPERATURE = DECODE(:B3 , 0, TEMPERATURE, :B2 ) WHERE LINE_ID =
+:B1
+
+       111	   77		84	  1.3	  2.1 afm76r2yjpbwc
+Module: Petronics_PB10 W_OUT_WBILL_PP_-0
+INSERT INTO "OUT_WBILL_MO_OS_I" ( "LINE_ID", "DOC_ID", "CAR_DULL_SEC_ID", "ORDER
+_LINE_ID", "ORDER_DOC_ID", "SALE_GDS_ID", "TAX_STATE", "TAX_AUTO", "GDS_ID", "ME
+ASURE_ID", "ROBJ_ID", "CAR_DULL_ID", "CERT_ID", "CERT_DATE", "CERT_NUMBER", "CAR
+_VOLUME", "VOLUME", "DELTA_LEVEL", "TEMPERATURE", "DENCITY", "IMPURITY_PERCENT",
+
+       108	   74		58	  1.9	  2.1 3fw5pknkyzws4
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+BEGIN :rc := PCK_DOC.MAKE_DOC_TRANSITION( :0,:1); END;
+
+       104	   91	       518	  0.2	  2.0 9fjpkr33t55x5
+Module: cag_repl1.exe
+BEGIN pck_cag_transfer1.begin_transfer(0 ); END;
+
+	95	   77	     1,403	  0.1	  1.8 9zv3zgp50avhn
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+begin if NOT pck_latch.no_write_down_update then pck_tax.make_tax_doc(:doc_i
+d, :line_id); end if; end;
+
+	88	   73	       428	  0.2	  1.7 a1hdvn89xudsu
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+INSERT INTO V_WRITE_DOWN (LINE_ID, MASTER_ID, DOC_ID, PRIME_LINE_ID, GDS_ID, MEA
+SURE_ID, OWNERSHIP_ID, SUPP_CNT_ID, SUPP_TREATY_ID, SUPP_BILL_ID, KEEP_CNT_ID, K
+EEP_TREATY_ID, KEEP_BILL_ID, PURE_WEIGHT, QUANTITY, UNIT_WEIGHT, PRICE, PRICE_TA
+X, AMOUNT, AMOUNT_TAX, MOVING_KIND_ID, ORDER_ID, ORDER_LINE_ID, RESP_ID, REC_DOC
+SQL ordered by Elapsed Time		  DB/Inst: NB/nb  Snaps: 110965-111029
+-> Resources reported for PL/SQL code includes the resources used by all SQL
+   statements called by the code.
+-> % Total DB Time is the Elapsed Time of the SQL statement divided
+   into the Total Database Time multiplied by 100
+
+  Elapsed      CPU		    Elap per  % Total
+  Time (s)   Time (s)  Executions   Exec (s)  DB Time	 SQL Id
+---------- ---------- ------------ ---------- ------- -------------
+
+	85	   79	       287	  0.3	  1.6 c8c8gr0cu0uzc
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+BEGIN PRC_CHANGE_OUT_WBILL_MO_OS_I(:line_id,0); END;
+
+	82	   60	       423	  0.2	  1.6 fg0unr2y6nrvf
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+UPDATE v_out_order_mo_os_i ord SET (fact_weight, fact_quantity, saldo_tax) = (SE
+LECT ord.fact_weight + decode(ord.measure_id, 175, NVL(wbill.volume, 0), NVL(wbi
+ll.pure_weight, 0)), NVL(wbill.quantity, 0) + ord.fact_quantity, ord.saldo_tax -
+ wbill.amount_tax FROM out_wbill_mo_os_i wbill WHERE line_id = :1) WHERE line_id
+
+	81	   29		 2	 40.3	  1.5 fqc5unquraw1k
+Module: DBMS_SCHEDULER
+call LIDER.PRC_RECALC_JOB ( )
+
+	76	   75	       260	  0.3	  1.5 1h8ww05650x5h
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+SELECT distinct gds.code, gds.name gds_name, gds.name, gds.master_id, gds.id, gd
+s.type_id,'-' end FROM storage_position strg, goods gds WHERE strg.gds_id = gds
+.id AND strg.home_id = pck_adm.fnc_home_id AND gds.type_id = 1
+
+	69	   42		 1	 69.0	  1.3 8f15jz7t7zu4y
+DECLARE job BINARY_INTEGER := :job; next_date DATE := :mydate; broken BOOLEAN :
+= FALSE; BEGIN declare prec_doc_id number; err varchar2(4000); begin P
+CK_ADM.PRC_REGISTRATION(892000000000741,892000000000584,0); select rd.doc_id in
+to prec_doc_id from receipt_doc rd,document doc where rd.doc_id=doc.id and lower
+
+	69	   54		 1	 68.6	  1.3 7ntmjxw1tu7p2
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+declare prec_doc_id number; err varchar2(4000); begin update sys_environ
+ment set value_parm=0 where id=599000000014156; select rd.doc_id into prec_doc_
+id from receipt_doc rd,document doc where rd.doc_id=doc.id and lower(rd.doc_numb
+er)='resurs'; for rec_doc in (select * from ( select doc.date_doc pdate,
+
+	67	   44		71	  0.9	  1.3 02u8bvku6jchn
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+INSERT INTO "OUT_WBILL_MO_OS_I" ( "LINE_ID", "TARE_WEIGHT", "GROSS_WEIGHT", "DOC
+_ID", "CAR_DULL_SEC_ID", "ORDER_LINE_ID", "ORDER_DOC_ID", "SALE_GDS_ID", "GDS_ID
+", "MEASURE_ID", "ROBJ_ID", "IS_WRITE_DOWN", "CAR_DULL_ID", "CERT_ID", "CERT_DAT
+E", "CERT_NUMBER", "CAR_VOLUME", "VOLUME", "DELTA_LEVEL", "TEMPERATURE", "DENCIT
+
+	66	   43	       140	  0.5	  1.2 9tngp6a5bsckc
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+INSERT INTO V_OUT_LINE ( LINE_ID, MASTER_ID, DOC_ID, RESP_ID, CONVEYANCE_ID, ORD
+ER_LINE_ID, TRANSMIT_KIND_ID, SEND_CNT_ID, SEND_ENT_ID, SEND_TERM_ID, RECIP_CNT_
+ID, RECIP_ENT_ID, RECIP_TERM_ID, BUYER_CNT_ID, BUYER_ENT_ID, CUST_CNT_ID, CUST_E
+NT_ID, CUST_TREATY_ID, CUST_BILL_ID, SALE_GDS_ID, GDS_ID, MEASURE_ID, MOVING_KIN
+
+	61	   53	       608	  0.1	  1.2 5rxvcus70tbvk
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+UPDATE V_OUT_LINE SET ORDER_LINE_ID = :B22 , SALE_GDS_ID = :B21 , GDS_ID = :B20
+, MEASURE_ID = :B19 , SEQNO = :B18 , VOLUME = :B17 , DENCITY = :B16 , TEMPERATUR
+E = :B15 , IMPURITY_PERCENT = :B14 , PURE_WEIGHT = :B13 , QUANTITY = :B12 , UNIT
+_WEIGHT = :B11 , TOTAL_WEIGHT = :B10 , PRICE = :B9 , PRICE_TAX = :B8 , AMOUNT =
+
+	57	   48	       500	  0.1	  1.1 5n96h2rpsc9k9
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+declare v_trt_item_value number; begin begin SELECT NVL(pck_treaty.fnc_get_it
+em_value(pck_treaty.exists_parameter_item_value(ol.doc_id, NULL, NULL, '–Õ¿ À_¿¬
+SQL ordered by Elapsed Time		  DB/Inst: NB/nb  Snaps: 110965-111029
+-> Resources reported for PL/SQL code includes the resources used by all SQL
+   statements called by the code.
+-> % Total DB Time is the Elapsed Time of the SQL statement divided
+   into the Total Database Time multiplied by 100
+
+  Elapsed      CPU		    Elap per  % Total
+  Time (s)   Time (s)  Executions   Exec (s)  DB Time	 SQL Id
+---------- ---------- ------------ ---------- ------- -------------
+“Œ_Õ¡_“–¿Õ«»“', NULL, '–Õ¿ À_¿¬“Œ_Õ¡_“–¿Õ«»“_ Œƒ_‘Œ–Ã»–', SYSDATE)),0)
+INTO v_trt_item_value FROM out_line ol WHERE ol.doc_id = :DOC_ID
+
+	  -------------------------------------------------------------
+
+SQL ordered by CPU Time		  DB/Inst: NB/nb  Snaps: 110965-111029
+-> Resources reported for PL/SQL code includes the resources used by all SQL
+   statements called by the code.
+-> % Total DB Time is the Elapsed Time of the SQL statement divided
+   into the Total Database Time multiplied by 100
+
+    CPU      Elapsed		      CPU per  % Total
+  Time (s)   Time (s)  Executions     Exec (s) DB Time	  SQL Id
+---------- ---------- ------------ ----------- ------- -------------
+       222	  337	       384	  0.58	   6.4 7g1qfx3j7gdcr
+Module: cag_repl1.exe
+BEGIN pck_cag_transfer1.import; END;
+
+       160	  844		 2	 80.17	  16.1 dtthhbnnrfzyy
+Module: DBMS_SCHEDULER
+DECLARE job BINARY_INTEGER := :job; next_date TIMESTAMP WITH TIME ZONE := :myda
+te; broken BOOLEAN := FALSE; job_name VARCHAR2(30) := :job_name; job_subname
+VARCHAR2(30) := :job_subname; job_owner VARCHAR2(30) := :job_owner; job_start
+TIMESTAMP WITH TIME ZONE := :job_start; job_scheduled_start TIMESTAMP WITH TIME
+
+       124	  136	       203	  0.61	   2.6 1yn0b4zk93v0u
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+UPDATE V_OUT_WBILL_MO_OS_I SET METER_OUT_ID = :B6 , PURE_WEIGHT = :B5 , TOTAL_WE
+IGHT = :B5 , VOLUME = DECODE(:B3 , 0, VOLUME, :B3 ), DENCITY = DECODE(:B4 , 0, D
+ENCITY, :B4 ), TEMPERATURE = DECODE(:B3 , 0, TEMPERATURE, :B2 ) WHERE LINE_ID =
+:B1
+
+	91	  104	       518	  0.18	   2.0 9fjpkr33t55x5
+Module: cag_repl1.exe
+BEGIN pck_cag_transfer1.begin_transfer(0 ); END;
+
+	79	   85	       287	  0.28	   1.6 c8c8gr0cu0uzc
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+BEGIN PRC_CHANGE_OUT_WBILL_MO_OS_I(:line_id,0); END;
+
+	77	   95	     1,403	  0.06	   1.8 9zv3zgp50avhn
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+begin if NOT pck_latch.no_write_down_update then pck_tax.make_tax_doc(:doc_i
+d, :line_id); end if; end;
+
+	77	  111		84	  0.91	   2.1 afm76r2yjpbwc
+Module: Petronics_PB10 W_OUT_WBILL_PP_-0
+INSERT INTO "OUT_WBILL_MO_OS_I" ( "LINE_ID", "DOC_ID", "CAR_DULL_SEC_ID", "ORDER
+_LINE_ID", "ORDER_DOC_ID", "SALE_GDS_ID", "TAX_STATE", "TAX_AUTO", "GDS_ID", "ME
+ASURE_ID", "ROBJ_ID", "CAR_DULL_ID", "CERT_ID", "CERT_DATE", "CERT_NUMBER", "CAR
+_VOLUME", "VOLUME", "DELTA_LEVEL", "TEMPERATURE", "DENCITY", "IMPURITY_PERCENT",
+
+	75	   76	       260	  0.29	   1.5 1h8ww05650x5h
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+SELECT distinct gds.code, gds.name gds_name, gds.name, gds.master_id, gds.id, gd
+s.type_id,'-' end FROM storage_position strg, goods gds WHERE strg.gds_id = gds
+.id AND strg.home_id = pck_adm.fnc_home_id AND gds.type_id = 1
+
+	74	  108		58	  1.28	   2.1 3fw5pknkyzws4
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+BEGIN :rc := PCK_DOC.MAKE_DOC_TRANSITION( :0,:1); END;
+
+	73	   88	       428	  0.17	   1.7 a1hdvn89xudsu
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+INSERT INTO V_WRITE_DOWN (LINE_ID, MASTER_ID, DOC_ID, PRIME_LINE_ID, GDS_ID, MEA
+SURE_ID, OWNERSHIP_ID, SUPP_CNT_ID, SUPP_TREATY_ID, SUPP_BILL_ID, KEEP_CNT_ID, K
+EEP_TREATY_ID, KEEP_BILL_ID, PURE_WEIGHT, QUANTITY, UNIT_WEIGHT, PRICE, PRICE_TA
+X, AMOUNT, AMOUNT_TAX, MOVING_KIND_ID, ORDER_ID, ORDER_LINE_ID, RESP_ID, REC_DOC
+
+	60	   82	       423	  0.14	   1.6 fg0unr2y6nrvf
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+UPDATE v_out_order_mo_os_i ord SET (fact_weight, fact_quantity, saldo_tax) = (SE
+LECT ord.fact_weight + decode(ord.measure_id, 175, NVL(wbill.volume, 0), NVL(wbi
+ll.pure_weight, 0)), NVL(wbill.quantity, 0) + ord.fact_quantity, ord.saldo_tax -
+SQL ordered by CPU Time		  DB/Inst: NB/nb  Snaps: 110965-111029
+-> Resources reported for PL/SQL code includes the resources used by all SQL
+   statements called by the code.
+-> % Total DB Time is the Elapsed Time of the SQL statement divided
+   into the Total Database Time multiplied by 100
+
+    CPU      Elapsed		      CPU per  % Total
+  Time (s)   Time (s)  Executions     Exec (s) DB Time	  SQL Id
+---------- ---------- ------------ ----------- ------- -------------
+ wbill.amount_tax FROM out_wbill_mo_os_i wbill WHERE line_id = :1) WHERE line_id
+
+	54	   69		 1	 54.45	   1.3 7ntmjxw1tu7p2
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+declare prec_doc_id number; err varchar2(4000); begin update sys_environ
+ment set value_parm=0 where id=599000000014156; select rd.doc_id into prec_doc_
+id from receipt_doc rd,document doc where rd.doc_id=doc.id and lower(rd.doc_numb
+er)='resurs'; for rec_doc in (select * from ( select doc.date_doc pdate,
+
+	53	   61	       608	  0.09	   1.2 5rxvcus70tbvk
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+UPDATE V_OUT_LINE SET ORDER_LINE_ID = :B22 , SALE_GDS_ID = :B21 , GDS_ID = :B20
+, MEASURE_ID = :B19 , SEQNO = :B18 , VOLUME = :B17 , DENCITY = :B16 , TEMPERATUR
+E = :B15 , IMPURITY_PERCENT = :B14 , PURE_WEIGHT = :B13 , QUANTITY = :B12 , UNIT
+_WEIGHT = :B11 , TOTAL_WEIGHT = :B10 , PRICE = :B9 , PRICE_TAX = :B8 , AMOUNT =
+
+	48	   57	       500	  0.10	   1.1 5n96h2rpsc9k9
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+declare v_trt_item_value number; begin begin SELECT NVL(pck_treaty.fnc_get_it
+em_value(pck_treaty.exists_parameter_item_value(ol.doc_id, NULL, NULL, '–Õ¿ À_¿¬
+“Œ_Õ¡_“–¿Õ«»“', NULL, '–Õ¿ À_¿¬“Œ_Õ¡_“–¿Õ«»“_ Œƒ_‘Œ–Ã»–', SYSDATE)),0)
+INTO v_trt_item_value FROM out_line ol WHERE ol.doc_id = :DOC_ID
+
+	44	   67		71	  0.61	   1.3 02u8bvku6jchn
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+INSERT INTO "OUT_WBILL_MO_OS_I" ( "LINE_ID", "TARE_WEIGHT", "GROSS_WEIGHT", "DOC
+_ID", "CAR_DULL_SEC_ID", "ORDER_LINE_ID", "ORDER_DOC_ID", "SALE_GDS_ID", "GDS_ID
+", "MEASURE_ID", "ROBJ_ID", "IS_WRITE_DOWN", "CAR_DULL_ID", "CERT_ID", "CERT_DAT
+E", "CERT_NUMBER", "CAR_VOLUME", "VOLUME", "DELTA_LEVEL", "TEMPERATURE", "DENCIT
+
+	43	   66	       140	  0.30	   1.2 9tngp6a5bsckc
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+INSERT INTO V_OUT_LINE ( LINE_ID, MASTER_ID, DOC_ID, RESP_ID, CONVEYANCE_ID, ORD
+ER_LINE_ID, TRANSMIT_KIND_ID, SEND_CNT_ID, SEND_ENT_ID, SEND_TERM_ID, RECIP_CNT_
+ID, RECIP_ENT_ID, RECIP_TERM_ID, BUYER_CNT_ID, BUYER_ENT_ID, CUST_CNT_ID, CUST_E
+NT_ID, CUST_TREATY_ID, CUST_BILL_ID, SALE_GDS_ID, GDS_ID, MEASURE_ID, MOVING_KIN
+
+	42	   69		 1	 41.61	   1.3 8f15jz7t7zu4y
+DECLARE job BINARY_INTEGER := :job; next_date DATE := :mydate; broken BOOLEAN :
+= FALSE; BEGIN declare prec_doc_id number; err varchar2(4000); begin P
+CK_ADM.PRC_REGISTRATION(892000000000741,892000000000584,0); select rd.doc_id in
+to prec_doc_id from receipt_doc rd,document doc where rd.doc_id=doc.id and lower
+
+	29	   81		 2	 14.42	   1.5 fqc5unquraw1k
+Module: DBMS_SCHEDULER
+call LIDER.PRC_RECALC_JOB ( )
+
+	17	  209		 1	 16.92	   4.0 6mcpb06rctk0x
+Module: DBMS_SCHEDULER
+call dbms_space.auto_space_advisor_job_proc ( )
+
+	14	  203		44	  0.32	   3.9 8szmwam7fysa3
+Module: DBMS_SCHEDULER
+insert into wri$_adv_objspace_trend_data select timepoint, space_usage, space_a
+lloc, quality from table(dbms_space.object_growth_trend(:1, :2, :3, :4, NULL, N
+ULL, NULL, 'FALSE', :5, 'FALSE'))
+
+	 0	  868		32	  0.00	  16.5 0vng7g88zxhra
+DECLARE job BINARY_INTEGER := :job; next_date DATE := :mydate; broken BOOLEAN :
+= FALSE; BEGIN begin FBU_VNP1C8.GAZ_LDR; EXCEPTION WHEN OTHERS THEN
+SQL ordered by CPU Time		  DB/Inst: NB/nb  Snaps: 110965-111029
+-> Resources reported for PL/SQL code includes the resources used by all SQL
+   statements called by the code.
+-> % Total DB Time is the Elapsed Time of the SQL statement divided
+   into the Total Database Time multiplied by 100
+
+    CPU      Elapsed		      CPU per  % Total
+  Time (s)   Time (s)  Executions     Exec (s) DB Time	  SQL Id
+---------- ---------- ------------ ----------- ------- -------------
+null; end; :mydate := next_date; IF broken THEN :b := 1; ELSE :b
+:= 0; END IF; END;
+
+	  -------------------------------------------------------------
+
+SQL ordered by Gets			  DB/Inst: NB/nb  Snaps: 110965-111029
+-> Resources reported for PL/SQL code includes the resources used by all SQL
+   statements called by the code.
+-> Total Buffer Gets:	   60,847,627
+-> Captured SQL account for	 92.8% of Total
+
+				Gets		  CPU	  Elapsed
+  Buffer Gets	Executions    per Exec	 %Total Time (s)  Time (s)    SQL Id
+-------------- ------------ ------------ ------ -------- --------- -------------
+     6,394,678		518	12,344.9   10.5    91.29    104.10 9fjpkr33t55x5
+Module: cag_repl1.exe
+BEGIN pck_cag_transfer1.begin_transfer(0 ); END;
+
+     4,878,576		 49	99,562.8    8.0    35.49     36.72 bbhyu0guwnwwp
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+SELECT /*+ ORDERED FIRST_ROWS*/ goods.code, LPAD(' ',5*(LEVEL-1)) ||
+goods.name gds_name, goods.name, goods.master_id,
+ goods.id, goods.type_id, '-' end FROM goods W
+HERE 2 = 1 AND 1=1 START WITH master_ID IS NULL CONNECT BY PRIOR ID = mas
+
+     4,796,249		384	12,490.2    7.9   222.30    337.25 7g1qfx3j7gdcr
+Module: cag_repl1.exe
+BEGIN pck_cag_transfer1.import; END;
+
+     3,745,104		  2  1,872,552.0    6.2   160.35    844.30 dtthhbnnrfzyy
+Module: DBMS_SCHEDULER
+DECLARE job BINARY_INTEGER := :job; next_date TIMESTAMP WITH TIME ZONE := :myda
+te; broken BOOLEAN := FALSE; job_name VARCHAR2(30) := :job_name; job_subname
+VARCHAR2(30) := :job_subname; job_owner VARCHAR2(30) := :job_owner; job_start
+TIMESTAMP WITH TIME ZONE := :job_start; job_scheduled_start TIMESTAMP WITH TIME
+
+     3,339,198		203	16,449.3    5.5   124.25    135.99 1yn0b4zk93v0u
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+UPDATE V_OUT_WBILL_MO_OS_I SET METER_OUT_ID = :B6 , PURE_WEIGHT = :B5 , TOTAL_WE
+IGHT = :B5 , VOLUME = DECODE(:B3 , 0, VOLUME, :B3 ), DENCITY = DECODE(:B4 , 0, D
+ENCITY, :B4 ), TEMPERATURE = DECODE(:B3 , 0, TEMPERATURE, :B2 ) WHERE LINE_ID =
+:B1
+
+     2,650,649		287	 9,235.7    4.4    78.98     85.31 c8c8gr0cu0uzc
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+BEGIN PRC_CHANGE_OUT_WBILL_MO_OS_I(:line_id,0); END;
+
+     2,016,441	      1,403	 1,437.2    3.3    77.17     94.81 9zv3zgp50avhn
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+begin if NOT pck_latch.no_write_down_update then pck_tax.make_tax_doc(:doc_i
+d, :line_id); end if; end;
+
+     1,954,127		  1  1,954,127.0    3.2    41.61     69.00 8f15jz7t7zu4y
+DECLARE job BINARY_INTEGER := :job; next_date DATE := :mydate; broken BOOLEAN :
+= FALSE; BEGIN declare prec_doc_id number; err varchar2(4000); begin P
+CK_ADM.PRC_REGISTRATION(892000000000741,892000000000584,0); select rd.doc_id in
+to prec_doc_id from receipt_doc rd,document doc where rd.doc_id=doc.id and lower
+
+     1,897,346		423	 4,485.5    3.1    59.97     81.71 fg0unr2y6nrvf
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+UPDATE v_out_order_mo_os_i ord SET (fact_weight, fact_quantity, saldo_tax) = (SE
+LECT ord.fact_weight + decode(ord.measure_id, 175, NVL(wbill.volume, 0), NVL(wbi
+ll.pure_weight, 0)), NVL(wbill.quantity, 0) + ord.fact_quantity, ord.saldo_tax -
+ wbill.amount_tax FROM out_wbill_mo_os_i wbill WHERE line_id = :1) WHERE line_id
+
+     1,889,398		 84	22,492.8    3.1    76.58    111.32 afm76r2yjpbwc
+Module: Petronics_PB10 W_OUT_WBILL_PP_-0
+INSERT INTO "OUT_WBILL_MO_OS_I" ( "LINE_ID", "DOC_ID", "CAR_DULL_SEC_ID", "ORDER
+_LINE_ID", "ORDER_DOC_ID", "SALE_GDS_ID", "TAX_STATE", "TAX_AUTO", "GDS_ID", "ME
+ASURE_ID", "ROBJ_ID", "CAR_DULL_ID", "CERT_ID", "CERT_DATE", "CERT_NUMBER", "CAR
+_VOLUME", "VOLUME", "DELTA_LEVEL", "TEMPERATURE", "DENCITY", "IMPURITY_PERCENT",
+
+     1,637,021		301	 5,438.6    2.7    21.17     39.73 gk3bdkt66yh6r
+Module: cag_repl1.exe
+SQL ordered by Gets			  DB/Inst: NB/nb  Snaps: 110965-111029
+-> Resources reported for PL/SQL code includes the resources used by all SQL
+   statements called by the code.
+-> Total Buffer Gets:	   60,847,627
+-> Captured SQL account for	 92.8% of Total
+
+				Gets		  CPU	  Elapsed
+  Buffer Gets	Executions    per Exec	 %Total Time (s)  Time (s)    SQL Id
+-------------- ------------ ------------ ------ -------- --------- -------------
+BEGIN pck_cag_transfer1.clear_repl; END;
+
+     1,615,023		281	 5,747.4    2.7    44.68     48.58 1ufgrbp2y1g82
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+UPDATE v_out_order_mo_os_i ord SET (fact_weight , fact_quantity, saldo_tax) = (S
+ELECT ord.fact_weight - decode(ord.measure_id, 175, NVL(wbill.volume, 0), NVL(wb
+ill.pure_weight, 0)), ord.fact_quantity - NVL(wbill.quantity, 0), ord.saldo_tax
++ wbill.amount_tax FROM out_wbill_mo_os_i_oldval wbill WHERE line_id = :1) WHERE
+
+     1,533,548		  1  1,533,548.0    2.5    54.45     68.64 7ntmjxw1tu7p2
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+declare prec_doc_id number; err varchar2(4000); begin update sys_environ
+ment set value_parm=0 where id=599000000014156; select rd.doc_id into prec_doc_
+id from receipt_doc rd,document doc where rd.doc_id=doc.id and lower(rd.doc_numb
+er)='resurs'; for rec_doc in (select * from ( select doc.date_doc pdate,
+
+     1,452,454		428	 3,393.6    2.4    72.81     87.52 a1hdvn89xudsu
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+INSERT INTO V_WRITE_DOWN (LINE_ID, MASTER_ID, DOC_ID, PRIME_LINE_ID, GDS_ID, MEA
+SURE_ID, OWNERSHIP_ID, SUPP_CNT_ID, SUPP_TREATY_ID, SUPP_BILL_ID, KEEP_CNT_ID, K
+EEP_TREATY_ID, KEEP_BILL_ID, PURE_WEIGHT, QUANTITY, UNIT_WEIGHT, PRICE, PRICE_TA
+X, AMOUNT, AMOUNT_TAX, MOVING_KIND_ID, ORDER_ID, ORDER_LINE_ID, RESP_ID, REC_DOC
+
+     1,405,139		 58	24,226.5    2.3    74.03    108.23 3fw5pknkyzws4
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+BEGIN :rc := PCK_DOC.MAKE_DOC_TRANSITION( :0,:1); END;
+
+     1,305,276		  2    652,638.0    2.1    28.84     80.52 fqc5unquraw1k
+Module: DBMS_SCHEDULER
+call LIDER.PRC_RECALC_JOB ( )
+
+     1,254,482	     67,025	    18.7    2.1    19.64     28.03 fpj46990f4hxd
+Module: cag_repl1.exe
+INSERT INTO LIDER.ZREPL_MSG_I(ID, MSG_ID, DATA, NOTE, META_ID) VALUES (LIDER.SQ_
+ZREPL_MSG_I.NEXTVAL, :B3 , SYSDATE, NVL(:B2 ,'-'), :B1 )
+
+     1,239,000		500	 2,478.0    2.0    47.66     57.32 5n96h2rpsc9k9
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+declare v_trt_item_value number; begin begin SELECT NVL(pck_treaty.fnc_get_it
+em_value(pck_treaty.exists_parameter_item_value(ol.doc_id, NULL, NULL, '–Õ¿ À_¿¬
+“Œ_Õ¡_“–¿Õ«»“', NULL, '–Õ¿ À_¿¬“Œ_Õ¡_“–¿Õ«»“_ Œƒ_‘Œ–Ã»–', SYSDATE)),0)
+INTO v_trt_item_value FROM out_line ol WHERE ol.doc_id = :DOC_ID
+
+     1,158,270		608	 1,905.0    1.9    52.66     60.70 5rxvcus70tbvk
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+UPDATE V_OUT_LINE SET ORDER_LINE_ID = :B22 , SALE_GDS_ID = :B21 , GDS_ID = :B20
+, MEASURE_ID = :B19 , SEQNO = :B18 , VOLUME = :B17 , DENCITY = :B16 , TEMPERATUR
+E = :B15 , IMPURITY_PERCENT = :B14 , PURE_WEIGHT = :B13 , QUANTITY = :B12 , UNIT
+_WEIGHT = :B11 , TOTAL_WEIGHT = :B10 , PRICE = :B9 , PRICE_TAX = :B8 , AMOUNT =
+
+     1,105,852		338	 3,271.8    1.8    25.48     36.38 bx9d7hafq9yvk
+SELECT /*+ ORDERED FIRST_ROWS*/ CV.DOC_ID, CV.LINE_ID, PCK_CARD_GDS.GET_NET(CV.I
+D, 1, TO_DATE('01.01.3000','dd.mm.yyyy')) GDS_NET, CV.VAL_05, CV.VAL_06, CV.VAL_
+11, CV.VAL_12, CV.VAL_15, CV.VAL_16, CV.VAL_17, CV.VAL_14, CV.VAL_04, CV.VAL_03
+FROM CARD_GDS_VAL CV WHERE CV.AIM_ID = :B10 AND CV.SP_END_DATE > :B9 AND CV.VAL_
+
+     1,029,696		 71	14,502.8    1.7    43.60     66.68 02u8bvku6jchn
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+INSERT INTO "OUT_WBILL_MO_OS_I" ( "LINE_ID", "TARE_WEIGHT", "GROSS_WEIGHT", "DOC
+_ID", "CAR_DULL_SEC_ID", "ORDER_LINE_ID", "ORDER_DOC_ID", "SALE_GDS_ID", "GDS_ID
+SQL ordered by Gets			  DB/Inst: NB/nb  Snaps: 110965-111029
+-> Resources reported for PL/SQL code includes the resources used by all SQL
+   statements called by the code.
+-> Total Buffer Gets:	   60,847,627
+-> Captured SQL account for	 92.8% of Total
+
+				Gets		  CPU	  Elapsed
+  Buffer Gets	Executions    per Exec	 %Total Time (s)  Time (s)    SQL Id
+-------------- ------------ ------------ ------ -------- --------- -------------
+", "MEASURE_ID", "ROBJ_ID", "IS_WRITE_DOWN", "CAR_DULL_ID", "CERT_ID", "CERT_DAT
+E", "CERT_NUMBER", "CAR_VOLUME", "VOLUME", "DELTA_LEVEL", "TEMPERATURE", "DENCIT
+
+       994,182	      2,658	   374.0    1.6    12.05     12.12 14dgabxk1pfvm
+Module: cag_repl1.exe
+SELECT * FROM (SELECT /*+ ORDERED FIRST_ROWS*/ A.VALUE_PARM FROM SYS_ENVIRONMENT
+ A WHERE A.NAME = UPPER(:B1 ) ORDER BY DATE_START DESC) WHERE ROWNUM = 1
+
+       961,255		260	 3,697.1    1.6    74.89     76.27 1h8ww05650x5h
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+SELECT distinct gds.code, gds.name gds_name, gds.name, gds.master_id, gds.id, gd
+s.type_id,'-' end FROM storage_position strg, goods gds WHERE strg.gds_id = gds
+.id AND strg.home_id = pck_adm.fnc_home_id AND gds.type_id = 1
+
+       948,044		140	 6,771.7    1.6    42.61     65.50 9tngp6a5bsckc
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+INSERT INTO V_OUT_LINE ( LINE_ID, MASTER_ID, DOC_ID, RESP_ID, CONVEYANCE_ID, ORD
+ER_LINE_ID, TRANSMIT_KIND_ID, SEND_CNT_ID, SEND_ENT_ID, SEND_TERM_ID, RECIP_CNT_
+ID, RECIP_ENT_ID, RECIP_TERM_ID, BUYER_CNT_ID, BUYER_ENT_ID, CUST_CNT_ID, CUST_E
+NT_ID, CUST_TREATY_ID, CUST_BILL_ID, SALE_GDS_ID, GDS_ID, MEASURE_ID, MOVING_KIN
+
+       914,364		 52	17,583.9    1.5     3.81     25.14 f52a2faz3kkdc
+SELECT OL.* FROM OUT_LINE OL, V_DOCUMENT DOC WHERE OL.DOC_ID=DOC.ID AND TRUNC(DO
+C.DATE_DOC)=TRUNC(:B2 ) AND OL.GDS_ID=:B1 AND DOC.STORNO_ID IS NULL ORDER BY DOC
+.DATE_DOC
+
+       899,831		385	 2,337.2    1.5    22.33     24.51 f98g8attf2dfs
+Module: cag_repl1.exe
+SELECT DISTINCT 1 FROM all_arguments A WHERE A.package_name ='PCK_CAG_TRANSFER1'
+ AND A.owner ='LIDER' AND A.object_name ='BEGIN_TRANSFER' AND A.argument_name IS
+ NOT NULL
+
+       882,092		 33	26,730.1    1.4    34.85     43.13 69x1ad3vrzjgn
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+UPDATE V_OUT_LINE SET RESP_ID = :B22 , CONVEYANCE_ID = :B21 , TRANSMIT_KIND_ID =
+ :B20 , SEND_CNT_ID = :B19 , SEND_ENT_ID = :B18 , SEND_TERM_ID = :B17 , RECIP_CN
+T_ID = :B16 , RECIP_ENT_ID = :B15 , RECIP_TERM_ID = :B14 , BUYER_CNT_ID = :B13 ,
+ BUYER_ENT_ID = :B12 , CUST_CNT_ID = :B11 , CUST_ENT_ID = :B10 , CUST_TREATY_ID
+
+       864,397		228	 3,791.2    1.4     3.59      3.99 2twk0zyvxkqab
+Module: cag_repl1.exe
+SELECT /*+ ORDERED FIRST_ROWS*/ S.ID, T.LEV, S.NOTE FROM ( SELECT O.CNT_ID, LEVE
+L LEV FROM LIDER.ORGANIZATION O WHERE O.DATE_START <= SYSDATE AND O.SP_END_DATE
+> SYSDATE START WITH O.MASTER_ID IS NULL CONNECT BY PRIOR O.ID = O.MASTER_ID) T,
+ LIDER.CONTRACTOR C, LIDER.ZREPL_SERVER_ENT E, LIDER.ZREPL_SERVER S WHERE C.ID =
+
+       831,944		753	 1,104.8    1.4    38.27     45.60 dmb4zu91k6g7c
+Module: Petronics_PB10 W_RECEIPT_PACKED_-0
+BEGIN pck_card_gds.reg_debit_eff(:doc_id, :line_id, :gds_type_id, :card_subj_id)
+; END;
+
+       824,795	      1,288	   640.4    1.4    33.88     41.62 01b2xv7rucmay
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+BEGIN pck_card_gds.reg_credit_cur(:doc_id, :line_id, :gds_type_id, :card_subj_id
+); END;
+
+       824,072		229	 3,598.6    1.4    35.61     45.52 62qk7gdtpdx5c
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+UPDATE OUT_WBILL_MO_OS_I SET amount_tax = amount + :1 , price_tax = price + :2
+WHERE line_id = :doc_id
+SQL ordered by Gets			  DB/Inst: NB/nb  Snaps: 110965-111029
+-> Resources reported for PL/SQL code includes the resources used by all SQL
+   statements called by the code.
+-> Total Buffer Gets:	   60,847,627
+-> Captured SQL account for	 92.8% of Total
+
+				Gets		  CPU	  Elapsed
+  Buffer Gets	Executions    per Exec	 %Total Time (s)  Time (s)    SQL Id
+-------------- ------------ ------------ ------ -------- --------- -------------
+
+       805,600		  3    268,533.3    1.3     1.38      5.98 gfjvxb25b773h
+select o.owner#,o.obj#,decode(o.linkname,null, decode(u.name,null,'SYS',u.name),
+o.remoteowner), o.name,o.linkname,o.namespace,o.subname from user$ u, obj$ o whe
+re u.user#(+)=o.owner# and o.type#=:1 and not exists (select p_obj# from depende
+ncy$ where p_obj# = o.obj#) order by o.obj# for update
+
+       805,378		140	 5,752.7    1.3    35.60     52.47 21txpd0z86p5h
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+declare v_trt_item_value number; begin begin SELECT NVL(pck_treaty.fnc_get_it
+em_value(pck_treaty.exists_parameter_item_value(ol.doc_id, NULL, NULL, '–Õ¿ À_¿¬
+“Œ_Õ¡_“–¿Õ«»“', NULL, '–Õ¿ À_¿¬“Œ_Õ¡_“–¿Õ«»“_ Œƒ_‘Œ–Ã»–', SYSDATE)),0)
+INTO v_trt_item_value FROM out_line ol WHERE ol.doc_id = :DOC_ID
+
+       795,748		130	 6,121.1    1.3    23.80     41.60 0p6vpqm3zj9fw
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+BEGIN PRC_CHANGE_OUT_WBILL_MO_OS_I(:line_id,1); END;
+
+       774,349		881	   878.9    1.3    37.25     46.46 4pu02gkbqzq50
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+BEGIN pck_card_gds.reg_credit_eff(:doc_id, :line_id, :gds_type_id, :card_subj_id
+); END;
+
+       708,553		198	 3,578.6    1.2    31.13     34.76 d0hdfxma8bgvc
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+UPDATE out_wbill_mo_os_i SET meter_out_id = :meter_out_id, volume = :volume, tem
+perature = :temperature, dencity = :dencity, pure_weight = :pure_weight, total_w
+eight = :total_weight WHERE line_id = :line_id
+
+       639,243	    127,796	     5.0    1.1     8.25      8.25 5ua270akf0d3n
+Module: kernel.exe
+SELECT /*+ ORDERED FIRST_ROWS*/ * FROM (SELECT E.VALUE_PARM, E.MANY FROM SYS_ENV
+IRONMENT E WHERE (E.ENT_ID = :B3 OR E.ENT_ID IS NULL) AND E.NAME = :B2 AND E.DAT
+E_START < :B1 + 1 ORDER BY E.DATE_START DESC) WHERE ROWNUM = 1
+
+       632,124		  1    632,124.0    1.0    16.92    208.85 6mcpb06rctk0x
+Module: DBMS_SCHEDULER
+call dbms_space.auto_space_advisor_job_proc ( )
+
+       620,282	     12,168	    51.0    1.0    23.11     23.11 b3rafd53vbxk9
+Module: Petronics_PB10 W_OUT_WBILL_PP_-0
+select ( pck_doc_item.get_value ( :1 , :2 , NULL , ' ¿“≈√Œ–»ﬂ_÷≈Õ' , NULL , ' ¿“
+≈√Œ–»ﬂ' , sysdate ) ) from dual
+
+	  -------------------------------------------------------------
+
+SQL ordered by Reads			  DB/Inst: NB/nb  Snaps: 110965-111029
+-> Total Disk Reads:	   2,802,206
+-> Captured SQL account for	64.8% of Total
+
+			       Reads		  CPU	  Elapsed
+Physical Reads	Executions    per Exec	 %Total Time (s)  Time (s)    SQL Id
+-------------- ----------- ------------- ------ -------- --------- -------------
+     1,810,607		 2     905,303.5   64.6   160.35    844.30 dtthhbnnrfzyy
+Module: DBMS_SCHEDULER
+DECLARE job BINARY_INTEGER := :job; next_date TIMESTAMP WITH TIME ZONE := :myda
+te; broken BOOLEAN := FALSE; job_name VARCHAR2(30) := :job_name; job_subname
+VARCHAR2(30) := :job_subname; job_owner VARCHAR2(30) := :job_owner; job_start
+TIMESTAMP WITH TIME ZONE := :job_start; job_scheduled_start TIMESTAMP WITH TIME
+
+       392,660		 6	65,443.3   14.0     8.78     28.66 18ad2bb42xnst
+Module: Petronics_PB10 W_OUT_ORDER_MO_OS_-0
+DECLARE v_info VARCHAR2(2000); BEGIN FOR rec IN (SELECT /*+ ORDERED FIR
+ST_ROWS*/ line_id FROM out_line WHERE doc_id IN (SELECT /*+ ORDERED FIRST_ROWS*/
+ ol.doc_id FROM doc_line oi, out_line ol WHERE ol.order_line_id = oi.line_id AND
+ oi.master_id = :LINE_ID)) LOOP pck_doc.generate_event(NULL, rec.line_id, p
+
+       392,603		 6	65,433.8   14.0     8.46     28.12 6h4my5gh1nhb6
+Module: Petronics_PB10 W_OUT_ORDER_MO_OS_-0
+SELECT /*+ ORDERED FIRST_ROWS*/ LINE_ID FROM OUT_LINE WHERE DOC_ID IN (SELECT /*
++ ORDERED FIRST_ROWS*/ OL.DOC_ID FROM DOC_LINE OI, OUT_LINE OL WHERE OL.ORDER_LI
+NE_ID = OI.LINE_ID AND OI.MASTER_ID = :B1 )
+
+       333,829	       197	 1,694.6   11.9    15.55     33.16 0fkawcmth29v3
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+DECLARE v_info VARCHAR2(2000); v_new_state doc_state.id%TYPE; v_c
+losed number; BEGIN SELECT fnc_order_must_close(:DOC_ID) into v_closed fro
+m dual; if v_closed=1 then delete out_order_mo_os_i_oldval where l
+ine_id=:LINE_ID; pck_doc.generate_event(:doc_id, NULL, pck_doc.get_oper
+
+       298,106		84	 3,548.9   10.6    76.58    111.32 afm76r2yjpbwc
+Module: Petronics_PB10 W_OUT_WBILL_PP_-0
+INSERT INTO "OUT_WBILL_MO_OS_I" ( "LINE_ID", "DOC_ID", "CAR_DULL_SEC_ID", "ORDER
+_LINE_ID", "ORDER_DOC_ID", "SALE_GDS_ID", "TAX_STATE", "TAX_AUTO", "GDS_ID", "ME
+ASURE_ID", "ROBJ_ID", "CAR_DULL_ID", "CERT_ID", "CERT_DATE", "CERT_NUMBER", "CAR
+_VOLUME", "VOLUME", "DELTA_LEVEL", "TEMPERATURE", "DENCITY", "IMPURITY_PERCENT",
+
+       295,664	       423	   699.0   10.6    59.97     81.71 fg0unr2y6nrvf
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+UPDATE v_out_order_mo_os_i ord SET (fact_weight, fact_quantity, saldo_tax) = (SE
+LECT ord.fact_weight + decode(ord.measure_id, 175, NVL(wbill.volume, 0), NVL(wbi
+ll.pure_weight, 0)), NVL(wbill.quantity, 0) + ord.fact_quantity, ord.saldo_tax -
+ wbill.amount_tax FROM out_wbill_mo_os_i wbill WHERE line_id = :1) WHERE line_id
+
+       295,161	       130	 2,270.5   10.5    23.80     41.60 0p6vpqm3zj9fw
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+BEGIN PRC_CHANGE_OUT_WBILL_MO_OS_I(:line_id,1); END;
+
+       166,316		 1     166,316.0    5.9    16.92    208.85 6mcpb06rctk0x
+Module: DBMS_SCHEDULER
+call dbms_space.auto_space_advisor_job_proc ( )
+
+       164,265		44	 3,733.3    5.9    13.92    203.18 8szmwam7fysa3
+Module: DBMS_SCHEDULER
+insert into wri$_adv_objspace_trend_data select timepoint, space_usage, space_a
+lloc, quality from table(dbms_space.object_growth_trend(:1, :2, :3, :4, NULL, N
+ULL, NULL, 'FALSE', :5, 'FALSE'))
+
+       115,611		 2	57,805.5    4.1    28.84     80.52 fqc5unquraw1k
+Module: DBMS_SCHEDULER
+call LIDER.PRC_RECALC_JOB ( )
+
+	64,421		58	 1,110.7    2.3    74.03    108.23 3fw5pknkyzws4
+SQL ordered by Reads			  DB/Inst: NB/nb  Snaps: 110965-111029
+-> Total Disk Reads:	   2,802,206
+-> Captured SQL account for	64.8% of Total
+
+			       Reads		  CPU	  Elapsed
+Physical Reads	Executions    per Exec	 %Total Time (s)  Time (s)    SQL Id
+-------------- ----------- ------------- ------ -------- --------- -------------
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+BEGIN :rc := PCK_DOC.MAKE_DOC_TRANSITION( :0,:1); END;
+
+	40,173		 2	20,086.5    1.4     1.19      4.42 dwu0q85ar3su5
+Module: DBMS_SCHEDULER
+SELECT CV.ID FROM CARD_GDS_VAL CV WHERE NET_DATE < TO_DATE('31.12.4712', 'DD.MM.
+YYYY')
+
+	40,090	       384	   104.4    1.4   222.30    337.25 7g1qfx3j7gdcr
+Module: cag_repl1.exe
+BEGIN pck_cag_transfer1.import; END;
+
+	40,072		 5	 8,014.4    1.4     2.42      7.89 an3buuqs1vj5t
+Module: Petronics_PB10 W_OUT_ORDER_MO_OS_-0
+UPDATE "OUT_ORDER_MO_OS_I" SET "PLAN_WEIGHT" = :1, "AMOUNT_TAX" = :2, "AMOUNT" =
+ :3 WHERE "LINE_ID" = :4
+
+	39,472		 2	19,736.0    1.4     2.77      5.08 92ydqxhupvhpz
+Module: DBMS_SCHEDULER
+SELECT ID FROM CARD_GDS_VAL WHERE SP_END_DATE = :B1
+
+	29,966	   141,789	     0.2    1.1    38.65     40.31 3jz8fjgzfk37x
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS-2333
+SELECT * FROM (SELECT CN.NET, CN.NET_EFF FROM CARD_GDS_NET CN WHERE CN.CARD_ID =
+ :B2 AND CN.NET_DATE < :B1 ORDER BY CN.NET_DATE DESC) WHERE ROWNUM = 1
+
+	  -------------------------------------------------------------
+
+SQL ordered by Executions		  DB/Inst: NB/nb  Snaps: 110965-111029
+-> Total Executions:	   6,848,376
+-> Captured SQL account for	34.3% of Total
+
+					      CPU per	 Elap per
+ Executions   Rows Processed  Rows per Exec   Exec (s)	 Exec (s)     SQL Id
+------------ --------------- -------------- ---------- ----------- -------------
+     192,901	     192,901		1.0	  0.00	      0.00 ftj9uawt4wwzb
+select condition from cdef$ where rowid=:1
+
+     172,128	     172,128		1.0	  0.00	      0.00 330q95smuwnv9
+update hist_head$ set bucket_cnt=:3, row_cnt=:4, cache_cnt=:5,null_cnt=:6, times
+tamp#=:7, sample_size=:8, minimum=:9, maximum=:10,distcnt=:11, lowval=:12, hival
+=:13, density=:14, spare1=:15, spare2=:16, avgcln=:17, col#=:18 where obj#=:1 an
+d intcol#=:2
+
+     170,914	     170,568		1.0	  0.00	      0.00 96g93hntrzjtr
+select /*+ rule */ bucket_cnt, row_cnt, cache_cnt, null_cnt, timestamp#, sample_
+size, minimum, maximum, distcnt, lowval, hival, density, col#, spare1, spare2, a
+vgcln from hist_head$ where obj#=:1 and intcol#=:2
+
+     141,789	     141,275		1.0	  0.00	      0.00 3jz8fjgzfk37x
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS-2333
+SELECT * FROM (SELECT CN.NET, CN.NET_EFF FROM CARD_GDS_NET CN WHERE CN.CARD_ID =
+ :B2 AND CN.NET_DATE < :B1 ORDER BY CN.NET_DATE DESC) WHERE ROWNUM = 1
+
+     140,540	     140,366		1.0	  0.00	      0.00 1ucd3arg6916c
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS-2333
+SELECT C.ID, C.NET_DATE, C.SP_END_DATE FROM CARD_GDS_VAL C WHERE C.ID = :B2 AND
+:B1 <= C.SP_END_DATE
+
+     131,296	     124,960		1.0	  0.00	      0.00 1b273j62a5a46
+Module: cag_repl1.exe
+INSERT INTO LIDER.ZREPL_SERVER_TREE(ID, LEV) VALUES (:B2 , :B1 )
+
+     127,796	     125,350		1.0	  0.00	      0.00 5ua270akf0d3n
+Module: kernel.exe
+SELECT /*+ ORDERED FIRST_ROWS*/ * FROM (SELECT E.VALUE_PARM, E.MANY FROM SYS_ENV
+IRONMENT E WHERE (E.ENT_ID = :B3 OR E.ENT_ID IS NULL) AND E.NAME = :B2 AND E.DAT
+E_START < :B1 + 1 ORDER BY E.DATE_START DESC) WHERE ROWNUM = 1
+
+      67,025	      67,025		1.0	  0.00	      0.00 fpj46990f4hxd
+Module: cag_repl1.exe
+INSERT INTO LIDER.ZREPL_MSG_I(ID, MSG_ID, DATA, NOTE, META_ID) VALUES (LIDER.SQ_
+ZREPL_MSG_I.NEXTVAL, :B3 , SYSDATE, NVL(:B2 ,'-'), :B1 )
+
+      58,128	      58,128		1.0	  0.00	      0.00 0vr7cstvu313r
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS_-0
+INSERT INTO AUDIT_USER.ZA_DOC_LINE (Z_AUDSID,Z_USER,Z_USER_ID,Z_OPER,Z_DATE_OPER
+,Z_MACHINE,Z_SRV_REPL,Z_ID,LINE_ID,LINE_TYPE_ID,DOC_ID,MASTER_ID,USER_ID,SEQNO,S
+TATUS,STATE,EVENT_ID,LINE_INFO,PLACE_ID,IS_STORNO,STORNO_ID,ZZ_LINE_TYPE_ID,ZZ_D
+OC_ID,ZZ_MASTER_ID,ZZ_USER_ID,ZZ_SEQNO,ZZ_STATUS,ZZ_STATE,ZZ_EVENT_ID,ZZ_LINE_IN
+
+      55,257	      55,257		1.0	  0.00	      0.00 1v717nvrhgbn9
+Module: oradim.exe
+SELECT USER FROM SYS.DUAL
+
+	  -------------------------------------------------------------
+
+SQL ordered by Parse Calls		  DB/Inst: NB/nb  Snaps: 110965-111029
+-> Total Parse Calls:	    1,991,877
+-> Captured SQL account for	 48.4% of Total
+
+			    % Total
+ Parse Calls  Executions     Parses    SQL Id
+------------ ------------ --------- -------------
+     192,901	  192,901      9.68 ftj9uawt4wwzb
+select condition from cdef$ where rowid=:1
+
+      31,879	   31,879      1.60 2ym6hhaq30r73
+select type#,blocks,extents,minexts,maxexts,extsize,extpct,user#,iniexts,NVL(lis
+ts,65535),NVL(groups,65535),cachehint,hwmincr, NVL(spare1,0),NVL(scanhint,0) fro
+m seg$ where ts#=:1 and file#=:2 and block#=:3
+
+      28,821	   28,821      1.45 grwydz59pu6mc
+select text from view$ where rowid=:1
+
+      23,767	   23,767      1.19 c9vs68pbjptu1
+update ind$ set ts#=:2,file#=:3,block#=:4,intcols=:5,type#=:6,flags=:7,property=
+:8,pctfree$=:9,initrans=:10,maxtrans=:11,blevel=:12,leafcnt=:13,distkey=:14,lblk
+key=:15,dblkkey=:16,clufac=:17,cols=:18,analyzetime=:19,samplesize=:20,dataobj#=
+:21,degree=decode(:22,1,null,:22),instances=decode(:23,1,null,:23),rowcnt=:24,pc
+
+      23,680	   23,680      1.19 gfw9v7ckmbdb6
+delete from ind_online$ where obj#= :1
+
+      23,522	   23,523      1.18 4m7m0t6fjcs5x
+update seq$ set increment$=:2,minvalue=:3,maxvalue=:4,cycle#=:5,order$=:6,cache=
+:7,highwater=:8,audit$=:9,flags=:10 where obj#=:1
+
+      23,352	   23,353      1.17 1fp87jmavgnvs
+insert into sys.wri$_optstat_ind_history(obj#,rowcnt,leafcnt,distkey, lblkkey, d
+blkkey,clufac,blevel,analyzetime,samplesize,guessq,cachedblk, cachehit,logicalre
+ad, savtime,flags) values (:1,:2,:3,:4,:5,:6,:7,:8,:9,:10,:11,:12,:13,:14,:15,:
+16)
+
+      23,034	   23,034      1.16 2jfqzrxhrm93b
+select /*+ rule */ c.name, u.name from con$ c, cdef$ cd, user$ u where c.con# =
+ cd.con# and cd.enabled = :1 and c.owner# = u.user#
+
+      21,634	   21,634      1.09 3axxxnjp5jjwj
+delete from ind_stats$ where obj#=:1
+
+      18,411	   18,411      0.92 56j9983pcjt4t
+Module: Petronics_PB10 W_PRN_LIST--1
+SELECT C.comment$ , L.null$ , L.default$ , L.length FROM sys.obj$ O , sys.col$ L
+ , sys.com$ C WHERE O.owner# =:1 AND O.name =:2 AND L.obj# =O.obj# AND L.name =:
+3 AND L.obj# =C.obj# AND L.intcol# =C.col#
+
+	  -------------------------------------------------------------
+
+SQL ordered by Sharable Memory 	  DB/Inst: NB/nb  Snaps: 110965-111029
+
+		  No data exists for this section of the report.
+	  -------------------------------------------------------------
+
+SQL ordered by Version Count		  DB/Inst: NB/nb  Snaps: 110965-111029
+-> Only Statements with Version Count greater than 20 are displayed
+
+ Version
+  Count   Executions	 SQL Id
+-------- ------------ -------------
+      48       18,411 56j9983pcjt4t
+Module: Petronics_PB10 W_PRN_LIST--1
+SELECT C.comment$ , L.null$ , L.default$ , L.length FROM sys.obj$ O , sys.col$ L
+ , sys.com$ C WHERE O.owner# =:1 AND O.name =:2 AND L.obj# =O.obj# AND L.name =:
+3 AND L.obj# =C.obj# AND L.intcol# =C.col#
+
+      44	2,841 18naypzfmabd6
+Module: EM_PING
+INSERT INTO MGMT_SYSTEM_PERFORMANCE_LOG (JOB_NAME, TIME, DURATION, MODULE, ACTIO
+N, IS_TOTAL, NAME, VALUE, CLIENT_DATA, HOST_URL) VALUES (:B9 , SYSDATE, :B8 , SU
+BSTR(:B7 , 1, 512), SUBSTR(:B6 ,1,32), :B5 , SUBSTR(:B4 ,1,128), SUBSTR(:B3 ,1,1
+28), SUBSTR(:B2 ,1,128), SUBSTR(:B1 ,1,256))
+
+      38	  189 3zh8054rnzshb
+Module: Petronics_PB10 W_OUT_WBILL_MO_OS-2333
+SELECT A.sql_hint , A.sql_order FROM adm_dw_hint A WHERE A.win_name =:1 AND A.dw
+_name =:2
+
+      31	  454 bw9zw1pxkjbgw
+Module: Petronics_PB10 W_A_EXPL-0-892000000004548
+SELECT object_name FROM all_objects WHERE object_name =UPPER ( :1 ) AND owner =U
+PPER ( :2 ) AND object_type =UPPER ( :3 )
+
+      31       20,077 dtgrfqwdnbhu9
+Module: DBMS_SCHEDULER
+INSERT INTO AUDIT_USER.ZA_ZREPL_META (Z_AUDSID,Z_USER,Z_USER_ID,Z_OPER,Z_DATE_OP
+ER,Z_MACHINE,Z_SRV_REPL,Z_ID,ID,ROW_ID,TABLE_ID,DATA,STATUS,SQL_TEXT,SERVER_ID,S
+ERVER_TRAN,SQL_TEXT1,SQL_TEXT2,SERVER_COUNT,DOC_ID) VALUES(USERENV('SESSIONID'),
+:B15 ,PCK_ADM.FNC_USER_ID(1),:B14 ,SYSDATE,FNC_USER_MACHINE,:B13 ,AUDIT_USER.SQA
+
+      26	    9 76natvnhtqqhw
+INSERT INTO SYS.WRI$_ADV_TASKS (ID,OWNER#,OWNER_NAME,NAME,DESCRIPTION,ADVISOR_ID
+,ADVISOR_NAME, CTIME,MTIME,PARENT_ID,PARENT_REC_ID,PROPERTY, EXEC_START,EXEC_END
+,STATUS,STATUS_MSG_ID,PCT_COMPLETION_TIME, PROGRESS_METRIC,METRIC_UNITS,ACTIVITY
+_COUNTER,REC_COUNT,ERROR_MSG#, SOURCE,HOW_CREATED ) VALUES (:B10 ,:B9 ,:B8 ,:B7
+
+	  -------------------------------------------------------------
+
+Instance Activity Stats		  DB/Inst: NB/nb  Snaps: 110965-111029
+
+Statistic				      Total	per Second     per Trans
+-------------------------------- ------------------ -------------- -------------
+CPU used by this session		    172,202	       1.5	     1.4
+CPU used when call started		    145,892	       1.3	     1.2
+CR blocks created			     34,064	       0.3	     0.3
+Cached Commit SCN referenced		    604,855	       5.3	     4.9
+Commit SCN cached				143	       0.0	     0.0
+DB time 				 12,093,213	     105.0	    98.0
+DBWR checkpoint buffers written 	    139,224	       1.2	     1.1
+DBWR checkpoints			      2,665	       0.0	     0.0
+DBWR object drop buffers written	      7,607	       0.1	     0.1
+DBWR revisited being-written buf		  0	       0.0	     0.0
+DBWR tablespace checkpoint buffe	      1,715	       0.0	     0.0
+DBWR thread checkpoint buffers w	    137,509	       1.2	     1.1
+DBWR transaction table writes			645	       0.0	     0.0
+DBWR undo block writes			     67,288	       0.6	     0.6
+IMU CR rollbacks				436	       0.0	     0.0
+IMU Flushes				     31,913	       0.3	     0.3
+IMU Redo allocation size		 55,541,352	     482.0	   450.0
+IMU commits				     94,650	       0.8	     0.8
+IMU contention					 43	       0.0	     0.0
+IMU ktichg flush				126	       0.0	     0.0
+IMU pool not allocated			      3,706	       0.0	     0.0
+IMU recursive-transaction flush 		 66	       0.0	     0.0
+IMU undo allocation size		363,671,360	   3,156.1	 2,946.4
+IMU- failed to get a private str	      3,706	       0.0	     0.0
+Misses for writing mapping			  0	       0.0	     0.0
+SMON posted for undo segment rec		  0	       0.0	     0.0
+SMON posted for undo segment shr		 75	       0.0	     0.0
+SQL*Net roundtrips to/from clien	    387,468	       3.4	     3.1
+SQL*Net roundtrips to/from dblin	      3,131	       0.0	     0.0
+active txn count during cleanout	     99,800	       0.9	     0.8
+application wait time				646	       0.0	     0.0
+background checkpoints completed		  9	       0.0	     0.0
+background checkpoints started			  9	       0.0	     0.0
+background timeouts			    371,199	       3.2	     3.0
+branch node splits				  8	       0.0	     0.0
+buffer is not pinned count		 23,032,558	     199.9	   186.6
+buffer is pinned count			 53,293,887	     462.5	   431.8
+bytes received via SQL*Net from 	103,337,628	     896.8	   837.2
+bytes received via SQL*Net from 	    868,384	       7.5	     7.0
+bytes sent via SQL*Net to client	216,982,471	   1,883.1	 1,757.9
+bytes sent via SQL*Net to dblink	    361,303	       3.1	     2.9
+calls to get snapshot scn: kcmgs	  7,983,497	      69.3	    64.7
+calls to kcmgas 			    537,219	       4.7	     4.4
+calls to kcmgcs 			     97,129	       0.8	     0.8
+change write time			      4,030	       0.0	     0.0
+cleanout - number of ktugct call	    101,637	       0.9	     0.8
+cleanouts and rollbacks - consis	      6,407	       0.1	     0.1
+cleanouts only - consistent read	      2,412	       0.0	     0.0
+cluster key scan block gets		    524,748	       4.6	     4.3
+cluster key scans			    215,576	       1.9	     1.8
+commit batch performed				 65	       0.0	     0.0
+commit batch requested				 65	       0.0	     0.0
+commit batch/immediate performed	      7,338	       0.1	     0.1
+commit batch/immediate requested	      7,338	       0.1	     0.1
+commit cleanout failures: block 		368	       0.0	     0.0
+commit cleanout failures: buffer		  4	       0.0	     0.0
+commit cleanout failures: callba		542	       0.0	     0.0
+commit cleanout failures: cannot		  3	       0.0	     0.0
+commit cleanouts			  1,053,005	       9.1	     8.5
+commit cleanouts successfully co	  1,052,088	       9.1	     8.5
+Instance Activity Stats		  DB/Inst: NB/nb  Snaps: 110965-111029
+
+Statistic				      Total	per Second     per Trans
+-------------------------------- ------------------ -------------- -------------
+commit immediate performed		      7,273	       0.1	     0.1
+commit immediate requested		      7,273	       0.1	     0.1
+commit txn count during cleanout	     22,614	       0.2	     0.2
+concurrency wait time				947	       0.0	     0.0
+consistent changes			    310,958	       2.7	     2.5
+consistent gets 			 51,116,873	     443.6	   414.1
+consistent gets - examination		 17,018,257	     147.7	   137.9
+consistent gets direct			     17,801	       0.2	     0.1
+consistent gets from cache		 51,099,072	     443.5	   414.0
+current blocks converted for CR 		  0	       0.0	     0.0
+cursor authentications			     36,974	       0.3	     0.3
+data blocks consistent reads - u	    167,310	       1.5	     1.4
+db block changes			  8,485,064	      73.6	    68.7
+db block gets				  9,730,754	      84.5	    78.8
+db block gets direct				588	       0.0	     0.0
+db block gets from cache		  9,730,166	      84.4	    78.8
+deferred (CURRENT) block cleanou	    657,771	       5.7	     5.3
+dirty buffers inspected 		     23,372	       0.2	     0.2
+enqueue conversions			     60,621	       0.5	     0.5
+enqueue deadlocks				  0	       0.0	     0.0
+enqueue releases			  2,559,380	      22.2	    20.7
+enqueue requests			  2,559,422	      22.2	    20.7
+enqueue timeouts				 41	       0.0	     0.0
+enqueue waits				      2,689	       0.0	     0.0
+execute count				  6,848,376	      59.4	    55.5
+failed probes on index block rec		 21	       0.0	     0.0
+free buffer inspected			  2,809,450	      24.4	    22.8
+free buffer requested			  2,951,412	      25.6	    23.9
+heap block compress			     98,252	       0.9	     0.8
+hot buffers moved to head of LRU	    319,231	       2.8	     2.6
+immediate (CR) block cleanout ap	      8,819	       0.1	     0.1
+immediate (CURRENT) block cleano	    150,324	       1.3	     1.2
+index crx upgrade (found)			  0	       0.0	     0.0
+index crx upgrade (positioned)		    251,069	       2.2	     2.0
+index fast full scans (full)		      1,033	       0.0	     0.0
+index fetch by key			  6,598,031	      57.3	    53.5
+index scans kdiixs1			 11,436,308	      99.3	    92.7
+leaf node 90-10 splits			      1,851	       0.0	     0.0
+leaf node splits			      3,925	       0.0	     0.0
+lob reads				     19,477	       0.2	     0.2
+lob writes				     34,989	       0.3	     0.3
+lob writes unaligned			     34,989	       0.3	     0.3
+logons cumulative			      4,271	       0.0	     0.0
+messages received			    261,316	       2.3	     2.1
+messages sent				    261,316	       2.3	     2.1
+no buffer to keep pinned count			  0	       0.0	     0.0
+no work - consistent read gets		 32,656,080	     283.4	   264.6
+opened cursors cumulative		  2,219,293	      19.3	    18.0
+parse count (failures)				 70	       0.0	     0.0
+parse count (hard)			     79,846	       0.7	     0.7
+parse count (total)			  1,991,877	      17.3	    16.1
+parse time cpu				     17,948	       0.2	     0.2
+parse time elapsed			    111,412	       1.0	     0.9
+physical read IO requests		    733,370	       6.4	     5.9
+physical read bytes		     22,955,671,552	 199,217.9     185,979.8
+physical read total IO requests 	    884,098	       7.7	     7.2
+physical read total bytes	     28,082,329,600	 243,708.9     227,514.4
+physical read total multi block 	    161,486	       1.4	     1.3
+physical reads				  2,802,206	      24.3	    22.7
+physical reads cache			  2,784,407	      24.2	    22.6
+Instance Activity Stats		  DB/Inst: NB/nb  Snaps: 110965-111029
+
+Statistic				      Total	per Second     per Trans
+-------------------------------- ------------------ -------------- -------------
+physical reads cache prefetch		  2,054,308	      17.8	    16.6
+physical reads direct			     17,799	       0.2	     0.1
+physical reads direct (lob)		      1,668	       0.0	     0.0
+physical reads direct temporary 	      2,232	       0.0	     0.0
+physical reads prefetch warmup			  0	       0.0	     0.0
+physical write IO requests		     99,964	       0.9	     0.8
+physical write bytes		      1,608,679,424	  13,960.7	13,033.0
+physical write total IO requests	    433,183	       3.8	     3.5
+physical write total bytes	      7,016,715,264	  60,893.7	56,847.3
+physical write total multi block	    221,795	       1.9	     1.8
+physical writes 			    196,372	       1.7	     1.6
+physical writes direct			      2,910	       0.0	     0.0
+physical writes direct (lob)			169	       0.0	     0.0
+physical writes direct temporary	      2,651	       0.0	     0.0
+physical writes from cache		    193,462	       1.7	     1.6
+physical writes non checkpoint		    116,741	       1.0	     1.0
+pinned buffers inspected			561	       0.0	     0.0
+prefetch clients - default			  0	       0.0	     0.0
+prefetch warmup blocks aged out 		  0	       0.0	     0.0
+prefetch warmup blocks flushed o		  0	       0.0	     0.0
+prefetched blocks aged out befor	  1,199,204	      10.4	     9.7
+process last non-idle time		    165,761	       1.4	     1.3
+recovery blocks read				  0	       0.0	     0.0
+recursive aborts on index block 		  0	       0.0	     0.0
+recursive calls 			 27,589,373	     239.4	   223.5
+recursive cpu usage			    130,441	       1.1	     1.1
+redo blocks read for recovery			  0	       0.0	     0.0
+redo blocks written			  2,889,861	      25.1	    23.4
+redo buffer allocation retries			 10	       0.0	     0.0
+redo entries				  3,581,331	      31.1	    29.0
+redo log space requests 			 11	       0.0	     0.0
+redo log space wait time			 36	       0.0	     0.0
+redo ordering marks				966	       0.0	     0.0
+redo size			      1,364,015,012	  11,837.4	11,050.8
+redo synch time 				902	       0.0	     0.0
+redo synch writes			     14,587	       0.1	     0.1
+redo wastage				 64,725,000	     561.7	   524.4
+redo write time 			     10,668	       0.1	     0.1
+redo writer latching time			 11	       0.0	     0.0
+redo writes				    212,861	       1.9	     1.7
+rollback changes - undo records 	    121,283	       1.1	     1.0
+rollbacks only - consistent read	     18,218	       0.2	     0.2
+rows fetched via callback		  4,738,557	      41.1	    38.4
+session connect time				  0	       0.0	     0.0
+session cursor cache hits		  1,775,365	      15.4	    14.4
+session logical reads			 60,847,627	     528.1	   493.0
+session pga memory		      2,644,862,868	  22,953.1	21,427.9
+session pga memory max		      3,500,173,204	  30,375.8	28,357.3
+session uga memory		  9,294,433,588,156   80,660,554.6  75,300,642.4
+session uga memory max		      5,035,140,912	  43,696.8	40,793.2
+shared hash latch upgrades - no 	  1,006,708	       8.7	     8.2
+shared hash latch upgrades - wai		  2	       0.0	     0.0
+sorts (disk)					  0	       0.0	     0.0
+sorts (memory)				    903,527	       7.8	     7.3
+sorts (rows)				 55,486,827	     481.5	   449.5
+sql area evicted			     64,274	       0.6	     0.5
+sql area purged 			     21,364	       0.2	     0.2
+summed dirty queue length		    129,204	       1.1	     1.1
+switch current to new buffer		     45,588	       0.4	     0.4
+table fetch by rowid			 30,777,479	     267.1	   249.4
+Instance Activity Stats		  DB/Inst: NB/nb  Snaps: 110965-111029
+
+Statistic				      Total	per Second     per Trans
+-------------------------------- ------------------ -------------- -------------
+table fetch continued row		     15,012	       0.1	     0.1
+table scan blocks gotten		  7,649,914	      66.4	    62.0
+table scan rows gotten			457,364,598	   3,969.2	 3,705.4
+table scans (cache partitions)			  6	       0.0	     0.0
+table scans (direct read)			146	       0.0	     0.0
+table scans (long tables)			218	       0.0	     0.0
+table scans (short tables)		    119,302	       1.0	     1.0
+total number of times SMON poste	      2,663	       0.0	     0.0
+transaction rollbacks			      7,338	       0.1	     0.1
+transaction tables consistent re		  0	       0.0	     0.0
+transaction tables consistent re		  0	       0.0	     0.0
+undo change vector size 		471,116,592	   4,088.5	 3,816.8
+user I/O wait time			    154,153	       1.3	     1.3
+user calls				    421,668	       3.7	     3.4
+user commits				    123,244	       1.1	     1.0
+user rollbacks					187	       0.0	     0.0
+workarea executions - onepass			 16	       0.0	     0.0
+workarea executions - optimal		    657,936	       5.7	     5.3
+write clones created in backgrou	      8,576	       0.1	     0.1
+write clones created in foregrou		 41	       0.0	     0.0
+	  -------------------------------------------------------------
+
+Instance Activity Stats - Absolute ValuesDB/Inst: NB/nb  Snaps: 110965-111029
+-> Statistics with absolute values (should not be diffed)
+
+Statistic			     Begin Value       End Value
+-------------------------------- --------------- ---------------
+session cursor cache count	       4,560,960       4,638,274
+opened cursors current			     251	     605
+logons current				      22	      29
+	  -------------------------------------------------------------
+
+Instance Activity Stats - Thread Activity DB/Inst: NB/nb  Snaps: 110965-111029
+-> Statistics identified by '(derived)' come from sources other than SYSSTAT
+
+Statistic				      Total  per Hour
+-------------------------------- ------------------ ---------
+log switches (derived)				  9	  .28
+	  -------------------------------------------------------------
+
+Tablespace IO Stats			  DB/Inst: NB/nb  Snaps: 110965-111029
+-> ordered by IOs (Reads + Writes) desc
+
+Tablespace
+------------------------------
+		 Av	 Av	Av			 Av	Buffer Av Buf
+	 Reads Reads/s Rd(ms) Blks/Rd	    Writes Writes/s	 Waits Wt(ms)
+-------------- ------- ------ ------- ------------ -------- ---------- ------
+USERS
+       263,105	     2	  1.4	  5.5	     4,951	  0	     0	  0.0
+IDX
+       180,046	     2	  2.1	  1.0	    19,928	  0	     4	  0.0
+AUDIT_KERNEL
+       125,411	     1	  2.9	  6.7	     7,763	  0	     0	  0.0
+REPL
+	71,985	     1	  2.5	  2.7	    28,294	  0	     0	  0.0
+SYSTEM
+	56,503	     0	  2.0	  1.1	     4,710	  0	     8	  0.0
+SYSAUX
+	25,908	     0	  3.7	  1.5	    22,288	  0	     0	  0.0
+UNDOTBS1
+	   136	     0	  0.7	  1.0	    11,776	  0	    47	  0.0
+TOOLS
+	10,056	     0	  2.2	  3.7	       123	  0	     0	  0.0
+TEMP
+	   125	     0	  1.5	 21.4	       113	  0	     0	  0.0
+AUDIT_KERNEL1
+	    48	     0	  4.4	  1.2		 9	  0	     0	  0.0
+RBS
+	    16	     0	  9.4	  1.0		 9	  0	     0	  0.0
+	  -------------------------------------------------------------
+
+File IO Stats				  DB/Inst: NB/nb  Snaps: 110965-111029
+-> ordered by Tablespace, File
+
+Tablespace		 Filename
+------------------------ ----------------------------------------------------
+		 Av	 Av	Av			 Av	Buffer Av Buf
+	 Reads Reads/s Rd(ms) Blks/Rd	    Writes Writes/s	 Waits Wt(ms)
+-------------- ------- ------ ------- ------------ -------- ---------- ------
+AUDIT_KERNEL		 D:\ORACLE\ORADATA\NB\AUDIT01.DBF
+       125,411	     1	  2.9	  6.7	     7,763	  0	     0	  0.0
+AUDIT_KERNEL1		 D:\ORACLE\ORADATA\NB\AUDIT11.DBF
+	    48	     0	  4.4	  1.2		 9	  0	     0	  0.0
+IDX			 D:\ORACLE\ORADATA\NB\INDX01.DBF
+       180,046	     2	  2.1	  1.0	    19,928	  0	     4	  0.0
+RBS			 D:\ORACLE\ORADATA\NB\RBS01.DBF
+	    16	     0	  9.4	  1.0		 9	  0	     0	  0.0
+REPL			 D:\ORACLE\ORADATA\NB\REPL01.DBF
+	71,985	     1	  2.5	  2.7	    28,294	  0	     0	  0.0
+SYSAUX			 D:\ORACLE\ORADATA\NB\SYSAUX01.DBF
+	25,908	     0	  3.7	  1.5	    22,288	  0	     0	  0.0
+SYSTEM			 D:\ORACLE\ORADATA\NB\SYSTEM01.DBF
+	56,503	     0	  2.0	  1.1	     4,710	  0	     8	  0.0
+TEMP			 D:\ORACLE\ORADATA\NB\TEMP01.DBF
+	   125	     0	  1.5	 21.4	       113	  0	     0	  N/A
+TOOLS			 D:\ORACLE\ORADATA\NB\TOOLS01.DBF
+	10,056	     0	  2.2	  3.7	       123	  0	     0	  0.0
+UNDOTBS1		 D:\ORACLE\ORADATA\NB\UNDOTBS01.DBF
+	   136	     0	  0.7	  1.0	    11,776	  0	    47	  0.0
+USERS			 D:\ORACLE\ORADATA\NB\USERS01.DBF
+       263,105	     2	  1.4	  5.5	     4,951	  0	     0	  0.0
+	  -------------------------------------------------------------
+
+Buffer Pool Statistics 		  DB/Inst: NB/nb  Snaps: 110965-111029
+-> Standard block size Pools  D: default,  K: keep,  R: recycle
+-> Default Pools for other block sizes: 2k, 4k, 8k, 16k, 32k
+
+							    Free Writ	  Buffer
+     Number of Pool	    Buffer     Physical    Physical Buff Comp	    Busy
+P      Buffers Hit%	      Gets	  Reads      Writes Wait Wait	   Waits
+--- ---------- ---- -------------- ------------ ----------- ---- ---- ----------
+D	71,886	 95	60,828,844    2,784,406     193,462    0    0	      59
+	  -------------------------------------------------------------
+
+Instance Recovery Stats 		  DB/Inst: NB/nb  Snaps: 110965-111029
+-> B: Begin snapshot,  E: End snapshot
+
+  Targt  Estd				       Log File Log Ckpt     Log Ckpt
+  MTTR	 MTTR	Recovery  Actual    Target	 Size	 Timeout     Interval
+   (s)	  (s)	Estd IOs Redo Blks Redo Blks  Redo Blks Redo Blks   Redo Blks
+- ----- ----- ---------- --------- --------- ---------- --------- ------------
+B     0     0	     969     18604     18381	1474560     18381	   N/A
+E     0     0	    4034     84092     84108	1474560     84108	   N/A
+	  -------------------------------------------------------------
+
+Buffer Pool Advisory				  DB/Inst: NB/nb  Snap: 111029
+-> Only rows with estimated physical reads >0 are displayed
+-> ordered by Block Size, Buffers For Estimate
+
+					Est
+				       Phys
+    Size for   Size	 Buffers for   Read	     Estimated
+P    Est (M) Factor	    Estimate Factor	Physical Reads
+--- -------- ------ ---------------- ------ ------------------
+D	  56	 .1	       6,993	2.9	   389,880,901
+D	 112	 .2	      13,986	2.0	   269,310,963
+D	 168	 .3	      20,979	1.5	   200,787,791
+D	 224	 .4	      27,972	1.3	   168,287,247
+D	 280	 .5	      34,965	1.2	   152,148,646
+D	 336	 .6	      41,958	1.1	   143,890,789
+D	 392	 .7	      48,951	1.1	   139,226,963
+D	 448	 .8	      55,944	1.0	   136,255,996
+D	 504	 .9	      62,937	1.0	   134,345,099
+D	 560	1.0	      69,930	1.0	   132,830,514
+D	 584	1.0	      72,927	1.0	   132,297,965
+D	 616	1.1	      76,923	1.0	   131,593,104
+D	 672	1.2	      83,916	1.0	   130,487,536
+D	 728	1.2	      90,909	1.0	   129,558,499
+D	 784	1.3	      97,902	1.0	   128,817,993
+D	 840	1.4	     104,895	1.0	   128,202,736
+D	 896	1.5	     111,888	1.0	   127,665,868
+D	 952	1.6	     118,881	1.0	   127,148,703
+D      1,008	1.7	     125,874	1.0	   126,540,798
+D      1,064	1.8	     132,867	1.0	   125,762,398
+D      1,120	1.9	     139,860	0.9	   124,629,750
+	  -------------------------------------------------------------
+
+PGA Aggr Summary			  DB/Inst: NB/nb  Snaps: 110965-111029
+-> PGA cache hit % - percentage of W/A (WorkArea) data processed only in-memory
+
+PGA Cache Hit %   W/A MB Processed  Extra W/A MB Read/Written
+--------------- ------------------ --------------------------
+	   99.2 	    10,518			   87
+	  -------------------------------------------------------------
+
+PGA Aggr Target Stats			  DB/Inst: NB/nb  Snaps: 110965-111029
+-> B: Begin snap   E: End snap (rows dentified with B or E contain data
+   which is absolute i.e. not diffed over the interval)
+-> Auto PGA Target - actual workarea memory target
+-> W/A PGA Used    - amount of memory used for all Workareas (manual + auto)
+-> %PGA W/A Mem    - percentage of PGA memory allocated to workareas
+-> %Auto W/A Mem   - percentage of workarea memory controlled by Auto Mem Mgmt
+-> %Man W/A Mem    - percentage of workarea memory under manual control
+
+						%PGA  %Auto   %Man
+    PGA Aggr   Auto PGA   PGA Mem    W/A PGA	 W/A	W/A    W/A Global Mem
+   Target(M)  Target(M)  Alloc(M)    Used(M)	 Mem	Mem    Mem   Bound(K)
+- ---------- ---------- ---------- ---------- ------ ------ ------ ----------
+B	 500	    422       54.9	  0.1	  .2  100.0	.0    102,400
+E	 500	    407       73.8	  0.0	  .0	 .0	.0    102,400
+	  -------------------------------------------------------------
+
+PGA Aggr Target Histogram		  DB/Inst: NB/nb  Snaps: 110965-111029
+-> Optimal Executions are purely in-memory operations
+
+  Low	  High
+Optimal Optimal    Total Execs	Optimal Execs 1-Pass Execs M-Pass Execs
+------- ------- -------------- -------------- ------------ ------------
+     2K      4K        644,940	      644,940		 0	      0
+    64K    128K 	 2,207		2,207		 0	      0
+   128K    256K 	 2,904		2,904		 0	      0
+   256K    512K 	   446		  446		 0	      0
+   512K   1024K 	 6,103		6,103		 0	      0
+     1M      2M 	 1,039		1,039		 0	      0
+     2M      4M 	    18		   18		 0	      0
+     4M      8M 	   180		  164		16	      0
+     8M     16M 	   115		  115		 0	      0
+	  -------------------------------------------------------------
+
+PGA Memory Advisory				  DB/Inst: NB/nb  Snap: 111029
+-> When using Auto Memory Mgmt, minimally choose a pga_aggregate_target value
+   where Estd PGA Overalloc Count is 0
+
+				       Estd Extra    Estd PGA	Estd PGA
+PGA Target    Size	     W/A MB   W/A MB Read/	Cache  Overalloc
+  Est (MB)   Factr	  Processed Written to Disk	Hit %	   Count
+---------- ------- ---------------- ---------------- -------- ----------
+	63     0.1	  556,594.0	    17,036.9	 97.0	   1,529
+       125     0.3	  556,594.0	     2,087.9	100.0	       0
+       250     0.5	  556,594.0	     1,404.6	100.0	       0
+       375     0.8	  556,594.0	     1,007.3	100.0	       0
+       500     1.0	  556,594.0	       412.5	100.0	       0
+       600     1.2	  556,594.0	       288.7	100.0	       0
+       700     1.4	  556,594.0	       288.7	100.0	       0
+       800     1.6	  556,594.0	       288.7	100.0	       0
+       900     1.8	  556,594.0	       288.7	100.0	       0
+     1,000     2.0	  556,594.0	       288.7	100.0	       0
+     1,500     3.0	  556,594.0	       288.7	100.0	       0
+     2,000     4.0	  556,594.0	       288.7	100.0	       0
+     3,000     6.0	  556,594.0	       288.7	100.0	       0
+     4,000     8.0	  556,594.0	       288.7	100.0	       0
+	  -------------------------------------------------------------
+
+Shared Pool Advisory				  DB/Inst: NB/nb  Snap: 111029
+-> SP: Shared Pool     Est LC: Estimated Library Cache	 Factr: Factor
+-> Note there is often a 1:Many correlation between a single logical object
+   in the Library Cache, and the physical number of memory objects associated
+   with it.  Therefore comparing the number of Lib Cache objects (e.g. in
+   v$librarycache), with the number of Lib Cache Memory Objects is invalid.
+
+					Est LC Est LC  Est LC Est LC
+    Shared    SP   Est LC		  Time	 Time	 Load	Load	  Est LC
+      Pool  Size     Size	Est LC	 Saved	Saved	 Time	Time	     Mem
+   Size(M) Factr      (M)      Mem Obj	   (s)	Factr	  (s)  Factr	Obj Hits
+---------- ----- -------- ------------ ------- ------ ------- ------ -----------
+       320    .4      106	 7,725 #######	   .9 #######	 4.0 ###########
+       416    .5      196	15,736 #######	   .9 #######	 3.2 ###########
+       512    .6      291	39,968 #######	   .9 #######	 2.6 ###########
+       608    .7      386	47,118 #######	  1.0 #######	 2.1 ###########
+       704    .8      481	53,726 #######	  1.0 #######	 1.7 ###########
+       800    .9      576	57,682 #######	  1.0 #######	 1.4 ###########
+       896   1.0      671	61,654 #######	  1.0 #######	 1.0 ###########
+       992   1.1      766	66,845 #######	  1.0  83,201	  .6 ###########
+     1,088   1.2      861	73,189 #######	  1.0  35,159	  .3 ###########
+     1,184   1.3      956	78,596 #######	  1.0	    1	  .0 ###########
+     1,280   1.4    1,051	84,671 #######	  1.1	    1	  .0 ###########
+     1,376   1.5    1,146	89,693 #######	  1.1	    1	  .0 ###########
+     1,472   1.6    1,241      107,935 #######	  1.1	    1	  .0 ###########
+     1,568   1.8    1,336      116,449 #######	  1.1	    1	  .0 ###########
+     1,664   1.9    1,431      123,622 #######	  1.1	    1	  .0 ###########
+     1,760   2.0    1,526      130,427 #######	  1.1	    1	  .0 ###########
+     1,856   2.1    1,621      135,920 #######	  1.1	    1	  .0 ###########
+	  -------------------------------------------------------------
+
+SGA Target Advisory				  DB/Inst: NB/nb  Snap: 111029
+
+SGA Target   SGA Size	    Est DB     Est Physical
+  Size (M)     Factor	  Time (s)	      Reads
+---------- ---------- ------------ ----------------
+       752	  0.5	   827,636	146,334,704
+     1,128	  0.8	   556,349	132,297,897
+     1,504	  1.0	   306,782	132,297,897
+     1,880	  1.3	   250,058	113,458,676
+     2,256	  1.5	   237,664	109,357,442
+     2,632	  1.8	   234,688	108,365,207
+     3,008	  2.0	   234,688	108,365,207
+	  -------------------------------------------------------------
+
+Streams Pool Advisory				  DB/Inst: NB/nb  Snap: 111029
+
+		  No data exists for this section of the report.
+	  -------------------------------------------------------------
+
+Java Pool Advisory				  DB/Inst: NB/nb  Snap: 111029
+
+		  No data exists for this section of the report.
+	  -------------------------------------------------------------
+
+Buffer Wait Statistics			  DB/Inst: NB/nb  Snaps: 110965-111029
+-> ordered by wait time desc, waits desc
+
+Class			 Waits Total Wait Time (s)  Avg Time (ms)
+------------------ ----------- ------------------- --------------
+undo header		    41			 0		0
+data block		    12			 0		0
+undo block		     6			 0		0
+	  -------------------------------------------------------------
+
+Enqueue Activity			  DB/Inst: NB/nb  Snaps: 110965-111029
+-> only enqueues with waits are shown
+-> Enqueue stats gathered prior to 10g should not be compared with 10g data
+-> ordered by Wait Time desc, Waits desc
+
+Enqueue Type (Request Reason)
+------------------------------------------------------------------------------
+    Requests	Succ Gets Failed Gets	    Waits  Wt Time (s) Av Wt Time(ms)
+------------ ------------ ----------- ----------- ------------ --------------
+RO-Multiple Object Reuse (fast object reuse)
+      22,590	   22,590	    0	    2,507	     4		 1.72
+KO-Multiple Object Checkpoint (fast object checkpoint)
+       1,314	    1,314	    0	      146	     1		 4.73
+TX-Transaction (row lock contention)
+	   1		1	    0		1	     1	       578.00
+CF-Controlfile Transaction
+      52,797	   52,797	    0	       16	     0		 6.88
+TM-DML
+   1,134,688	1,134,669	   18	       14	     0		 1.07
+SQ-Sequence Cache
+      23,764	   23,764	    0		4	     0		  .00
+JS-Job Scheduler (queue lock)
+     487,279	  487,279	    0		1	     0		  .00
+	  -------------------------------------------------------------
+
+Undo Segment Summary			  DB/Inst: NB/nb  Snaps: 110965-111029
+-> Min/Max TR (mins) - Min and Max Tuned Retention (minutes)
+-> STO - Snapshot Too Old count,  OOS - Out of Space count
+-> Undo segment block stats:
+-> uS - unexpired Stolen,   uR - unexpired Released,   uU - unexpired reUsed
+-> eS - expired   Stolen,   eR - expired   Released,   eU - expired   reUsed
+
+Undo   Num Undo       Number of  Max Qry   Max Tx Min/Max   STO/     uS/uR/uU/
+ TS# Blocks (K)    Transactions  Len (s) Concurcy TR (mins) OOS      eS/eR/eU
+---- ---------- --------------- -------- -------- --------- ----- --------------
+   1	   66.9 	218,025    2,913	5 15/61.633 0/0   0/0/0/0/0/0
+	  -------------------------------------------------------------
+
+Undo Segment Stats			  DB/Inst: NB/nb  Snaps: 110965-111029
+-> Most recent 35 Undostat rows, ordered by Time desc
+
+		Num Undo    Number of Max Qry  Max Tx Tun Ret STO/    uS/uR/uU/
+End Time	  Blocks Transactions Len (s)	Concy  (mins) OOS     eS/eR/eU
+------------ ----------- ------------ ------- ------- ------- ----- ------------
+10-Jul 08:54	     761	1,886	  309	    3	   18 0/0   0/0/0/0/0/0
+10-Jul 08:44	     186	  486	    0	    3	   15 0/0   0/0/0/0/0/0
+10-Jul 08:34	     233	  947	    0	    3	   15 0/0   0/0/0/0/0/0
+10-Jul 08:24	     129	  517	    0	    2	   15 0/0   0/0/0/0/0/0
+10-Jul 08:14	     136	  630	    0	    2	   15 0/0   0/0/0/0/0/0
+10-Jul 08:04	     263	  899	    0	    3	   15 0/0   0/0/0/0/0/0
+10-Jul 07:54	     139	  651	    0	    2	   15 0/0   0/0/0/0/0/0
+10-Jul 07:44	      63	  282	    0	    2	   15 0/0   0/0/0/0/0/0
+10-Jul 07:34	     165	  719	    0	    3	   15 0/0   0/0/0/0/0/0
+10-Jul 07:24	     161	  604	    0	    2	   15 0/0   0/0/0/0/0/0
+10-Jul 07:14	     155	  651	    0	    2	   15 0/0   0/0/0/0/0/0
+10-Jul 07:04	     261	  948	    0	    3	   15 0/0   0/0/0/0/0/0
+10-Jul 06:54	     145	  553	    0	    2	   15 0/0   0/0/0/0/0/0
+10-Jul 06:44	      71	  347	    0	    2	   15 0/0   0/0/0/0/0/0
+10-Jul 06:34	     175	  724	    0	    3	   15 0/0   0/0/0/0/0/0
+10-Jul 06:24	     157	  579	    0	    2	   15 0/0   0/0/0/0/0/0
+10-Jul 06:14	     124	  631	    0	    2	   15 0/0   0/0/0/0/0/0
+10-Jul 06:04	     345	1,053	    0	    3	   15 0/0   0/0/0/0/0/0
+10-Jul 05:54	     144	  612	    0	    2	   15 0/0   0/0/0/0/0/0
+10-Jul 05:44	      64	  436	    0	    2	   15 0/0   0/0/0/0/0/0
+10-Jul 05:34	     205	  583	    0	    3	   15 0/0   0/0/0/0/0/0
+10-Jul 05:24	     129	  618	    0	    2	   15 0/0   0/0/0/0/0/0
+10-Jul 05:14	   1,039	1,822	    0	    2	   15 0/0   0/0/0/0/0/0
+10-Jul 05:04	   3,045       17,549	  186	    5	   15 0/0   0/0/0/0/0/0
+10-Jul 04:54	     136	  599	    0	    3	   15 0/0   0/0/0/0/0/0
+10-Jul 04:44	      79	  377	    0	    2	   15 0/0   0/0/0/0/0/0
+10-Jul 04:34	     208	  711	    0	    3	   15 0/0   0/0/0/0/0/0
+10-Jul 04:24	     133	  551	    0	    2	   15 0/0   0/0/0/0/0/0
+10-Jul 04:14	     158	  778	    0	    3	   15 0/0   0/0/0/0/0/0
+10-Jul 04:04	     401	1,151	    0	    3	   15 0/0   0/0/0/0/0/0
+10-Jul 03:54	     130	  612	    0	    2	   15 0/0   0/0/0/0/0/0
+10-Jul 03:44	     174	  743	    0	    3	   15 0/0   0/0/0/0/0/0
+10-Jul 03:34	      95	  309	    0	    3	   15 0/0   0/0/0/0/0/0
+10-Jul 03:24	     149	  647	    0	    3	   15 0/0   0/0/0/0/0/0
+	  -------------------------------------------------------------
+
+Latch Activity 			  DB/Inst: NB/nb  Snaps: 110965-111029
+-> "Get Requests", "Pct Get Miss" and "Avg Slps/Miss" are statistics for
+   willing-to-wait latch get requests
+-> "NoWait Requests", "Pct NoWait Miss" are for no-wait latch get requests
+-> "Pct Misses" for both should be very close to 0.0
+
+					   Pct	  Avg	Wait		     Pct
+				    Get    Get	 Slps	Time	   NoWait NoWait
+Latch Name		       Requests   Miss	/Miss	 (s)	 Requests   Miss
+------------------------ -------------- ------ ------ ------ ------------ ------
+ASM db client latch		 82,501    0.0	  N/A	   0		0    N/A
+AWR Alerted Metric Eleme	424,642    0.0	  N/A	   0		0    N/A
+Consistent RBA			212,883    0.0	  N/A	   0		0    N/A
+FAL request queue		  2,322    0.0	  N/A	   0		0    N/A
+FAL subheap alocation		  2,322    0.0	  N/A	   0		0    N/A
+FIB s.o chain latch		    258    0.0	  N/A	   0		0    N/A
+FOB s.o list latch		  7,478    0.0	  N/A	   0		0    N/A
+In memory undo latch	      1,350,110    0.0	  0.0	   0	  170,551    0.0
+JS Sh mem access		      2    0.0	  N/A	   0		0    N/A
+JS mem alloc latch		    451    0.0	  N/A	   0		0    N/A
+JS queue access latch		    451    0.0	  N/A	   0		0    N/A
+JS queue state obj latch	974,558    0.0	  N/A	   0		0    N/A
+JS slv state obj latch		  7,500    0.0	  N/A	   0		0    N/A
+KMG MMAN ready and start	 38,438    0.0	  N/A	   0		0    N/A
+KMG resize request state	      6    0.0	  N/A	   0		0    N/A
+KTF sga latch			    247    0.0	  N/A	   0	   36,291    0.0
+KWQMN job cache list lat	    316    0.0	  N/A	   0		0    N/A
+MQL Tracking Latch		      0    N/A	  N/A	   0	    2,266    0.0
+Memory Management Latch 	     90    0.0	  N/A	   0	   38,438    0.0
+OS process			 11,766    0.0	  N/A	   0		0    N/A
+OS process allocation		 46,260    0.0	  0.0	   0		0    N/A
+OS process: request allo	  4,207    0.0	  N/A	   0		0    N/A
+PL/SQL warning settings 	205,241    0.0	  N/A	   0		0    N/A
+Reserved Space Latch		     75    0.0	  N/A	   0		0    N/A
+SGA IO buffer pool latch	157,577    0.0	  0.0	   0	  157,577    0.0
+SQL memory manager latch	     64    0.0	  N/A	   0	   38,408    0.0
+SQL memory manager worka      2,691,805    0.0	  N/A	   0		0    N/A
+Shared B-Tree			  4,113    0.0	  N/A	   0		0    N/A
+X$KSFQP 			     56    0.0	  N/A	   0		0    N/A
+active checkpoint queue 	 93,451    0.0	  0.0	   0		0    N/A
+active service list		272,956    0.0	  0.1	   0	   39,604    0.0
+archive control 		  2,550    0.0	  N/A	   0		0    N/A
+archive process latch		 43,074    0.0	  N/A	   0		0    N/A
+begin backup scn array		    168    0.0	  N/A	   0		0    N/A
+buffer pool			    133    0.0	  N/A	   0		0    N/A
+cache buffer handles		 74,570    0.0	  N/A	   0		0    N/A
+cache buffers chains	    128,997,050    0.0	  0.0	   0	5,200,785    0.0
+cache buffers lru chain 	648,145    0.1	  0.0	   0	3,882,410    0.0
+cache table scan latch		      0    N/A	  N/A	   0	  157,577    0.0
+channel handle pool latc	  7,851    0.0	  N/A	   0		0    N/A
+channel operations paren	609,983    0.0	  N/A	   0		0    N/A
+checkpoint queue latch	      1,799,067    0.0	  0.0	   0	  201,266    0.0
+client/application info 	 10,931    0.0	  N/A	   0		0    N/A
+commit callback allocati	    302    0.0	  N/A	   0		0    N/A
+compile environment latc	  4,271    0.0	  N/A	   0		0    N/A
+dictionary lookup		  3,062    0.0	  N/A	   0		0    N/A
+dml lock allocation	      2,253,464    0.0	  0.0	   0		0    N/A
+dummy allocation		  8,535    0.0	  N/A	   0		0    N/A
+enqueue hash chains	      5,184,961    0.0	  0.0	   0	      205    0.0
+enqueues		      2,594,875    0.0	  0.0	   0		0    N/A
+event group latch		  2,107    0.0	  N/A	   0		0    N/A
+file cache latch		  4,800    0.0	  N/A	   0		0    N/A
+fixed table rows for x$h	    101    0.0	  N/A	   0		0    N/A
+global KZLD latch for me	  1,162    0.0	  N/A	   0		0    N/A
+global tx hash mapping		 11,419    0.0	  N/A	   0		0    N/A
+hash table column usage 	  8,670    0.0	  N/A	   0	1,191,399    0.0
+hash table modification 	  4,152    0.0	  N/A	   0		0    N/A
+internal temp table obje	      3    0.0	  N/A	   0		0    N/A
+job workq parent latch		      0    N/A	  N/A	   0	    4,326    0.0
+job_queue_processes para	  4,053    0.0	  N/A	   0		0    N/A
+Latch Activity 			  DB/Inst: NB/nb  Snaps: 110965-111029
+-> "Get Requests", "Pct Get Miss" and "Avg Slps/Miss" are statistics for
+   willing-to-wait latch get requests
+-> "NoWait Requests", "Pct NoWait Miss" are for no-wait latch get requests
+-> "Pct Misses" for both should be very close to 0.0
+
+					   Pct	  Avg	Wait		     Pct
+				    Get    Get	 Slps	Time	   NoWait NoWait
+Latch Name		       Requests   Miss	/Miss	 (s)	 Requests   Miss
+------------------------ -------------- ------ ------ ------ ------------ ------
+kks stats			432,358    0.0	  N/A	   0		0    N/A
+kmcptab latch			      8    0.0	  N/A	   0		0    N/A
+kmcpvec latch			      0    N/A	  N/A	   0		8    0.0
+kokc descriptor allocati	  2,266    0.0	  N/A	   0		0    N/A
+krbmrosl			  5,701    0.0	  N/A	   0		0    N/A
+ksuosstats global area		  7,810    0.0	  N/A	   0		0    N/A
+ktm global data 		  2,971    0.0	  N/A	   0		0    N/A
+kwqbsn:qsga			  4,113    0.0	  N/A	   0		0    N/A
+lgwr LWN SCN			244,962    0.0	  0.0	   0		0    N/A
+library cache		     21,487,904    0.0	  0.0	   0	  193,036  116.8
+library cache load lock 	 94,698    0.0	  N/A	   0		0    N/A
+library cache lock	     11,382,427    0.0	  0.0	   0		0    N/A
+library cache lock alloc	236,564    0.0	  N/A	   0		0    N/A
+library cache pin	      7,026,180    0.0	  0.0	   0		0    N/A
+library cache pin alloca	162,568    0.0	  N/A	   0		0    N/A
+list of block allocation	 18,750    0.0	  N/A	   0		0    N/A
+loader state object free	  3,752    0.0	  N/A	   0		0    N/A
+longop free list parent 	     87    0.0	  N/A	   0	       92    0.0
+message pool operations 	 13,228    0.0	  N/A	   0		0    N/A
+messages		      1,515,125    0.3	  0.0	   0		0    N/A
+mostly latch-free SCN		245,108    0.0	  0.0	   0		0    N/A
+multiblock read objects 	331,040    0.0	  N/A	   0		0    N/A
+ncodef allocation latch 	  1,886    0.0	  N/A	   0		0    N/A
+object queue header heap	 77,193    0.0	  N/A	   0	   76,058    0.0
+object queue header oper      6,562,043    0.0	  0.0	   0	    9,434    0.0
+object stats modificatio	  5,360    0.0	  N/A	   0		0    N/A
+parallel query alloc buf	 13,988    0.0	  N/A	   0		0    N/A
+parameter list			  6,285    0.0	  N/A	   0		0    N/A
+parameter table allocati	  9,795    0.0	  N/A	   0		0    N/A
+post/wait queue 		 23,868    0.0	  0.0	   0	   14,532    0.0
+process allocation		  4,207    0.0	  N/A	   0	    2,107    0.0
+process group creation		  4,207    0.0	  N/A	   0		0    N/A
+qmn task queue latch		 16,452    0.0	  0.0	   0		0    N/A
+redo allocation 	      4,377,956    0.0	  0.0	   0		0    N/A
+redo copy			      0    N/A	  N/A	   0	3,581,370    0.1
+redo writing			803,350    0.0	  0.0	   0		0    N/A
+reservation so alloc lat	     34    0.0	  N/A	   0		0    N/A
+row cache objects	     21,184,549    0.0	  0.0	   0	   50,338    0.0
+rules engine aggregate s	     12    0.0	  N/A	   0		0    N/A
+rules engine rule set st	     24    0.0	  N/A	   0		0    N/A
+sequence cache			973,734    0.0	  0.0	   0		0    N/A
+session allocation	     40,820,691    0.0	  0.0	   0		0    N/A
+session idle bit	      1,076,911    0.0	  0.0	   0		0    N/A
+session state list latch	 16,392    0.0	  N/A	   0		0    N/A
+session switching		  1,886    0.0	  N/A	   0		0    N/A
+session timer			 39,605    0.0	  N/A	   0		0    N/A
+shared pool		      8,010,338    0.0	  0.2	   2		0    N/A
+shared pool simulator	     11,520,697    0.0	  0.0	   0		0    N/A
+simulator hash latch	      4,122,615    0.0	  0.0	   0		0    N/A
+simulator lru latch		193,770    0.0	  0.0	   0	3,738,212    0.0
+slave class			    132    0.0	  N/A	   0		0    N/A
+slave class create		    528   11.9	  1.0	   0		0    N/A
+sort extent pool		  6,055    0.0	  N/A	   0		0    N/A
+state object free list		    128    0.0	  N/A	   0		0    N/A
+statistics aggregation		 53,760    0.0	  N/A	   0		0    N/A
+temp lob duration state 	      6    0.0	  N/A	   0		0    N/A
+temporary table state ob	     21    0.0	  N/A	   0		0    N/A
+threshold alerts latch		 11,634    0.0	  N/A	   0		0    N/A
+transaction allocation		 15,684    0.0	  N/A	   0		0    N/A
+transaction branch alloc	 45,738    0.0	  N/A	   0		0    N/A
+Latch Activity 			  DB/Inst: NB/nb  Snaps: 110965-111029
+-> "Get Requests", "Pct Get Miss" and "Avg Slps/Miss" are statistics for
+   willing-to-wait latch get requests
+-> "NoWait Requests", "Pct NoWait Miss" are for no-wait latch get requests
+-> "Pct Misses" for both should be very close to 0.0
+
+					   Pct	  Avg	Wait		     Pct
+				    Get    Get	 Slps	Time	   NoWait NoWait
+Latch Name		       Requests   Miss	/Miss	 (s)	 Requests   Miss
+------------------------ -------------- ------ ------ ------ ------------ ------
+undo global data	      1,138,768    0.0	  0.0	   0		0    N/A
+user lock			  8,982    0.0	  N/A	   0		0    N/A
+	  -------------------------------------------------------------
+
+Latch Sleep Breakdown			  DB/Inst: NB/nb  Snaps: 110965-111029
+-> ordered by misses desc
+
+Latch Name
+----------------------------------------
+  Get Requests	    Misses	Sleeps	Spin Gets   Sleep1   Sleep2   Sleep3
+-------------- ----------- ----------- ---------- -------- -------- --------
+library cache
+    21,487,904	     3,153	   103	    3,069	 0	  0	   0
+shared pool
+     8,010,338	     1,827	   427	    1,634	 0	  0	   0
+cache buffers chains
+   128,997,050	       457	     2	      455	 0	  0	   0
+slave class create
+	   528		63	    63		0	 0	  0	   0
+active service list
+       272,956		 9	     1		8	 0	  0	   0
+	  -------------------------------------------------------------
+
+Latch Miss Sources			  DB/Inst: NB/nb  Snaps: 110965-111029
+-> only latches with sleeps are shown
+-> ordered by name, sleeps desc
+
+						     NoWait		 Waiter
+Latch Name		 Where			     Misses	Sleeps	 Sleeps
+------------------------ -------------------------- ------- ---------- --------
+In memory undo latch	 ktiFlush: child		  0	     5	      0
+active service list	 ksws_event: ksws event 	  0	     3	      1
+active service list	 kswssvid: get id from svc	  0	     1	      1
+active service list	 kswssyis: find service ent	  0	     1	      0
+cache buffers chains	 kcbbic2			  0	     2	      0
+cache buffers chains	 kcbchg: kslbegin: bufs not	  0	     1	      0
+library cache		 kglScanDependency		  0	    91	      0
+library cache		 kglic				  0	     2	      0
+library cache		 kglLockCursor			  0	     1	     13
+library cache		 kglobpn: child:		  0	     1	     15
+library cache		 kglpndl: child: after proc	  0	     1	     13
+library cache lock	 kgllkdl: child: no lock ha	  0	     1	      6
+shared pool		 kgh_next_free			  0	   359	      0
+shared pool		 kghalo 			  0	    36	     46
+shared pool		 kghfrunp: alloc: wait		  0	    15	      0
+shared pool		 kgh: add extent to quiesce	  0	    13	      0
+shared pool		 kghfrunp: clatch: nowait	  0	     4	      0
+shared pool		 kghupr1			  0	     3	    205
+shared pool		 kghfrunp: clatch: wait 	  0	     2	      0
+shared pool		 kghasp 			  0	     1	      0
+slave class create	 ksvcreate			  0	    63	      0
+	  -------------------------------------------------------------
+
+Parent Latch Statistics		  DB/Inst: NB/nb  Snaps: 110965-111029
+
+		  No data exists for this section of the report.
+	  -------------------------------------------------------------
+
+Child Latch Statistics			  DB/Inst: NB/nb  Snaps: 110965-111029
+
+		  No data exists for this section of the report.
+	  -------------------------------------------------------------
+
+Segments by Logical Reads		  DB/Inst: NB/nb  Snaps: 110965-111029
+-> Total Logical Reads:      60,847,627
+-> Captured Segments account for   74.1% of Total
+
+	   Tablespace			   Subobject  Obj.	 Logical
+Owner	      Name    Object Name	     Name     Type	   Reads  %Total
+---------- ---------- -------------------- ---------- ----- ------------ -------
+LIDER	   IDX	      GOODS_TREE		      INDEX    4,829,472    7.94
+LIDER	   REPL       ZREPL_META_IDX		      INDEX    2,509,392    4.12
+LIDER	   IDX	      DOCUMENT_PK		      INDEX    2,231,168    3.67
+LIDER	   IDX	      ORGANIZATION_TREE 	      INDEX    1,932,320    3.18
+LIDER	   USERS      SYS_ENVIRONMENT		      TABLE    1,832,528    3.01
+	  -------------------------------------------------------------
+
+Segments by Physical Reads		  DB/Inst: NB/nb  Snaps: 110965-111029
+-> Total Physical Reads:       2,802,206
+-> Captured Segments account for    25.8% of Total
+
+	   Tablespace			   Subobject  Obj.	Physical
+Owner	      Name    Object Name	     Name     Type	   Reads  %Total
+---------- ---------- -------------------- ---------- ----- ------------ -------
+LIDER	   USERS      OUT_LINE			      TABLE	 407,250   14.53
+LIDER	   USERS      CARD_GDS_VAL		      TABLE	  86,500    3.09
+LIDER	   USERS      CARD_GDS_NET		      TABLE	  24,693     .88
+LIDER	   USERS      DOCUMENT			      TABLE	  14,779     .53
+LIDER	   USERS      OUT_WBILL_MO_OS		      TABLE	  13,343     .48
+	  -------------------------------------------------------------
+
+Segments by Row Lock Waits		  DB/Inst: NB/nb  Snaps: 110965-111029
+-> % of Capture shows % of row lock waits for each top segment compared
+-> with total row lock waits for all segments captured by the Snapshot
+
+								     Row
+	   Tablespace			   Subobject  Obj.	    Lock    % of
+Owner	      Name    Object Name	     Name     Type	   Waits Capture
+---------- ---------- -------------------- ---------- ----- ------------ -------
+LIDER	   REPL       ZREPL_META_IDX		      INDEX	     148   15.09
+LIDER	   IDX	      CARD_GDS_FLOW_NET_FK	      INDEX	     126   12.84
+LIDER	   IDX	      CARD_STOR_FLOW_NET_F	      INDEX	     119   12.13
+LIDER	   IDX	      CARD_GDS_STOR_FLOW_N	      INDEX	     117   11.93
+LIDER	   IDX	      DOCUMENT_PK		      INDEX	      65    6.63
+	  -------------------------------------------------------------
+
+Segments by ITL Waits			  DB/Inst: NB/nb  Snaps: 110965-111029
+
+		  No data exists for this section of the report.
+	  -------------------------------------------------------------
+
+Segments by Buffer Busy Waits		  DB/Inst: NB/nb  Snaps: 110965-111029
+-> % of Capture shows % of Buffer Busy Waits for each top segment compared
+-> with total Buffer Busy Waits for all segments captured by the Snapshot
+
+								  Buffer
+	   Tablespace			   Subobject  Obj.	    Busy    % of
+Owner	      Name    Object Name	     Name     Type	   Waits Capture
+---------- ---------- -------------------- ---------- ----- ------------ -------
+LIDER	   IDX	      DOC_LINE_PK		      INDEX	       3   60.00
+LIDER	   IDX	      DOCUMENT_PK		      INDEX	       1   20.00
+SYS	   SYSTEM     SEQ$			      TABLE	       1   20.00
+	  -------------------------------------------------------------
+
+Dictionary Cache Stats 		  DB/Inst: NB/nb  Snaps: 110965-111029
+-> "Pct Misses"  should be very low (< 2% in most cases)
+-> "Final Usage" is the number of cache entries being used
+
+				   Get	  Pct	 Scan	Pct	 Mod	  Final
+Cache			      Requests	 Miss	 Reqs  Miss	Reqs	  Usage
+------------------------- ------------ ------ ------- ----- -------- ----------
+dc_awr_control			 2,147	  0.0	    0	N/A	 130	      1
+dc_constraints			    36	 36.1	    0	N/A	  36	      1
+dc_database_links		 7,568	  0.0	    0	N/A	   0	      5
+dc_files			    70	  0.0	    0	N/A	   0	     10
+dc_global_oids			14,159	  0.5	    0	N/A	   0	     47
+dc_histogram_data		67,381	  3.3	    0	N/A    1,209	  2,423
+dc_histogram_defs	       625,970	 28.3	    0	N/A  177,163	 88,738
+dc_object_grants	       170,938	  0.2	    0	N/A	   0	    479
+dc_object_ids		     2,459,368	  1.5	    0	N/A	  62	 18,531
+dc_objects		       358,506	  4.5	    0	N/A    3,548	  7,965
+dc_profiles			 3,445	  0.0	    0	N/A	   0	      4
+dc_rollback_segments		15,647	  0.0	    0	N/A	   0	     26
+dc_segments		     1,106,977	  2.9	    0	N/A    2,861	 18,156
+dc_sequences			23,764	  0.7	    0	N/A   23,764	     97
+dc_table_scns			     4	100.0	    0	N/A	   0	      0
+dc_tablespace_quotas		    89	  5.6	    0	N/A	  73	      2
+dc_tablespaces		       580,148	  0.0	    0	N/A	   0	     12
+dc_usernames		       119,314	  0.0	    0	N/A	   0	     72
+dc_users		     1,456,159	  0.0	    0	N/A	   4	    101
+outstanding_alerts		 4,685	  0.1	    0	N/A	  12	     22
+	  -------------------------------------------------------------
+
+Library Cache Activity			  DB/Inst: NB/nb  Snaps: 110965-111029
+-> "Pct Misses"  should be very low
+
+			 Get	Pct	       Pin    Pct	      Invali-
+Namespace	    Requests   Miss	  Requests   Miss    Reloads  dations
+--------------- ------------ ------ -------------- ------ ---------- --------
+BODY		      27,043	0.1	   570,828    0.0	  42	    0
+CLUSTER 		 445	0.7	       969    0.4	   1	    0
+INDEX		       1,449   12.6	     3,626    8.5	  12	    0
+PIPE		     141,949	0.0	   141,949    0.0	   0	    0
+SQL AREA	     731,332   15.7	 9,482,134    2.5     20,476   56,023
+TABLE/PROCEDURE      325,116	3.4	 2,406,905    2.0      9,624	    0
+TRIGGER 	      94,111	0.3	   690,127    0.1	 573	    0
+	  -------------------------------------------------------------
+
+Process Memory Summary 		  DB/Inst: NB/nb  Snaps: 110965-111029
+-> B: Begin snap   E: End snap
+-> All rows below contain absolute values (i.e. not diffed over the interval)
+-> Max Alloc is Maximum PGA Allocation size at snapshot time
+-> Hist Max Alloc is the Historical Max Allocation for still-connected processes
+-> ordered by Begin/End snapshot, Alloc (MB) desc
+
+							    Hist
+				    Avg  Std Dev     Max     Max
+	       Alloc	  Used	  Alloc    Alloc   Alloc   Alloc    Num    Num
+  Category	(MB)	  (MB)	   (MB)     (MB)    (MB)    (MB)   Proc  Alloc
+- -------- --------- --------- -------- -------- ------- ------- ------ ------
+B Other 	53.4	   N/A	    2.2      2.9       9      10     24     24
+  SQL		 1.0	    .4	     .1       .1       0      16     13     10
+  PL/SQL	  .5	    .2	     .0       .1       0       0     22     22
+E Other 	71.5	   N/A	    2.3      2.6       9      10     31     31
+  SQL		 1.8	    .6	     .1       .1       0      17     20     17
+  PL/SQL	 1.0	    .3	     .0       .1       0       0     29     29
+	  -------------------------------------------------------------
+
+SGA Memory Summary			  DB/Inst: NB/nb  Snaps: 110965-111029
+
+						      End Size (Bytes)
+SGA regions			Begin Size (Bytes)	(if different)
+------------------------------ ------------------- -------------------
+Database Buffers		       654,311,424	   612,368,384
+Fixed Size				 1,299,216
+Redo Buffers				 7,086,080
+Variable Size			       914,361,584	   956,304,624
+			       -------------------
+sum				     1,577,058,304
+	  -------------------------------------------------------------
+
+SGA breakdown difference		  DB/Inst: NB/nb  Snaps: 110965-111029
+-> ordered by Pool, Name
+-> N/A value for Begin MB or End MB indicates the size of that Pool/Name was
+   insignificant, or zero in that snapshot
+
+Pool   Name				    Begin MB	     End MB  % Diff
+------ ------------------------------ -------------- -------------- -------
+java   free memory				 8.0		8.0    0.00
+large  PX msg pool				  .3		 .3    0.00
+large  free memory				 7.8		7.8    0.00
+shared CCursor					94.9	       75.1  -20.84
+shared Cursor Stats				14.0	       14.0    0.00
+shared KGH: NO ACCESS			       120.9	      159.9   32.20
+shared KGLS heap				35.1	       84.1  139.35
+shared KQR M PO 				 N/A	       56.4	N/A
+shared PCursor					42.4	       43.6    2.86
+shared free memory			       268.0	      301.2   12.40
+shared kglsim heap				12.4	       12.4    0.00
+shared kglsim object batch			17.2	       17.2    0.00
+shared library cache				33.6	       40.6   20.70
+shared sql area 			       237.5	      147.9  -37.69
+       buffer_cache			       624.0	      584.0   -6.41
+       fixed_sga				 1.2		1.2    0.00
+       log_buffer				 6.8		6.8    0.00
+	  -------------------------------------------------------------
+
+Streams CPU/IO Usage			  DB/Inst: NB/nb  Snaps: 110965-111029
+
+		  No data exists for this section of the report.
+	  -------------------------------------------------------------
+
+Streams Capture 			  DB/Inst: NB/nb  Snaps: 110965-111029
+
+		  No data exists for this section of the report.
+	  -------------------------------------------------------------
+
+Streams Apply				  DB/Inst: NB/nb  Snaps: 110965-111029
+
+		  No data exists for this section of the report.
+	  -------------------------------------------------------------
+
+Buffered Queues 			  DB/Inst: NB/nb  Snaps: 110965-111029
+
+		  No data exists for this section of the report.
+	  -------------------------------------------------------------
+
+Buffered Subscribers			  DB/Inst: NB/nb  Snaps: 110965-111029
+
+		  No data exists for this section of the report.
+	  -------------------------------------------------------------
+
+Rule Set				  DB/Inst: NB/nb  Snaps: 110965-111029
+
+		  No data exists for this section of the report.
+	  -------------------------------------------------------------
+
+Resource Limit Stats				  DB/Inst: NB/nb  Snap: 111029
+
+		  No data exists for this section of the report.
+	  -------------------------------------------------------------
+
+init.ora Parameters			  DB/Inst: NB/nb  Snaps: 110965-111029
+
+								End value
+Parameter Name		      Begin value			(if different)
+----------------------------- --------------------------------- --------------
+audit_file_dest 	      D:\ORACLE\ADMIN\NB\ADUMP
+background_dump_dest	      D:\ORACLE\ADMIN\NB\BDUMP
+compatible		      10.2.0.4.0
+control_files		      D:\ORACLE\ORADATA\NB\CONTROL01.CT
+core_dump_dest		      D:\ORACLE\ADMIN\NB\CDUMP
+db_block_size		      8192
+db_domain		      WORLD
+db_file_multiblock_read_count 16
+db_name 		      NB
+db_recovery_file_dest	      D:\ARCHIVE
+db_recovery_file_dest_size    524288000000
+dispatchers		      (PROTOCOL=TCP) (SERVICE=NBXDB)
+global_names		      TRUE
+job_queue_processes	      10
+log_archive_format	      ARCnb%S_%R.%T
+nls_language		      AMERICAN
+nls_territory		      AMERICA
+open_cursors		      2000
+optimizer_index_caching       50
+optimizer_index_cost_adj      50
+optimizer_mode		      ALL_ROWS
+optimizer_secure_view_merging TRUE
+pga_aggregate_target	      524288000
+processes		      300
+remote_login_passwordfile     EXCLUSIVE
+service_names		      NB
+sga_max_size		      1577058304
+sga_target		      1577058304
+statistics_level	      TYPICAL
+undo_management 	      AUTO
+undo_tablespace 	      UNDOTBS1
+user_dump_dest		      D:\ORACLE\ADMIN\NB\UDUMP
+	  -------------------------------------------------------------
+
+End of Report
+Report written to c:\hotcopy\oradata\awr.txt
+Disconnected from Oracle Database 10g Release 10.2.0.4.0 - Production
+
+C:\HotCopy>del /Q c:\hotcopy\oradata\awr.txt 
+
+C:\HotCopy>exit /B 0 
+ 
+---------------------------------------------------------- 
+ 
+Finished: 10.07.2019  9:03:46,91 
+Status: OK 

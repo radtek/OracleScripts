@@ -1,0 +1,1834 @@
+ 
+Type: HOTCOPY 
+File: C:\HotCopy\HotCopy.bat 
+Log: C:\HotCopy\HotCopy.log 
+Directory: C:\HotCopy 
+Computer: KMINB1 
+Version: 4.1 
+Started: 05.07.2019 20:00:21,89 
+Username: Orapetronics 
+ORACLE_HOME: d:\oracle 
+ORACLE_SID: NB 
+PATH: d:\oracle\bin;d:\oracle\bin;D:\ORACLE\bin;C:\Program Files\Oracle\jre\1.1.7\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\Windows Imaging\;c:\program files\winrar;;C:\WINDOWS\system32\WindowsPowerShell\v1.0;D:\ORACLE\BIN; D:\ORACLE\NETWORK\ADMIN; D:\ORACLE\bin;C:\Program Files\Oracle\jre\1.1.7\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\Windows Imaging\;c:\program files\winrar;;C:\WINDOWS\system32\WindowsPowerShell\v1.0 
+ 
+---------------------------------------------------------- 
+
+C:\HotCopy>SET ORACLE_SID=NB 
+
+C:\HotCopy>SET ORACLE_HOME=d:\oracle 
+
+C:\HotCopy>SET PATH=d:\oracle\bin;d:\oracle\bin;d:\oracle\bin;D:\ORACLE\bin;C:\Program Files\Oracle\jre\1.1.7\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\Windows Imaging\;c:\program files\winrar;;C:\WINDOWS\system32\WindowsPowerShell\v1.0;D:\ORACLE\BIN; D:\ORACLE\NETWORK\ADMIN; D:\ORACLE\bin;C:\Program Files\Oracle\jre\1.1.7\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\Windows Imaging\;c:\program files\winrar;;C:\WINDOWS\system32\WindowsPowerShell\v1.0 
+
+C:\HotCopy>SET DIR_ORADATA=d:\oracle\oradata\NB\ 
+
+C:\HotCopy>SET TEMP_DBFILE='D:\ORACLE\ORADATA\NB\TEMP01.DBF' 
+
+C:\HotCopy>SET DIR_PFILE=d:\oracle\ADMIN\NB\PFILE\ 
+
+C:\HotCopy>SET DIR_BDUMP=d:\oracle\ADMIN\NB\BDUMP\ 
+
+C:\HotCopy>SET DIR_DATABASE=d:\oracle\DATABASE\ 
+
+C:\HotCopy>SET DIR_ARCHIVE=D:\ARCHIVE\NB\ARCHIVELOG\ 
+
+C:\HotCopy>SET DIR_AREMOTE_OUT=\\KMISQL1\d$\AREMOTE\AZS\BACKUP_LOG\ 
+
+C:\HotCopy>SET DIR_BACKUP=D:\ARCHIVE\NB\ 
+
+C:\HotCopy>SET DIR_HOTCOPY=c:\hotcopy\ 
+
+C:\HotCopy>SET DIR_CONFIG=c:\hotcopy\config\ 
+
+C:\HotCopy>SET DIR_TMP=c:\hotcopy\oradata\ 
+
+C:\HotCopy>SET ORA805_NETA=\ORANT\Net80\Admin\ 
+
+C:\HotCopy>SET ORA817_NETA=\ORACLE\network\ADMIN\ 
+
+C:\HotCopy>SET TEMP_BACKUPFILE=c:\hotcopy\oradata\HotCopyTmp.rar 
+
+C:\HotCopy>SET USB_DRIVE= 
+
+C:\HotCopy>SET IS_SERVER=YES 
+
+C:\HotCopy>SET SERVER_HOTCOPY=c:\hotcopy\ 
+
+C:\HotCopy>SET ARGUS_SERVER=KMINB1 
+
+C:\HotCopy>SET USE_RMAN=YES 
+
+C:\HotCopy>set nls_lang=AMERICAN_AMERICA.CL8MSWIN1251 
+
+C:\HotCopy>rem --- Подключаемся к соседним АРМам (для копирования бакапов) 
+
+C:\HotCopy>SET IP_ARM0=127.0.0.1\diskc 
+
+C:\HotCopy>SET IP_ARM1=0.0.0.0\diskc 
+
+C:\HotCopy>SET IP_ARM2=0.0.0.0\diskc 
+
+C:\HotCopy>SET USER_ARM0=oracle 
+
+C:\HotCopy>SET USER_ARM1=oracle 
+
+C:\HotCopy>SET USER_ARM2=oracle 
+
+C:\HotCopy>SET PWD_ARM0=master 
+
+C:\HotCopy>SET PWD_ARM1=master 
+
+C:\HotCopy>SET PWD_ARM2=master 
+
+C:\HotCopy>echo y   | net use \\127.0.0.1\diskc master /user:oracle 
+System error 1326 has occurred.
+
+Logon failure: unknown user name or bad password.
+
+
+C:\HotCopy>echo y   | net use \\0.0.0.0\diskc master /user:oracle 
+System error 1214 has occurred.
+
+The format of the specified network name is invalid.
+
+
+C:\HotCopy>echo y   | net use \\0.0.0.0\diskc master /user:oracle 
+System error 1214 has occurred.
+
+The format of the specified network name is invalid.
+
+
+C:\HotCopy>echo y   | net use \\127.0.0.1\diskc  
+System error 67 has occurred.
+
+The network name cannot be found.
+
+
+C:\HotCopy>echo y   | net use \\0.0.0.0\diskc  
+System error 1214 has occurred.
+
+The format of the specified network name is invalid.
+
+
+C:\HotCopy>echo y   | net use \\0.0.0.0\diskc  
+System error 1214 has occurred.
+
+The format of the specified network name is invalid.
+
+
+C:\HotCopy>rem --- Создаем необходимые каталоги --- 
+
+C:\HotCopy>mkdir c:\temp 
+A subdirectory or file c:\temp already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\config\ 
+A subdirectory or file c:\hotcopy\config\ already exists.
+
+C:\HotCopy>mkdir D:\ARCHIVE\NB\ 
+A subdirectory or file D:\ARCHIVE\NB\ already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\ 
+A subdirectory or file c:\hotcopy\ already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata 
+A subdirectory or file c:\hotcopy\oradata already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\archive 
+A subdirectory or file c:\hotcopy\archive already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\backup 
+A subdirectory or file c:\hotcopy\backup already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\ 
+A subdirectory or file c:\hotcopy\oradata\ already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\admin 
+A subdirectory or file c:\hotcopy\oradata\admin already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\database 
+A subdirectory or file c:\hotcopy\oradata\database already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\archive 
+A subdirectory or file c:\hotcopy\oradata\archive already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\config 
+A subdirectory or file c:\hotcopy\oradata\config already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\move 
+A subdirectory or file c:\hotcopy\oradata\move already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\config 
+A subdirectory or file c:\hotcopy\oradata\config already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\config\LUKNET 
+A subdirectory or file c:\hotcopy\oradata\config\LUKNET already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\config\ORANT\Net80\Admin\ 
+A subdirectory or file c:\hotcopy\oradata\config\ORANT\Net80\Admin\ already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\config\ORACLE\network\ADMIN\ 
+A subdirectory or file c:\hotcopy\oradata\config\ORACLE\network\ADMIN\ already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\config\PFILE 
+A subdirectory or file c:\hotcopy\oradata\config\PFILE already exists.
+
+C:\HotCopy>MONTH.EXE
+
+C:\HotCopy>IF ERRORLEVEL 1 SET NUM_MON=01 
+
+C:\HotCopy>IF ERRORLEVEL 2 SET NUM_MON=02 
+
+C:\HotCopy>IF ERRORLEVEL 3 SET NUM_MON=03 
+
+C:\HotCopy>IF ERRORLEVEL 4 SET NUM_MON=04 
+
+C:\HotCopy>IF ERRORLEVEL 5 SET NUM_MON=05 
+
+C:\HotCopy>IF ERRORLEVEL 6 SET NUM_MON=06 
+
+C:\HotCopy>IF ERRORLEVEL 7 SET NUM_MON=07 
+
+C:\HotCopy>IF ERRORLEVEL 8 SET NUM_MON=08 
+
+C:\HotCopy>IF ERRORLEVEL 9 SET NUM_MON=09 
+
+C:\HotCopy>IF ERRORLEVEL 10 SET NUM_MON=10 
+
+C:\HotCopy>IF ERRORLEVEL 11 SET NUM_MON=11 
+
+C:\HotCopy>IF ERRORLEVEL 12 SET NUM_MON=12 
+
+C:\HotCopy>DAY.EXE
+
+C:\HotCopy>IF ERRORLEVEL 1 SET NUM_DAY=01 
+
+C:\HotCopy>IF ERRORLEVEL 2 SET NUM_DAY=02 
+
+C:\HotCopy>IF ERRORLEVEL 3 SET NUM_DAY=03 
+
+C:\HotCopy>IF ERRORLEVEL 4 SET NUM_DAY=04 
+
+C:\HotCopy>IF ERRORLEVEL 5 SET NUM_DAY=05 
+
+C:\HotCopy>IF ERRORLEVEL 6 SET NUM_DAY=06 
+
+C:\HotCopy>IF ERRORLEVEL 7 SET NUM_DAY=07 
+
+C:\HotCopy>IF ERRORLEVEL 8 SET NUM_DAY=08 
+
+C:\HotCopy>IF ERRORLEVEL 9 SET NUM_DAY=09 
+
+C:\HotCopy>IF ERRORLEVEL 10 SET NUM_DAY=10 
+
+C:\HotCopy>IF ERRORLEVEL 11 SET NUM_DAY=11 
+
+C:\HotCopy>IF ERRORLEVEL 12 SET NUM_DAY=12 
+
+C:\HotCopy>IF ERRORLEVEL 13 SET NUM_DAY=13 
+
+C:\HotCopy>IF ERRORLEVEL 14 SET NUM_DAY=14 
+
+C:\HotCopy>IF ERRORLEVEL 15 SET NUM_DAY=15 
+
+C:\HotCopy>IF ERRORLEVEL 16 SET NUM_DAY=16 
+
+C:\HotCopy>IF ERRORLEVEL 17 SET NUM_DAY=17 
+
+C:\HotCopy>IF ERRORLEVEL 18 SET NUM_DAY=18 
+
+C:\HotCopy>IF ERRORLEVEL 19 SET NUM_DAY=19 
+
+C:\HotCopy>IF ERRORLEVEL 20 SET NUM_DAY=20 
+
+C:\HotCopy>IF ERRORLEVEL 21 SET NUM_DAY=21 
+
+C:\HotCopy>IF ERRORLEVEL 22 SET NUM_DAY=22 
+
+C:\HotCopy>IF ERRORLEVEL 23 SET NUM_DAY=23 
+
+C:\HotCopy>IF ERRORLEVEL 24 SET NUM_DAY=24 
+
+C:\HotCopy>IF ERRORLEVEL 25 SET NUM_DAY=25 
+
+C:\HotCopy>IF ERRORLEVEL 26 SET NUM_DAY=26 
+
+C:\HotCopy>IF ERRORLEVEL 27 SET NUM_DAY=27 
+
+C:\HotCopy>IF ERRORLEVEL 28 SET NUM_DAY=28 
+
+C:\HotCopy>IF ERRORLEVEL 29 SET NUM_DAY=29 
+
+C:\HotCopy>IF ERRORLEVEL 30 SET NUM_DAY=30 
+
+C:\HotCopy>IF ERRORLEVEL 31 SET NUM_DAY=31 
+---------------------------------------------------------- 
+ 
+
+C:\HotCopy>rem -- Проверяем параллельное выполнение процедуры Update 
+
+C:\HotCopy>if exist c:\hotcopy\oradata\update.is GOTO skip_run 
+
+C:\HotCopy>GOTO exec_run 
+
+C:\HotCopy>rem -- Создаем флаг, для предотвращения параллельного запуска MoveArchiveLog.bat  
+
+C:\HotCopy>echo HotCopy started 05.07.2019 20:00:22,75   1>c:\hotcopy\oradata\hotcopy.is 
+
+C:\HotCopy>rem --- Удаляем файл временного RAR-архива 
+
+C:\HotCopy>DEL /Q c:\hotcopy\oradata\HotCopyTmp.rar 
+Could Not Find c:\hotcopy\oradata\HotCopyTmp.rar
+
+C:\HotCopy>IF .YES. == .NO. CALL :RunBeginEndBackup 
+
+C:\HotCopy>IF .YES. == .YES. CALL :RunRMANBackup 
+
+C:\HotCopy>rem --- Процедура резервного копирования с использованием RMAN 
+
+C:\HotCopy>rman target / nocatalog @backupfull.script  
+
+Recovery Manager: Release 10.2.0.4.0 - Production on Fri Jul 5 20:00:22 2019
+
+Copyright (c) 1982, 2007, Oracle.  All rights reserved.
+
+connected to target database: NB (DBID=2378935397)
+using target database control file instead of recovery catalog
+
+RMAN> run {
+2>     # 1. Настройка до
+3>     CONFIGURE RETENTION POLICY TO REDUNDANCY 2;
+4>     # CONFIGURE RETENTION POLICY TO RECOVERY WINDOW OF 14 DAYS;
+5>     CONFIGURE CONTROLFILE AUTOBACKUP ON;
+6>     CONFIGURE BACKUP OPTIMIZATION ON;
+7>     CONFIGURE DEVICE TYPE DISK BACKUP TYPE TO COMPRESSED BACKUPSET;
+8> 
+9>     # 2. Проверить наличие файлов бакапа, удалить несуществующие или поврежденные
+10>     CROSSCHECK BACKUP;
+11>     DELETE NOPROMPT EXPIRED BACKUP;
+12> 
+13>     # 3. Резервное копирование полной базы данных
+14>        # backup as backupset device type disk database;
+15>        # backup as copy device type disk database;
+16>        # backup database;
+17> 
+18>     BACKUP FULL DATABASE NOEXCLUDE INCLUDE CURRENT CONTROLFILE SPFILE;
+19> 
+20>        # format 'D:\backup\%d_datafile_%s_%p.bak'
+21>        # tag 'backup_name';
+22> 
+23>     # 4. Удаляем бакапы с истекшим сроком   
+24>     DELETE NOPROMPT OBSOLETE;
+25> 
+26>     # 5. Настройка после
+27>     sql "create PFILE = ''D:\oracle\admin\NB\pfile\PFILENB.ora'' from SPFILE";
+28>     sql "create PFILE = ''PFILENB.ora'' from SPFILE";
+29> }  
+30> 
+31> list backup;
+32> list backup summary;
+33> 
+old RMAN configuration parameters:
+CONFIGURE RETENTION POLICY TO REDUNDANCY 2;
+new RMAN configuration parameters:
+CONFIGURE RETENTION POLICY TO REDUNDANCY 2;
+new RMAN configuration parameters are successfully stored
+
+old RMAN configuration parameters:
+CONFIGURE CONTROLFILE AUTOBACKUP ON;
+new RMAN configuration parameters:
+CONFIGURE CONTROLFILE AUTOBACKUP ON;
+new RMAN configuration parameters are successfully stored
+
+old RMAN configuration parameters:
+CONFIGURE BACKUP OPTIMIZATION ON;
+new RMAN configuration parameters:
+CONFIGURE BACKUP OPTIMIZATION ON;
+new RMAN configuration parameters are successfully stored
+
+old RMAN configuration parameters:
+CONFIGURE DEVICE TYPE DISK BACKUP TYPE TO COMPRESSED BACKUPSET PARALLELISM 1;
+new RMAN configuration parameters:
+CONFIGURE DEVICE TYPE DISK BACKUP TYPE TO COMPRESSED BACKUPSET PARALLELISM 1;
+new RMAN configuration parameters are successfully stored
+
+allocated channel: ORA_DISK_1
+channel ORA_DISK_1: sid=295 devtype=DISK
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_21\O1_MF_NNNDF_TAG20190621T200035_GJT39MOZ_.BKP recid=20784 stamp=1011556835
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_22\O1_MF_ANNNN_TAG20190622T090409_GJVK6TDX_.BKP recid=20788 stamp=1011603850
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_22\O1_MF_ANNNN_TAG20190622T120013_GJVVJYJH_.BKP recid=20790 stamp=1011614414
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_22\O1_MF_ANNNN_TAG20190622T150007_GJW628OH_.BKP recid=20792 stamp=1011625208
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_22\O1_MF_ANNNN_TAG20190622T180007_GJWJMRFJ_.BKP recid=20794 stamp=1011636008
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_23\O1_MF_ANNNN_TAG20190623T090406_GJY5LQQD_.BKP recid=20796 stamp=1011690247
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_23\O1_MF_ANNNN_TAG20190623T120007_GJYHWR5Y_.BKP recid=20798 stamp=1011700808
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_23\O1_MF_ANNNN_TAG20190623T150006_GJYTG81X_.BKP recid=20800 stamp=1011711608
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_23\O1_MF_ANNNN_TAG20190623T180008_GJZ4ZS6X_.BKP recid=20802 stamp=1011722409
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_24\O1_MF_ANNNN_TAG20190624T090414_GK0SZ03H_.BKP recid=20804 stamp=1011776656
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_24\O1_MF_ANNNN_TAG20190624T120007_GK148RW7_.BKP recid=20806 stamp=1011787208
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_24\O1_MF_ANNNN_TAG20190624T150010_GK1GTD45_.BKP recid=20808 stamp=1011798012
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_24\O1_MF_ANNNN_TAG20190624T180011_GK1SCWOM_.BKP recid=20810 stamp=1011808812
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_25\O1_MF_ANNNN_TAG20190625T090409_GK3GBTKD_.BKP recid=20812 stamp=1011863050
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_25\O1_MF_ANNNN_TAG20190625T120008_GK3RNT4V_.BKP recid=20814 stamp=1011873610
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_25\O1_MF_ANNNN_TAG20190625T150008_GK4369N1_.BKP recid=20816 stamp=1011884409
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_25\O1_MF_ANNNN_TAG20190625T180014_GK4FQZMW_.BKP recid=20818 stamp=1011895215
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_26\O1_MF_ANNNN_TAG20190626T090430_GK62QJ1Y_.BKP recid=20820 stamp=1011949472
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_26\O1_MF_ANNNN_TAG20190626T120009_GK6F0TFS_.BKP recid=20822 stamp=1011960010
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_26\O1_MF_ANNNN_TAG20190626T150013_GK6QLH1G_.BKP recid=20824 stamp=1011970815
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_26\O1_MF_ANNNN_TAG20190626T180008_GK723T5Q_.BKP recid=20826 stamp=1011981610
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_27\O1_MF_ANNNN_TAG20190627T091026_GK8QGN58_.BKP recid=20828 stamp=1012036228
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_27\O1_MF_ANNNN_TAG20190627T120009_GK91DTY8_.BKP recid=20830 stamp=1012046410
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_27\O1_MF_ANNNN_TAG20190627T150006_GK9CY893_.BKP recid=20832 stamp=1012057208
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_27\O1_MF_ANNNN_TAG20190627T180012_GK9PHY42_.BKP recid=20834 stamp=1012068014
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_28\O1_MF_ANNNN_TAG20190628T090409_GKCCGT8R_.BKP recid=20836 stamp=1012122250
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_28\O1_MF_ANNNN_TAG20190628T120009_GKCORTCB_.BKP recid=20838 stamp=1012132810
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_28\O1_MF_ANNNN_TAG20190628T150008_GKD0B9F5_.BKP recid=20840 stamp=1012143609
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_28\O1_MF_ANNNN_TAG20190628T180008_GKDBVS9D_.BKP recid=20842 stamp=1012154409
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_28\O1_MF_ANNNN_TAG20190628T200007_GKDKWRWB_.BKP recid=20844 stamp=1012161608
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_28\O1_MF_NNNDF_TAG20190628T200036_GKDKXNN1_.BKP recid=20846 stamp=1012161636
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_28\O1_MF_NCNNF_TAG20190628T200036_GKDPG5Z2_.BKP recid=20847 stamp=1012166261
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_28\O1_MF_NNSNF_TAG20190628T200036_GKDPG82R_.BKP recid=20848 stamp=1012166264
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_06_28\O1_MF_S_1012166265_GKDPG993_.BKP recid=20849 stamp=1012166265
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_29\O1_MF_ANNNN_TAG20190629T090418_GKFZV3XO_.BKP recid=20850 stamp=1012208659
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_06_29\O1_MF_S_1012208705_GKFZWKF8_.BKP recid=20851 stamp=1012208705
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_29\O1_MF_ANNNN_TAG20190629T120008_GKGB4SKW_.BKP recid=20852 stamp=1012219209
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_06_29\O1_MF_S_1012219224_GKGB58Y3_.BKP recid=20853 stamp=1012219224
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_29\O1_MF_ANNNN_TAG20190629T150007_GKGNP8J9_.BKP recid=20854 stamp=1012230008
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_06_29\O1_MF_S_1012230015_GKGNPHWH_.BKP recid=20855 stamp=1012230015
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_29\O1_MF_ANNNN_TAG20190629T180006_GKGZ7QSF_.BKP recid=20856 stamp=1012240807
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_06_29\O1_MF_S_1012240814_GKGZ7Z8T_.BKP recid=20857 stamp=1012240815
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_30\O1_MF_ANNNN_TAG20190630T090427_GKJN7DLK_.BKP recid=20858 stamp=1012295068
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_06_30\O1_MF_S_1012295103_GKJN8J5D_.BKP recid=20859 stamp=1012295104
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_30\O1_MF_ANNNN_TAG20190630T120010_GKJYJVOM_.BKP recid=20860 stamp=1012305611
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_06_30\O1_MF_S_1012305618_GKJYK31L_.BKP recid=20861 stamp=1012305619
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_30\O1_MF_ANNNN_TAG20190630T150006_GKK92823_.BKP recid=20862 stamp=1012316408
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_06_30\O1_MF_S_1012316415_GKK92HGB_.BKP recid=20863 stamp=1012316415
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_30\O1_MF_ANNNN_TAG20190630T180006_GKKMMQQX_.BKP recid=20864 stamp=1012327207
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_06_30\O1_MF_S_1012327214_GKKMMZ7T_.BKP recid=20865 stamp=1012327215
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_07_01\O1_MF_ANNNN_TAG20190701T090415_GKM8M0CG_.BKP recid=20866 stamp=1012467856
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_01\O1_MF_S_1012467891_GKM8N426_.BKP recid=20867 stamp=1012467892
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_07_01\O1_MF_ANNNN_TAG20190701T120010_GKMLWV8O_.BKP recid=20868 stamp=1012478411
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_01\O1_MF_S_1012478426_GKMLXBSR_.BKP recid=20869 stamp=1012478426
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_07_01\O1_MF_ANNNN_TAG20190701T150009_GKMXGB90_.BKP recid=20870 stamp=1012489210
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_01\O1_MF_S_1012489225_GKMXGSNQ_.BKP recid=20871 stamp=1012489225
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_07_01\O1_MF_ANNNN_TAG20190701T180007_GKN7ZR4M_.BKP recid=20872 stamp=1012500008
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_01\O1_MF_S_1012500015_GKN7ZZJC_.BKP recid=20873 stamp=1012500015
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_07_02\O1_MF_ANNNN_TAG20190702T090430_GKOWZJ5O_.BKP recid=20874 stamp=1012554272
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_02\O1_MF_S_1012554357_GKOX25QB_.BKP recid=20875 stamp=1012554357
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_07_02\O1_MF_ANNNN_TAG20190702T120008_GKP78T7O_.BKP recid=20876 stamp=1012564810
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_02\O1_MF_S_1012564835_GKP79MQ9_.BKP recid=20877 stamp=1012564835
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_07_02\O1_MF_ANNNN_TAG20190702T150014_GKPKTHFC_.BKP recid=20878 stamp=1012575615
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_02\O1_MF_S_1012575630_GKPKTYS3_.BKP recid=20879 stamp=1012575630
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_07_02\O1_MF_ANNNN_TAG20190702T180010_GKPWCW10_.BKP recid=20880 stamp=1012586412
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_02\O1_MF_S_1012586419_GKPWD3D8_.BKP recid=20881 stamp=1012586419
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_07_03\O1_MF_ANNNN_TAG20190703T090429_GKRKCGY4_.BKP recid=20882 stamp=1012640670
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_03\O1_MF_S_1012640716_GKRKDWMF_.BKP recid=20883 stamp=1012640716
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_07_03\O1_MF_ANNNN_TAG20190703T120013_GKRVNYX9_.BKP recid=20884 stamp=1012651214
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_03\O1_MF_S_1012651230_GKRVOGDP_.BKP recid=20885 stamp=1012651230
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_07_03\O1_MF_ANNNN_TAG20190703T150011_GKS66DST_.BKP recid=20886 stamp=1012662012
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_03\O1_MF_S_1012662027_GKS66W5T_.BKP recid=20887 stamp=1012662028
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_07_03\O1_MF_ANNNN_TAG20190703T180007_GKSJQRD0_.BKP recid=20888 stamp=1012672808
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_03\O1_MF_S_1012672823_GKSJR7SO_.BKP recid=20889 stamp=1012672823
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_07_04\O1_MF_ANNNN_TAG20190704T090421_GKV5Q6SZ_.BKP recid=20890 stamp=1012727062
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_04\O1_MF_S_1012727098_GKV5RBFB_.BKP recid=20891 stamp=1012727098
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_07_04\O1_MF_ANNNN_TAG20190704T120010_GKVJ0VY0_.BKP recid=20892 stamp=1012737611
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_04\O1_MF_S_1012737637_GKVJ1OBJ_.BKP recid=20893 stamp=1012737637
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_07_04\O1_MF_ANNNN_TAG20190704T150007_GKVTL8R0_.BKP recid=20894 stamp=1012748408
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_04\O1_MF_S_1012748425_GKVTLT9V_.BKP recid=20895 stamp=1012748426
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_07_04\O1_MF_ANNNN_TAG20190704T180010_GKW53W2W_.BKP recid=20896 stamp=1012759212
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_04\O1_MF_S_1012759227_GKW54CLJ_.BKP recid=20897 stamp=1012759227
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_07_05\O1_MF_ANNNN_TAG20190705T090403_GKXT2NTF_.BKP recid=20898 stamp=1012813444
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_05\O1_MF_S_1012813520_GKXT50K6_.BKP recid=20899 stamp=1012813520
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_07_05\O1_MF_ANNNN_TAG20190705T120010_GKY4DVZ0_.BKP recid=20900 stamp=1012824011
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_05\O1_MF_S_1012824037_GKY4FOFG_.BKP recid=20901 stamp=1012824037
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_07_05\O1_MF_ANNNN_TAG20190705T150009_GKYGYBXW_.BKP recid=20902 stamp=1012834810
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_05\O1_MF_S_1012834826_GKYGYTO3_.BKP recid=20903 stamp=1012834826
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_07_05\O1_MF_ANNNN_TAG20190705T180007_GKYSHRX7_.BKP recid=20904 stamp=1012845608
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_05\O1_MF_S_1012845624_GKYSJ8CO_.BKP recid=20905 stamp=1012845624
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_07_05\O1_MF_ANNNN_TAG20190705T200009_GKZ0JTBS_.BKP recid=20906 stamp=1012852810
+crosschecked backup piece: found to be 'AVAILABLE'
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_05\O1_MF_S_1012852813_GKZ0JXWV_.BKP recid=20907 stamp=1012852813
+Crosschecked 92 objects
+
+
+using channel ORA_DISK_1
+
+Starting backup at 05-JUL-19
+using channel ORA_DISK_1
+channel ORA_DISK_1: starting compressed full datafile backupset
+channel ORA_DISK_1: specifying datafile(s) in backupset
+input datafile fno=00009 name=D:\ORACLE\ORADATA\NB\USERS01.DBF
+input datafile fno=00004 name=D:\ORACLE\ORADATA\NB\AUDIT01.DBF
+input datafile fno=00008 name=D:\ORACLE\ORADATA\NB\REPL01.DBF
+input datafile fno=00006 name=D:\ORACLE\ORADATA\NB\INDX01.DBF
+input datafile fno=00010 name=D:\ORACLE\ORADATA\NB\TOOLS01.DBF
+input datafile fno=00002 name=D:\ORACLE\ORADATA\NB\UNDOTBS01.DBF
+input datafile fno=00003 name=D:\ORACLE\ORADATA\NB\SYSAUX01.DBF
+input datafile fno=00001 name=D:\ORACLE\ORADATA\NB\SYSTEM01.DBF
+input datafile fno=00005 name=D:\ORACLE\ORADATA\NB\AUDIT11.DBF
+input datafile fno=00007 name=D:\ORACLE\ORADATA\NB\RBS01.DBF
+channel ORA_DISK_1: starting piece 1 at 05-JUL-19
+channel ORA_DISK_1: finished piece 1 at 05-JUL-19
+piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_07_05\O1_MF_NNNDF_TAG20190705T200031_GKZ0KHSY_.BKP tag=TAG20190705T200031 comment=NONE
+channel ORA_DISK_1: backup set complete, elapsed time: 01:08:05
+channel ORA_DISK_1: starting compressed full datafile backupset
+channel ORA_DISK_1: specifying datafile(s) in backupset
+including current control file in backupset
+channel ORA_DISK_1: starting piece 1 at 05-JUL-19
+channel ORA_DISK_1: finished piece 1 at 05-JUL-19
+piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_07_05\O1_MF_NCNNF_TAG20190705T200031_GKZ4K53K_.BKP tag=TAG20190705T200031 comment=NONE
+channel ORA_DISK_1: backup set complete, elapsed time: 00:00:02
+channel ORA_DISK_1: starting compressed full datafile backupset
+channel ORA_DISK_1: specifying datafile(s) in backupset
+including current SPFILE in backupset
+channel ORA_DISK_1: starting piece 1 at 05-JUL-19
+channel ORA_DISK_1: finished piece 1 at 05-JUL-19
+piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_07_05\O1_MF_NNSNF_TAG20190705T200031_GKZ4K76H_.BKP tag=TAG20190705T200031 comment=NONE
+channel ORA_DISK_1: backup set complete, elapsed time: 00:00:02
+Finished backup at 05-JUL-19
+
+Starting Control File and SPFILE Autobackup at 05-JUL-19
+piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_05\O1_MF_S_1012856920_GKZ4K8FB_.BKP comment=NONE
+Finished Control File and SPFILE Autobackup at 05-JUL-19
+
+RMAN retention policy will be applied to the command
+RMAN retention policy is set to redundancy 2
+using channel ORA_DISK_1
+Deleting the following obsolete backups and copies:
+Type                 Key    Completion Time    Filename/Handle
+-------------------- ------ ------------------ --------------------
+Backup Set           20737  21-JUN-19         
+  Backup Piece       20784  21-JUN-19          D:\ARCHIVE\NB\BACKUPSET\2019_06_21\O1_MF_NNNDF_TAG20190621T200035_GJT39MOZ_.BKP
+Backup Set           20741  22-JUN-19         
+  Backup Piece       20788  22-JUN-19          D:\ARCHIVE\NB\BACKUPSET\2019_06_22\O1_MF_ANNNN_TAG20190622T090409_GJVK6TDX_.BKP
+Backup Set           20743  22-JUN-19         
+  Backup Piece       20790  22-JUN-19          D:\ARCHIVE\NB\BACKUPSET\2019_06_22\O1_MF_ANNNN_TAG20190622T120013_GJVVJYJH_.BKP
+Backup Set           20745  22-JUN-19         
+  Backup Piece       20792  22-JUN-19          D:\ARCHIVE\NB\BACKUPSET\2019_06_22\O1_MF_ANNNN_TAG20190622T150007_GJW628OH_.BKP
+Backup Set           20747  22-JUN-19         
+  Backup Piece       20794  22-JUN-19          D:\ARCHIVE\NB\BACKUPSET\2019_06_22\O1_MF_ANNNN_TAG20190622T180007_GJWJMRFJ_.BKP
+Backup Set           20749  23-JUN-19         
+  Backup Piece       20796  23-JUN-19          D:\ARCHIVE\NB\BACKUPSET\2019_06_23\O1_MF_ANNNN_TAG20190623T090406_GJY5LQQD_.BKP
+Backup Set           20751  23-JUN-19         
+  Backup Piece       20798  23-JUN-19          D:\ARCHIVE\NB\BACKUPSET\2019_06_23\O1_MF_ANNNN_TAG20190623T120007_GJYHWR5Y_.BKP
+Backup Set           20753  23-JUN-19         
+  Backup Piece       20800  23-JUN-19          D:\ARCHIVE\NB\BACKUPSET\2019_06_23\O1_MF_ANNNN_TAG20190623T150006_GJYTG81X_.BKP
+Backup Set           20755  23-JUN-19         
+  Backup Piece       20802  23-JUN-19          D:\ARCHIVE\NB\BACKUPSET\2019_06_23\O1_MF_ANNNN_TAG20190623T180008_GJZ4ZS6X_.BKP
+Backup Set           20757  24-JUN-19         
+  Backup Piece       20804  24-JUN-19          D:\ARCHIVE\NB\BACKUPSET\2019_06_24\O1_MF_ANNNN_TAG20190624T090414_GK0SZ03H_.BKP
+Backup Set           20759  24-JUN-19         
+  Backup Piece       20806  24-JUN-19          D:\ARCHIVE\NB\BACKUPSET\2019_06_24\O1_MF_ANNNN_TAG20190624T120007_GK148RW7_.BKP
+Backup Set           20761  24-JUN-19         
+  Backup Piece       20808  24-JUN-19          D:\ARCHIVE\NB\BACKUPSET\2019_06_24\O1_MF_ANNNN_TAG20190624T150010_GK1GTD45_.BKP
+Backup Set           20763  24-JUN-19         
+  Backup Piece       20810  24-JUN-19          D:\ARCHIVE\NB\BACKUPSET\2019_06_24\O1_MF_ANNNN_TAG20190624T180011_GK1SCWOM_.BKP
+Backup Set           20765  25-JUN-19         
+  Backup Piece       20812  25-JUN-19          D:\ARCHIVE\NB\BACKUPSET\2019_06_25\O1_MF_ANNNN_TAG20190625T090409_GK3GBTKD_.BKP
+Backup Set           20767  25-JUN-19         
+  Backup Piece       20814  25-JUN-19          D:\ARCHIVE\NB\BACKUPSET\2019_06_25\O1_MF_ANNNN_TAG20190625T120008_GK3RNT4V_.BKP
+Backup Set           20769  25-JUN-19         
+  Backup Piece       20816  25-JUN-19          D:\ARCHIVE\NB\BACKUPSET\2019_06_25\O1_MF_ANNNN_TAG20190625T150008_GK4369N1_.BKP
+Backup Set           20771  25-JUN-19         
+  Backup Piece       20818  25-JUN-19          D:\ARCHIVE\NB\BACKUPSET\2019_06_25\O1_MF_ANNNN_TAG20190625T180014_GK4FQZMW_.BKP
+Backup Set           20773  26-JUN-19         
+  Backup Piece       20820  26-JUN-19          D:\ARCHIVE\NB\BACKUPSET\2019_06_26\O1_MF_ANNNN_TAG20190626T090430_GK62QJ1Y_.BKP
+Backup Set           20775  26-JUN-19         
+  Backup Piece       20822  26-JUN-19          D:\ARCHIVE\NB\BACKUPSET\2019_06_26\O1_MF_ANNNN_TAG20190626T120009_GK6F0TFS_.BKP
+Backup Set           20777  26-JUN-19         
+  Backup Piece       20824  26-JUN-19          D:\ARCHIVE\NB\BACKUPSET\2019_06_26\O1_MF_ANNNN_TAG20190626T150013_GK6QLH1G_.BKP
+Backup Set           20779  26-JUN-19         
+  Backup Piece       20826  26-JUN-19          D:\ARCHIVE\NB\BACKUPSET\2019_06_26\O1_MF_ANNNN_TAG20190626T180008_GK723T5Q_.BKP
+Backup Set           20781  27-JUN-19         
+  Backup Piece       20828  27-JUN-19          D:\ARCHIVE\NB\BACKUPSET\2019_06_27\O1_MF_ANNNN_TAG20190627T091026_GK8QGN58_.BKP
+Backup Set           20783  27-JUN-19         
+  Backup Piece       20830  27-JUN-19          D:\ARCHIVE\NB\BACKUPSET\2019_06_27\O1_MF_ANNNN_TAG20190627T120009_GK91DTY8_.BKP
+Backup Set           20785  27-JUN-19         
+  Backup Piece       20832  27-JUN-19          D:\ARCHIVE\NB\BACKUPSET\2019_06_27\O1_MF_ANNNN_TAG20190627T150006_GK9CY893_.BKP
+Backup Set           20787  27-JUN-19         
+  Backup Piece       20834  27-JUN-19          D:\ARCHIVE\NB\BACKUPSET\2019_06_27\O1_MF_ANNNN_TAG20190627T180012_GK9PHY42_.BKP
+Backup Set           20789  28-JUN-19         
+  Backup Piece       20836  28-JUN-19          D:\ARCHIVE\NB\BACKUPSET\2019_06_28\O1_MF_ANNNN_TAG20190628T090409_GKCCGT8R_.BKP
+Backup Set           20791  28-JUN-19         
+  Backup Piece       20838  28-JUN-19          D:\ARCHIVE\NB\BACKUPSET\2019_06_28\O1_MF_ANNNN_TAG20190628T120009_GKCORTCB_.BKP
+Backup Set           20793  28-JUN-19         
+  Backup Piece       20840  28-JUN-19          D:\ARCHIVE\NB\BACKUPSET\2019_06_28\O1_MF_ANNNN_TAG20190628T150008_GKD0B9F5_.BKP
+Backup Set           20795  28-JUN-19         
+  Backup Piece       20842  28-JUN-19          D:\ARCHIVE\NB\BACKUPSET\2019_06_28\O1_MF_ANNNN_TAG20190628T180008_GKDBVS9D_.BKP
+Backup Set           20797  28-JUN-19         
+  Backup Piece       20844  28-JUN-19          D:\ARCHIVE\NB\BACKUPSET\2019_06_28\O1_MF_ANNNN_TAG20190628T200007_GKDKWRWB_.BKP
+Backup Set           20800  28-JUN-19         
+  Backup Piece       20847  28-JUN-19          D:\ARCHIVE\NB\BACKUPSET\2019_06_28\O1_MF_NCNNF_TAG20190628T200036_GKDPG5Z2_.BKP
+Backup Set           20801  28-JUN-19         
+  Backup Piece       20848  28-JUN-19          D:\ARCHIVE\NB\BACKUPSET\2019_06_28\O1_MF_NNSNF_TAG20190628T200036_GKDPG82R_.BKP
+Backup Set           20802  28-JUN-19         
+  Backup Piece       20849  28-JUN-19          D:\ARCHIVE\NB\AUTOBACKUP\2019_06_28\O1_MF_S_1012166265_GKDPG993_.BKP
+Backup Set           20804  29-JUN-19         
+  Backup Piece       20851  29-JUN-19          D:\ARCHIVE\NB\AUTOBACKUP\2019_06_29\O1_MF_S_1012208705_GKFZWKF8_.BKP
+Backup Set           20806  29-JUN-19         
+  Backup Piece       20853  29-JUN-19          D:\ARCHIVE\NB\AUTOBACKUP\2019_06_29\O1_MF_S_1012219224_GKGB58Y3_.BKP
+Backup Set           20808  29-JUN-19         
+  Backup Piece       20855  29-JUN-19          D:\ARCHIVE\NB\AUTOBACKUP\2019_06_29\O1_MF_S_1012230015_GKGNPHWH_.BKP
+Backup Set           20810  29-JUN-19         
+  Backup Piece       20857  29-JUN-19          D:\ARCHIVE\NB\AUTOBACKUP\2019_06_29\O1_MF_S_1012240814_GKGZ7Z8T_.BKP
+Backup Set           20812  30-JUN-19         
+  Backup Piece       20859  30-JUN-19          D:\ARCHIVE\NB\AUTOBACKUP\2019_06_30\O1_MF_S_1012295103_GKJN8J5D_.BKP
+Backup Set           20814  30-JUN-19         
+  Backup Piece       20861  30-JUN-19          D:\ARCHIVE\NB\AUTOBACKUP\2019_06_30\O1_MF_S_1012305618_GKJYK31L_.BKP
+Backup Set           20816  30-JUN-19         
+  Backup Piece       20863  30-JUN-19          D:\ARCHIVE\NB\AUTOBACKUP\2019_06_30\O1_MF_S_1012316415_GKK92HGB_.BKP
+Backup Set           20818  30-JUN-19         
+  Backup Piece       20865  30-JUN-19          D:\ARCHIVE\NB\AUTOBACKUP\2019_06_30\O1_MF_S_1012327214_GKKMMZ7T_.BKP
+Backup Set           20820  01-JUL-19         
+  Backup Piece       20867  01-JUL-19          D:\ARCHIVE\NB\AUTOBACKUP\2019_07_01\O1_MF_S_1012467891_GKM8N426_.BKP
+Backup Set           20822  01-JUL-19         
+  Backup Piece       20869  01-JUL-19          D:\ARCHIVE\NB\AUTOBACKUP\2019_07_01\O1_MF_S_1012478426_GKMLXBSR_.BKP
+Backup Set           20824  01-JUL-19         
+  Backup Piece       20871  01-JUL-19          D:\ARCHIVE\NB\AUTOBACKUP\2019_07_01\O1_MF_S_1012489225_GKMXGSNQ_.BKP
+Backup Set           20826  01-JUL-19         
+  Backup Piece       20873  01-JUL-19          D:\ARCHIVE\NB\AUTOBACKUP\2019_07_01\O1_MF_S_1012500015_GKN7ZZJC_.BKP
+Backup Set           20828  02-JUL-19         
+  Backup Piece       20875  02-JUL-19          D:\ARCHIVE\NB\AUTOBACKUP\2019_07_02\O1_MF_S_1012554357_GKOX25QB_.BKP
+Backup Set           20830  02-JUL-19         
+  Backup Piece       20877  02-JUL-19          D:\ARCHIVE\NB\AUTOBACKUP\2019_07_02\O1_MF_S_1012564835_GKP79MQ9_.BKP
+Backup Set           20832  02-JUL-19         
+  Backup Piece       20879  02-JUL-19          D:\ARCHIVE\NB\AUTOBACKUP\2019_07_02\O1_MF_S_1012575630_GKPKTYS3_.BKP
+Backup Set           20834  02-JUL-19         
+  Backup Piece       20881  02-JUL-19          D:\ARCHIVE\NB\AUTOBACKUP\2019_07_02\O1_MF_S_1012586419_GKPWD3D8_.BKP
+Backup Set           20836  03-JUL-19         
+  Backup Piece       20883  03-JUL-19          D:\ARCHIVE\NB\AUTOBACKUP\2019_07_03\O1_MF_S_1012640716_GKRKDWMF_.BKP
+Backup Set           20838  03-JUL-19         
+  Backup Piece       20885  03-JUL-19          D:\ARCHIVE\NB\AUTOBACKUP\2019_07_03\O1_MF_S_1012651230_GKRVOGDP_.BKP
+Backup Set           20840  03-JUL-19         
+  Backup Piece       20887  03-JUL-19          D:\ARCHIVE\NB\AUTOBACKUP\2019_07_03\O1_MF_S_1012662027_GKS66W5T_.BKP
+Backup Set           20842  03-JUL-19         
+  Backup Piece       20889  03-JUL-19          D:\ARCHIVE\NB\AUTOBACKUP\2019_07_03\O1_MF_S_1012672823_GKSJR7SO_.BKP
+Backup Set           20844  04-JUL-19         
+  Backup Piece       20891  04-JUL-19          D:\ARCHIVE\NB\AUTOBACKUP\2019_07_04\O1_MF_S_1012727098_GKV5RBFB_.BKP
+Backup Set           20846  04-JUL-19         
+  Backup Piece       20893  04-JUL-19          D:\ARCHIVE\NB\AUTOBACKUP\2019_07_04\O1_MF_S_1012737637_GKVJ1OBJ_.BKP
+Backup Set           20848  04-JUL-19         
+  Backup Piece       20895  04-JUL-19          D:\ARCHIVE\NB\AUTOBACKUP\2019_07_04\O1_MF_S_1012748425_GKVTLT9V_.BKP
+Backup Set           20850  04-JUL-19         
+  Backup Piece       20897  04-JUL-19          D:\ARCHIVE\NB\AUTOBACKUP\2019_07_04\O1_MF_S_1012759227_GKW54CLJ_.BKP
+Backup Set           20852  05-JUL-19         
+  Backup Piece       20899  05-JUL-19          D:\ARCHIVE\NB\AUTOBACKUP\2019_07_05\O1_MF_S_1012813520_GKXT50K6_.BKP
+Backup Set           20854  05-JUL-19         
+  Backup Piece       20901  05-JUL-19          D:\ARCHIVE\NB\AUTOBACKUP\2019_07_05\O1_MF_S_1012824037_GKY4FOFG_.BKP
+Backup Set           20856  05-JUL-19         
+  Backup Piece       20903  05-JUL-19          D:\ARCHIVE\NB\AUTOBACKUP\2019_07_05\O1_MF_S_1012834826_GKYGYTO3_.BKP
+Backup Set           20858  05-JUL-19         
+  Backup Piece       20905  05-JUL-19          D:\ARCHIVE\NB\AUTOBACKUP\2019_07_05\O1_MF_S_1012845624_GKYSJ8CO_.BKP
+Backup Set           20860  05-JUL-19         
+  Backup Piece       20907  05-JUL-19          D:\ARCHIVE\NB\AUTOBACKUP\2019_07_05\O1_MF_S_1012852813_GKZ0JXWV_.BKP
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_21\O1_MF_NNNDF_TAG20190621T200035_GJT39MOZ_.BKP recid=20784 stamp=1011556835
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_22\O1_MF_ANNNN_TAG20190622T090409_GJVK6TDX_.BKP recid=20788 stamp=1011603850
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_22\O1_MF_ANNNN_TAG20190622T120013_GJVVJYJH_.BKP recid=20790 stamp=1011614414
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_22\O1_MF_ANNNN_TAG20190622T150007_GJW628OH_.BKP recid=20792 stamp=1011625208
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_22\O1_MF_ANNNN_TAG20190622T180007_GJWJMRFJ_.BKP recid=20794 stamp=1011636008
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_23\O1_MF_ANNNN_TAG20190623T090406_GJY5LQQD_.BKP recid=20796 stamp=1011690247
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_23\O1_MF_ANNNN_TAG20190623T120007_GJYHWR5Y_.BKP recid=20798 stamp=1011700808
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_23\O1_MF_ANNNN_TAG20190623T150006_GJYTG81X_.BKP recid=20800 stamp=1011711608
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_23\O1_MF_ANNNN_TAG20190623T180008_GJZ4ZS6X_.BKP recid=20802 stamp=1011722409
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_24\O1_MF_ANNNN_TAG20190624T090414_GK0SZ03H_.BKP recid=20804 stamp=1011776656
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_24\O1_MF_ANNNN_TAG20190624T120007_GK148RW7_.BKP recid=20806 stamp=1011787208
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_24\O1_MF_ANNNN_TAG20190624T150010_GK1GTD45_.BKP recid=20808 stamp=1011798012
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_24\O1_MF_ANNNN_TAG20190624T180011_GK1SCWOM_.BKP recid=20810 stamp=1011808812
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_25\O1_MF_ANNNN_TAG20190625T090409_GK3GBTKD_.BKP recid=20812 stamp=1011863050
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_25\O1_MF_ANNNN_TAG20190625T120008_GK3RNT4V_.BKP recid=20814 stamp=1011873610
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_25\O1_MF_ANNNN_TAG20190625T150008_GK4369N1_.BKP recid=20816 stamp=1011884409
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_25\O1_MF_ANNNN_TAG20190625T180014_GK4FQZMW_.BKP recid=20818 stamp=1011895215
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_26\O1_MF_ANNNN_TAG20190626T090430_GK62QJ1Y_.BKP recid=20820 stamp=1011949472
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_26\O1_MF_ANNNN_TAG20190626T120009_GK6F0TFS_.BKP recid=20822 stamp=1011960010
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_26\O1_MF_ANNNN_TAG20190626T150013_GK6QLH1G_.BKP recid=20824 stamp=1011970815
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_26\O1_MF_ANNNN_TAG20190626T180008_GK723T5Q_.BKP recid=20826 stamp=1011981610
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_27\O1_MF_ANNNN_TAG20190627T091026_GK8QGN58_.BKP recid=20828 stamp=1012036228
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_27\O1_MF_ANNNN_TAG20190627T120009_GK91DTY8_.BKP recid=20830 stamp=1012046410
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_27\O1_MF_ANNNN_TAG20190627T150006_GK9CY893_.BKP recid=20832 stamp=1012057208
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_27\O1_MF_ANNNN_TAG20190627T180012_GK9PHY42_.BKP recid=20834 stamp=1012068014
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_28\O1_MF_ANNNN_TAG20190628T090409_GKCCGT8R_.BKP recid=20836 stamp=1012122250
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_28\O1_MF_ANNNN_TAG20190628T120009_GKCORTCB_.BKP recid=20838 stamp=1012132810
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_28\O1_MF_ANNNN_TAG20190628T150008_GKD0B9F5_.BKP recid=20840 stamp=1012143609
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_28\O1_MF_ANNNN_TAG20190628T180008_GKDBVS9D_.BKP recid=20842 stamp=1012154409
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_28\O1_MF_ANNNN_TAG20190628T200007_GKDKWRWB_.BKP recid=20844 stamp=1012161608
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_28\O1_MF_NCNNF_TAG20190628T200036_GKDPG5Z2_.BKP recid=20847 stamp=1012166261
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_06_28\O1_MF_NNSNF_TAG20190628T200036_GKDPG82R_.BKP recid=20848 stamp=1012166264
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_06_28\O1_MF_S_1012166265_GKDPG993_.BKP recid=20849 stamp=1012166265
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_06_29\O1_MF_S_1012208705_GKFZWKF8_.BKP recid=20851 stamp=1012208705
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_06_29\O1_MF_S_1012219224_GKGB58Y3_.BKP recid=20853 stamp=1012219224
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_06_29\O1_MF_S_1012230015_GKGNPHWH_.BKP recid=20855 stamp=1012230015
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_06_29\O1_MF_S_1012240814_GKGZ7Z8T_.BKP recid=20857 stamp=1012240815
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_06_30\O1_MF_S_1012295103_GKJN8J5D_.BKP recid=20859 stamp=1012295104
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_06_30\O1_MF_S_1012305618_GKJYK31L_.BKP recid=20861 stamp=1012305619
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_06_30\O1_MF_S_1012316415_GKK92HGB_.BKP recid=20863 stamp=1012316415
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_06_30\O1_MF_S_1012327214_GKKMMZ7T_.BKP recid=20865 stamp=1012327215
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_01\O1_MF_S_1012467891_GKM8N426_.BKP recid=20867 stamp=1012467892
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_01\O1_MF_S_1012478426_GKMLXBSR_.BKP recid=20869 stamp=1012478426
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_01\O1_MF_S_1012489225_GKMXGSNQ_.BKP recid=20871 stamp=1012489225
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_01\O1_MF_S_1012500015_GKN7ZZJC_.BKP recid=20873 stamp=1012500015
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_02\O1_MF_S_1012554357_GKOX25QB_.BKP recid=20875 stamp=1012554357
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_02\O1_MF_S_1012564835_GKP79MQ9_.BKP recid=20877 stamp=1012564835
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_02\O1_MF_S_1012575630_GKPKTYS3_.BKP recid=20879 stamp=1012575630
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_02\O1_MF_S_1012586419_GKPWD3D8_.BKP recid=20881 stamp=1012586419
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_03\O1_MF_S_1012640716_GKRKDWMF_.BKP recid=20883 stamp=1012640716
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_03\O1_MF_S_1012651230_GKRVOGDP_.BKP recid=20885 stamp=1012651230
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_03\O1_MF_S_1012662027_GKS66W5T_.BKP recid=20887 stamp=1012662028
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_03\O1_MF_S_1012672823_GKSJR7SO_.BKP recid=20889 stamp=1012672823
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_04\O1_MF_S_1012727098_GKV5RBFB_.BKP recid=20891 stamp=1012727098
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_04\O1_MF_S_1012737637_GKVJ1OBJ_.BKP recid=20893 stamp=1012737637
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_04\O1_MF_S_1012748425_GKVTLT9V_.BKP recid=20895 stamp=1012748426
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_04\O1_MF_S_1012759227_GKW54CLJ_.BKP recid=20897 stamp=1012759227
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_05\O1_MF_S_1012813520_GKXT50K6_.BKP recid=20899 stamp=1012813520
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_05\O1_MF_S_1012824037_GKY4FOFG_.BKP recid=20901 stamp=1012824037
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_05\O1_MF_S_1012834826_GKYGYTO3_.BKP recid=20903 stamp=1012834826
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_05\O1_MF_S_1012845624_GKYSJ8CO_.BKP recid=20905 stamp=1012845624
+deleted backup piece
+backup piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_05\O1_MF_S_1012852813_GKZ0JXWV_.BKP recid=20907 stamp=1012852813
+Deleted 62 objects
+
+
+sql statement: create PFILE = ''D:\oracle\admin\NB\pfile\PFILENB.ora'' from SPFILE
+
+sql statement: create PFILE = ''PFILENB.ora'' from SPFILE
+
+
+List of Backup Sets
+===================
+
+BS Key  Type LV Size       Device Type Elapsed Time Completion Time
+------- ---- -- ---------- ----------- ------------ ---------------
+20799   Full    17.18G     DISK        01:16:56     28-JUN-19      
+        BP Key: 20846   Status: AVAILABLE  Compressed: YES  Tag: TAG20190628T200036
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_06_28\O1_MF_NNNDF_TAG20190628T200036_GKDKXNN1_.BKP
+  List of Datafiles in backup set 20799
+  File LV Type Ckp SCN    Ckp Time  Name
+  ---- -- ---- ---------- --------- ----
+  1       Full 177935112308 28-JUN-19 D:\ORACLE\ORADATA\NB\SYSTEM01.DBF
+  2       Full 177935112308 28-JUN-19 D:\ORACLE\ORADATA\NB\UNDOTBS01.DBF
+  3       Full 177935112308 28-JUN-19 D:\ORACLE\ORADATA\NB\SYSAUX01.DBF
+  4       Full 177935112308 28-JUN-19 D:\ORACLE\ORADATA\NB\AUDIT01.DBF
+  5       Full 177935112308 28-JUN-19 D:\ORACLE\ORADATA\NB\AUDIT11.DBF
+  6       Full 177935112308 28-JUN-19 D:\ORACLE\ORADATA\NB\INDX01.DBF
+  7       Full 177935112308 28-JUN-19 D:\ORACLE\ORADATA\NB\RBS01.DBF
+  8       Full 177935112308 28-JUN-19 D:\ORACLE\ORADATA\NB\REPL01.DBF
+  9       Full 177935112308 28-JUN-19 D:\ORACLE\ORADATA\NB\USERS01.DBF
+  10      Full 177935112308 28-JUN-19 D:\ORACLE\ORADATA\NB\TOOLS01.DBF
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20803   181.39M    DISK        00:00:37     29-JUN-19      
+        BP Key: 20850   Status: AVAILABLE  Compressed: YES  Tag: TAG20190629T090418
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_06_29\O1_MF_ANNNN_TAG20190629T090418_GKFZV3XO_.BKP
+
+  List of Archived Logs in backup set 20803
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25627   177935112076 28-JUN-19 177935352435 29-JUN-19
+  1    25628   177935352435 29-JUN-19 177935481327 29-JUN-19
+  1    25629   177935481327 29-JUN-19 177935645795 29-JUN-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20805   50.26M     DISK        00:00:11     29-JUN-19      
+        BP Key: 20852   Status: AVAILABLE  Compressed: YES  Tag: TAG20190629T120008
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_06_29\O1_MF_ANNNN_TAG20190629T120008_GKGB4SKW_.BKP
+
+  List of Archived Logs in backup set 20805
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25630   177935645795 29-JUN-19 177935696641 29-JUN-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20807   30.47M     DISK        00:00:07     29-JUN-19      
+        BP Key: 20854   Status: AVAILABLE  Compressed: YES  Tag: TAG20190629T150007
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_06_29\O1_MF_ANNNN_TAG20190629T150007_GKGNP8J9_.BKP
+
+  List of Archived Logs in backup set 20807
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25631   177935696641 29-JUN-19 177935738765 29-JUN-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20809   24.80M     DISK        00:00:06     29-JUN-19      
+        BP Key: 20856   Status: AVAILABLE  Compressed: YES  Tag: TAG20190629T180006
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_06_29\O1_MF_ANNNN_TAG20190629T180006_GKGZ7QSF_.BKP
+
+  List of Archived Logs in backup set 20809
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25632   177935738765 29-JUN-19 177935775593 29-JUN-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20811   171.62M    DISK        00:00:34     30-JUN-19      
+        BP Key: 20858   Status: AVAILABLE  Compressed: YES  Tag: TAG20190630T090427
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_06_30\O1_MF_ANNNN_TAG20190630T090427_GKJN7DLK_.BKP
+
+  List of Archived Logs in backup set 20811
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25633   177935775593 29-JUN-19 177935859224 30-JUN-19
+  1    25634   177935859224 30-JUN-19 177935989335 30-JUN-19
+  1    25635   177935989335 30-JUN-19 177936052776 30-JUN-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20813   27.08M     DISK        00:00:06     30-JUN-19      
+        BP Key: 20860   Status: AVAILABLE  Compressed: YES  Tag: TAG20190630T120010
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_06_30\O1_MF_ANNNN_TAG20190630T120010_GKJYJVOM_.BKP
+
+  List of Archived Logs in backup set 20813
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25636   177936052776 30-JUN-19 177936090185 30-JUN-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20815   29.71M     DISK        00:00:06     30-JUN-19      
+        BP Key: 20862   Status: AVAILABLE  Compressed: YES  Tag: TAG20190630T150006
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_06_30\O1_MF_ANNNN_TAG20190630T150006_GKK92823_.BKP
+
+  List of Archived Logs in backup set 20815
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25637   177936090185 30-JUN-19 177936128473 30-JUN-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20817   25.26M     DISK        00:00:06     30-JUN-19      
+        BP Key: 20864   Status: AVAILABLE  Compressed: YES  Tag: TAG20190630T180006
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_06_30\O1_MF_ANNNN_TAG20190630T180006_GKKMMQQX_.BKP
+
+  List of Archived Logs in backup set 20817
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25638   177936128473 30-JUN-19 177936165845 30-JUN-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20819   151.94M    DISK        00:00:32     01-JUL-19      
+        BP Key: 20866   Status: AVAILABLE  Compressed: YES  Tag: TAG20190701T090415
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_01\O1_MF_ANNNN_TAG20190701T090415_GKM8M0CG_.BKP
+
+  List of Archived Logs in backup set 20819
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25639   177936165845 30-JUN-19 177936245106 30-JUN-19
+  1    25640   177936245106 30-JUN-19 177936373427 01-JUL-19
+  1    25641   177936373427 01-JUL-19 177936399364 01-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20821   63.47M     DISK        00:00:14     01-JUL-19      
+        BP Key: 20868   Status: AVAILABLE  Compressed: YES  Tag: TAG20190701T120010
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_01\O1_MF_ANNNN_TAG20190701T120010_GKMLWV8O_.BKP
+
+  List of Archived Logs in backup set 20821
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25642   177936399364 01-JUL-19 177936451471 01-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20823   51.34M     DISK        00:00:11     01-JUL-19      
+        BP Key: 20870   Status: AVAILABLE  Compressed: YES  Tag: TAG20190701T150009
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_01\O1_MF_ANNNN_TAG20190701T150009_GKMXGB90_.BKP
+
+  List of Archived Logs in backup set 20823
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25643   177936451471 01-JUL-19 177936491863 01-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20825   37.66M     DISK        00:00:07     01-JUL-19      
+        BP Key: 20872   Status: AVAILABLE  Compressed: YES  Tag: TAG20190701T180007
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_01\O1_MF_ANNNN_TAG20190701T180007_GKN7ZR4M_.BKP
+
+  List of Archived Logs in backup set 20825
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25644   177936491863 01-JUL-19 177936540803 01-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20827   363.00M    DISK        00:01:19     02-JUL-19      
+        BP Key: 20874   Status: AVAILABLE  Compressed: YES  Tag: TAG20190702T090430
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_02\O1_MF_ANNNN_TAG20190702T090430_GKOWZJ5O_.BKP
+
+  List of Archived Logs in backup set 20827
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25645   177936540803 01-JUL-19 177936668701 01-JUL-19
+  1    25646   177936668701 01-JUL-19 177936800378 01-JUL-19
+  1    25647   177936800378 01-JUL-19 177936949391 01-JUL-19
+  1    25648   177936949391 01-JUL-19 177937154270 01-JUL-19
+  1    25649   177937154270 01-JUL-19 177937283063 02-JUL-19
+  1    25650   177937283063 02-JUL-19 177937334197 02-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20829   109.90M    DISK        00:00:22     02-JUL-19      
+        BP Key: 20876   Status: AVAILABLE  Compressed: YES  Tag: TAG20190702T120008
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_02\O1_MF_ANNNN_TAG20190702T120008_GKP78T7O_.BKP
+
+  List of Archived Logs in backup set 20829
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25651   177937334197 02-JUL-19 177937397027 02-JUL-19
+  1    25652   177937397027 02-JUL-19 177937437680 02-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20831   46.94M     DISK        00:00:10     02-JUL-19      
+        BP Key: 20878   Status: AVAILABLE  Compressed: YES  Tag: TAG20190702T150014
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_02\O1_MF_ANNNN_TAG20190702T150014_GKPKTHFC_.BKP
+
+  List of Archived Logs in backup set 20831
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25653   177937437680 02-JUL-19 177937481945 02-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20833   29.24M     DISK        00:00:05     02-JUL-19      
+        BP Key: 20880   Status: AVAILABLE  Compressed: YES  Tag: TAG20190702T180010
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_02\O1_MF_ANNNN_TAG20190702T180010_GKPWCW10_.BKP
+
+  List of Archived Logs in backup set 20833
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25654   177937481945 02-JUL-19 177937514401 02-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20835   168.12M    DISK        00:00:38     03-JUL-19      
+        BP Key: 20882   Status: AVAILABLE  Compressed: YES  Tag: TAG20190703T090429
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_03\O1_MF_ANNNN_TAG20190703T090429_GKRKCGY4_.BKP
+
+  List of Archived Logs in backup set 20835
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25655   177937514401 02-JUL-19 177937749985 02-JUL-19
+  1    25656   177937749985 02-JUL-19 177937875952 03-JUL-19
+  1    25657   177937875952 03-JUL-19 177937917688 03-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20837   64.01M     DISK        00:00:12     03-JUL-19      
+        BP Key: 20884   Status: AVAILABLE  Compressed: YES  Tag: TAG20190703T120013
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_03\O1_MF_ANNNN_TAG20190703T120013_GKRVNYX9_.BKP
+
+  List of Archived Logs in backup set 20837
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25658   177937917688 03-JUL-19 177937982212 03-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20839   39.23M     DISK        00:00:09     03-JUL-19      
+        BP Key: 20886   Status: AVAILABLE  Compressed: YES  Tag: TAG20190703T150011
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_03\O1_MF_ANNNN_TAG20190703T150011_GKS66DST_.BKP
+
+  List of Archived Logs in backup set 20839
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25659   177937982212 03-JUL-19 177938029502 03-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20841   73.86M     DISK        00:00:15     03-JUL-19      
+        BP Key: 20888   Status: AVAILABLE  Compressed: YES  Tag: TAG20190703T180007
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_03\O1_MF_ANNNN_TAG20190703T180007_GKSJQRD0_.BKP
+
+  List of Archived Logs in backup set 20841
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25660   177938029502 03-JUL-19 177938131791 03-JUL-19
+  1    25661   177938131791 03-JUL-19 177938142217 03-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20843   165.89M    DISK        00:00:34     04-JUL-19      
+        BP Key: 20890   Status: AVAILABLE  Compressed: YES  Tag: TAG20190704T090421
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_04\O1_MF_ANNNN_TAG20190704T090421_GKV5Q6SZ_.BKP
+
+  List of Archived Logs in backup set 20843
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25662   177938142217 03-JUL-19 177938365176 03-JUL-19
+  1    25663   177938365176 03-JUL-19 177938494459 04-JUL-19
+  1    25664   177938494459 04-JUL-19 177938541589 04-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20845   115.05M    DISK        00:00:23     04-JUL-19      
+        BP Key: 20892   Status: AVAILABLE  Compressed: YES  Tag: TAG20190704T120010
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_04\O1_MF_ANNNN_TAG20190704T120010_GKVJ0VY0_.BKP
+
+  List of Archived Logs in backup set 20845
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25665   177938541589 04-JUL-19 177938617065 04-JUL-19
+  1    25666   177938617065 04-JUL-19 177938665217 04-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20847   40.73M     DISK        00:00:09     04-JUL-19      
+        BP Key: 20894   Status: AVAILABLE  Compressed: YES  Tag: TAG20190704T150007
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_04\O1_MF_ANNNN_TAG20190704T150007_GKVTL8R0_.BKP
+
+  List of Archived Logs in backup set 20847
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25667   177938665217 04-JUL-19 177938710167 04-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20849   76.98M     DISK        00:00:13     04-JUL-19      
+        BP Key: 20896   Status: AVAILABLE  Compressed: YES  Tag: TAG20190704T180010
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_04\O1_MF_ANNNN_TAG20190704T180010_GKW53W2W_.BKP
+
+  List of Archived Logs in backup set 20849
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25668   177938710167 04-JUL-19 177938817785 04-JUL-19
+  1    25669   177938817785 04-JUL-19 177938838862 04-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20851   348.18M    DISK        00:01:10     05-JUL-19      
+        BP Key: 20898   Status: AVAILABLE  Compressed: YES  Tag: TAG20190705T090403
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_05\O1_MF_ANNNN_TAG20190705T090403_GKXT2NTF_.BKP
+
+  List of Archived Logs in backup set 20851
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25670   177938838862 04-JUL-19 177938960059 04-JUL-19
+  1    25671   177938960059 04-JUL-19 177939083755 04-JUL-19
+  1    25672   177939083755 04-JUL-19 177939202189 04-JUL-19
+  1    25673   177939202189 04-JUL-19 177939445368 05-JUL-19
+  1    25674   177939445368 05-JUL-19 177939572189 05-JUL-19
+  1    25675   177939572189 05-JUL-19 177939602818 05-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20853   98.90M     DISK        00:00:21     05-JUL-19      
+        BP Key: 20900   Status: AVAILABLE  Compressed: YES  Tag: TAG20190705T120010
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_05\O1_MF_ANNNN_TAG20190705T120010_GKY4DVZ0_.BKP
+
+  List of Archived Logs in backup set 20853
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25676   177939602818 05-JUL-19 177939678452 05-JUL-19
+  1    25677   177939678452 05-JUL-19 177939703983 05-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20855   49.19M     DISK        00:00:09     05-JUL-19      
+        BP Key: 20902   Status: AVAILABLE  Compressed: YES  Tag: TAG20190705T150009
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_05\O1_MF_ANNNN_TAG20190705T150009_GKYGYBXW_.BKP
+
+  List of Archived Logs in backup set 20855
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25678   177939703983 05-JUL-19 177939753589 05-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20857   80.52M     DISK        00:00:16     05-JUL-19      
+        BP Key: 20904   Status: AVAILABLE  Compressed: YES  Tag: TAG20190705T180007
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_05\O1_MF_ANNNN_TAG20190705T180007_GKYSHRX7_.BKP
+
+  List of Archived Logs in backup set 20857
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25679   177939753589 05-JUL-19 177939823851 05-JUL-19
+  1    25680   177939823851 05-JUL-19 177939839091 05-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20859   14.84M     DISK        00:00:03     05-JUL-19      
+        BP Key: 20906   Status: AVAILABLE  Compressed: YES  Tag: TAG20190705T200009
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_05\O1_MF_ANNNN_TAG20190705T200009_GKZ0JTBS_.BKP
+
+  List of Archived Logs in backup set 20859
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25681   177939839091 05-JUL-19 177939858476 05-JUL-19
+
+BS Key  Type LV Size       Device Type Elapsed Time Completion Time
+------- ---- -- ---------- ----------- ------------ ---------------
+20861   Full    17.29G     DISK        01:08:04     05-JUL-19      
+        BP Key: 20908   Status: AVAILABLE  Compressed: YES  Tag: TAG20190705T200031
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_05\O1_MF_NNNDF_TAG20190705T200031_GKZ0KHSY_.BKP
+  List of Datafiles in backup set 20861
+  File LV Type Ckp SCN    Ckp Time  Name
+  ---- -- ---- ---------- --------- ----
+  1       Full 177939858626 05-JUL-19 D:\ORACLE\ORADATA\NB\SYSTEM01.DBF
+  2       Full 177939858626 05-JUL-19 D:\ORACLE\ORADATA\NB\UNDOTBS01.DBF
+  3       Full 177939858626 05-JUL-19 D:\ORACLE\ORADATA\NB\SYSAUX01.DBF
+  4       Full 177939858626 05-JUL-19 D:\ORACLE\ORADATA\NB\AUDIT01.DBF
+  5       Full 177939858626 05-JUL-19 D:\ORACLE\ORADATA\NB\AUDIT11.DBF
+  6       Full 177939858626 05-JUL-19 D:\ORACLE\ORADATA\NB\INDX01.DBF
+  7       Full 177939858626 05-JUL-19 D:\ORACLE\ORADATA\NB\RBS01.DBF
+  8       Full 177939858626 05-JUL-19 D:\ORACLE\ORADATA\NB\REPL01.DBF
+  9       Full 177939858626 05-JUL-19 D:\ORACLE\ORADATA\NB\USERS01.DBF
+  10      Full 177939858626 05-JUL-19 D:\ORACLE\ORADATA\NB\TOOLS01.DBF
+
+BS Key  Type LV Size       Device Type Elapsed Time Completion Time
+------- ---- -- ---------- ----------- ------------ ---------------
+20862   Full    1.31M      DISK        00:00:01     05-JUL-19      
+        BP Key: 20909   Status: AVAILABLE  Compressed: YES  Tag: TAG20190705T200031
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_05\O1_MF_NCNNF_TAG20190705T200031_GKZ4K53K_.BKP
+  Control File Included: Ckp SCN: 177939868834   Ckp time: 05-JUL-19
+
+BS Key  Type LV Size       Device Type Elapsed Time Completion Time
+------- ---- -- ---------- ----------- ------------ ---------------
+20863   Full    80.00K     DISK        00:00:01     05-JUL-19      
+        BP Key: 20910   Status: AVAILABLE  Compressed: YES  Tag: TAG20190705T200031
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_05\O1_MF_NNSNF_TAG20190705T200031_GKZ4K76H_.BKP
+  SPFILE Included: Modification time: 04-JUL-19
+
+BS Key  Type LV Size       Device Type Elapsed Time Completion Time
+------- ---- -- ---------- ----------- ------------ ---------------
+20864   Full    8.42M      DISK        00:00:00     05-JUL-19      
+        BP Key: 20911   Status: AVAILABLE  Compressed: NO  Tag: TAG20190705T210840
+        Piece Name: D:\ARCHIVE\NB\AUTOBACKUP\2019_07_05\O1_MF_S_1012856920_GKZ4K8FB_.BKP
+  Control File Included: Ckp SCN: 177939868839   Ckp time: 05-JUL-19
+  SPFILE Included: Modification time: 04-JUL-19
+
+
+List of Backups
+===============
+Key     TY LV S Device Type Completion Time #Pieces #Copies Compressed Tag
+------- -- -- - ----------- --------------- ------- ------- ---------- ---
+20799   B  F  A DISK        28-JUN-19       1       1       YES        TAG20190628T200036
+20803   B  A  A DISK        29-JUN-19       1       1       YES        TAG20190629T090418
+20805   B  A  A DISK        29-JUN-19       1       1       YES        TAG20190629T120008
+20807   B  A  A DISK        29-JUN-19       1       1       YES        TAG20190629T150007
+20809   B  A  A DISK        29-JUN-19       1       1       YES        TAG20190629T180006
+20811   B  A  A DISK        30-JUN-19       1       1       YES        TAG20190630T090427
+20813   B  A  A DISK        30-JUN-19       1       1       YES        TAG20190630T120010
+20815   B  A  A DISK        30-JUN-19       1       1       YES        TAG20190630T150006
+20817   B  A  A DISK        30-JUN-19       1       1       YES        TAG20190630T180006
+20819   B  A  A DISK        01-JUL-19       1       1       YES        TAG20190701T090415
+20821   B  A  A DISK        01-JUL-19       1       1       YES        TAG20190701T120010
+20823   B  A  A DISK        01-JUL-19       1       1       YES        TAG20190701T150009
+20825   B  A  A DISK        01-JUL-19       1       1       YES        TAG20190701T180007
+20827   B  A  A DISK        02-JUL-19       1       1       YES        TAG20190702T090430
+20829   B  A  A DISK        02-JUL-19       1       1       YES        TAG20190702T120008
+20831   B  A  A DISK        02-JUL-19       1       1       YES        TAG20190702T150014
+20833   B  A  A DISK        02-JUL-19       1       1       YES        TAG20190702T180010
+20835   B  A  A DISK        03-JUL-19       1       1       YES        TAG20190703T090429
+20837   B  A  A DISK        03-JUL-19       1       1       YES        TAG20190703T120013
+20839   B  A  A DISK        03-JUL-19       1       1       YES        TAG20190703T150011
+20841   B  A  A DISK        03-JUL-19       1       1       YES        TAG20190703T180007
+20843   B  A  A DISK        04-JUL-19       1       1       YES        TAG20190704T090421
+20845   B  A  A DISK        04-JUL-19       1       1       YES        TAG20190704T120010
+20847   B  A  A DISK        04-JUL-19       1       1       YES        TAG20190704T150007
+20849   B  A  A DISK        04-JUL-19       1       1       YES        TAG20190704T180010
+20851   B  A  A DISK        05-JUL-19       1       1       YES        TAG20190705T090403
+20853   B  A  A DISK        05-JUL-19       1       1       YES        TAG20190705T120010
+20855   B  A  A DISK        05-JUL-19       1       1       YES        TAG20190705T150009
+20857   B  A  A DISK        05-JUL-19       1       1       YES        TAG20190705T180007
+20859   B  A  A DISK        05-JUL-19       1       1       YES        TAG20190705T200009
+20861   B  F  A DISK        05-JUL-19       1       1       YES        TAG20190705T200031
+20862   B  F  A DISK        05-JUL-19       1       1       YES        TAG20190705T200031
+20863   B  F  A DISK        05-JUL-19       1       1       YES        TAG20190705T200031
+20864   B  F  A DISK        05-JUL-19       1       1       NO         TAG20190705T210840
+
+Recovery Manager complete.
+
+C:\HotCopy>rem pause Press any key to exit 
+
+C:\HotCopy>rem --- копируем бакап на другие рабочие станции в сети и подчищаем устаревшие архивные журналы транзакций 
+
+C:\HotCopy>echo y   | net use o: \\0.0.0.0\diskc  
+System error 1214 has occurred.
+
+The format of the specified network name is invalid.
+
+
+C:\HotCopy>mkdir o:\hotcopy 
+The system cannot find the drive specified.
+
+C:\HotCopy>mkdir o:\hotcopy\backup 
+The system cannot find the drive specified.
+
+C:\HotCopy>robocopy D:\ARCHIVE\NB\ o:\HotCopy\backup\ /MIR /NP /R:0 
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows     ::     Version XP010
+-------------------------------------------------------------------------------
+
+  Started : Fri Jul 05 21:08:51 2019
+
+2019/07/05 21:08:51 ERROR 3 (0x00000003) Getting File System Type of Destination o:\HotCopy\backup\
+The system cannot find the path specified.
+
+   Source : D:\ARCHIVE\NB\
+     Dest - o:\HotCopy\backup\
+
+    Files : *.*
+	    
+  Options : *.* /S /E /COPY:DAT /PURGE /MIR /NP /R:0 /W:30 
+
+------------------------------------------------------------------------------
+
+2019/07/05 21:08:51 ERROR 3 (0x00000003) Creating Destination Directory o:\HotCopy\backup\
+The system cannot find the path specified.
+
+C:\HotCopy>echo y   | net use o: /delete 
+The network connection could not be found.
+
+More help is available by typing NET HELPMSG 2250.
+
+
+C:\HotCopy>echo y   | net use o: \\0.0.0.0\diskc 
+System error 1214 has occurred.
+
+The format of the specified network name is invalid.
+
+
+C:\HotCopy>mkdir o:\hotcopy 
+The system cannot find the drive specified.
+
+C:\HotCopy>mkdir o:\hotcopy\backup 
+The system cannot find the drive specified.
+
+C:\HotCopy>robocopy D:\ARCHIVE\NB\ o:\HotCopy\backup\ /MIR /NP /R:0 
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows     ::     Version XP010
+-------------------------------------------------------------------------------
+
+  Started : Fri Jul 05 21:08:51 2019
+
+2019/07/05 21:08:51 ERROR 3 (0x00000003) Getting File System Type of Destination o:\HotCopy\backup\
+The system cannot find the path specified.
+
+   Source : D:\ARCHIVE\NB\
+     Dest - o:\HotCopy\backup\
+
+    Files : *.*
+	    
+  Options : *.* /S /E /COPY:DAT /PURGE /MIR /NP /R:0 /W:30 
+
+------------------------------------------------------------------------------
+
+2019/07/05 21:08:51 ERROR 3 (0x00000003) Creating Destination Directory o:\HotCopy\backup\
+The system cannot find the path specified.
+
+C:\HotCopy>echo y   | net use o: /delete 
+The network connection could not be found.
+
+More help is available by typing NET HELPMSG 2250.
+
+
+C:\HotCopy>rem Копирование на диск USB  
+
+C:\HotCopy>if .. == .. goto skip_usb 
+
+C:\HotCopy>goto :eof 
+
+C:\HotCopy>rem *** Собираем и архивируем конфигурационные файлы 
+
+C:\HotCopy>CALL ConfigAZS.bat 
+
+C:\HotCopy>rem --- Настройка переменных 
+
+C:\HotCopy>CALL set_var.bat 
+
+C:\HotCopy>SET ORACLE_SID=NB 
+
+C:\HotCopy>SET ORACLE_HOME=d:\oracle 
+
+C:\HotCopy>SET PATH=d:\oracle\bin;d:\oracle\bin;d:\oracle\bin;d:\oracle\bin;D:\ORACLE\bin;C:\Program Files\Oracle\jre\1.1.7\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\Windows Imaging\;c:\program files\winrar;;C:\WINDOWS\system32\WindowsPowerShell\v1.0;D:\ORACLE\BIN; D:\ORACLE\NETWORK\ADMIN; D:\ORACLE\bin;C:\Program Files\Oracle\jre\1.1.7\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\Windows Imaging\;c:\program files\winrar;;C:\WINDOWS\system32\WindowsPowerShell\v1.0 
+
+C:\HotCopy>SET DIR_ORADATA=d:\oracle\oradata\NB\ 
+
+C:\HotCopy>SET TEMP_DBFILE='D:\ORACLE\ORADATA\NB\TEMP01.DBF' 
+
+C:\HotCopy>SET DIR_PFILE=d:\oracle\ADMIN\NB\PFILE\ 
+
+C:\HotCopy>SET DIR_BDUMP=d:\oracle\ADMIN\NB\BDUMP\ 
+
+C:\HotCopy>SET DIR_DATABASE=d:\oracle\DATABASE\ 
+
+C:\HotCopy>SET DIR_ARCHIVE=D:\ARCHIVE\NB\ARCHIVELOG\ 
+
+C:\HotCopy>SET DIR_AREMOTE_OUT=\\KMISQL1\d$\AREMOTE\AZS\BACKUP_LOG\ 
+
+C:\HotCopy>SET DIR_BACKUP=D:\ARCHIVE\NB\ 
+
+C:\HotCopy>SET DIR_HOTCOPY=c:\hotcopy\ 
+
+C:\HotCopy>SET DIR_CONFIG=c:\hotcopy\config\ 
+
+C:\HotCopy>SET DIR_TMP=c:\hotcopy\oradata\ 
+
+C:\HotCopy>SET ORA805_NETA=\ORANT\Net80\Admin\ 
+
+C:\HotCopy>SET ORA817_NETA=\ORACLE\network\ADMIN\ 
+
+C:\HotCopy>SET TEMP_BACKUPFILE=c:\hotcopy\oradata\HotCopyTmp.rar 
+
+C:\HotCopy>SET USB_DRIVE= 
+
+C:\HotCopy>SET IS_SERVER=YES 
+
+C:\HotCopy>SET SERVER_HOTCOPY=c:\hotcopy\ 
+
+C:\HotCopy>SET ARGUS_SERVER=KMINB1 
+
+C:\HotCopy>SET USE_RMAN=YES 
+
+C:\HotCopy>set nls_lang=AMERICAN_AMERICA.CL8MSWIN1251 
+
+C:\HotCopy>rem --- Подключаемся к соседним АРМам (для копирования бакапов) 
+
+C:\HotCopy>SET IP_ARM0=127.0.0.1\diskc 
+
+C:\HotCopy>SET IP_ARM1=0.0.0.0\diskc 
+
+C:\HotCopy>SET IP_ARM2=0.0.0.0\diskc 
+
+C:\HotCopy>SET USER_ARM0=oracle 
+
+C:\HotCopy>SET USER_ARM1=oracle 
+
+C:\HotCopy>SET USER_ARM2=oracle 
+
+C:\HotCopy>SET PWD_ARM0=master 
+
+C:\HotCopy>SET PWD_ARM1=master 
+
+C:\HotCopy>SET PWD_ARM2=master 
+
+C:\HotCopy>echo y   | net use \\127.0.0.1\diskc master /user:oracle 
+System error 1326 has occurred.
+
+Logon failure: unknown user name or bad password.
+
+
+C:\HotCopy>echo y   | net use \\0.0.0.0\diskc master /user:oracle 
+System error 1214 has occurred.
+
+The format of the specified network name is invalid.
+
+
+C:\HotCopy>echo y   | net use \\0.0.0.0\diskc master /user:oracle 
+System error 1214 has occurred.
+
+The format of the specified network name is invalid.
+
+
+C:\HotCopy>echo y   | net use \\127.0.0.1\diskc  
+System error 67 has occurred.
+
+The network name cannot be found.
+
+
+C:\HotCopy>echo y   | net use \\0.0.0.0\diskc  
+System error 1214 has occurred.
+
+The format of the specified network name is invalid.
+
+
+C:\HotCopy>echo y   | net use \\0.0.0.0\diskc  
+System error 1214 has occurred.
+
+The format of the specified network name is invalid.
+
+
+C:\HotCopy>rem --- Создаем необходимые каталоги --- 
+
+C:\HotCopy>mkdir c:\temp 
+A subdirectory or file c:\temp already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\config\ 
+A subdirectory or file c:\hotcopy\config\ already exists.
+
+C:\HotCopy>mkdir D:\ARCHIVE\NB\ 
+A subdirectory or file D:\ARCHIVE\NB\ already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\ 
+A subdirectory or file c:\hotcopy\ already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata 
+A subdirectory or file c:\hotcopy\oradata already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\archive 
+A subdirectory or file c:\hotcopy\archive already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\backup 
+A subdirectory or file c:\hotcopy\backup already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\ 
+A subdirectory or file c:\hotcopy\oradata\ already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\admin 
+A subdirectory or file c:\hotcopy\oradata\admin already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\database 
+A subdirectory or file c:\hotcopy\oradata\database already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\archive 
+A subdirectory or file c:\hotcopy\oradata\archive already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\config 
+A subdirectory or file c:\hotcopy\oradata\config already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\move 
+A subdirectory or file c:\hotcopy\oradata\move already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\config 
+A subdirectory or file c:\hotcopy\oradata\config already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\config\LUKNET 
+A subdirectory or file c:\hotcopy\oradata\config\LUKNET already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\config\ORANT\Net80\Admin\ 
+A subdirectory or file c:\hotcopy\oradata\config\ORANT\Net80\Admin\ already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\config\ORACLE\network\ADMIN\ 
+A subdirectory or file c:\hotcopy\oradata\config\ORACLE\network\ADMIN\ already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\config\PFILE 
+A subdirectory or file c:\hotcopy\oradata\config\PFILE already exists.
+
+C:\HotCopy>MONTH.EXE
+
+C:\HotCopy>IF ERRORLEVEL 1 SET NUM_MON=01 
+
+C:\HotCopy>IF ERRORLEVEL 2 SET NUM_MON=02 
+
+C:\HotCopy>IF ERRORLEVEL 3 SET NUM_MON=03 
+
+C:\HotCopy>IF ERRORLEVEL 4 SET NUM_MON=04 
+
+C:\HotCopy>IF ERRORLEVEL 5 SET NUM_MON=05 
+
+C:\HotCopy>IF ERRORLEVEL 6 SET NUM_MON=06 
+
+C:\HotCopy>IF ERRORLEVEL 7 SET NUM_MON=07 
+
+C:\HotCopy>IF ERRORLEVEL 8 SET NUM_MON=08 
+
+C:\HotCopy>IF ERRORLEVEL 9 SET NUM_MON=09 
+
+C:\HotCopy>IF ERRORLEVEL 10 SET NUM_MON=10 
+
+C:\HotCopy>IF ERRORLEVEL 11 SET NUM_MON=11 
+
+C:\HotCopy>IF ERRORLEVEL 12 SET NUM_MON=12 
+
+C:\HotCopy>DAY.EXE
+
+C:\HotCopy>IF ERRORLEVEL 1 SET NUM_DAY=01 
+
+C:\HotCopy>IF ERRORLEVEL 2 SET NUM_DAY=02 
+
+C:\HotCopy>IF ERRORLEVEL 3 SET NUM_DAY=03 
+
+C:\HotCopy>IF ERRORLEVEL 4 SET NUM_DAY=04 
+
+C:\HotCopy>IF ERRORLEVEL 5 SET NUM_DAY=05 
+
+C:\HotCopy>IF ERRORLEVEL 6 SET NUM_DAY=06 
+
+C:\HotCopy>IF ERRORLEVEL 7 SET NUM_DAY=07 
+
+C:\HotCopy>IF ERRORLEVEL 8 SET NUM_DAY=08 
+
+C:\HotCopy>IF ERRORLEVEL 9 SET NUM_DAY=09 
+
+C:\HotCopy>IF ERRORLEVEL 10 SET NUM_DAY=10 
+
+C:\HotCopy>IF ERRORLEVEL 11 SET NUM_DAY=11 
+
+C:\HotCopy>IF ERRORLEVEL 12 SET NUM_DAY=12 
+
+C:\HotCopy>IF ERRORLEVEL 13 SET NUM_DAY=13 
+
+C:\HotCopy>IF ERRORLEVEL 14 SET NUM_DAY=14 
+
+C:\HotCopy>IF ERRORLEVEL 15 SET NUM_DAY=15 
+
+C:\HotCopy>IF ERRORLEVEL 16 SET NUM_DAY=16 
+
+C:\HotCopy>IF ERRORLEVEL 17 SET NUM_DAY=17 
+
+C:\HotCopy>IF ERRORLEVEL 18 SET NUM_DAY=18 
+
+C:\HotCopy>IF ERRORLEVEL 19 SET NUM_DAY=19 
+
+C:\HotCopy>IF ERRORLEVEL 20 SET NUM_DAY=20 
+
+C:\HotCopy>IF ERRORLEVEL 21 SET NUM_DAY=21 
+
+C:\HotCopy>IF ERRORLEVEL 22 SET NUM_DAY=22 
+
+C:\HotCopy>IF ERRORLEVEL 23 SET NUM_DAY=23 
+
+C:\HotCopy>IF ERRORLEVEL 24 SET NUM_DAY=24 
+
+C:\HotCopy>IF ERRORLEVEL 25 SET NUM_DAY=25 
+
+C:\HotCopy>IF ERRORLEVEL 26 SET NUM_DAY=26 
+
+C:\HotCopy>IF ERRORLEVEL 27 SET NUM_DAY=27 
+
+C:\HotCopy>IF ERRORLEVEL 28 SET NUM_DAY=28 
+
+C:\HotCopy>IF ERRORLEVEL 29 SET NUM_DAY=29 
+
+C:\HotCopy>IF ERRORLEVEL 30 SET NUM_DAY=30 
+
+C:\HotCopy>IF ERRORLEVEL 31 SET NUM_DAY=31 
+
+C:\HotCopy>rem --- Копируем все что хотим 
+
+C:\HotCopy>xcopy /y /c c:\WINNT\ww.ini      c:\hotcopy\oradata\config\ 
+File not found - ww.ini
+0 File(s) copied
+
+C:\HotCopy>xcopy /y /c c:\KERNEL\Appl.ini   c:\hotcopy\oradata\config\ 
+C:\KERNEL\appl.ini
+1 File(s) copied
+
+C:\HotCopy>xcopy /y /c c:\LUKNET\*.bat      c:\hotcopy\oradata\config\LUKNET\ 
+File not found - *.bat
+0 File(s) copied
+
+C:\HotCopy>xcopy /y /c c:\ORANT\Net80\Admin\*.ora c:\hotcopy\oradata\config\ORANT\Net80\Admin\ 
+File not found - *.ora
+0 File(s) copied
+
+C:\HotCopy>xcopy /y /c c:\ORACLE\network\ADMIN\*.ora c:\hotcopy\oradata\config\ORACLE\network\ADMIN\ 
+File not found - *.ora
+0 File(s) copied
+
+C:\HotCopy>xcopy /y /c d:\ORACLE\network\ADMIN\*.ora c:\hotcopy\oradata\config\ORACLE\network\ADMIN\ 
+D:\ORACLE\network\ADMIN\listener.ora
+D:\ORACLE\network\ADMIN\sqlnet.ora
+D:\ORACLE\network\ADMIN\tnsnames.ora
+D:\ORACLE\network\ADMIN\tnsnames.ora_copy
+4 File(s) copied
+
+C:\HotCopy>xcopy /y /c d:\oracle\ADMIN\NB\PFILE\*.*       c:\hotcopy\oradata\config\PFILE\ 
+D:\oracle\ADMIN\NB\PFILE\PFILENB.ora
+1 File(s) copied
+
+C:\HotCopy>xcopy /y /c HotCopy.log                c:\hotcopy\oradata\config\ 
+C:HotCopy.log
+1 File(s) copied
+
+C:\HotCopy>rem --- Архивируем все что скопировали 
+
+C:\HotCopy>"C:\Program Files\WinRAR\RAR.exe" m -r -ep1 -ri2 -inul c:\hotcopy\config\Config_KMINB1_m07.rar c:\hotcopy\oradata\config\*.* 
+
+C:\HotCopy>rem *** Храним конфигурацию за пол-года (по 1 за месяц) *** 
+
+C:\HotCopy>waitdel c:\hotcopy\config\Config_KMINB1_m*.rar 185 00:00 
+
+C:\HotCopy>rem --- копируем бакап на другие рабочие станции в сети и подчищаем устаревшие архивные журналы транзакций 
+
+C:\HotCopy>echo y   | net use o: \\0.0.0.0\diskc  
+System error 1214 has occurred.
+
+The format of the specified network name is invalid.
+
+
+C:\HotCopy>mkdir o:\hotcopy 
+The system cannot find the drive specified.
+
+C:\HotCopy>mkdir o:\hotcopy\config 
+The system cannot find the drive specified.
+
+C:\HotCopy>robocopy c:\hotcopy\config\ o:\HotCopy\config\ /MIR /NP /R:0 
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows     ::     Version XP010
+-------------------------------------------------------------------------------
+
+  Started : Fri Jul 05 21:08:53 2019
+
+2019/07/05 21:08:53 ERROR 3 (0x00000003) Getting File System Type of Destination o:\HotCopy\config\
+The system cannot find the path specified.
+
+   Source : c:\hotcopy\config\
+     Dest - o:\HotCopy\config\
+
+    Files : *.*
+	    
+  Options : *.* /S /E /COPY:DAT /PURGE /MIR /NP /R:0 /W:30 
+
+------------------------------------------------------------------------------
+
+2019/07/05 21:08:53 ERROR 3 (0x00000003) Creating Destination Directory o:\HotCopy\config\
+The system cannot find the path specified.
+
+C:\HotCopy>echo y   | net use o: /delete 
+The network connection could not be found.
+
+More help is available by typing NET HELPMSG 2250.
+
+
+C:\HotCopy>echo y   | net use o: \\0.0.0.0\diskc 
+System error 1214 has occurred.
+
+The format of the specified network name is invalid.
+
+
+C:\HotCopy>mkdir o:\hotcopy 
+The system cannot find the drive specified.
+
+C:\HotCopy>mkdir o:\hotcopy\config 
+The system cannot find the drive specified.
+
+C:\HotCopy>robocopy c:\hotcopy\config\ o:\HotCopy\config\ /MIR /NP /R:0 
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows     ::     Version XP010
+-------------------------------------------------------------------------------
+
+  Started : Fri Jul 05 21:08:53 2019
+
+2019/07/05 21:08:53 ERROR 3 (0x00000003) Getting File System Type of Destination o:\HotCopy\config\
+The system cannot find the path specified.
+
+   Source : c:\hotcopy\config\
+     Dest - o:\HotCopy\config\
+
+    Files : *.*
+	    
+  Options : *.* /S /E /COPY:DAT /PURGE /MIR /NP /R:0 /W:30 
+
+------------------------------------------------------------------------------
+
+2019/07/05 21:08:53 ERROR 3 (0x00000003) Creating Destination Directory o:\HotCopy\config\
+The system cannot find the path specified.
+
+C:\HotCopy>echo y   | net use o: /delete 
+The network connection could not be found.
+
+More help is available by typing NET HELPMSG 2250.
+
+
+C:\HotCopy>rem Копирование на диск USB  
+
+C:\HotCopy>if .. == .. goto skip_usb 
+
+C:\HotCopy>rem --- Определяем сервер репликации 
+
+C:\HotCopy>SQLPLUS /nolog @srv_info.sql NB  
+
+SQL*Plus: Release 10.2.0.4.0 - Production on Fri Jul 5 21:08:53 2019
+
+Copyright (c) 1982, 2007, Oracle.  All Rights Reserved.
+
+Connected.
+
+TITLE				 VALUE
+-------------------------------- --------------------------------
+BACKUP_INFO_SERVER_NAME 	 NBKMI
+BACKUP_INFO_SERVER_DATE 	 05.07.2019 21:08:53
+BACKUP_INFO_ZREPL_META_LAST_DATE 05.07.2019 21:00:00
+
+Disconnected from Oracle Database 10g Release 10.2.0.4.0 - Production
+
+C:\HotCopy>rem --- Информация о дисках, мониторах, принтерах 
+
+C:\HotCopy>IF EXIST GetDeviceInfo.exe (
+GetDeviceInfo.exe /disk /log  
+ GetDeviceInfo.exe /monitor /log  
+ GetDeviceInfo.exe /printer /log 
+)  ELSE (
+GetDiskInfo.exe C:  
+ GetDiskInfo.exe D:  
+ GetDiskInfo.exe E: 
+) 
+[DISK_INFO]
+NETBIOS_NAME=KMINB1
+Disk A: total space (Gb): 0
+Disk A: free space (Gb): 0
+Disk A: type: Removable
+Disk C: total space (Gb): 19
+Disk C: free space (Gb): 6
+Disk C: type: Fixed
+Disk D: total space (Gb): 299
+Disk D: free space (Gb): 103
+Disk D: type: Fixed
+Disk E: total space (Gb): 0
+Disk E: free space (Gb): 0
+Disk E: type: CD-ROM
+Disk Z: total space (Gb): 712
+Disk Z: free space (Gb): 175
+Disk Z: type: Network
+
+C:\HotCopy>rem -- Удаляем временные файлы 
+
+C:\HotCopy>DEL /Q c:\hotcopy\oradata\HotCopy.is 
+
+C:\HotCopy>DEL /Q c:\hotcopy\oradata\HotCopyTmp.rar 
+Could Not Find c:\hotcopy\oradata\HotCopyTmp.rar
+
+C:\HotCopy>goto :eof 
+ 
+---------------------------------------------------------- 
+ 
+Finished: 05.07.2019 21:08:54,02 
+Status: OK 

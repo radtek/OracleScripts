@@ -1,0 +1,32 @@
+run {
+    # 1. Настройка до
+    CONFIGURE RETENTION POLICY TO REDUNDANCY 2;
+    # CONFIGURE RETENTION POLICY TO RECOVERY WINDOW OF 14 DAYS;
+    CONFIGURE CONTROLFILE AUTOBACKUP ON;
+    CONFIGURE BACKUP OPTIMIZATION ON;
+    CONFIGURE DEVICE TYPE DISK BACKUP TYPE TO COMPRESSED BACKUPSET;
+
+    # 2. Проверить наличие файлов бакапа, удалить несуществующие или поврежденные
+    CROSSCHECK BACKUP;
+    DELETE NOPROMPT EXPIRED BACKUP;
+
+    # 3. Резервное копирование полной базы данных
+       # backup as backupset device type disk database;
+       # backup as copy device type disk database;
+       # backup database;
+
+    BACKUP FULL DATABASE NOEXCLUDE INCLUDE CURRENT CONTROLFILE SPFILE;
+
+       # format 'D:\backup\%d_datafile_%s_%p.bak'
+       # tag 'backup_name';
+
+    # 4. Удаляем бакапы с истекшим сроком   
+    DELETE NOPROMPT OBSOLETE;
+
+    # 5. Настройка после
+    sql "create PFILE = ''D:\oracle\admin\NB\pfile\PFILENB.ora'' from SPFILE";
+    sql "create PFILE = ''PFILENB.ora'' from SPFILE";
+}  
+
+list backup;
+list backup summary;

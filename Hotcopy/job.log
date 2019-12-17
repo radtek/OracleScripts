@@ -1,0 +1,43 @@
+ 
+Type: JOB_LOG 
+File: C:\JOB\job.log 
+Log: C:\HotCopy\job.log 
+Directory: C:\HotCopy 
+Computer: KMINB1 
+Version: 1.9 
+Started: 10.07.2019  9:03:34,60 
+Username: Orapetronics 
+ 
+---------------------------------------------------------- 
+ 
+SQL> execute PRC_RECALC_JOB;
+
+PL/SQL procedure successfully completed.
+
+SQL> execute PCK_JOB.UPD_STAT;
+
+PL/SQL procedure successfully completed.
+
+SQL> execute PCK_JOB.UPD_STAT_USER('FOXPRO');
+
+PL/SQL procedure successfully completed.
+
+SQL> execute PCK_JOB.UPD_STAT_USER('R3');
+
+PL/SQL procedure successfully completed.
+
+SQL> execute PCK_JOB.UPD_STAT_USER('AUDIT_USER');
+
+PL/SQL procedure successfully completed.
+
+SQL> execute PCK_JOB.UPD_STAT_USER('AUDIT_USER_R3');
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> exit
+ 
+---------------------------------------------------------- 
+ 
+Finished: 10.07.2019  9:03:34,70 
+Status: OK 

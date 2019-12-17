@@ -1,0 +1,1390 @@
+ 
+Type: MOVEARCHIVELOG 
+File: C:\HotCopy\MoveArchiveLog.bat 
+Log: C:\HotCopy\MoveArchiveLog.log 
+Directory: C:\HotCopy 
+Computer: KMINB1 
+Version: 4.1 
+Started: 10.07.2019 12:00:01,90 
+Username: Orapetronics 
+ORACLE_HOME: d:\oracle 
+ORACLE_SID: NB 
+PATH: d:\oracle\bin;D:\ORACLE\bin;C:\Program Files\Oracle\jre\1.1.7\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\Windows Imaging\;c:\program files\winrar;;C:\WINDOWS\system32\WindowsPowerShell\v1.0;D:\ORACLE\BIN; D:\ORACLE\NETWORK\ADMIN; D:\ORACLE\bin;C:\Program Files\Oracle\jre\1.1.7\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\Windows Imaging\;c:\program files\winrar;;C:\WINDOWS\system32\WindowsPowerShell\v1.0 
+ 
+---------------------------------------------------------- 
+
+C:\HotCopy>SET ORACLE_SID=NB 
+
+C:\HotCopy>SET ORACLE_HOME=d:\oracle 
+
+C:\HotCopy>SET PATH=d:\oracle\bin;d:\oracle\bin;D:\ORACLE\bin;C:\Program Files\Oracle\jre\1.1.7\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\Windows Imaging\;c:\program files\winrar;;C:\WINDOWS\system32\WindowsPowerShell\v1.0;D:\ORACLE\BIN; D:\ORACLE\NETWORK\ADMIN; D:\ORACLE\bin;C:\Program Files\Oracle\jre\1.1.7\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\Windows Imaging\;c:\program files\winrar;;C:\WINDOWS\system32\WindowsPowerShell\v1.0 
+
+C:\HotCopy>SET DIR_ORADATA=d:\oracle\oradata\NB\ 
+
+C:\HotCopy>SET TEMP_DBFILE='D:\ORACLE\ORADATA\NB\TEMP01.DBF' 
+
+C:\HotCopy>SET DIR_PFILE=d:\oracle\ADMIN\NB\PFILE\ 
+
+C:\HotCopy>SET DIR_BDUMP=d:\oracle\ADMIN\NB\BDUMP\ 
+
+C:\HotCopy>SET DIR_DATABASE=d:\oracle\DATABASE\ 
+
+C:\HotCopy>SET DIR_ARCHIVE=D:\ARCHIVE\NB\ARCHIVELOG\ 
+
+C:\HotCopy>SET DIR_AREMOTE_OUT=\\KMISQL1\d$\AREMOTE\AZS\BACKUP_LOG\ 
+
+C:\HotCopy>SET DIR_BACKUP=D:\ARCHIVE\NB\ 
+
+C:\HotCopy>SET DIR_HOTCOPY=c:\hotcopy\ 
+
+C:\HotCopy>SET DIR_CONFIG=c:\hotcopy\config\ 
+
+C:\HotCopy>SET DIR_TMP=c:\hotcopy\oradata\ 
+
+C:\HotCopy>SET ORA805_NETA=\ORANT\Net80\Admin\ 
+
+C:\HotCopy>SET ORA817_NETA=\ORACLE\network\ADMIN\ 
+
+C:\HotCopy>SET TEMP_BACKUPFILE=c:\hotcopy\oradata\HotCopyTmp.rar 
+
+C:\HotCopy>SET USB_DRIVE= 
+
+C:\HotCopy>SET IS_SERVER=YES 
+
+C:\HotCopy>SET SERVER_HOTCOPY=c:\hotcopy\ 
+
+C:\HotCopy>SET ARGUS_SERVER=KMINB1 
+
+C:\HotCopy>SET USE_RMAN=YES 
+
+C:\HotCopy>set nls_lang=AMERICAN_AMERICA.CL8MSWIN1251 
+
+C:\HotCopy>rem --- Подключаемся к соседним АРМам (для копирования бакапов) 
+
+C:\HotCopy>SET IP_ARM0=127.0.0.1\diskc 
+
+C:\HotCopy>SET IP_ARM1=0.0.0.0\diskc 
+
+C:\HotCopy>SET IP_ARM2=0.0.0.0\diskc 
+
+C:\HotCopy>SET USER_ARM0=oracle 
+
+C:\HotCopy>SET USER_ARM1=oracle 
+
+C:\HotCopy>SET USER_ARM2=oracle 
+
+C:\HotCopy>SET PWD_ARM0=master 
+
+C:\HotCopy>SET PWD_ARM1=master 
+
+C:\HotCopy>SET PWD_ARM2=master 
+
+C:\HotCopy>echo y   | net use \\127.0.0.1\diskc master /user:oracle 
+System error 1326 has occurred.
+
+Logon failure: unknown user name or bad password.
+
+
+C:\HotCopy>echo y   | net use \\0.0.0.0\diskc master /user:oracle 
+System error 1214 has occurred.
+
+The format of the specified network name is invalid.
+
+
+C:\HotCopy>echo y   | net use \\0.0.0.0\diskc master /user:oracle 
+System error 1214 has occurred.
+
+The format of the specified network name is invalid.
+
+
+C:\HotCopy>echo y   | net use \\127.0.0.1\diskc  
+System error 67 has occurred.
+
+The network name cannot be found.
+
+
+C:\HotCopy>echo y   | net use \\0.0.0.0\diskc  
+System error 1214 has occurred.
+
+The format of the specified network name is invalid.
+
+
+C:\HotCopy>echo y   | net use \\0.0.0.0\diskc  
+System error 1214 has occurred.
+
+The format of the specified network name is invalid.
+
+
+C:\HotCopy>rem --- Создаем необходимые каталоги --- 
+
+C:\HotCopy>mkdir c:\temp 
+A subdirectory or file c:\temp already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\config\ 
+A subdirectory or file c:\hotcopy\config\ already exists.
+
+C:\HotCopy>mkdir D:\ARCHIVE\NB\ 
+A subdirectory or file D:\ARCHIVE\NB\ already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\ 
+A subdirectory or file c:\hotcopy\ already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata 
+A subdirectory or file c:\hotcopy\oradata already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\archive 
+A subdirectory or file c:\hotcopy\archive already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\backup 
+A subdirectory or file c:\hotcopy\backup already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\ 
+A subdirectory or file c:\hotcopy\oradata\ already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\admin 
+A subdirectory or file c:\hotcopy\oradata\admin already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\database 
+A subdirectory or file c:\hotcopy\oradata\database already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\archive 
+A subdirectory or file c:\hotcopy\oradata\archive already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\config 
+A subdirectory or file c:\hotcopy\oradata\config already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\move 
+A subdirectory or file c:\hotcopy\oradata\move already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\config 
+A subdirectory or file c:\hotcopy\oradata\config already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\config\LUKNET 
+A subdirectory or file c:\hotcopy\oradata\config\LUKNET already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\config\ORANT\Net80\Admin\ 
+A subdirectory or file c:\hotcopy\oradata\config\ORANT\Net80\Admin\ already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\config\ORACLE\network\ADMIN\ 
+A subdirectory or file c:\hotcopy\oradata\config\ORACLE\network\ADMIN\ already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\config\PFILE 
+A subdirectory or file c:\hotcopy\oradata\config\PFILE already exists.
+
+C:\HotCopy>MONTH.EXE
+
+C:\HotCopy>IF ERRORLEVEL 1 SET NUM_MON=01 
+
+C:\HotCopy>IF ERRORLEVEL 2 SET NUM_MON=02 
+
+C:\HotCopy>IF ERRORLEVEL 3 SET NUM_MON=03 
+
+C:\HotCopy>IF ERRORLEVEL 4 SET NUM_MON=04 
+
+C:\HotCopy>IF ERRORLEVEL 5 SET NUM_MON=05 
+
+C:\HotCopy>IF ERRORLEVEL 6 SET NUM_MON=06 
+
+C:\HotCopy>IF ERRORLEVEL 7 SET NUM_MON=07 
+
+C:\HotCopy>IF ERRORLEVEL 8 SET NUM_MON=08 
+
+C:\HotCopy>IF ERRORLEVEL 9 SET NUM_MON=09 
+
+C:\HotCopy>IF ERRORLEVEL 10 SET NUM_MON=10 
+
+C:\HotCopy>IF ERRORLEVEL 11 SET NUM_MON=11 
+
+C:\HotCopy>IF ERRORLEVEL 12 SET NUM_MON=12 
+
+C:\HotCopy>DAY.EXE
+
+C:\HotCopy>IF ERRORLEVEL 1 SET NUM_DAY=01 
+
+C:\HotCopy>IF ERRORLEVEL 2 SET NUM_DAY=02 
+
+C:\HotCopy>IF ERRORLEVEL 3 SET NUM_DAY=03 
+
+C:\HotCopy>IF ERRORLEVEL 4 SET NUM_DAY=04 
+
+C:\HotCopy>IF ERRORLEVEL 5 SET NUM_DAY=05 
+
+C:\HotCopy>IF ERRORLEVEL 6 SET NUM_DAY=06 
+
+C:\HotCopy>IF ERRORLEVEL 7 SET NUM_DAY=07 
+
+C:\HotCopy>IF ERRORLEVEL 8 SET NUM_DAY=08 
+
+C:\HotCopy>IF ERRORLEVEL 9 SET NUM_DAY=09 
+
+C:\HotCopy>IF ERRORLEVEL 10 SET NUM_DAY=10 
+
+C:\HotCopy>IF ERRORLEVEL 11 SET NUM_DAY=11 
+
+C:\HotCopy>IF ERRORLEVEL 12 SET NUM_DAY=12 
+
+C:\HotCopy>IF ERRORLEVEL 13 SET NUM_DAY=13 
+
+C:\HotCopy>IF ERRORLEVEL 14 SET NUM_DAY=14 
+
+C:\HotCopy>IF ERRORLEVEL 15 SET NUM_DAY=15 
+
+C:\HotCopy>IF ERRORLEVEL 16 SET NUM_DAY=16 
+
+C:\HotCopy>IF ERRORLEVEL 17 SET NUM_DAY=17 
+
+C:\HotCopy>IF ERRORLEVEL 18 SET NUM_DAY=18 
+
+C:\HotCopy>IF ERRORLEVEL 19 SET NUM_DAY=19 
+
+C:\HotCopy>IF ERRORLEVEL 20 SET NUM_DAY=20 
+
+C:\HotCopy>IF ERRORLEVEL 21 SET NUM_DAY=21 
+
+C:\HotCopy>IF ERRORLEVEL 22 SET NUM_DAY=22 
+
+C:\HotCopy>IF ERRORLEVEL 23 SET NUM_DAY=23 
+
+C:\HotCopy>IF ERRORLEVEL 24 SET NUM_DAY=24 
+
+C:\HotCopy>IF ERRORLEVEL 25 SET NUM_DAY=25 
+
+C:\HotCopy>IF ERRORLEVEL 26 SET NUM_DAY=26 
+
+C:\HotCopy>IF ERRORLEVEL 27 SET NUM_DAY=27 
+
+C:\HotCopy>IF ERRORLEVEL 28 SET NUM_DAY=28 
+
+C:\HotCopy>IF ERRORLEVEL 29 SET NUM_DAY=29 
+
+C:\HotCopy>IF ERRORLEVEL 30 SET NUM_DAY=30 
+
+C:\HotCopy>IF ERRORLEVEL 31 SET NUM_DAY=31 
+---------------------------------------------------------- 
+ 
+
+C:\HotCopy>rem -- Проверяем параллельное выполнение процедуры Update 
+
+C:\HotCopy>if exist c:\hotcopy\oradata\update.is GOTO skip_run 
+
+C:\HotCopy>GOTO exec_run 
+
+C:\HotCopy>IF .YES. == .NO. CALL :RunBeginEndBackup 
+
+C:\HotCopy>IF .YES. == .YES. CALL :RunRMANBackup 
+
+C:\HotCopy>rem --- Процедура резервного копирования с использованием RMAN 
+
+C:\HotCopy>rman target / nocatalog @backuplogs.script  
+
+Recovery Manager: Release 10.2.0.4.0 - Production on Wed Jul 10 12:00:02 2019
+
+Copyright (c) 1982, 2007, Oracle.  All rights reserved.
+
+connected to target database: NB (DBID=2378935397)
+using target database control file instead of recovery catalog
+
+RMAN> run {
+2>     # 1. Настройка до
+3>     CONFIGURE RETENTION POLICY TO REDUNDANCY 2;
+4>     # CONFIGURE RETENTION POLICY TO RECOVERY WINDOW OF 14 DAYS;
+5>     CONFIGURE CONTROLFILE AUTOBACKUP ON;
+6>     CONFIGURE BACKUP OPTIMIZATION ON;
+7>     CONFIGURE DEVICE TYPE DISK BACKUP TYPE TO COMPRESSED BACKUPSET;
+8> 
+9>     # 2. Проверить наличие файлов backup'а
+10>     CROSSCHECK ARCHIVELOG ALL;
+11>     DELETE NOPROMPT EXPIRED ARCHIVELOG ALL;
+12> 
+13>     # 3. Делаем backup ARCHIVE LOGS и удаляем архивлоги
+14>     BACKUP FILESPERSET 10 ARCHIVELOG ALL DELETE INPUT;
+15> 
+16>     # 4. Настройка после
+17> }  
+18> 
+19> list backup;
+20> list backup summary;
+21> 
+old RMAN configuration parameters:
+CONFIGURE RETENTION POLICY TO REDUNDANCY 2;
+new RMAN configuration parameters:
+CONFIGURE RETENTION POLICY TO REDUNDANCY 2;
+new RMAN configuration parameters are successfully stored
+
+old RMAN configuration parameters:
+CONFIGURE CONTROLFILE AUTOBACKUP ON;
+new RMAN configuration parameters:
+CONFIGURE CONTROLFILE AUTOBACKUP ON;
+new RMAN configuration parameters are successfully stored
+
+old RMAN configuration parameters:
+CONFIGURE BACKUP OPTIMIZATION ON;
+new RMAN configuration parameters:
+CONFIGURE BACKUP OPTIMIZATION ON;
+new RMAN configuration parameters are successfully stored
+
+old RMAN configuration parameters:
+CONFIGURE DEVICE TYPE DISK BACKUP TYPE TO COMPRESSED BACKUPSET PARALLELISM 1;
+new RMAN configuration parameters:
+CONFIGURE DEVICE TYPE DISK BACKUP TYPE TO COMPRESSED BACKUPSET PARALLELISM 1;
+new RMAN configuration parameters are successfully stored
+
+allocated channel: ORA_DISK_1
+channel ORA_DISK_1: sid=309 devtype=DISK
+validation succeeded for archived log
+archive log filename=D:\ARCHIVE\NB\ARCHIVELOG\2019_07_10\O1_MF_1_25712_GLC7KTR4_.ARC recid=23971 stamp=1013253229
+Crosschecked 1 objects
+
+
+released channel: ORA_DISK_1
+allocated channel: ORA_DISK_1
+channel ORA_DISK_1: sid=309 devtype=DISK
+specification does not match any archive log in the recovery catalog
+
+Starting backup at 10-JUL-19
+current log archived
+using channel ORA_DISK_1
+channel ORA_DISK_1: starting compressed archive log backupset
+channel ORA_DISK_1: specifying archive log(s) in backup set
+input archive log thread=1 sequence=25712 recid=23971 stamp=1013253229
+input archive log thread=1 sequence=25713 recid=23972 stamp=1013256007
+channel ORA_DISK_1: starting piece 1 at 10-JUL-19
+channel ORA_DISK_1: finished piece 1 at 10-JUL-19
+piece handle=D:\ARCHIVE\NB\BACKUPSET\2019_07_10\O1_MF_ANNNN_TAG20190710T120007_GLCB8S0Y_.BKP tag=TAG20190710T120007 comment=NONE
+channel ORA_DISK_1: backup set complete, elapsed time: 00:00:26
+channel ORA_DISK_1: deleting archive log(s)
+archive log filename=D:\ARCHIVE\NB\ARCHIVELOG\2019_07_10\O1_MF_1_25712_GLC7KTR4_.ARC recid=23971 stamp=1013253229
+archive log filename=D:\ARCHIVE\NB\ARCHIVELOG\2019_07_10\O1_MF_1_25713_GLCB8PX9_.ARC recid=23972 stamp=1013256007
+Finished backup at 10-JUL-19
+
+Starting Control File and SPFILE Autobackup at 10-JUL-19
+piece handle=D:\ARCHIVE\NB\AUTOBACKUP\2019_07_10\O1_MF_S_1013256034_GLCB9LK3_.BKP comment=NONE
+Finished Control File and SPFILE Autobackup at 10-JUL-19
+
+
+List of Backup Sets
+===================
+
+BS Key  Type LV Size       Device Type Elapsed Time Completion Time
+------- ---- -- ---------- ----------- ------------ ---------------
+20799   Full    17.18G     DISK        01:16:56     28-JUN-19      
+        BP Key: 20846   Status: AVAILABLE  Compressed: YES  Tag: TAG20190628T200036
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_06_28\O1_MF_NNNDF_TAG20190628T200036_GKDKXNN1_.BKP
+  List of Datafiles in backup set 20799
+  File LV Type Ckp SCN    Ckp Time  Name
+  ---- -- ---- ---------- --------- ----
+  1       Full 177935112308 28-JUN-19 D:\ORACLE\ORADATA\NB\SYSTEM01.DBF
+  2       Full 177935112308 28-JUN-19 D:\ORACLE\ORADATA\NB\UNDOTBS01.DBF
+  3       Full 177935112308 28-JUN-19 D:\ORACLE\ORADATA\NB\SYSAUX01.DBF
+  4       Full 177935112308 28-JUN-19 D:\ORACLE\ORADATA\NB\AUDIT01.DBF
+  5       Full 177935112308 28-JUN-19 D:\ORACLE\ORADATA\NB\AUDIT11.DBF
+  6       Full 177935112308 28-JUN-19 D:\ORACLE\ORADATA\NB\INDX01.DBF
+  7       Full 177935112308 28-JUN-19 D:\ORACLE\ORADATA\NB\RBS01.DBF
+  8       Full 177935112308 28-JUN-19 D:\ORACLE\ORADATA\NB\REPL01.DBF
+  9       Full 177935112308 28-JUN-19 D:\ORACLE\ORADATA\NB\USERS01.DBF
+  10      Full 177935112308 28-JUN-19 D:\ORACLE\ORADATA\NB\TOOLS01.DBF
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20803   181.39M    DISK        00:00:37     29-JUN-19      
+        BP Key: 20850   Status: AVAILABLE  Compressed: YES  Tag: TAG20190629T090418
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_06_29\O1_MF_ANNNN_TAG20190629T090418_GKFZV3XO_.BKP
+
+  List of Archived Logs in backup set 20803
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25627   177935112076 28-JUN-19 177935352435 29-JUN-19
+  1    25628   177935352435 29-JUN-19 177935481327 29-JUN-19
+  1    25629   177935481327 29-JUN-19 177935645795 29-JUN-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20805   50.26M     DISK        00:00:11     29-JUN-19      
+        BP Key: 20852   Status: AVAILABLE  Compressed: YES  Tag: TAG20190629T120008
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_06_29\O1_MF_ANNNN_TAG20190629T120008_GKGB4SKW_.BKP
+
+  List of Archived Logs in backup set 20805
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25630   177935645795 29-JUN-19 177935696641 29-JUN-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20807   30.47M     DISK        00:00:07     29-JUN-19      
+        BP Key: 20854   Status: AVAILABLE  Compressed: YES  Tag: TAG20190629T150007
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_06_29\O1_MF_ANNNN_TAG20190629T150007_GKGNP8J9_.BKP
+
+  List of Archived Logs in backup set 20807
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25631   177935696641 29-JUN-19 177935738765 29-JUN-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20809   24.80M     DISK        00:00:06     29-JUN-19      
+        BP Key: 20856   Status: AVAILABLE  Compressed: YES  Tag: TAG20190629T180006
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_06_29\O1_MF_ANNNN_TAG20190629T180006_GKGZ7QSF_.BKP
+
+  List of Archived Logs in backup set 20809
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25632   177935738765 29-JUN-19 177935775593 29-JUN-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20811   171.62M    DISK        00:00:34     30-JUN-19      
+        BP Key: 20858   Status: AVAILABLE  Compressed: YES  Tag: TAG20190630T090427
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_06_30\O1_MF_ANNNN_TAG20190630T090427_GKJN7DLK_.BKP
+
+  List of Archived Logs in backup set 20811
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25633   177935775593 29-JUN-19 177935859224 30-JUN-19
+  1    25634   177935859224 30-JUN-19 177935989335 30-JUN-19
+  1    25635   177935989335 30-JUN-19 177936052776 30-JUN-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20813   27.08M     DISK        00:00:06     30-JUN-19      
+        BP Key: 20860   Status: AVAILABLE  Compressed: YES  Tag: TAG20190630T120010
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_06_30\O1_MF_ANNNN_TAG20190630T120010_GKJYJVOM_.BKP
+
+  List of Archived Logs in backup set 20813
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25636   177936052776 30-JUN-19 177936090185 30-JUN-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20815   29.71M     DISK        00:00:06     30-JUN-19      
+        BP Key: 20862   Status: AVAILABLE  Compressed: YES  Tag: TAG20190630T150006
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_06_30\O1_MF_ANNNN_TAG20190630T150006_GKK92823_.BKP
+
+  List of Archived Logs in backup set 20815
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25637   177936090185 30-JUN-19 177936128473 30-JUN-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20817   25.26M     DISK        00:00:06     30-JUN-19      
+        BP Key: 20864   Status: AVAILABLE  Compressed: YES  Tag: TAG20190630T180006
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_06_30\O1_MF_ANNNN_TAG20190630T180006_GKKMMQQX_.BKP
+
+  List of Archived Logs in backup set 20817
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25638   177936128473 30-JUN-19 177936165845 30-JUN-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20819   151.94M    DISK        00:00:32     01-JUL-19      
+        BP Key: 20866   Status: AVAILABLE  Compressed: YES  Tag: TAG20190701T090415
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_01\O1_MF_ANNNN_TAG20190701T090415_GKM8M0CG_.BKP
+
+  List of Archived Logs in backup set 20819
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25639   177936165845 30-JUN-19 177936245106 30-JUN-19
+  1    25640   177936245106 30-JUN-19 177936373427 01-JUL-19
+  1    25641   177936373427 01-JUL-19 177936399364 01-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20821   63.47M     DISK        00:00:14     01-JUL-19      
+        BP Key: 20868   Status: AVAILABLE  Compressed: YES  Tag: TAG20190701T120010
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_01\O1_MF_ANNNN_TAG20190701T120010_GKMLWV8O_.BKP
+
+  List of Archived Logs in backup set 20821
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25642   177936399364 01-JUL-19 177936451471 01-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20823   51.34M     DISK        00:00:11     01-JUL-19      
+        BP Key: 20870   Status: AVAILABLE  Compressed: YES  Tag: TAG20190701T150009
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_01\O1_MF_ANNNN_TAG20190701T150009_GKMXGB90_.BKP
+
+  List of Archived Logs in backup set 20823
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25643   177936451471 01-JUL-19 177936491863 01-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20825   37.66M     DISK        00:00:07     01-JUL-19      
+        BP Key: 20872   Status: AVAILABLE  Compressed: YES  Tag: TAG20190701T180007
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_01\O1_MF_ANNNN_TAG20190701T180007_GKN7ZR4M_.BKP
+
+  List of Archived Logs in backup set 20825
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25644   177936491863 01-JUL-19 177936540803 01-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20827   363.00M    DISK        00:01:19     02-JUL-19      
+        BP Key: 20874   Status: AVAILABLE  Compressed: YES  Tag: TAG20190702T090430
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_02\O1_MF_ANNNN_TAG20190702T090430_GKOWZJ5O_.BKP
+
+  List of Archived Logs in backup set 20827
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25645   177936540803 01-JUL-19 177936668701 01-JUL-19
+  1    25646   177936668701 01-JUL-19 177936800378 01-JUL-19
+  1    25647   177936800378 01-JUL-19 177936949391 01-JUL-19
+  1    25648   177936949391 01-JUL-19 177937154270 01-JUL-19
+  1    25649   177937154270 01-JUL-19 177937283063 02-JUL-19
+  1    25650   177937283063 02-JUL-19 177937334197 02-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20829   109.90M    DISK        00:00:22     02-JUL-19      
+        BP Key: 20876   Status: AVAILABLE  Compressed: YES  Tag: TAG20190702T120008
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_02\O1_MF_ANNNN_TAG20190702T120008_GKP78T7O_.BKP
+
+  List of Archived Logs in backup set 20829
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25651   177937334197 02-JUL-19 177937397027 02-JUL-19
+  1    25652   177937397027 02-JUL-19 177937437680 02-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20831   46.94M     DISK        00:00:10     02-JUL-19      
+        BP Key: 20878   Status: AVAILABLE  Compressed: YES  Tag: TAG20190702T150014
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_02\O1_MF_ANNNN_TAG20190702T150014_GKPKTHFC_.BKP
+
+  List of Archived Logs in backup set 20831
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25653   177937437680 02-JUL-19 177937481945 02-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20833   29.24M     DISK        00:00:05     02-JUL-19      
+        BP Key: 20880   Status: AVAILABLE  Compressed: YES  Tag: TAG20190702T180010
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_02\O1_MF_ANNNN_TAG20190702T180010_GKPWCW10_.BKP
+
+  List of Archived Logs in backup set 20833
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25654   177937481945 02-JUL-19 177937514401 02-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20835   168.12M    DISK        00:00:38     03-JUL-19      
+        BP Key: 20882   Status: AVAILABLE  Compressed: YES  Tag: TAG20190703T090429
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_03\O1_MF_ANNNN_TAG20190703T090429_GKRKCGY4_.BKP
+
+  List of Archived Logs in backup set 20835
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25655   177937514401 02-JUL-19 177937749985 02-JUL-19
+  1    25656   177937749985 02-JUL-19 177937875952 03-JUL-19
+  1    25657   177937875952 03-JUL-19 177937917688 03-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20837   64.01M     DISK        00:00:12     03-JUL-19      
+        BP Key: 20884   Status: AVAILABLE  Compressed: YES  Tag: TAG20190703T120013
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_03\O1_MF_ANNNN_TAG20190703T120013_GKRVNYX9_.BKP
+
+  List of Archived Logs in backup set 20837
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25658   177937917688 03-JUL-19 177937982212 03-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20839   39.23M     DISK        00:00:09     03-JUL-19      
+        BP Key: 20886   Status: AVAILABLE  Compressed: YES  Tag: TAG20190703T150011
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_03\O1_MF_ANNNN_TAG20190703T150011_GKS66DST_.BKP
+
+  List of Archived Logs in backup set 20839
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25659   177937982212 03-JUL-19 177938029502 03-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20841   73.86M     DISK        00:00:15     03-JUL-19      
+        BP Key: 20888   Status: AVAILABLE  Compressed: YES  Tag: TAG20190703T180007
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_03\O1_MF_ANNNN_TAG20190703T180007_GKSJQRD0_.BKP
+
+  List of Archived Logs in backup set 20841
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25660   177938029502 03-JUL-19 177938131791 03-JUL-19
+  1    25661   177938131791 03-JUL-19 177938142217 03-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20843   165.89M    DISK        00:00:34     04-JUL-19      
+        BP Key: 20890   Status: AVAILABLE  Compressed: YES  Tag: TAG20190704T090421
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_04\O1_MF_ANNNN_TAG20190704T090421_GKV5Q6SZ_.BKP
+
+  List of Archived Logs in backup set 20843
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25662   177938142217 03-JUL-19 177938365176 03-JUL-19
+  1    25663   177938365176 03-JUL-19 177938494459 04-JUL-19
+  1    25664   177938494459 04-JUL-19 177938541589 04-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20845   115.05M    DISK        00:00:23     04-JUL-19      
+        BP Key: 20892   Status: AVAILABLE  Compressed: YES  Tag: TAG20190704T120010
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_04\O1_MF_ANNNN_TAG20190704T120010_GKVJ0VY0_.BKP
+
+  List of Archived Logs in backup set 20845
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25665   177938541589 04-JUL-19 177938617065 04-JUL-19
+  1    25666   177938617065 04-JUL-19 177938665217 04-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20847   40.73M     DISK        00:00:09     04-JUL-19      
+        BP Key: 20894   Status: AVAILABLE  Compressed: YES  Tag: TAG20190704T150007
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_04\O1_MF_ANNNN_TAG20190704T150007_GKVTL8R0_.BKP
+
+  List of Archived Logs in backup set 20847
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25667   177938665217 04-JUL-19 177938710167 04-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20849   76.98M     DISK        00:00:13     04-JUL-19      
+        BP Key: 20896   Status: AVAILABLE  Compressed: YES  Tag: TAG20190704T180010
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_04\O1_MF_ANNNN_TAG20190704T180010_GKW53W2W_.BKP
+
+  List of Archived Logs in backup set 20849
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25668   177938710167 04-JUL-19 177938817785 04-JUL-19
+  1    25669   177938817785 04-JUL-19 177938838862 04-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20851   348.18M    DISK        00:01:10     05-JUL-19      
+        BP Key: 20898   Status: AVAILABLE  Compressed: YES  Tag: TAG20190705T090403
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_05\O1_MF_ANNNN_TAG20190705T090403_GKXT2NTF_.BKP
+
+  List of Archived Logs in backup set 20851
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25670   177938838862 04-JUL-19 177938960059 04-JUL-19
+  1    25671   177938960059 04-JUL-19 177939083755 04-JUL-19
+  1    25672   177939083755 04-JUL-19 177939202189 04-JUL-19
+  1    25673   177939202189 04-JUL-19 177939445368 05-JUL-19
+  1    25674   177939445368 05-JUL-19 177939572189 05-JUL-19
+  1    25675   177939572189 05-JUL-19 177939602818 05-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20853   98.90M     DISK        00:00:21     05-JUL-19      
+        BP Key: 20900   Status: AVAILABLE  Compressed: YES  Tag: TAG20190705T120010
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_05\O1_MF_ANNNN_TAG20190705T120010_GKY4DVZ0_.BKP
+
+  List of Archived Logs in backup set 20853
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25676   177939602818 05-JUL-19 177939678452 05-JUL-19
+  1    25677   177939678452 05-JUL-19 177939703983 05-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20855   49.19M     DISK        00:00:09     05-JUL-19      
+        BP Key: 20902   Status: AVAILABLE  Compressed: YES  Tag: TAG20190705T150009
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_05\O1_MF_ANNNN_TAG20190705T150009_GKYGYBXW_.BKP
+
+  List of Archived Logs in backup set 20855
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25678   177939703983 05-JUL-19 177939753589 05-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20857   80.52M     DISK        00:00:16     05-JUL-19      
+        BP Key: 20904   Status: AVAILABLE  Compressed: YES  Tag: TAG20190705T180007
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_05\O1_MF_ANNNN_TAG20190705T180007_GKYSHRX7_.BKP
+
+  List of Archived Logs in backup set 20857
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25679   177939753589 05-JUL-19 177939823851 05-JUL-19
+  1    25680   177939823851 05-JUL-19 177939839091 05-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20859   14.84M     DISK        00:00:03     05-JUL-19      
+        BP Key: 20906   Status: AVAILABLE  Compressed: YES  Tag: TAG20190705T200009
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_05\O1_MF_ANNNN_TAG20190705T200009_GKZ0JTBS_.BKP
+
+  List of Archived Logs in backup set 20859
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25681   177939839091 05-JUL-19 177939858476 05-JUL-19
+
+BS Key  Type LV Size       Device Type Elapsed Time Completion Time
+------- ---- -- ---------- ----------- ------------ ---------------
+20861   Full    17.29G     DISK        01:08:04     05-JUL-19      
+        BP Key: 20908   Status: AVAILABLE  Compressed: YES  Tag: TAG20190705T200031
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_05\O1_MF_NNNDF_TAG20190705T200031_GKZ0KHSY_.BKP
+  List of Datafiles in backup set 20861
+  File LV Type Ckp SCN    Ckp Time  Name
+  ---- -- ---- ---------- --------- ----
+  1       Full 177939858626 05-JUL-19 D:\ORACLE\ORADATA\NB\SYSTEM01.DBF
+  2       Full 177939858626 05-JUL-19 D:\ORACLE\ORADATA\NB\UNDOTBS01.DBF
+  3       Full 177939858626 05-JUL-19 D:\ORACLE\ORADATA\NB\SYSAUX01.DBF
+  4       Full 177939858626 05-JUL-19 D:\ORACLE\ORADATA\NB\AUDIT01.DBF
+  5       Full 177939858626 05-JUL-19 D:\ORACLE\ORADATA\NB\AUDIT11.DBF
+  6       Full 177939858626 05-JUL-19 D:\ORACLE\ORADATA\NB\INDX01.DBF
+  7       Full 177939858626 05-JUL-19 D:\ORACLE\ORADATA\NB\RBS01.DBF
+  8       Full 177939858626 05-JUL-19 D:\ORACLE\ORADATA\NB\REPL01.DBF
+  9       Full 177939858626 05-JUL-19 D:\ORACLE\ORADATA\NB\USERS01.DBF
+  10      Full 177939858626 05-JUL-19 D:\ORACLE\ORADATA\NB\TOOLS01.DBF
+
+BS Key  Type LV Size       Device Type Elapsed Time Completion Time
+------- ---- -- ---------- ----------- ------------ ---------------
+20862   Full    1.31M      DISK        00:00:01     05-JUL-19      
+        BP Key: 20909   Status: AVAILABLE  Compressed: YES  Tag: TAG20190705T200031
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_05\O1_MF_NCNNF_TAG20190705T200031_GKZ4K53K_.BKP
+  Control File Included: Ckp SCN: 177939868834   Ckp time: 05-JUL-19
+
+BS Key  Type LV Size       Device Type Elapsed Time Completion Time
+------- ---- -- ---------- ----------- ------------ ---------------
+20863   Full    80.00K     DISK        00:00:01     05-JUL-19      
+        BP Key: 20910   Status: AVAILABLE  Compressed: YES  Tag: TAG20190705T200031
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_05\O1_MF_NNSNF_TAG20190705T200031_GKZ4K76H_.BKP
+  SPFILE Included: Modification time: 04-JUL-19
+
+BS Key  Type LV Size       Device Type Elapsed Time Completion Time
+------- ---- -- ---------- ----------- ------------ ---------------
+20864   Full    8.42M      DISK        00:00:00     05-JUL-19      
+        BP Key: 20911   Status: AVAILABLE  Compressed: NO  Tag: TAG20190705T210840
+        Piece Name: D:\ARCHIVE\NB\AUTOBACKUP\2019_07_05\O1_MF_S_1012856920_GKZ4K8FB_.BKP
+  Control File Included: Ckp SCN: 177939868839   Ckp time: 05-JUL-19
+  SPFILE Included: Modification time: 04-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20865   171.21M    DISK        00:00:36     06-JUL-19      
+        BP Key: 20912   Status: AVAILABLE  Compressed: YES  Tag: TAG20190706T090408
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_06\O1_MF_ANNNN_TAG20190706T090408_GL0GGT3Y_.BKP
+
+  List of Archived Logs in backup set 20865
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25682   177939858476 05-JUL-19 177940074756 05-JUL-19
+  1    25683   177940074756 05-JUL-19 177940199981 06-JUL-19
+  1    25684   177940199981 06-JUL-19 177940725841 06-JUL-19
+
+BS Key  Type LV Size       Device Type Elapsed Time Completion Time
+------- ---- -- ---------- ----------- ------------ ---------------
+20866   Full    8.42M      DISK        00:00:00     06-JUL-19      
+        BP Key: 20913   Status: AVAILABLE  Compressed: NO  Tag: TAG20190706T090455
+        Piece Name: D:\ARCHIVE\NB\AUTOBACKUP\2019_07_06\O1_MF_S_1012899895_GL0GJ7O2_.BKP
+  Control File Included: Ckp SCN: 177940725870   Ckp time: 06-JUL-19
+  SPFILE Included: Modification time: 06-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20867   42.95M     DISK        00:00:09     06-JUL-19      
+        BP Key: 20914   Status: AVAILABLE  Compressed: YES  Tag: TAG20190706T120012
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_06\O1_MF_ANNNN_TAG20190706T120012_GL0RRXKR_.BKP
+
+  List of Archived Logs in backup set 20867
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25685   177940725841 06-JUL-19 177940766942 06-JUL-19
+
+BS Key  Type LV Size       Device Type Elapsed Time Completion Time
+------- ---- -- ---------- ----------- ------------ ---------------
+20868   Full    8.42M      DISK        00:00:01     06-JUL-19      
+        BP Key: 20915   Status: AVAILABLE  Compressed: NO  Tag: TAG20190706T120028
+        Piece Name: D:\ARCHIVE\NB\AUTOBACKUP\2019_07_06\O1_MF_S_1012910428_GL0RSDX0_.BKP
+  Control File Included: Ckp SCN: 177940766953   Ckp time: 06-JUL-19
+  SPFILE Included: Modification time: 06-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20869   32.41M     DISK        00:00:07     06-JUL-19      
+        BP Key: 20916   Status: AVAILABLE  Compressed: YES  Tag: TAG20190706T150011
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_06\O1_MF_ANNNN_TAG20190706T150011_GL13BDN6_.BKP
+
+  List of Archived Logs in backup set 20869
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25686   177940766942 06-JUL-19 177940806352 06-JUL-19
+
+BS Key  Type LV Size       Device Type Elapsed Time Completion Time
+------- ---- -- ---------- ----------- ------------ ---------------
+20870   Full    8.42M      DISK        00:00:01     06-JUL-19      
+        BP Key: 20917   Status: AVAILABLE  Compressed: NO  Tag: TAG20190706T150019
+        Piece Name: D:\ARCHIVE\NB\AUTOBACKUP\2019_07_06\O1_MF_S_1012921219_GL13BN4L_.BKP
+  Control File Included: Ckp SCN: 177940806361   Ckp time: 06-JUL-19
+  SPFILE Included: Modification time: 06-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20871   26.32M     DISK        00:00:06     06-JUL-19      
+        BP Key: 20918   Status: AVAILABLE  Compressed: YES  Tag: TAG20190706T180006
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_06\O1_MF_ANNNN_TAG20190706T180006_GL1FVR0Z_.BKP
+
+  List of Archived Logs in backup set 20871
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25687   177940806352 06-JUL-19 177940838265 06-JUL-19
+
+BS Key  Type LV Size       Device Type Elapsed Time Completion Time
+------- ---- -- ---------- ----------- ------------ ---------------
+20872   Full    8.42M      DISK        00:00:00     06-JUL-19      
+        BP Key: 20919   Status: AVAILABLE  Compressed: NO  Tag: TAG20190706T180015
+        Piece Name: D:\ARCHIVE\NB\AUTOBACKUP\2019_07_06\O1_MF_S_1012932015_GL1FVZFP_.BKP
+  Control File Included: Ckp SCN: 177940838273   Ckp time: 06-JUL-19
+  SPFILE Included: Modification time: 06-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20873   153.96M    DISK        00:00:27     07-JUL-19      
+        BP Key: 20920   Status: AVAILABLE  Compressed: YES  Tag: TAG20190707T090316
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_07\O1_MF_ANNNN_TAG20190707T090316_GL32S56D_.BKP
+
+  List of Archived Logs in backup set 20873
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25688   177940838265 06-JUL-19 177940906789 07-JUL-19
+  1    25689   177940906789 07-JUL-19 177941035932 07-JUL-19
+  1    25690   177941035932 07-JUL-19 177941068635 07-JUL-19
+
+BS Key  Type LV Size       Device Type Elapsed Time Completion Time
+------- ---- -- ---------- ----------- ------------ ---------------
+20874   Full    8.42M      DISK        00:00:00     07-JUL-19      
+        BP Key: 20921   Status: AVAILABLE  Compressed: NO  Tag: TAG20190707T090352
+        Piece Name: D:\ARCHIVE\NB\AUTOBACKUP\2019_07_07\O1_MF_S_1012986232_GL32T8O1_.BKP
+  Control File Included: Ckp SCN: 177941068658   Ckp time: 07-JUL-19
+  SPFILE Included: Modification time: 06-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20875   22.75M     DISK        00:00:05     07-JUL-19      
+        BP Key: 20922   Status: AVAILABLE  Compressed: YES  Tag: TAG20190707T120007
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_07\O1_MF_ANNNN_TAG20190707T120007_GL3F4RT3_.BKP
+
+  List of Archived Logs in backup set 20875
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25691   177941068635 07-JUL-19 177941095860 07-JUL-19
+
+BS Key  Type LV Size       Device Type Elapsed Time Completion Time
+------- ---- -- ---------- ----------- ------------ ---------------
+20876   Full    8.42M      DISK        00:00:00     07-JUL-19      
+        BP Key: 20923   Status: AVAILABLE  Compressed: NO  Tag: TAG20190707T120016
+        Piece Name: D:\ARCHIVE\NB\AUTOBACKUP\2019_07_07\O1_MF_S_1012996816_GL3F5062_.BKP
+  Control File Included: Ckp SCN: 177941095868   Ckp time: 07-JUL-19
+  SPFILE Included: Modification time: 06-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20877   19.82M     DISK        00:00:03     07-JUL-19      
+        BP Key: 20924   Status: AVAILABLE  Compressed: YES  Tag: TAG20190707T150005
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_07\O1_MF_ANNNN_TAG20190707T150005_GL3QP720_.BKP
+
+  List of Archived Logs in backup set 20877
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25692   177941095860 07-JUL-19 177941123352 07-JUL-19
+
+BS Key  Type LV Size       Device Type Elapsed Time Completion Time
+------- ---- -- ---------- ----------- ------------ ---------------
+20878   Full    8.42M      DISK        00:00:00     07-JUL-19      
+        BP Key: 20925   Status: AVAILABLE  Compressed: NO  Tag: TAG20190707T150010
+        Piece Name: D:\ARCHIVE\NB\AUTOBACKUP\2019_07_07\O1_MF_S_1013007610_GL3QPBK5_.BKP
+  Control File Included: Ckp SCN: 177941123358   Ckp time: 07-JUL-19
+  SPFILE Included: Modification time: 06-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20879   19.61M     DISK        00:00:05     07-JUL-19      
+        BP Key: 20926   Status: AVAILABLE  Compressed: YES  Tag: TAG20190707T180006
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_07\O1_MF_ANNNN_TAG20190707T180006_GL427QMB_.BKP
+
+  List of Archived Logs in backup set 20879
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25693   177941123352 07-JUL-19 177941150819 07-JUL-19
+
+BS Key  Type LV Size       Device Type Elapsed Time Completion Time
+------- ---- -- ---------- ----------- ------------ ---------------
+20880   Full    8.42M      DISK        00:00:01     07-JUL-19      
+        BP Key: 20927   Status: AVAILABLE  Compressed: NO  Tag: TAG20190707T180014
+        Piece Name: D:\ARCHIVE\NB\AUTOBACKUP\2019_07_07\O1_MF_S_1013018414_GL427Z64_.BKP
+  Control File Included: Ckp SCN: 177941150827   Ckp time: 07-JUL-19
+  SPFILE Included: Modification time: 06-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20881   155.21M    DISK        00:00:27     08-JUL-19      
+        BP Key: 20928   Status: AVAILABLE  Compressed: YES  Tag: TAG20190708T090400
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_08\O1_MF_ANNNN_TAG20190708T090400_GL5Q6K7Q_.BKP
+
+  List of Archived Logs in backup set 20881
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25694   177941150819 07-JUL-19 177941222203 08-JUL-19
+  1    25695   177941222203 08-JUL-19 177941349332 08-JUL-19
+  1    25696   177941349332 08-JUL-19 177941379675 08-JUL-19
+
+BS Key  Type LV Size       Device Type Elapsed Time Completion Time
+------- ---- -- ---------- ----------- ------------ ---------------
+20882   Full    8.42M      DISK        00:00:01     08-JUL-19      
+        BP Key: 20929   Status: AVAILABLE  Compressed: NO  Tag: TAG20190708T090436
+        Piece Name: D:\ARCHIVE\NB\AUTOBACKUP\2019_07_08\O1_MF_S_1013072676_GL5Q7O0Y_.BKP
+  Control File Included: Ckp SCN: 177941379693   Ckp time: 08-JUL-19
+  SPFILE Included: Modification time: 06-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20883   106.25M    DISK        00:00:22     08-JUL-19      
+        BP Key: 20930   Status: AVAILABLE  Compressed: YES  Tag: TAG20190708T120008
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_08\O1_MF_ANNNN_TAG20190708T120008_GL61JSQK_.BKP
+
+  List of Archived Logs in backup set 20883
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25697   177941379675 08-JUL-19 177941440421 08-JUL-19
+  1    25698   177941440421 08-JUL-19 177941475168 08-JUL-19
+
+BS Key  Type LV Size       Device Type Elapsed Time Completion Time
+------- ---- -- ---------- ----------- ------------ ---------------
+20884   Full    8.42M      DISK        00:00:00     08-JUL-19      
+        BP Key: 20931   Status: AVAILABLE  Compressed: NO  Tag: TAG20190708T120035
+        Piece Name: D:\ARCHIVE\NB\AUTOBACKUP\2019_07_08\O1_MF_S_1013083235_GL61KMG9_.BKP
+  Control File Included: Ckp SCN: 177941475183   Ckp time: 08-JUL-19
+  SPFILE Included: Modification time: 06-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20885   44.85M     DISK        00:00:09     08-JUL-19      
+        BP Key: 20932   Status: AVAILABLE  Compressed: YES  Tag: TAG20190708T150008
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_08\O1_MF_ANNNN_TAG20190708T150008_GL6D29GM_.BKP
+
+  List of Archived Logs in backup set 20885
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25699   177941475168 08-JUL-19 177941516971 08-JUL-19
+
+BS Key  Type LV Size       Device Type Elapsed Time Completion Time
+------- ---- -- ---------- ----------- ------------ ---------------
+20886   Full    8.42M      DISK        00:00:01     08-JUL-19      
+        BP Key: 20933   Status: AVAILABLE  Compressed: NO  Tag: TAG20190708T150024
+        Piece Name: D:\ARCHIVE\NB\AUTOBACKUP\2019_07_08\O1_MF_S_1013094024_GL6D2RW9_.BKP
+  Control File Included: Ckp SCN: 177941516985   Ckp time: 08-JUL-19
+  SPFILE Included: Modification time: 06-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20887   39.31M     DISK        00:00:08     08-JUL-19      
+        BP Key: 20934   Status: AVAILABLE  Compressed: YES  Tag: TAG20190708T180007
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_08\O1_MF_ANNNN_TAG20190708T180007_GL6PMR4P_.BKP
+
+  List of Archived Logs in backup set 20887
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25700   177941516971 08-JUL-19 177941562538 08-JUL-19
+
+BS Key  Type LV Size       Device Type Elapsed Time Completion Time
+------- ---- -- ---------- ----------- ------------ ---------------
+20888   Full    8.42M      DISK        00:00:00     08-JUL-19      
+        BP Key: 20935   Status: AVAILABLE  Compressed: NO  Tag: TAG20190708T180023
+        Piece Name: D:\ARCHIVE\NB\AUTOBACKUP\2019_07_08\O1_MF_S_1013104823_GL6PN7NB_.BKP
+  Control File Included: Ckp SCN: 177941562620   Ckp time: 08-JUL-19
+  SPFILE Included: Modification time: 06-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20889   173.65M    DISK        00:00:35     09-JUL-19      
+        BP Key: 20936   Status: AVAILABLE  Compressed: YES  Tag: TAG20190709T090409
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_09\O1_MF_ANNNN_TAG20190709T090409_GL8CLTBC_.BKP
+
+  List of Archived Logs in backup set 20889
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25701   177941562538 08-JUL-19 177941819463 08-JUL-19
+  1    25702   177941819463 08-JUL-19 177941950955 09-JUL-19
+  1    25703   177941950955 09-JUL-19 177942010413 09-JUL-19
+
+BS Key  Type LV Size       Device Type Elapsed Time Completion Time
+------- ---- -- ---------- ----------- ------------ ---------------
+20890   Full    8.42M      DISK        00:00:01     09-JUL-19      
+        BP Key: 20937   Status: AVAILABLE  Compressed: NO  Tag: TAG20190709T090445
+        Piece Name: D:\ARCHIVE\NB\AUTOBACKUP\2019_07_09\O1_MF_S_1013159085_GL8CMXWG_.BKP
+  Control File Included: Ckp SCN: 177942010453   Ckp time: 09-JUL-19
+  SPFILE Included: Modification time: 09-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20891   97.76M     DISK        00:00:17     09-JUL-19      
+        BP Key: 20938   Status: AVAILABLE  Compressed: YES  Tag: TAG20190709T120009
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_09\O1_MF_ANNNN_TAG20190709T120009_GL8OWTYJ_.BKP
+
+  List of Archived Logs in backup set 20891
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25704   177942010413 09-JUL-19 177942070265 09-JUL-19
+  1    25705   177942070265 09-JUL-19 177942093523 09-JUL-19
+
+BS Key  Type LV Size       Device Type Elapsed Time Completion Time
+------- ---- -- ---------- ----------- ------------ ---------------
+20892   Full    8.42M      DISK        00:00:00     09-JUL-19      
+        BP Key: 20939   Status: AVAILABLE  Compressed: NO  Tag: TAG20190709T120036
+        Piece Name: D:\ARCHIVE\NB\AUTOBACKUP\2019_07_09\O1_MF_S_1013169636_GL8OXNFX_.BKP
+  Control File Included: Ckp SCN: 177942093615   Ckp time: 09-JUL-19
+  SPFILE Included: Modification time: 09-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20893   48.22M     DISK        00:00:11     09-JUL-19      
+        BP Key: 20940   Status: AVAILABLE  Compressed: YES  Tag: TAG20190709T150008
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_09\O1_MF_ANNNN_TAG20190709T150008_GL90G9SS_.BKP
+
+  List of Archived Logs in backup set 20893
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25706   177942093523 09-JUL-19 177942139134 09-JUL-19
+
+BS Key  Type LV Size       Device Type Elapsed Time Completion Time
+------- ---- -- ---------- ----------- ------------ ---------------
+20894   Full    8.42M      DISK        00:00:00     09-JUL-19      
+        BP Key: 20941   Status: AVAILABLE  Compressed: NO  Tag: TAG20190709T150024
+        Piece Name: D:\ARCHIVE\NB\AUTOBACKUP\2019_07_09\O1_MF_S_1013180425_GL90GSBO_.BKP
+  Control File Included: Ckp SCN: 177942139218   Ckp time: 09-JUL-19
+  SPFILE Included: Modification time: 09-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20895   71.03M     DISK        00:00:15     09-JUL-19      
+        BP Key: 20942   Status: AVAILABLE  Compressed: YES  Tag: TAG20190709T180013
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_09\O1_MF_ANNNN_TAG20190709T180013_GL9BZYO9_.BKP
+
+  List of Archived Logs in backup set 20895
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25707   177942139134 09-JUL-19 177942214348 09-JUL-19
+  1    25708   177942214348 09-JUL-19 177942219028 09-JUL-19
+
+BS Key  Type LV Size       Device Type Elapsed Time Completion Time
+------- ---- -- ---------- ----------- ------------ ---------------
+20896   Full    8.42M      DISK        00:00:01     09-JUL-19      
+        BP Key: 20943   Status: AVAILABLE  Compressed: NO  Tag: TAG20190709T180029
+        Piece Name: D:\ARCHIVE\NB\AUTOBACKUP\2019_07_09\O1_MF_S_1013191229_GL9C0G2R_.BKP
+  Control File Included: Ckp SCN: 177942219100   Ckp time: 09-JUL-19
+  SPFILE Included: Modification time: 09-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20897   178.26M    DISK        00:00:33     10-JUL-19      
+        BP Key: 20944   Status: AVAILABLE  Compressed: YES  Tag: TAG20190710T090357
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_10\O1_MF_ANNNN_TAG20190710T090357_GLBZYG92_.BKP
+
+  List of Archived Logs in backup set 20897
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25709   177942219028 09-JUL-19 177942445313 09-JUL-19
+  1    25710   177942445313 09-JUL-19 177942575222 10-JUL-19
+  1    25711   177942575222 10-JUL-19 177942638370 10-JUL-19
+
+BS Key  Type LV Size       Device Type Elapsed Time Completion Time
+------- ---- -- ---------- ----------- ------------ ---------------
+20898   Full    8.42M      DISK        00:00:00     10-JUL-19      
+        BP Key: 20945   Status: AVAILABLE  Compressed: NO  Tag: TAG20190710T090433
+        Piece Name: D:\ARCHIVE\NB\AUTOBACKUP\2019_07_10\O1_MF_S_1013245473_GLBZZKTV_.BKP
+  Control File Included: Ckp SCN: 177942638393   Ckp time: 10-JUL-19
+  SPFILE Included: Modification time: 09-JUL-19
+
+BS Key  Size       Device Type Elapsed Time Completion Time
+------- ---------- ----------- ------------ ---------------
+20899   86.52M     DISK        00:00:18     10-JUL-19      
+        BP Key: 20946   Status: AVAILABLE  Compressed: YES  Tag: TAG20190710T120007
+        Piece Name: D:\ARCHIVE\NB\BACKUPSET\2019_07_10\O1_MF_ANNNN_TAG20190710T120007_GLCB8S0Y_.BKP
+
+  List of Archived Logs in backup set 20899
+  Thrd Seq     Low SCN    Low Time  Next SCN   Next Time
+  ---- ------- ---------- --------- ---------- ---------
+  1    25712   177942638370 10-JUL-19 177942695635 10-JUL-19
+  1    25713   177942695635 10-JUL-19 177942713991 10-JUL-19
+
+BS Key  Type LV Size       Device Type Elapsed Time Completion Time
+------- ---- -- ---------- ----------- ------------ ---------------
+20900   Full    8.42M      DISK        00:00:00     10-JUL-19      
+        BP Key: 20947   Status: AVAILABLE  Compressed: NO  Tag: TAG20190710T120034
+        Piece Name: D:\ARCHIVE\NB\AUTOBACKUP\2019_07_10\O1_MF_S_1013256034_GLCB9LK3_.BKP
+  Control File Included: Ckp SCN: 177942714036   Ckp time: 10-JUL-19
+  SPFILE Included: Modification time: 10-JUL-19
+
+
+List of Backups
+===============
+Key     TY LV S Device Type Completion Time #Pieces #Copies Compressed Tag
+------- -- -- - ----------- --------------- ------- ------- ---------- ---
+20799   B  F  A DISK        28-JUN-19       1       1       YES        TAG20190628T200036
+20803   B  A  A DISK        29-JUN-19       1       1       YES        TAG20190629T090418
+20805   B  A  A DISK        29-JUN-19       1       1       YES        TAG20190629T120008
+20807   B  A  A DISK        29-JUN-19       1       1       YES        TAG20190629T150007
+20809   B  A  A DISK        29-JUN-19       1       1       YES        TAG20190629T180006
+20811   B  A  A DISK        30-JUN-19       1       1       YES        TAG20190630T090427
+20813   B  A  A DISK        30-JUN-19       1       1       YES        TAG20190630T120010
+20815   B  A  A DISK        30-JUN-19       1       1       YES        TAG20190630T150006
+20817   B  A  A DISK        30-JUN-19       1       1       YES        TAG20190630T180006
+20819   B  A  A DISK        01-JUL-19       1       1       YES        TAG20190701T090415
+20821   B  A  A DISK        01-JUL-19       1       1       YES        TAG20190701T120010
+20823   B  A  A DISK        01-JUL-19       1       1       YES        TAG20190701T150009
+20825   B  A  A DISK        01-JUL-19       1       1       YES        TAG20190701T180007
+20827   B  A  A DISK        02-JUL-19       1       1       YES        TAG20190702T090430
+20829   B  A  A DISK        02-JUL-19       1       1       YES        TAG20190702T120008
+20831   B  A  A DISK        02-JUL-19       1       1       YES        TAG20190702T150014
+20833   B  A  A DISK        02-JUL-19       1       1       YES        TAG20190702T180010
+20835   B  A  A DISK        03-JUL-19       1       1       YES        TAG20190703T090429
+20837   B  A  A DISK        03-JUL-19       1       1       YES        TAG20190703T120013
+20839   B  A  A DISK        03-JUL-19       1       1       YES        TAG20190703T150011
+20841   B  A  A DISK        03-JUL-19       1       1       YES        TAG20190703T180007
+20843   B  A  A DISK        04-JUL-19       1       1       YES        TAG20190704T090421
+20845   B  A  A DISK        04-JUL-19       1       1       YES        TAG20190704T120010
+20847   B  A  A DISK        04-JUL-19       1       1       YES        TAG20190704T150007
+20849   B  A  A DISK        04-JUL-19       1       1       YES        TAG20190704T180010
+20851   B  A  A DISK        05-JUL-19       1       1       YES        TAG20190705T090403
+20853   B  A  A DISK        05-JUL-19       1       1       YES        TAG20190705T120010
+20855   B  A  A DISK        05-JUL-19       1       1       YES        TAG20190705T150009
+20857   B  A  A DISK        05-JUL-19       1       1       YES        TAG20190705T180007
+20859   B  A  A DISK        05-JUL-19       1       1       YES        TAG20190705T200009
+20861   B  F  A DISK        05-JUL-19       1       1       YES        TAG20190705T200031
+20862   B  F  A DISK        05-JUL-19       1       1       YES        TAG20190705T200031
+20863   B  F  A DISK        05-JUL-19       1       1       YES        TAG20190705T200031
+20864   B  F  A DISK        05-JUL-19       1       1       NO         TAG20190705T210840
+20865   B  A  A DISK        06-JUL-19       1       1       YES        TAG20190706T090408
+20866   B  F  A DISK        06-JUL-19       1       1       NO         TAG20190706T090455
+20867   B  A  A DISK        06-JUL-19       1       1       YES        TAG20190706T120012
+20868   B  F  A DISK        06-JUL-19       1       1       NO         TAG20190706T120028
+20869   B  A  A DISK        06-JUL-19       1       1       YES        TAG20190706T150011
+20870   B  F  A DISK        06-JUL-19       1       1       NO         TAG20190706T150019
+20871   B  A  A DISK        06-JUL-19       1       1       YES        TAG20190706T180006
+20872   B  F  A DISK        06-JUL-19       1       1       NO         TAG20190706T180015
+20873   B  A  A DISK        07-JUL-19       1       1       YES        TAG20190707T090316
+20874   B  F  A DISK        07-JUL-19       1       1       NO         TAG20190707T090352
+20875   B  A  A DISK        07-JUL-19       1       1       YES        TAG20190707T120007
+20876   B  F  A DISK        07-JUL-19       1       1       NO         TAG20190707T120016
+20877   B  A  A DISK        07-JUL-19       1       1       YES        TAG20190707T150005
+20878   B  F  A DISK        07-JUL-19       1       1       NO         TAG20190707T150010
+20879   B  A  A DISK        07-JUL-19       1       1       YES        TAG20190707T180006
+20880   B  F  A DISK        07-JUL-19       1       1       NO         TAG20190707T180014
+20881   B  A  A DISK        08-JUL-19       1       1       YES        TAG20190708T090400
+20882   B  F  A DISK        08-JUL-19       1       1       NO         TAG20190708T090436
+20883   B  A  A DISK        08-JUL-19       1       1       YES        TAG20190708T120008
+20884   B  F  A DISK        08-JUL-19       1       1       NO         TAG20190708T120035
+20885   B  A  A DISK        08-JUL-19       1       1       YES        TAG20190708T150008
+20886   B  F  A DISK        08-JUL-19       1       1       NO         TAG20190708T150024
+20887   B  A  A DISK        08-JUL-19       1       1       YES        TAG20190708T180007
+20888   B  F  A DISK        08-JUL-19       1       1       NO         TAG20190708T180023
+20889   B  A  A DISK        09-JUL-19       1       1       YES        TAG20190709T090409
+20890   B  F  A DISK        09-JUL-19       1       1       NO         TAG20190709T090445
+20891   B  A  A DISK        09-JUL-19       1       1       YES        TAG20190709T120009
+20892   B  F  A DISK        09-JUL-19       1       1       NO         TAG20190709T120036
+20893   B  A  A DISK        09-JUL-19       1       1       YES        TAG20190709T150008
+20894   B  F  A DISK        09-JUL-19       1       1       NO         TAG20190709T150024
+20895   B  A  A DISK        09-JUL-19       1       1       YES        TAG20190709T180013
+20896   B  F  A DISK        09-JUL-19       1       1       NO         TAG20190709T180029
+20897   B  A  A DISK        10-JUL-19       1       1       YES        TAG20190710T090357
+20898   B  F  A DISK        10-JUL-19       1       1       NO         TAG20190710T090433
+20899   B  A  A DISK        10-JUL-19       1       1       YES        TAG20190710T120007
+20900   B  F  A DISK        10-JUL-19       1       1       NO         TAG20190710T120034
+
+Recovery Manager complete.
+
+C:\HotCopy>rem pause Press any key to exit 
+
+C:\HotCopy>rem Копирование на компьютер оператора 1  
+
+C:\HotCopy>echo y   | net use p: \\0.0.0.0\diskc 
+System error 1214 has occurred.
+
+The format of the specified network name is invalid.
+
+
+C:\HotCopy>mkdir p:\hotcopy 
+The system cannot find the drive specified.
+
+C:\HotCopy>mkdir p:\hotcopy\backup 
+The system cannot find the drive specified.
+
+C:\HotCopy>robocopy D:\ARCHIVE\NB\ p:\HotCopy\backup\ /MIR /NP /R:0 
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows     ::     Version XP010
+-------------------------------------------------------------------------------
+
+  Started : Wed Jul 10 12:00:40 2019
+
+2019/07/10 12:00:40 ERROR 3 (0x00000003) Getting File System Type of Destination p:\HotCopy\backup\
+The system cannot find the path specified.
+
+   Source : D:\ARCHIVE\NB\
+     Dest - p:\HotCopy\backup\
+
+    Files : *.*
+	    
+  Options : *.* /S /E /COPY:DAT /PURGE /MIR /NP /R:0 /W:30 
+
+------------------------------------------------------------------------------
+
+2019/07/10 12:00:40 ERROR 3 (0x00000003) Creating Destination Directory p:\HotCopy\backup\
+The system cannot find the path specified.
+
+C:\HotCopy>echo y   | net use p: /delete 
+The network connection could not be found.
+
+More help is available by typing NET HELPMSG 2250.
+
+
+C:\HotCopy>rem Копирование на компьютер оператора 2  
+
+C:\HotCopy>echo y   | net use p: \\0.0.0.0\diskc 
+System error 1214 has occurred.
+
+The format of the specified network name is invalid.
+
+
+C:\HotCopy>mkdir p:\hotcopy 
+The system cannot find the drive specified.
+
+C:\HotCopy>mkdir p:\hotcopy\backup 
+The system cannot find the drive specified.
+
+C:\HotCopy>robocopy D:\ARCHIVE\NB\ p:\HotCopy\backup\ /MIR /NP /R:0 
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows     ::     Version XP010
+-------------------------------------------------------------------------------
+
+  Started : Wed Jul 10 12:00:41 2019
+
+2019/07/10 12:00:41 ERROR 3 (0x00000003) Getting File System Type of Destination p:\HotCopy\backup\
+The system cannot find the path specified.
+
+   Source : D:\ARCHIVE\NB\
+     Dest - p:\HotCopy\backup\
+
+    Files : *.*
+	    
+  Options : *.* /S /E /COPY:DAT /PURGE /MIR /NP /R:0 /W:30 
+
+------------------------------------------------------------------------------
+
+2019/07/10 12:00:41 ERROR 3 (0x00000003) Creating Destination Directory p:\HotCopy\backup\
+The system cannot find the path specified.
+
+C:\HotCopy>echo y   | net use p: /delete 
+The network connection could not be found.
+
+More help is available by typing NET HELPMSG 2250.
+
+
+C:\HotCopy>rem Копирование на диск USB  
+
+C:\HotCopy>if .. == .. goto skip_usb 
+
+C:\HotCopy>goto :eof 
+
+C:\HotCopy>DEL /Q c:\hotcopy\oradata\move\*.* 
+
+C:\HotCopy>rem --- Определяем сервер репликации 
+
+C:\HotCopy>SQLPLUS /nolog @srv_info.sql NB 
+
+SQL*Plus: Release 10.2.0.4.0 - Production on Wed Jul 10 12:00:41 2019
+
+Copyright (c) 1982, 2007, Oracle.  All Rights Reserved.
+
+Connected.
+
+TITLE				 VALUE
+-------------------------------- --------------------------------
+BACKUP_INFO_SERVER_NAME 	 NBKMI
+BACKUP_INFO_SERVER_DATE 	 10.07.2019 12:00:41
+BACKUP_INFO_ZREPL_META_LAST_DATE 10.07.2019 11:59:03
+
+Disconnected from Oracle Database 10g Release 10.2.0.4.0 - Production
+
+C:\HotCopy>rem --- Информация о дисках 
+
+C:\HotCopy>IF EXIST GetDeviceInfo.exe (GetDeviceInfo.exe /disk /log /test )  ELSE (
+GetDiskInfo.exe C:  
+ GetDiskInfo.exe D:  
+ GetDiskInfo.exe E: 
+) 
+=== ╤ючфрхь C:\Temp\GetDeviceInfo.log
+=== тхЁёш  GetDeviceInfo.exe=1.01d 01.06.2011
+=== Ёрсюўшщ ърЄрыюу = C:\HotCopy\
+=== ╚эЇюЁьрЎш  ю фшёърї
+NETBIOS_NAME=KMINB1
+DISK_NAME=A
+DISK_TYPE=Removable
+DISK_SIZE=0
+DISK_FREE=0
+DISK_EDID=GetDeviceInfo.exe=1.01d 01.06.2011
+-----------------------------------------------
+NETBIOS_NAME=KMINB1
+DISK_NAME=C
+DISK_TYPE=Fixed
+DISK_SIZE=19
+DISK_FREE=6
+DISK_EDID=GetDeviceInfo.exe=1.01d 01.06.2011
+-----------------------------------------------
+NETBIOS_NAME=KMINB1
+DISK_NAME=D
+DISK_TYPE=Fixed
+DISK_SIZE=299
+DISK_FREE=102
+DISK_EDID=GetDeviceInfo.exe=1.01d 01.06.2011
+-----------------------------------------------
+NETBIOS_NAME=KMINB1
+DISK_NAME=E
+DISK_TYPE=CD-ROM
+DISK_SIZE=0
+DISK_FREE=0
+DISK_EDID=GetDeviceInfo.exe=1.01d 01.06.2011
+-----------------------------------------------
+NETBIOS_NAME=KMINB1
+DISK_NAME=Z
+DISK_TYPE=Network
+DISK_SIZE=712
+DISK_FREE=175
+DISK_EDID=GetDeviceInfo.exe=1.01d 01.06.2011
+-----------------------------------------------
+[DISK_INFO]
+NETBIOS_NAME=KMINB1
+Disk A: total space (Gb): 0
+Disk A: free space (Gb): 0
+Disk A: type: Removable
+Disk C: total space (Gb): 19
+Disk C: free space (Gb): 6
+Disk C: type: Fixed
+Disk D: total space (Gb): 299
+Disk D: free space (Gb): 102
+Disk D: type: Fixed
+Disk E: total space (Gb): 0
+Disk E: free space (Gb): 0
+Disk E: type: CD-ROM
+Disk Z: total space (Gb): 712
+Disk Z: free space (Gb): 175
+Disk Z: type: Network
+
+C:\HotCopy>goto :eof 
+ 
+---------------------------------------------------------- 
+ 
+Finished: 10.07.2019 12:00:43,12 
+Status: OK 

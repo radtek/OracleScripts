@@ -1,0 +1,267 @@
+ 
+Type: UPDATE 
+File: C:\HotCopy\Update.bat 
+Log: C:\HotCopy\Update.log 
+Directory: C:\HotCopy 
+Computer: KMINB1 
+Version: 1.7 
+Started: 10.07.2019  9:00:02,06 
+Username: Orapetronics 
+PATH: d:\oracle\bin;D:\ORACLE\bin;C:\Program Files\Oracle\jre\1.1.7\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\Windows Imaging\;c:\program files\winrar;;C:\WINDOWS\system32\WindowsPowerShell\v1.0;D:\ORACLE\BIN; D:\ORACLE\NETWORK\ADMIN; D:\ORACLE\bin;C:\Program Files\Oracle\jre\1.1.7\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\Windows Imaging\;c:\program files\winrar;;C:\WINDOWS\system32\WindowsPowerShell\v1.0 
+ 
+---------------------------------------------------------- 
+
+C:\HotCopy>SET ORACLE_SID=NB 
+
+C:\HotCopy>SET ORACLE_HOME=d:\oracle 
+
+C:\HotCopy>SET PATH=d:\oracle\bin;d:\oracle\bin;D:\ORACLE\bin;C:\Program Files\Oracle\jre\1.1.7\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\Windows Imaging\;c:\program files\winrar;;C:\WINDOWS\system32\WindowsPowerShell\v1.0;D:\ORACLE\BIN; D:\ORACLE\NETWORK\ADMIN; D:\ORACLE\bin;C:\Program Files\Oracle\jre\1.1.7\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\Windows Imaging\;c:\program files\winrar;;C:\WINDOWS\system32\WindowsPowerShell\v1.0 
+
+C:\HotCopy>SET DIR_ORADATA=d:\oracle\oradata\NB\ 
+
+C:\HotCopy>SET TEMP_DBFILE='D:\ORACLE\ORADATA\NB\TEMP01.DBF' 
+
+C:\HotCopy>SET DIR_PFILE=d:\oracle\ADMIN\NB\PFILE\ 
+
+C:\HotCopy>SET DIR_BDUMP=d:\oracle\ADMIN\NB\BDUMP\ 
+
+C:\HotCopy>SET DIR_DATABASE=d:\oracle\DATABASE\ 
+
+C:\HotCopy>SET DIR_ARCHIVE=D:\ARCHIVE\NB\ARCHIVELOG\ 
+
+C:\HotCopy>SET DIR_AREMOTE_OUT=\\KMISQL1\d$\AREMOTE\AZS\BACKUP_LOG\ 
+
+C:\HotCopy>SET DIR_BACKUP=D:\ARCHIVE\NB\ 
+
+C:\HotCopy>SET DIR_HOTCOPY=c:\hotcopy\ 
+
+C:\HotCopy>SET DIR_CONFIG=c:\hotcopy\config\ 
+
+C:\HotCopy>SET DIR_TMP=c:\hotcopy\oradata\ 
+
+C:\HotCopy>SET ORA805_NETA=\ORANT\Net80\Admin\ 
+
+C:\HotCopy>SET ORA817_NETA=\ORACLE\network\ADMIN\ 
+
+C:\HotCopy>SET TEMP_BACKUPFILE=c:\hotcopy\oradata\HotCopyTmp.rar 
+
+C:\HotCopy>SET USB_DRIVE= 
+
+C:\HotCopy>SET IS_SERVER=YES 
+
+C:\HotCopy>SET SERVER_HOTCOPY=c:\hotcopy\ 
+
+C:\HotCopy>SET ARGUS_SERVER=KMINB1 
+
+C:\HotCopy>SET USE_RMAN=YES 
+
+C:\HotCopy>set nls_lang=AMERICAN_AMERICA.CL8MSWIN1251 
+
+C:\HotCopy>rem --- Подключаемся к соседним АРМам (для копирования бакапов) 
+
+C:\HotCopy>SET IP_ARM0=127.0.0.1\diskc 
+
+C:\HotCopy>SET IP_ARM1=0.0.0.0\diskc 
+
+C:\HotCopy>SET IP_ARM2=0.0.0.0\diskc 
+
+C:\HotCopy>SET USER_ARM0=oracle 
+
+C:\HotCopy>SET USER_ARM1=oracle 
+
+C:\HotCopy>SET USER_ARM2=oracle 
+
+C:\HotCopy>SET PWD_ARM0=master 
+
+C:\HotCopy>SET PWD_ARM1=master 
+
+C:\HotCopy>SET PWD_ARM2=master 
+
+C:\HotCopy>echo y   | net use \\127.0.0.1\diskc master /user:oracle 
+System error 1326 has occurred.
+
+Logon failure: unknown user name or bad password.
+
+
+C:\HotCopy>echo y   | net use \\0.0.0.0\diskc master /user:oracle 
+System error 1214 has occurred.
+
+The format of the specified network name is invalid.
+
+
+C:\HotCopy>echo y   | net use \\0.0.0.0\diskc master /user:oracle 
+System error 1214 has occurred.
+
+The format of the specified network name is invalid.
+
+
+C:\HotCopy>echo y   | net use \\127.0.0.1\diskc  
+System error 67 has occurred.
+
+The network name cannot be found.
+
+
+C:\HotCopy>echo y   | net use \\0.0.0.0\diskc  
+System error 1214 has occurred.
+
+The format of the specified network name is invalid.
+
+
+C:\HotCopy>echo y   | net use \\0.0.0.0\diskc  
+System error 1214 has occurred.
+
+The format of the specified network name is invalid.
+
+
+C:\HotCopy>rem --- Создаем необходимые каталоги --- 
+
+C:\HotCopy>mkdir c:\temp 
+A subdirectory or file c:\temp already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\config\ 
+A subdirectory or file c:\hotcopy\config\ already exists.
+
+C:\HotCopy>mkdir D:\ARCHIVE\NB\ 
+A subdirectory or file D:\ARCHIVE\NB\ already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\ 
+A subdirectory or file c:\hotcopy\ already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata 
+A subdirectory or file c:\hotcopy\oradata already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\archive 
+A subdirectory or file c:\hotcopy\archive already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\backup 
+A subdirectory or file c:\hotcopy\backup already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\ 
+A subdirectory or file c:\hotcopy\oradata\ already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\admin 
+A subdirectory or file c:\hotcopy\oradata\admin already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\database 
+A subdirectory or file c:\hotcopy\oradata\database already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\archive 
+A subdirectory or file c:\hotcopy\oradata\archive already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\config 
+A subdirectory or file c:\hotcopy\oradata\config already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\move 
+A subdirectory or file c:\hotcopy\oradata\move already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\config 
+A subdirectory or file c:\hotcopy\oradata\config already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\config\LUKNET 
+A subdirectory or file c:\hotcopy\oradata\config\LUKNET already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\config\ORANT\Net80\Admin\ 
+A subdirectory or file c:\hotcopy\oradata\config\ORANT\Net80\Admin\ already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\config\ORACLE\network\ADMIN\ 
+A subdirectory or file c:\hotcopy\oradata\config\ORACLE\network\ADMIN\ already exists.
+
+C:\HotCopy>mkdir c:\hotcopy\oradata\config\PFILE 
+A subdirectory or file c:\hotcopy\oradata\config\PFILE already exists.
+
+C:\HotCopy>MONTH.EXE
+
+C:\HotCopy>IF ERRORLEVEL 1 SET NUM_MON=01 
+
+C:\HotCopy>IF ERRORLEVEL 2 SET NUM_MON=02 
+
+C:\HotCopy>IF ERRORLEVEL 3 SET NUM_MON=03 
+
+C:\HotCopy>IF ERRORLEVEL 4 SET NUM_MON=04 
+
+C:\HotCopy>IF ERRORLEVEL 5 SET NUM_MON=05 
+
+C:\HotCopy>IF ERRORLEVEL 6 SET NUM_MON=06 
+
+C:\HotCopy>IF ERRORLEVEL 7 SET NUM_MON=07 
+
+C:\HotCopy>IF ERRORLEVEL 8 SET NUM_MON=08 
+
+C:\HotCopy>IF ERRORLEVEL 9 SET NUM_MON=09 
+
+C:\HotCopy>IF ERRORLEVEL 10 SET NUM_MON=10 
+
+C:\HotCopy>IF ERRORLEVEL 11 SET NUM_MON=11 
+
+C:\HotCopy>IF ERRORLEVEL 12 SET NUM_MON=12 
+
+C:\HotCopy>DAY.EXE
+
+C:\HotCopy>IF ERRORLEVEL 1 SET NUM_DAY=01 
+
+C:\HotCopy>IF ERRORLEVEL 2 SET NUM_DAY=02 
+
+C:\HotCopy>IF ERRORLEVEL 3 SET NUM_DAY=03 
+
+C:\HotCopy>IF ERRORLEVEL 4 SET NUM_DAY=04 
+
+C:\HotCopy>IF ERRORLEVEL 5 SET NUM_DAY=05 
+
+C:\HotCopy>IF ERRORLEVEL 6 SET NUM_DAY=06 
+
+C:\HotCopy>IF ERRORLEVEL 7 SET NUM_DAY=07 
+
+C:\HotCopy>IF ERRORLEVEL 8 SET NUM_DAY=08 
+
+C:\HotCopy>IF ERRORLEVEL 9 SET NUM_DAY=09 
+
+C:\HotCopy>IF ERRORLEVEL 10 SET NUM_DAY=10 
+
+C:\HotCopy>IF ERRORLEVEL 11 SET NUM_DAY=11 
+
+C:\HotCopy>IF ERRORLEVEL 12 SET NUM_DAY=12 
+
+C:\HotCopy>IF ERRORLEVEL 13 SET NUM_DAY=13 
+
+C:\HotCopy>IF ERRORLEVEL 14 SET NUM_DAY=14 
+
+C:\HotCopy>IF ERRORLEVEL 15 SET NUM_DAY=15 
+
+C:\HotCopy>IF ERRORLEVEL 16 SET NUM_DAY=16 
+
+C:\HotCopy>IF ERRORLEVEL 17 SET NUM_DAY=17 
+
+C:\HotCopy>IF ERRORLEVEL 18 SET NUM_DAY=18 
+
+C:\HotCopy>IF ERRORLEVEL 19 SET NUM_DAY=19 
+
+C:\HotCopy>IF ERRORLEVEL 20 SET NUM_DAY=20 
+
+C:\HotCopy>IF ERRORLEVEL 21 SET NUM_DAY=21 
+
+C:\HotCopy>IF ERRORLEVEL 22 SET NUM_DAY=22 
+
+C:\HotCopy>IF ERRORLEVEL 23 SET NUM_DAY=23 
+
+C:\HotCopy>IF ERRORLEVEL 24 SET NUM_DAY=24 
+
+C:\HotCopy>IF ERRORLEVEL 25 SET NUM_DAY=25 
+
+C:\HotCopy>IF ERRORLEVEL 26 SET NUM_DAY=26 
+
+C:\HotCopy>IF ERRORLEVEL 27 SET NUM_DAY=27 
+
+C:\HotCopy>IF ERRORLEVEL 28 SET NUM_DAY=28 
+
+C:\HotCopy>IF ERRORLEVEL 29 SET NUM_DAY=29 
+
+C:\HotCopy>IF ERRORLEVEL 30 SET NUM_DAY=30 
+
+C:\HotCopy>IF ERRORLEVEL 31 SET NUM_DAY=31 
+---------------------------------------------------------- 
+ 
+ 
+---------------------------------------------------------- 
+ 
+Finished: 10.07.2019  9:00:02,95 
+Status: OK 

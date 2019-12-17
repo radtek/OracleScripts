@@ -1,0 +1,41 @@
+ 
+Type: JOB_LOG 
+File: C:\JOB\job2.log 
+Log: C:\HotCopy\job2.log 
+Directory: C:\HotCopy 
+Computer: KMINB1 
+Version: 1.9 
+Started: 10.07.2019  9:03:34,71 
+Username: Orapetronics 
+ 
+---------------------------------------------------------- 
+ 
+SQL> 
+SQL> 
+SQL> ANALYZE TABLE LIDER.DOCUMENT COMPUTE STATISTICS;
+
+Table analyzed.
+
+SQL> ANALYZE TABLE LIDER.OUT_WBILL_MO_OS_EX COMPUTE STATISTICS;
+
+Table analyzed.
+
+SQL> ANALYZE TABLE LIDER.OUT_WBILL_MO_OS_I COMPUTE STATISTICS;
+
+Table analyzed.
+
+SQL> ANALYZE TABLE LIDER.CARD_GDS_NET COMPUTE STATISTICS;
+
+Table analyzed.
+
+SQL> ANALYZE TABLE LIDER.CARD_GDS_STOR_NET COMPUTE STATISTICS;
+
+Table analyzed.
+
+SQL> 
+SQL> exit
+ 
+---------------------------------------------------------- 
+ 
+Finished: 10.07.2019  9:03:34,76 
+Status: OK 

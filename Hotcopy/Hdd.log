@@ -1,0 +1,140 @@
+ 
+Type: DISK_INFO 
+File: smartctl.exe 
+Log: C:\HotCopy\Hdd.log 
+Directory: C:\HotCopy 
+Computer: KMINB1 
+Version: 1.9 
+Started: 10.07.2019  9:03:28,43 
+Username: Orapetronics 
+ 
+---------------------------------------------------------- 
+ 
+ 
+smart info - disk C: 
+smartctl 5.40 2010-10-16 r3189 [i686-w64-mingw32-2003-sp2] (sf-win32-5.40-1)
+Copyright (C) 2002-10 by Bruce Allen, http://smartmontools.sourceforge.net
+
+unable to fetch IEC (SMART) mode page [unsupported field in scsi command]
+A mandatory SMART command failed: exiting. To continue, add one or more '-T permissive' options.
+smartctl 5.40 2010-10-16 r3189 [i686-w64-mingw32-2003-sp2] (sf-win32-5.40-1)
+Copyright (C) 2002-10 by Bruce Allen, http://smartmontools.sourceforge.net
+
+Device: VMware   Virtual disk     Version: 1.0 
+Device type: disk
+Local Time is: Wed Jul 10 09:03:28 2019 RTZST
+Device does not support SMART
+
+Error Counter logging not supported
+Device does not support Self Test logging
+ 
+smart info - disk D: 
+smartctl 5.40 2010-10-16 r3189 [i686-w64-mingw32-2003-sp2] (sf-win32-5.40-1)
+Copyright (C) 2002-10 by Bruce Allen, http://smartmontools.sourceforge.net
+
+Standard Inquiry (36 bytes) failed [Function not implemented]
+Retrying with a 64 byte Standard Inquiry
+Standard Inquiry (64 bytes) failed [Function not implemented]
+A mandatory SMART command failed: exiting. To continue, add one or more '-T permissive' options.
+smartctl 5.40 2010-10-16 r3189 [i686-w64-mingw32-2003-sp2] (sf-win32-5.40-1)
+Copyright (C) 2002-10 by Bruce Allen, http://smartmontools.sourceforge.net
+
+Standard Inquiry (36 bytes) failed [Function not implemented]
+Retrying with a 64 byte Standard Inquiry
+Standard Inquiry (64 bytes) failed [Function not implemented]
+A mandatory SMART command failed: exiting. To continue, add one or more '-T permissive' options.
+ 
+smart info - disk E: 
+smartctl 5.40 2010-10-16 r3189 [i686-w64-mingw32-2003-sp2] (sf-win32-5.40-1)
+Copyright (C) 2002-10 by Bruce Allen, http://smartmontools.sourceforge.net
+
+Device: NECVMWar VMware IDE CDR10 Version: 1.00
+Device type: CD/DVD
+Local Time is: Wed Jul 10 09:03:28 2019 RTZST
+NO MEDIUM present on device
+A mandatory SMART command failed: exiting. To continue, add one or more '-T permissive' options.
+ 
+smart info - disk F: 
+smartctl 5.40 2010-10-16 r3189 [i686-w64-mingw32-2003-sp2] (sf-win32-5.40-1)
+Copyright (C) 2002-10 by Bruce Allen, http://smartmontools.sourceforge.net
+
+Smartctl open device: F: failed: \\.\F:: Open failed, Error=2
+ 
+smart info - disk G: 
+smartctl 5.40 2010-10-16 r3189 [i686-w64-mingw32-2003-sp2] (sf-win32-5.40-1)
+Copyright (C) 2002-10 by Bruce Allen, http://smartmontools.sourceforge.net
+
+Smartctl open device: G: failed: \\.\G:: Open failed, Error=2
+ 
+smart info - disk H: 
+smartctl 5.40 2010-10-16 r3189 [i686-w64-mingw32-2003-sp2] (sf-win32-5.40-1)
+Copyright (C) 2002-10 by Bruce Allen, http://smartmontools.sourceforge.net
+
+Smartctl open device: H: failed: \\.\H:: Open failed, Error=2
+ 
+smart info - disk I: 
+smartctl 5.40 2010-10-16 r3189 [i686-w64-mingw32-2003-sp2] (sf-win32-5.40-1)
+Copyright (C) 2002-10 by Bruce Allen, http://smartmontools.sourceforge.net
+
+Smartctl open device: I: failed: \\.\I:: Open failed, Error=2
+=== Создаем C:\Temp\GetDeviceInfo.log
+=== версия GetDeviceInfo.exe=1.01d 01.06.2011
+=== рабочий каталог = C:\HotCopy\
+=== Информация о дисках
+NETBIOS_NAME=KMINB1
+DISK_NAME=A
+DISK_TYPE=Removable
+DISK_SIZE=0
+DISK_FREE=0
+DISK_EDID=GetDeviceInfo.exe=1.01d 01.06.2011
+-----------------------------------------------
+NETBIOS_NAME=KMINB1
+DISK_NAME=C
+DISK_TYPE=Fixed
+DISK_SIZE=19
+DISK_FREE=6
+DISK_EDID=GetDeviceInfo.exe=1.01d 01.06.2011
+-----------------------------------------------
+NETBIOS_NAME=KMINB1
+DISK_NAME=D
+DISK_TYPE=Fixed
+DISK_SIZE=299
+DISK_FREE=102
+DISK_EDID=GetDeviceInfo.exe=1.01d 01.06.2011
+-----------------------------------------------
+NETBIOS_NAME=KMINB1
+DISK_NAME=E
+DISK_TYPE=CD-ROM
+DISK_SIZE=0
+DISK_FREE=0
+DISK_EDID=GetDeviceInfo.exe=1.01d 01.06.2011
+-----------------------------------------------
+NETBIOS_NAME=KMINB1
+DISK_NAME=Z
+DISK_TYPE=Network
+DISK_SIZE=712
+DISK_FREE=175
+DISK_EDID=GetDeviceInfo.exe=1.01d 01.06.2011
+-----------------------------------------------
+[DISK_INFO]
+NETBIOS_NAME=KMINB1
+Disk A: total space (Gb): 0
+Disk A: free space (Gb): 0
+Disk A: type: Removable
+Disk C: total space (Gb): 19
+Disk C: free space (Gb): 6
+Disk C: type: Fixed
+Disk D: total space (Gb): 299
+Disk D: free space (Gb): 102
+Disk D: type: Fixed
+Disk E: total space (Gb): 0
+Disk E: free space (Gb): 0
+Disk E: type: CD-ROM
+Disk Z: total space (Gb): 712
+Disk Z: free space (Gb): 175
+Disk Z: type: Network
+ 
+---------------------------------------------------------- 
+ 
+Finished: 10.07.2019  9:03:30,34 
+Status: HDD_INFO_ERROR 

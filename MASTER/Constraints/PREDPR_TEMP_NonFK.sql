@@ -1,7 +1,0 @@
--- 
--- Non Foreign Key Constraints for Table PREDPR_TEMP 
--- 
-ALTER TABLE MASTER.PREDPR_TEMP ADD (
-  CHECK ("NAIM" IS NOT NULL)
-  DISABLE NOVALIDATE);
-

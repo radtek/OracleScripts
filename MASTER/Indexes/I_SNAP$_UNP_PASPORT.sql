@@ -1,1 +1,0 @@
--- Note: Index I_SNAP$_UNP_PASPORT will be created/dropped automatically by Oracle with the associated materialized view.

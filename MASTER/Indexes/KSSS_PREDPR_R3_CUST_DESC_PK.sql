@@ -1,9 +1,0 @@
-/* This object may not be sorted properly in the script due to cirular references. */
---
--- KSSS_PREDPR_R3_CUST_DESC_PK  (Index) 
---
-CREATE UNIQUE INDEX MASTER.KSSS_PREDPR_R3_CUST_DESC_PK ON MASTER.KSSS_PREDPR_R3_CUSTOMERS_DESC
-(KSSS_PREDPR_ID, R3_CUSTOMERS)
-TABLESPACE USERSINDX;
-
-

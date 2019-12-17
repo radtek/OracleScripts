@@ -1,7 +1,0 @@
--- 
--- Non Foreign Key Constraints for Table KLS_MASTER_POGR 
--- 
-ALTER TABLE MASTER.KLS_MASTER_POGR ADD (
-  CHECK ("ID" IS NOT NULL)
-  DISABLE NOVALIDATE);
-

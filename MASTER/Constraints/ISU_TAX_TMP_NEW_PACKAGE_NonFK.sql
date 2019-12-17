@@ -1,8 +1,0 @@
--- 
--- Non Foreign Key Constraints for Table ISU_TAX_TMP_NEW_PACKAGE 
--- 
-ALTER TABLE MASTER.ISU_TAX_TMP_NEW_PACKAGE ADD (
-  PRIMARY KEY
-  (ID)
-  ENABLE VALIDATE);
-

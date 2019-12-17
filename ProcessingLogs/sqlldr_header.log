@@ -1,0 +1,51 @@
+
+SQL*Loader: Release 10.2.0.1.0 - Production on Sat Dec 31 15:14:57 2016
+
+Copyright (c) 1982, 2005, Oracle.  All rights reserved.
+
+Control File:   sqlldr_header.ctl
+Character Set RU8PC866 specified for all input.
+
+Data File:      d:\temp\ProcessingLogs\header.txt
+  Bad File:     header.bad
+  Discard File:  none specified
+ 
+ (Allow all discards)
+
+Number to load: ALL
+Number to skip: 0
+Errors allowed: 999999999
+Bind array:     64 rows, maximum of 256000 bytes
+Continuation:    none specified
+Path used:      Conventional
+
+Table ARM_BUFFER_PSV, loaded from every logical record.
+Insert option in effect for this table: APPEND
+
+   Column Name                  Position   Len  Term Encl Datatype
+------------------------------ ---------- ----- ---- ---- ---------------------
+ID                                                        CONSTANT
+    Value is '0'
+TEXT                                1:250   250           CHARACTER            
+
+
+Table ARM_BUFFER_PSV:
+  10 Rows successfully loaded.
+  0 Rows not loaded due to data errors.
+  0 Rows not loaded because all WHEN clauses were failed.
+  0 Rows not loaded because all fields were null.
+
+
+Space allocated for bind array:                  16256 bytes(64 rows)
+Read   buffer bytes: 1048576
+
+Total logical records skipped:          0
+Total logical records read:            10
+Total logical records rejected:         0
+Total logical records discarded:        0
+
+Run began on Sat Dec 31 15:14:57 2016
+Run ended on Sat Dec 31 15:14:57 2016
+
+Elapsed time was:     00:00:00.06
+CPU time was:         00:00:00.04

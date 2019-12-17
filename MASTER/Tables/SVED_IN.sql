@@ -1,0 +1,78 @@
+--
+-- SVED_IN  (Table) 
+--
+CREATE TABLE MASTER.SVED_IN
+(
+  ID              VARCHAR2(9 BYTE)              NOT NULL,
+  SVED_NUM        NUMBER(10),
+  SVED_DATE       DATE,
+  SVED_VES        NUMBER(15,7)                  DEFAULT 0,
+  SVED_CNT        NUMBER(5)                     DEFAULT 0,
+  GOTOV_TIME      DATE,
+  BEG_NALIV_TIME  DATE,
+  END_NALIV_TIME  DATE,
+  DATE_OFORML     DATE,
+  PROD_ID_NPR     VARCHAR2(5 BYTE),
+  MESTO_ID        NUMBER(10),
+  VES_NETTO       NUMBER(15,7)                  DEFAULT 0,
+  VES_KVIT        NUMBER(12,3)                  DEFAULT 0,
+  PASP_NUM        VARCHAR2(15 BYTE),
+  REZ_NUM         VARCHAR2(15 BYTE),
+  PASP_DATE       DATE,
+  PL              NUMBER(6,4),
+  P_VOD           NUMBER(7,4),
+  P_DIRT          NUMBER(7,4),
+  MG_SOL          NUMBER(8,4),
+  P_SOL           NUMBER(7,4),
+  PL15            NUMBER(6,4),
+  VES_NETTO_KVIT  NUMBER(16,7)
+)
+TABLESPACE USERS2
+NOCOMPRESS ;
+
+COMMENT ON TABLE MASTER.SVED_IN IS 'Сведения по разгрузке/сливу';
+
+COMMENT ON COLUMN MASTER.SVED_IN.SVED_NUM IS '№ сведения';
+
+COMMENT ON COLUMN MASTER.SVED_IN.SVED_DATE IS 'Дата поступления под разгрузку';
+
+COMMENT ON COLUMN MASTER.SVED_IN.SVED_VES IS 'Чистый вес (расчетный)';
+
+COMMENT ON COLUMN MASTER.SVED_IN.SVED_CNT IS 'Кол-во';
+
+COMMENT ON COLUMN MASTER.SVED_IN.GOTOV_TIME IS 'Дата/время готовности к разгрузке';
+
+COMMENT ON COLUMN MASTER.SVED_IN.BEG_NALIV_TIME IS 'Начало разгрузки';
+
+COMMENT ON COLUMN MASTER.SVED_IN.END_NALIV_TIME IS 'Окончание разгрузки';
+
+COMMENT ON COLUMN MASTER.SVED_IN.DATE_OFORML IS 'Время оформления сведения о разгрузке';
+
+COMMENT ON COLUMN MASTER.SVED_IN.PROD_ID_NPR IS 'Продукт';
+
+COMMENT ON COLUMN MASTER.SVED_IN.MESTO_ID IS 'Место слива';
+
+COMMENT ON COLUMN MASTER.SVED_IN.VES_NETTO IS 'Вес нетто (расчетный)';
+
+COMMENT ON COLUMN MASTER.SVED_IN.VES_KVIT IS 'Вес по накладным';
+
+COMMENT ON COLUMN MASTER.SVED_IN.PASP_NUM IS '№ паспорта УНП';
+
+COMMENT ON COLUMN MASTER.SVED_IN.REZ_NUM IS '№ резервуара УНП';
+
+COMMENT ON COLUMN MASTER.SVED_IN.PASP_DATE IS 'Дата паспорта УНП';
+
+COMMENT ON COLUMN MASTER.SVED_IN.PL IS 'Плотность из паспорта УНП';
+
+COMMENT ON COLUMN MASTER.SVED_IN.P_VOD IS '% воды';
+
+COMMENT ON COLUMN MASTER.SVED_IN.P_DIRT IS '% мех.примесей';
+
+COMMENT ON COLUMN MASTER.SVED_IN.MG_SOL IS 'содержание солей мг/л';
+
+COMMENT ON COLUMN MASTER.SVED_IN.P_SOL IS '% солей';
+
+COMMENT ON COLUMN MASTER.SVED_IN.VES_NETTO_KVIT IS 'Плотность при 15''C';
+
+
+

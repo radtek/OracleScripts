@@ -1,0 +1,18 @@
+--
+-- KLS_CAT_CEN  (Table) 
+--
+CREATE TABLE MASTER.KLS_CAT_CEN
+(
+  ID                NUMBER(3)                   NOT NULL,
+  CAT_CEN_NAME      VARCHAR2(70 BYTE),
+  GROUPDOG_ID       NUMBER(2),
+  PREDPR_ID         NUMBER(6),
+  CAT_CEN_GROUP_ID  NUMBER(2),
+  FOX_ID            NUMBER(6),
+  DOG_ID            NUMBER(5),
+  FOR_AZC           VARCHAR2(21 BYTE)
+)
+TABLESPACE USERS2
+NOCOMPRESS ;
+
+

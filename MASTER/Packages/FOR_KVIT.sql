@@ -1,0 +1,13 @@
+--
+-- FOR_KVIT  (Package) 
+--
+CREATE OR REPLACE PACKAGE MASTER.For_KVIT AS
+
+/* Заполнить KVIT_DATE_VIR из SFDBF.MOVEPROD */
+PROCEDURE FillDateVir(pBEGIN_DATE DATE, pEND_DATE DATE);
+
+
+END;
+
+/
+

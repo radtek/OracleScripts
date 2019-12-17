@@ -1,0 +1,111 @@
+/* This object may not be sorted properly in the script due to cirular references. */
+--
+-- V_NEW_MONTH_R3_VBAK  (View) 
+--
+CREATE OR REPLACE FORCE VIEW MASTER.V_NEW_MONTH_R3_VBAK
+(ID, VBELN, NOM_ZD, DATE_RAZN, DATE_PLAN, 
+ LOCK_STATUS, IS_EXP_NAME, IS_EXP, VBAK_VSBED, LOAD_NAME, 
+ VBKD_TRATY, VAGONTYPE_NAME, LOAD_ABBR, LOAD_TYPE_ID, TYPE_OTGR_NAME, 
+ VBAP_MATNR, PROD_NAME_NPR, PROD_ID_NPR, LUK_DOG_NUMBER, LUK_DOG_ID, 
+ NPO_DOG_NUMBER, NPO_DOG_ID, DOG_NUMBER, DOG_ID, USL_NUMBER, 
+ VBPA_KUNNR, PLAT_NAME, PLAT_ID, OT_LIFNR, GROTP_NAME, 
+ GROTP_ID, TEX_PD_ID, VBAP_ROUTE, ROUTE_NAME, KNANF, 
+ STANOTP_KOD, STANOTP_ID, STANOTP_NAME, KNEND, STAN_KOD, 
+ STAN_ID, STAN_NAME, SH_KUNNR, POLUCH_NAME, POLUCH_ID, 
+ POLUCH_GD_KOD, POTREB_NAME, POTREB_ID, VETKA_NAME, VETKA_ID, 
+ OWNERSHIP_ID, VBAK_AUART, CONTRACTOR_ATTR, NAZN_OTG_ID, NAZN_OTG_NAME, 
+ NP_OWNER, OWNER_NAME, OWNER_ID, NP_PRODR, PRODR_NAME, 
+ PRODR_ID, SUPPLIER_ID, SUPPLIER_NAME, LGOBE, TARIF_CODE, 
+ TRANSP_NUM, FORMA_2, FORMA_2_NAME, PRIM, GR4, 
+ OSN_8, SLIV_V, DOP_CIST, OBOGR, VBKD_VSART, 
+ VAGOWNER_NAME, TONN_DECLARED, CIST_DECLARED, TONN_ALLOW, CIST_ALLOW, 
+ TONN_MIN, CIST_MIN, TONN_R, CIST_R, TONN_LOADED, 
+ CIST_LOADED, GOSPROG_ID, GOSPROG_NAME, GP_NAPR_ID, GP_NAPR_NAME, 
+ DATE_CEN, CENA, CENA_OTP, SUM_ZD, TARIF1TONN, 
+ PLANSTRU_ID, PLANSTRU_NAME, UPDATE_DATE, UPDATE_FILE)
+AS 
+SELECT
+  A.VBELN AS ID, -- ID
+  A.VBELN, -- номер разнарядки R3
+  A.NOM_ZD, -- номер разнарядки НПО
+  A.VBAK_VDATU AS DATE_RAZN, -- дата разнарядки
+  TRUNC(A.VBAK_VDATU,'MONTH') AS DATE_PLAN, -- плановая дата
+  A.V_TJ30_TXT04 AS LOCK_STATUS, -- <>'0010' - наличие хотя-бы одной блокированной позиции
+  DECODE(A.VBAK_VTWEG,'01','ЭКСПОРТ','ВНУТРЕННИЙ РЫНОК') AS IS_EXP_NAME, DECODE(A.VBAK_VTWEG,'01',1,0) AS IS_EXP, -- направление 01-экспорт 02-по России
+  A.VBAK_VSBED, B.NAME AS LOAD_NAME, A.VBKD_TRATY, C.NAME AS VAGONTYPE_NAME, C.LOAD_ABBR, C.LOAD_TYPE_ID, B.NAME AS TYPE_OTGR_NAME, -- Тип транспортировки
+  MM.VBAP_MATNR, MM.MAKTX AS PROD_NAME_NPR, MM.PROD_ID_NPR, -- последний продукт (если NULL - разнарядка блокирована)
+  A.VBAK_ZZ021 AS LUK_DOG_NUMBER, NVL(luk_dog.DOG_ID,0) AS LUK_DOG_ID, -- Договор ЛУКОЙЛ-Клиент
+  NVL(plat.KVERM, '') AS NPO_DOG_NUMBER, NVL(dog.DOG_ID,0) AS NPO_DOG_ID, -- Договор НПО-Клиент
+  NVL(DECODE(plat.KVERM, NULL, A.VBAK_ZZ021, plat.KVERM),'') AS DOG_NUMBER, NVL(DECODE(plat.KVERM, NULL, luk_dog.DOG_ID, dog.DOG_ID),0) AS DOG_ID, -- Договор разнарядки
+  0 AS USL_NUMBER, -- Номер условия
+  A.VBPA_KUNNR, plat.NAME AS plat_name, NVL(plat.PREDPR_ID,0) AS plat_ID, -- Плательщик по договору разнарядки
+  A.OT_LIFNR, grotp.NAME AS grotp_name, NVL(grotp.PREDPR_ID,0) AS grotp_ID, -- грузоотправитель
+  0 AS TEX_PD_ID, -- плательщик тарифа
+  A.VBAP_ROUTE, G.BEZEI AS ROUTE_NAME, G.KNANF, STANOTP.STAN_KOD AS STANOTP_KOD, NVL(STANOTP.ID,0) AS STANOTP_ID, STANOTP.STAN_NAME as STANOTP_NAME, G.KNEND, STAN.STAN_KOD, NVL(STAN.ID,0) AS STAN_ID, STAN.STAN_NAME, -- Маршрут
+  A.SH_KUNNR, poluch.NAME AS poluch_name, NVL(poluch.PREDPR_ID,0) AS poluch_ID, -- грузополучатель
+  A.MPS_Y006 AS POLUCH_GD_KOD, -- жд код получателя
+  DECODE(A.PO_KNA1_NAME1,NULL,poluch.NAME,A.PO_KNA1_NAME1) AS POTREB_NAME, DECODE(A.PO_KNA1_NAME1,NULL,NVL(poluch.PREDPR_ID,0),0) AS potreb_ID, -- Потребитель
+  A.NPR_NAME AS VETKA_NAME, 0 AS VETKA_ID, -- Ветка получателя
+  DECODE(A.VBAK_VTWEG,'01',0,DECODE(A.NP_OWNER,'1001090',0,2)) AS OWNERSHIP_ID, -- отношения собственности (0-собс.продукт,1-покупной,2-чужой)
+  A.VBAK_AUART, A.CONTRACTOR_ATTR, -- назначение отгрузки
+  DECODE(H.NAZN_OTG_ID,NULL,DECODE(A.VBAK_VTWEG,'01',5,DECODE(A.NP_OWNER,'1001090',1,4)),H.NAZN_OTG_ID) AS NAZN_OTG_ID, '' AS NAZN_OTG_NAME, -- назначение отгрузки
+  A.NP_OWNER, owner.NAME AS owner_name, NVL(owner.PREDPR_ID,0) AS owner_ID, -- собственник н/п
+  A.NP_PRODR, prodr.NAME AS prodr_name, NVL(prodr.PREDPR_ID,0) AS prodr_ID, -- производитель н/п
+  1 AS SUPPLIER_ID, 'НЕФТЯНАЯ КОМПАНИЯ "ЛУКОЙЛ"' AS SUPPLIER_NAME, -- поставщик н/п
+  D.LGOBE, -- Завод/Склад
+  A.TARIF_CODE, -- Код искл.тарифа
+  A.TRANSP_NUM, -- N транспорта
+  0 AS FORMA_2, GAR_Y007 AS FORMA_2_NAME,-- Оплата по ф.2
+  A.TEXT1_Y005 AS PRIM, -- Примечание
+  A.TEXT3_Y003 AS GR4, -- Графа 4
+  DECODE(A.MVRG1,'РЗР',1,0) AS osn_8, -- можно в 8-осные
+  0 AS sliv_v, -- врехний слив
+  0 AS dop_cist, -- д/ц
+  0 AS obogr, -- обогрев
+  A.VBKD_VSART, F.NAME AS VAGOWNER_NAME, -- Собственник т/с
+  A.VBAP_KWMENG AS TONN_DECLARED, -- Заявлено
+  CEIL(A.VBAP_KWMENG/60) AS CIST_DECLARED, -- Заявлено цист.
+  A.VBAP_KBMENG AS TONN_ALLOW, -- Разрешено
+  CEIL(A.VBAP_KBMENG/60) AS CIST_ALLOW, -- Разрешено цист.
+  0 AS TONN_MIN, -- Минимально
+  0 AS CIST_MIN, -- Минимально
+  0 AS TONN_R,
+  0 AS CIST_R,
+  0 AS TONN_LOADED,
+  0 AS CIST_LOADED,
+  -1 AS GOSPROG_ID, '' AS GOSPROG_NAME, -- Госпрограмма
+  0 AS GP_NAPR_ID, '' AS GP_NAPR_NAME, -- Получатель по ГП
+  TRUNC(SYSDATE) AS DATE_CEN, -- Дата цены
+  0 AS CENA, -- цена без НДС
+  0 AS CENA_OTP, -- отпускная цена
+  0 AS SUM_ZD, -- сумма по заданию
+  0 AS TARIF1TONN, -- тариф за 1 тонну
+  0 AS PLANSTRU_ID, '' AS PLANSTRU_NAME, -- позиция плана поставки
+  A.ZZZZ_DATE AS UPDATE_DATE,
+  A.ZZZZ_FILE AS UPDATE_FILE
+FROM R3_VBAK A, R3_VSBED B, R3_TRATY C, R3_VSART F, R3_WERKS_LGORT D,
+     R3_VENDORS owner, R3_VENDORS prodr, R3_VENDORS grotp,
+	 R3_CUSTOMERS poluch, R3_CUSTOMERS luk_plat, R3_CUSTOMERS plat,
+	 R3_ROUTES G, R3_CC luk_dog, R3_CC dog, KLS_STAN STAN, KLS_STAN STANOTP,
+     R3_MATERIALS MM, R3_AUART H
+WHERE A.VBAP_VSTEL='05'
+  AND A.VBAK_VSBED=B.VBAK_VSBED(+)
+  AND A.VBKD_TRATY=C.VBKD_TRATY(+)
+  AND A.VBAP_WERKS=D.VBAP_WERKS(+)
+  AND A.LGORT=D.LGORT(+)
+  AND A.OT_LIFNR=grotp.ID(+)
+  AND A.NP_OWNER=owner.ID(+)
+  AND A.NP_PRODR=prodr.ID(+)
+  AND A.SH_KUNNR=poluch.ID(+)
+  AND A.VBPA_KUNNR=plat.ID(+)
+  AND A.VBPA_KUNNR_SP=luk_plat.ID(+)
+  AND A.VBAP_ROUTE=G.ROUTE(+)
+  AND A.VBAK_ZZ021=luk_dog.EKKO_ZZ021(+)
+  AND plat.KVERM=dog.EKKO_ZZ021(+)
+  AND TO_NUMBER(G.KNANF)=STANOTP.STAN_KOD(+)
+  AND TO_NUMBER(G.KNEND)=STAN.STAN_KOD(+)
+  AND A.VBKD_VSART=F.VBKD_VSART (+)
+  AND A.VBAP_MATNR=MM.VBAP_MATNR(+)
+  AND A.VBAK_AUART=H.VBAK_AUART(+);
+
+

@@ -1,0 +1,847 @@
+--
+-- FOR_PLANFACT  (Package Body) 
+--
+CREATE OR REPLACE PACKAGE BODY MASTER.For_Planfact AS
+
+  -- Очистить таблицу PLAN_FACT
+  PROCEDURE EmptyPlanFact IS
+  BEGIN
+    DELETE FROM PLAN_FACT
+    WHERE TERMINAL_NAME = For_Init.GetCurrTerm
+      AND OSUSER_NAME = For_Init.GetCurrUser;
+    COMMIT;	 
+  END;
+  
+  -- Заполнить план поставок
+  PROCEDURE FillPlanPost (PlanId NUMBER, DateBeg VARCHAR2, DateEnd VARCHAR2, IsSNP NUMBER DEFAULT 0) IS
+    vDateBeg DATE;
+	vDateEnd DATE;
+	pDateEnd DATE;
+	NumDay NUMBER;
+	NumDay7 NUMBER;
+	MaxDay NUMBER;
+  BEGIN
+    pDateEnd:=TO_DATE(DateEnd,'dd.mm.yyyy');
+	vDateBeg:=TRUNC(TO_DATE(DateBeg,'dd.mm.yyyy'),'MONTH'); -- Начало месяца
+	vDateEnd:=LAST_DAY(TO_DATE(DateEnd,'dd.mm.yyyy')); -- Конец месяца
+	NumDay:=TO_NUMBER(TO_CHAR(pDateEnd,'dd'));
+	IF pDateEnd-7<vDateBeg THEN
+	  NumDay7:=0;
+	ELSE  
+  	  NumDay7:=TO_NUMBER(TO_CHAR(pDateEnd-7,'dd'));
+	end if;  
+	MaxDay:=TO_NUMBER(TO_CHAR(vDateEnd,'dd'));
+	
+	-- Текущий план
+    -- Перебор плановых периодов
+    FOR lcur IN (SELECT A.ID,A.BEGIN_DATE,A.END_DATE,
+	               (CASE
+				      WHEN A.BEGIN_DATE>=vDateBeg+20 THEN 3
+					  WHEN A.BEGIN_DATE>=vDateBeg+10 THEN 2
+					  ELSE 1
+					END) as NUM_DECADA
+				  FROM PLAN_PERIODS A 
+	             WHERE A.Plan_id=PlanID AND A.DATE_PLAN BETWEEN vDateBeg AND vDateEnd) LOOP
+	  -- Добавляем план за месяц во временную таблицу
+      INSERT INTO PLAN_FACT (TIP_ROW, PROD_ORDER, PROD_ID_NPR, PLANSTRU_ORDER, PLANSTRU_ID, 
+	    DATE_PLAN, PLAN_MON_V, PLAN_NAR_V, PLAN_NAR_RASP, PLAN_NAR_RASP_7,NUM_DECADA) 
+      SELECT
+        (CASE
+		   WHEN PlanId=14 THEN 'ПОСТ_АВТО'
+		   ELSE 'ПОСТАВКА'
+		 END) AS TIP_ROW,
+        TO_NUMBER(A.PROD_ID_NPR) AS PROD_ORDER,
+        A.PROD_ID_NPR,
+        TO_CHAR(C.KOD_SGR*1000000000000000+C.KOD_SPG*1000000000000+C.KOD_RZD*1000000000+C.KOD_PRZ*1000000+C.KOD_GRP*1000+C.KOD_PGR) AS PLANSTRU_ORDER,
+        A.PLANSTRU_ID,
+        pDateEnd AS DATE_PLAN,
+        SUM(A.PLAN_VES) AS PLAN_MON_V,
+        SUM(A.PLAN_VES/MaxDay*NumDay) AS PLAN_NAR_V,
+        SUM(CASE
+		      WHEN C.ID in (174,175,176,194,249,250,251,253,266) THEN 0
+			  ELSE A.PLAN_VES/MaxDay*NumDay
+			END) AS PLAN_NAR_RASP,
+        SUM(CASE
+		      WHEN C.ID in (174,175,176,194,249,250,251,253,266) THEN 0
+			  ELSE A.PLAN_VES/MaxDay*NumDay7
+			END) AS PLAN_NAR_RASP_7,
+		(CASE
+ 	       WHEN pDateEnd>=vDateBeg+20 THEN 3
+		   WHEN pDateEnd>=vDateBeg+10 THEN 2
+		   ELSE 1
+		 END) as NUM_DECADA
+      FROM PLAN_POST A, V_KLS_PLANSTRU C, KLS_DOG D 
+      WHERE A.PLANSTRU_ID=C.ID
+	    AND A.DOG_ID=D.ID
+        AND A.PLAN_ID=PlanId
+        AND A.PLAN_PER_ID=lcur.ID
+		AND C.IS_SNP=DECODE(IsSNP,1,1,C.IS_SNP)
+		AND NVL(A.REFINERY_ID,8) in (8,4175)
+		--AND a.prod_id_npr<>'90000'
+		AND NOT(A.PLAN_PER_ID=145 AND A.PLANSTRU_ID=13 AND A.PLAN_ID=PlanId AND A.PROD_ID_NPR='10492')
+      GROUP BY     
+        TO_NUMBER(A.PROD_ID_NPR),
+        A.PROD_ID_NPR,
+        TO_CHAR(C.KOD_SGR*1000000000000000+C.KOD_SPG*1000000000000+C.KOD_RZD*1000000000+C.KOD_PRZ*1000000+C.KOD_GRP*1000+C.KOD_PGR),
+        A.PLANSTRU_ID;
+
+    END LOOP;
+
+	
+	IF PlanID=2 THEN
+
+	  -- План подекадно
+      FOR lcur IN (SELECT A.ID,A.BEGIN_DATE,A.END_DATE,
+	               (CASE
+				      WHEN A.BEGIN_DATE>=vDateBeg+20 THEN 3
+					  WHEN A.BEGIN_DATE>=vDateBeg+10 THEN 2
+					  ELSE 1
+					END) as NUM_DECADA
+				   FROM PLAN_PERIODS A 
+	               WHERE A.Plan_id=7 AND A.DATE_PLAN BETWEEN vDateBeg AND vDateEnd) LOOP
+        INSERT INTO PLAN_FACT (TIP_ROW, PROD_ORDER, PROD_ID_NPR, PLANSTRU_ORDER, PLANSTRU_ID, 
+	      DATE_PLAN, PLAN_DECADA_1, PLAN_DECADA_2, PLAN_DECADA_3,NUM_DECADA) 
+        SELECT
+          'ПОСТАВКА' AS TIP_ROW,
+          TO_NUMBER(A.PROD_ID_NPR) AS PROD_ORDER,
+          A.PROD_ID_NPR,
+          TO_CHAR(C.KOD_SGR*1000000000000000+C.KOD_SPG*1000000000000+C.KOD_RZD*1000000000+C.KOD_PRZ*1000000+C.KOD_GRP*1000+C.KOD_PGR) AS PLANSTRU_ORDER,
+          A.PLANSTRU_ID,
+          pDateEnd AS DATE_PLAN,
+	      SUM(CASE
+	            WHEN lcur.NUM_DECADA=1 THEN A.PLAN_VES
+			    ELSE 0
+		      END) as PLAN_DECADA_1,
+	      SUM(CASE
+	            WHEN lcur.NUM_DECADA=2 THEN A.PLAN_VES
+			    ELSE 0
+		      END) as PLAN_DECADA_2,
+	      SUM(CASE
+	            WHEN lcur.NUM_DECADA=3 THEN A.PLAN_VES
+			    ELSE 0
+		      END) as PLAN_DECADA_3,
+		(CASE
+ 	       WHEN pDateEnd>=vDateBeg+20 THEN 3
+		   WHEN pDateEnd>=vDateBeg+10 THEN 2
+		   ELSE 1
+		 END) as NUM_DECADA
+        FROM PLAN_POST A, V_KLS_PLANSTRU C, KLS_DOG D 
+        WHERE A.PLANSTRU_ID=C.ID
+	      AND A.DOG_ID=D.ID
+          AND A.PLAN_ID=7
+          AND A.PLAN_PER_ID=lcur.ID
+		  AND C.IS_SNP=DECODE(IsSNP,1,1,C.IS_SNP)
+		  AND NVL(A.REFINERY_ID,8) in (8,4175)
+		  --AND a.prod_id_npr<>'90000'
+		  AND NOT(A.PLAN_PER_ID=145 AND A.PLANSTRU_ID=13 AND A.PLAN_ID=PlanId AND A.PROD_ID_NPR='10492')
+        GROUP BY     
+          TO_NUMBER(A.PROD_ID_NPR),
+          A.PROD_ID_NPR,
+          TO_CHAR(C.KOD_SGR*1000000000000000+C.KOD_SPG*1000000000000+C.KOD_RZD*1000000000+C.KOD_PRZ*1000000+C.KOD_GRP*1000+C.KOD_PGR),
+          A.PLANSTRU_ID;
+      END LOOP;
+
+	  -- Только ОБР
+      FOR lcur IN (SELECT A.ID,A.BEGIN_DATE,A.END_DATE,
+	               (CASE
+				      WHEN A.BEGIN_DATE>=vDateBeg+20 THEN 3
+					  WHEN A.BEGIN_DATE>=vDateBeg+10 THEN 2
+					  ELSE 1
+					END) as NUM_DECADA
+					FROM PLAN_PERIODS A 
+	               WHERE A.Plan_id=3 AND A.DATE_PLAN BETWEEN vDateBeg AND vDateEnd) LOOP
+  	    -- Добавляем план во временную таблицу
+        INSERT INTO PLAN_FACT (TIP_ROW, PROD_ORDER, PROD_ID_NPR, PLANSTRU_ORDER, PLANSTRU_ID, 
+		    DATE_PLAN, OBR_MON_V, OBR_NAR_V, OBR_NAR_RASP, OBR_NAR_RASP_7,NUM_DECADA) 
+        SELECT
+          'ПОСТАВКА' AS TIP_ROW,
+          TO_NUMBER(A.PROD_ID_NPR) AS PROD_ORDER,
+          A.PROD_ID_NPR,
+          TO_CHAR(C.KOD_SGR*1000000000000000+C.KOD_SPG*1000000000000+C.KOD_RZD*1000000000+C.KOD_PRZ*1000000+C.KOD_GRP*1000+C.KOD_PGR) AS PLANSTRU_ORDER,
+          A.PLANSTRU_ID,
+          pDateEnd AS DATE_PLAN,
+          SUM(A.PLAN_VES) AS OBR_MON_V,
+          SUM(A.PLAN_VES/MaxDay*NumDay) AS OBR_NAR_V,
+          SUM(CASE
+		        WHEN C.ID in (174,175,176,194,249,250,251,253,266) THEN 0
+			    ELSE A.PLAN_VES/MaxDay*NumDay
+			  END) AS OBR_NAR_RASP,
+          SUM(CASE
+		        WHEN C.ID in (174,175,176,194,249,250,251,253,266) THEN 0
+			    ELSE A.PLAN_VES/MaxDay*NumDay7
+			  END) AS OBR_NAR_RASP_7,
+		(CASE
+ 	       WHEN pDateEnd>=vDateBeg+20 THEN 3
+		   WHEN pDateEnd>=vDateBeg+10 THEN 2
+		   ELSE 1
+		 END) as NUM_DECADA
+        FROM PLAN_POST A, V_KLS_PLANSTRU C, KLS_DOG D 
+        WHERE A.PLANSTRU_ID=C.ID
+	      AND A.DOG_ID=D.ID
+          AND A.PLAN_ID=3
+          AND A.PLAN_PER_ID=lcur.ID
+  		  AND C.IS_SNP=DECODE(IsSNP,1,1,C.IS_SNP)
+		  AND NVL(A.REFINERY_ID,8) in (8,4175)
+	  	  --AND a.prod_id_npr<>'90000'
+  		  AND NOT(A.PLAN_PER_ID=145 AND A.PLANSTRU_ID=13 AND A.PLAN_ID=PlanId AND A.PROD_ID_NPR='10492')
+        GROUP BY     
+          TO_NUMBER(A.PROD_ID_NPR),
+          A.PROD_ID_NPR,
+          TO_CHAR(C.KOD_SGR*1000000000000000+C.KOD_SPG*1000000000000+C.KOD_RZD*1000000000+C.KOD_PRZ*1000000+C.KOD_GRP*1000+C.KOD_PGR),
+          A.PLANSTRU_ID;
+    
+      END LOOP;
+	END IF;
+
+
+	IF PlanID=14 THEN
+	  -- Только ОБР
+      FOR lcur IN (SELECT A.ID,A.BEGIN_DATE,A.END_DATE,
+	               (CASE
+				      WHEN A.BEGIN_DATE>=vDateBeg+20 THEN 3
+					  WHEN A.BEGIN_DATE>=vDateBeg+10 THEN 2
+					  ELSE 1
+					END) as NUM_DECADA
+					FROM PLAN_PERIODS A 
+	               WHERE A.Plan_id=15 AND A.DATE_PLAN BETWEEN vDateBeg AND vDateEnd) LOOP
+  	    -- Добавляем план во временную таблицу
+        INSERT INTO PLAN_FACT (TIP_ROW, PROD_ORDER, PROD_ID_NPR, PLANSTRU_ORDER, PLANSTRU_ID, 
+		    DATE_PLAN, OBR_MON_V, OBR_NAR_V, OBR_NAR_RASP, OBR_NAR_RASP_7,NUM_DECADA) 
+        SELECT
+          'ПОСТ_АВТО' AS TIP_ROW,
+          TO_NUMBER(A.PROD_ID_NPR) AS PROD_ORDER,
+          A.PROD_ID_NPR,
+          TO_CHAR(C.KOD_SGR*1000000000000000+C.KOD_SPG*1000000000000+C.KOD_RZD*1000000000+C.KOD_PRZ*1000000+C.KOD_GRP*1000+C.KOD_PGR) AS PLANSTRU_ORDER,
+          A.PLANSTRU_ID,
+          pDateEnd AS DATE_PLAN,
+          SUM(A.PLAN_VES) AS OBR_MON_V,
+          SUM(A.PLAN_VES/MaxDay*NumDay) AS OBR_NAR_V,
+          SUM(CASE
+		        WHEN C.ID in (174,175,176,194,249,250,251,253,266) THEN 0
+			    ELSE A.PLAN_VES/MaxDay*NumDay
+			  END) AS OBR_NAR_RASP,
+          SUM(CASE
+		        WHEN C.ID in (174,175,176,194,249,250,251,253,266) THEN 0
+			    ELSE A.PLAN_VES/MaxDay*NumDay7
+			  END) AS OBR_NAR_RASP_7,
+		(CASE
+ 	       WHEN pDateEnd>=vDateBeg+20 THEN 3
+		   WHEN pDateEnd>=vDateBeg+10 THEN 2
+		   ELSE 1
+		 END) as NUM_DECADA
+        FROM PLAN_POST A, V_KLS_PLANSTRU C, KLS_DOG D 
+        WHERE A.PLANSTRU_ID=C.ID
+	      AND A.DOG_ID=D.ID
+          AND A.PLAN_ID=3
+          AND A.PLAN_PER_ID=lcur.ID
+  		  AND C.IS_SNP=DECODE(IsSNP,1,1,C.IS_SNP)
+		  AND NVL(A.REFINERY_ID,8) in (8,4175)
+	  	  --AND a.prod_id_npr<>'90000'
+  		  AND NOT(A.PLAN_PER_ID=145 AND A.PLANSTRU_ID=13 AND A.PLAN_ID=PlanId AND A.PROD_ID_NPR='10492')
+        GROUP BY     
+          TO_NUMBER(A.PROD_ID_NPR),
+          A.PROD_ID_NPR,
+          TO_CHAR(C.KOD_SGR*1000000000000000+C.KOD_SPG*1000000000000+C.KOD_RZD*1000000000+C.KOD_PRZ*1000000+C.KOD_GRP*1000+C.KOD_PGR),
+          A.PLANSTRU_ID;
+    
+      END LOOP;
+	END IF;
+	
+	-- Только ОБР (СНП)
+	IF PlanID=12 THEN
+      -- Перебор плановых периодов 
+      FOR lcur IN (SELECT A.ID FROM PLAN_PERIODS A 
+	               WHERE A.Plan_id=13 AND A.DATE_PLAN BETWEEN vDateBeg AND vDateEnd) LOOP
+  	    -- Добавляем план во временную таблицу
+        INSERT INTO PLAN_FACT (TIP_ROW, PROD_ORDER, PROD_ID_NPR, PLANSTRU_ORDER, PLANSTRU_ID, 
+		    DATE_PLAN, OBR_MON_V, OBR_NAR_V, OBR_NAR_RASP) 
+        SELECT
+          'ПОСТАВКА' AS TIP_ROW,
+          TO_NUMBER(A.PROD_ID_NPR) AS PROD_ORDER,
+          A.PROD_ID_NPR,
+          TO_CHAR(C.KOD_SGR*1000000000000000+C.KOD_SPG*1000000000000+C.KOD_RZD*1000000000+C.KOD_PRZ*1000000+C.KOD_GRP*1000+C.KOD_PGR) AS PLANSTRU_ORDER,
+          A.PLANSTRU_ID,
+          pDateEnd AS DATE_PLAN,
+          SUM(A.PLAN_VES) AS OBR_MON_V,
+          SUM(A.PLAN_VES/MaxDay*NumDay) AS OBR_NAR_V,
+          SUM(CASE
+		        WHEN C.ID in (174,175,176,194,249,250,251,253,266) THEN 0
+			    ELSE A.PLAN_VES/MaxDay*NumDay
+			  END) AS OBR_NAR_RASP
+        FROM PLAN_POST A, V_KLS_PLANSTRU C, KLS_DOG D 
+        WHERE A.PLANSTRU_ID=C.ID
+	      AND A.DOG_ID=D.ID
+          AND A.PLAN_ID=13
+          AND A.PLAN_PER_ID=lcur.ID
+  		  AND C.IS_SNP=DECODE(IsSNP,1,1,C.IS_SNP)
+		  AND NVL(A.REFINERY_ID,8) in (8,4175)
+	  	  --AND a.prod_id_npr<>'90000'
+        GROUP BY     
+          TO_NUMBER(A.PROD_ID_NPR),
+          A.PROD_ID_NPR,
+          TO_CHAR(C.KOD_SGR*1000000000000000+C.KOD_SPG*1000000000000+C.KOD_RZD*1000000000+C.KOD_PRZ*1000000+C.KOD_GRP*1000+C.KOD_PGR),
+          A.PLANSTRU_ID;
+    
+      END LOOP;
+	END IF;
+
+	-- Только заявки на корректировку (УНП)
+	IF PlanID=2 THEN
+      -- Перебор плановых периодов 
+      FOR lcur IN (SELECT A.ID,A.BEGIN_DATE,A.END_DATE,
+	               (CASE
+				      WHEN A.BEGIN_DATE>=vDateBeg+20 THEN 3
+					  WHEN A.BEGIN_DATE>=vDateBeg+10 THEN 2
+					  ELSE 1
+					END) as NUM_DECADA
+					FROM PLAN_PERIODS A 
+	               WHERE A.Plan_id=6 AND A.DATE_PLAN BETWEEN vDateBeg AND vDateEnd) LOOP
+  	    -- Добавляем план во временную таблицу
+        INSERT INTO PLAN_FACT (TIP_ROW, PROD_ORDER, PROD_ID_NPR, PLANSTRU_ORDER, PLANSTRU_ID, 
+		    DATE_PLAN, KORR_MON_V, KORR_NAR_V, KORR_NAR_RASP,NUM_DECADA) 
+        SELECT
+          'ПОСТАВКА' AS TIP_ROW,
+          TO_NUMBER(A.PROD_ID_NPR) AS PROD_ORDER,
+          A.PROD_ID_NPR,
+          TO_CHAR(C.KOD_SGR*1000000000000000+C.KOD_SPG*1000000000000+C.KOD_RZD*1000000000+C.KOD_PRZ*1000000+C.KOD_GRP*1000+C.KOD_PGR) AS PLANSTRU_ORDER,
+          A.PLANSTRU_ID,
+          pDateEnd AS DATE_PLAN,
+          SUM(A.PLAN_VES) AS KORR_MON_V,
+          SUM(A.PLAN_VES/MaxDay*NumDay) AS KORR_NAR_V,
+          SUM(CASE
+		        WHEN C.ID in (174,175,176,194,249,250,251,253,266) THEN 0
+			    ELSE A.PLAN_VES/MaxDay*NumDay
+			  END) AS KORR_NAR_RASP,
+		(CASE
+ 	       WHEN pDateEnd>=vDateBeg+20 THEN 3
+		   WHEN pDateEnd>=vDateBeg+10 THEN 2
+		   ELSE 1
+		 END) as NUM_DECADA
+        FROM PLAN_POST A, V_KLS_PLANSTRU C, KLS_DOG D 
+        WHERE A.PLANSTRU_ID=C.ID
+	      AND A.DOG_ID=D.ID
+          AND A.PLAN_ID=6
+          AND A.PLAN_PER_ID=lcur.ID
+  		  AND C.IS_SNP=DECODE(IsSNP,1,1,C.IS_SNP)
+		  AND NVL(A.REFINERY_ID,8) in (8,4175)
+	  	  --AND a.prod_id_npr<>'90000'
+        GROUP BY     
+          TO_NUMBER(A.PROD_ID_NPR),
+          A.PROD_ID_NPR,
+          TO_CHAR(C.KOD_SGR*1000000000000000+C.KOD_SPG*1000000000000+C.KOD_RZD*1000000000+C.KOD_PRZ*1000000+C.KOD_GRP*1000+C.KOD_PGR),
+          A.PLANSTRU_ID;
+    
+      END LOOP;
+	END IF;
+
+    COMMIT;
+  END; 
+  
+  -- Заполнить "Заявлено"
+  PROCEDURE FillZayv (DateBeg VARCHAR2, DateEnd VARCHAR2, IsSNP NUMBER DEFAULT 0) IS
+    vDateBeg DATE;
+	vDateEnd DATE;
+  BEGIN
+	vDateBeg:=TRUNC(TO_DATE(DateBeg,'dd.mm.yyyy'),'MONTH'); -- Начало месяца
+	vDateEnd:=LAST_DAY(TO_DATE(DateEnd,'dd.mm.yyyy')); -- Конец месяца
+
+    INSERT INTO PLAN_FACT (TIP_ROW, PROD_ORDER, PROD_ID_NPR, PLANSTRU_ORDER, PLANSTRU_ID, DATE_ZAYV,ZAYV) 
+    SELECT
+      'ПОСТАВКА' AS TIP_ROW,
+      TO_NUMBER(A.PROD_ID_NPR) AS PROD_ORDER,
+      A.PROD_ID_NPR,
+      TO_CHAR(C.KOD_SGR*1000000000000000+C.KOD_SPG*1000000000000+C.KOD_RZD*1000000000+C.KOD_PRZ*1000000+C.KOD_GRP*1000+C.KOD_PGR) AS PLANSTRU_ORDER,
+      A.PLANSTRU_ID,
+      MAX(A.UPDATE_DATE) AS DATE_ZAYV, 
+      SUM(A.TONN_DECLARED) AS ZAYV
+    FROM MONTH A, V_KLS_PLANSTRU C 
+    WHERE A.PLANSTRU_ID=C.ID
+      AND A.DATE_PLAN BETWEEN vDateBeg AND vDateEnd
+	  AND A.NAZN_OTG_ID<>10
+      AND C.IS_SNP=DECODE(IsSNP,1,1,C.IS_SNP)
+      --AND a.prod_id_npr<>'90000'
+    GROUP BY     
+      TO_NUMBER(A.PROD_ID_NPR),
+      A.PROD_ID_NPR,
+      TO_CHAR(C.KOD_SGR*1000000000000000+C.KOD_SPG*1000000000000+C.KOD_RZD*1000000000+C.KOD_PRZ*1000000+C.KOD_GRP*1000+C.KOD_PGR),
+      A.PLANSTRU_ID;
+
+	COMMIT;  
+  END;
+
+  -- Заполнить "Заявлено"
+  PROCEDURE FillZayvSNP (DateBeg VARCHAR2, DateEnd VARCHAR2) IS
+    vDateBeg DATE;
+	vDateEnd DATE;
+  BEGIN
+	vDateBeg:=TRUNC(TO_DATE(DateBeg,'dd.mm.yyyy'),'MONTH'); -- Начало месяца
+	vDateEnd:=LAST_DAY(TO_DATE(DateEnd,'dd.mm.yyyy')); -- Конец месяца
+
+    INSERT INTO PLAN_FACT (TIP_ROW, PROD_ORDER, PROD_ID_NPR, PLANSTRU_ORDER, PLANSTRU_ID, DATE_ZAYV,ZAYV) 
+    SELECT
+      'ПОСТАВКА' AS TIP_ROW,
+      TO_NUMBER(A.PROD_ID_NPR) AS PROD_ORDER,
+      A.PROD_ID_NPR,
+      TO_CHAR(C.KOD_SGR*1000000000000000+C.KOD_SPG*1000000000000+C.KOD_RZD*1000000000+C.KOD_PRZ*1000000+C.KOD_GRP*1000+C.KOD_PGR) AS PLANSTRU_ORDER,
+      C.ID,
+      MAX(A.UPDATE_DATE) AS DATE_ZAYV, 
+      SUM(A.TONN_DECLARED) AS ZAYV
+    FROM MONTH A, V_KLS_PLANSTRU C, ZAKAZ unp, ZAKAZ snp  
+    WHERE A.ZAKAZ_ID=unp.ID(+) AND unp.LINK_ID=snp.ID(+) 
+	  AND NVL(snp.PLANSTRU_ID,A.PLANSTRU_ID)=C.ID     
+      AND A.DATE_PLAN BETWEEN vDateBeg AND vDateEnd
+	  AND A.NAZN_OTG_ID<>10
+      AND C.IS_SNP=1
+      --AND a.prod_id_npr<>'90000'
+    GROUP BY     
+      TO_NUMBER(A.PROD_ID_NPR),
+      A.PROD_ID_NPR,
+      TO_CHAR(C.KOD_SGR*1000000000000000+C.KOD_SPG*1000000000000+C.KOD_RZD*1000000000+C.KOD_PRZ*1000000+C.KOD_GRP*1000+C.KOD_PGR),
+      C.ID;
+
+	COMMIT;  
+  END;
+    
+  -- Заполнить "Свободная емкость"
+  PROCEDURE FillEmptyVol (TimeEnd VARCHAR2, DateEnd VARCHAR2) IS
+	pTimeEnd VARCHAR2(5);
+	pDateEnd DATE;
+  BEGIN
+    pDateEnd:=TO_DATE(DateEnd,'dd.mm.yyyy'); 
+	pTimeEnd:=SUBSTR(TimeEnd,1,5);
+
+    INSERT INTO PLAN_FACT (TIP_ROW, PROD_ORDER, PROD_ID_NPR, DATE_EMPTY_VOL, TIME_EMPTY_VOL, MAX_VOL,DEAD_VOL,VOL,EMPTY_VOL) 
+    SELECT
+      'СВ.ЕМКОСТЬ' AS TIP_ROW,
+      TO_NUMBER(A.PROD_ID_NPR) AS PROD_ORDER,
+      A.PROD_ID_NPR,
+      pDateEnd AS DATE_EMPTY_VOL,
+      pTimeEnd AS TIME_EMPTY_VOL,
+	  SUM(A.MAX_VOL) AS MAX_VOL,
+	  SUM(A.DEAD_VOL) AS DEAD_VOL,
+--      SUM(DECODE(SIGN(A.VOL-A.DEAD_VOL),1,A.VOL-A.DEAD_VOL,0)) AS VOL, 
+      SUM(DECODE(A.AR_TOV_ID,1,DECODE(SIGN(A.VOL-A.DEAD_VOL),1,A.VOL-A.DEAD_VOL,0),0)) AS VOL, 
+      SUM(DECODE(SIGN(A.MAX_VOL-A.VOL),1,A.MAX_VOL-A.VOL,0)) AS EMPTY_VOL 
+    FROM ARC_REZ A
+    WHERE A.DATEUPLOAD=TO_DATE(DateEnd || ' ' || pTimeEnd,'dd.mm.yyyy hh24:mi')
+--	  AND A.AR_TOV_ID=1
+    GROUP BY     
+      TO_NUMBER(A.PROD_ID_NPR),
+      A.PROD_ID_NPR;
+
+    COMMIT;
+  END;
+
+  -- Заполнить факт по плану поставок
+  PROCEDURE FillFactPost (DateBegPlan VARCHAR2, DateEndPlan VARCHAR2, TimeBeg VARCHAR2, DateBeg VARCHAR2, TimeEnd VARCHAR2, DateEnd VARCHAR2, IsSNP NUMBER DEFAULT 0) IS
+    vDateBegPlan DATE;
+	vDateEndPlan DATE;
+	pTimeBeg VARCHAR2(5);
+	pTimeEnd VARCHAR2(5);
+	pDateEnd DATE;
+	pDateEnd7 VARCHAR2(10);
+  BEGIN
+	vDateBegPlan:=TRUNC(TO_DATE(DateBegPlan,'dd.mm.yyyy'),'MONTH'); -- Начало месяца
+	vDateEndPlan:=LAST_DAY(TO_DATE(DateEndPlan,'dd.mm.yyyy')); -- Конец месяца
+	pTimeBeg:=SUBSTR(TimeBeg,1,5); 
+    pDateEnd:=TO_DATE(DateEnd,'dd.mm.yyyy'); 
+	pTimeEnd:=SUBSTR(TimeEnd,1,5);
+
+	IF pDateEnd-7<vDateBegPlan THEN
+	  pDateEnd7:=TO_CHAR(vDateBegPlan,'dd.mm.yyyy');
+	ELSE  
+  	  pDateEnd7:=TO_CHAR(pDateEnd-7,'dd.mm.yyyy');
+	end if;  
+
+	-- Отгрузка всего
+    INSERT INTO PLAN_FACT (TIP_ROW, PROD_ORDER, PROD_ID_NPR, PLANSTRU_ORDER, PLANSTRU_ID, DATE_FACT, TIME_FACT, FACT_SUT_V, FACT_V, FACT_NAR_7,
+  	   FACT_DECADA_1,FACT_DECADA_2,FACT_DECADA_3,DATE_PLAN) 
+    SELECT
+      'ПОСТАВКА' AS TIP_ROW,
+      TO_NUMBER(A.PROD_ID_NPR) AS PROD_ORDER,
+      A.PROD_ID_NPR,
+      TO_CHAR(C.KOD_SGR*1000000000000000+C.KOD_SPG*1000000000000+C.KOD_RZD*1000000000+C.KOD_PRZ*1000000+C.KOD_GRP*1000+C.KOD_PGR) AS PLANSTRU_ORDER,
+      MONTH.PLANSTRU_ID,
+      pDateEnd AS DATE_FACT,
+      pTimeEnd AS TIME_FACT,
+	  SUM(CASE
+	        WHEN A.DATE_OFORML>=TO_DATE(DateEnd || ' ' || pTimeEnd,'dd.mm.yyyy hh24:mi')-1 THEN A.VES_BRUTTO
+			ELSE 0
+		  END) as FACT_SUT_V,
+      SUM(A.VES_BRUTTO) AS FACT_V,
+	  SUM(CASE
+	        WHEN A.DATE_OFORML<TO_DATE(pDateEnd7 || ' ' || pTimeEnd,'dd.mm.yyyy hh24:mi') THEN A.VES_BRUTTO
+			ELSE 0
+		  END) as FACT_NAR_7,
+	  SUM(CASE
+	        WHEN TO_NUMBER(TO_CHAR(A.DATE_OTGR,'DD'))<=10 THEN A.VES_BRUTTO
+			ELSE 0
+		  END) as FACT_DECADA_1,
+	  SUM(CASE
+	        WHEN TO_NUMBER(TO_CHAR(A.DATE_OTGR,'DD'))>10 AND TO_NUMBER(TO_CHAR(A.DATE_OTGR,'DD'))<=20 THEN A.VES_BRUTTO
+			ELSE 0
+		  END) as FACT_DECADA_2,
+	  SUM(CASE
+	        WHEN TO_NUMBER(TO_CHAR(A.DATE_OTGR,'DD'))>20 THEN A.VES_BRUTTO
+			ELSE 0
+		  END) as FACT_DECADA_3,
+      TO_DATE(DateEndPlan,'dd.mm.yyyy') AS DATE_PLAN	  
+    FROM KVIT A, MONTH, V_KLS_PLANSTRU C 
+    WHERE MONTH.PLANSTRU_ID=C.ID    
+	  AND A.NOM_ZD=MONTH.NOM_ZD 
+      AND MONTH.DATE_PLAN BETWEEN vDateBegPlan AND vDateEndPlan
+	  AND MONTH.NAZN_OTG_ID<>10
+      --AND a.prod_id_npr<>'90000'
+      AND C.IS_SNP=DECODE(IsSNP,1,1,C.IS_SNP)
+--      AND A.DATE_OFORML>=TO_DATE(DateBeg || ' ' || pTimeBeg,'dd.mm.yyyy hh24:mi')
+      AND A.DATE_OFORML <TO_DATE(DateEnd || ' ' || pTimeEnd,'dd.mm.yyyy hh24:mi')
+    GROUP BY     
+      TO_NUMBER(A.PROD_ID_NPR),
+      A.PROD_ID_NPR,
+      TO_CHAR(C.KOD_SGR*1000000000000000+C.KOD_SPG*1000000000000+C.KOD_RZD*1000000000+C.KOD_PRZ*1000000+C.KOD_GRP*1000+C.KOD_PGR),
+      MONTH.PLANSTRU_ID,
+	  (CASE
+	        WHEN A.DATE_OTGR>=vDateBegPlan+20 THEN 3
+	        WHEN A.DATE_OTGR>=vDateBegPlan+10 THEN 2
+			ELSE 1
+		  END);
+
+    -- Отгрузка автотранспортом
+    INSERT INTO PLAN_FACT (TIP_ROW, PROD_ORDER, PROD_ID_NPR, PLANSTRU_ORDER, PLANSTRU_ID, DATE_FACT, TIME_FACT, FACT_SUT_V, FACT_V, FACT_NAR_7,
+  	   FACT_DECADA_1,FACT_DECADA_2,FACT_DECADA_3,DATE_PLAN) 
+    SELECT
+      'ПОСТ_АВТО' AS TIP_ROW,
+      TO_NUMBER(A.PROD_ID_NPR) AS PROD_ORDER,
+      A.PROD_ID_NPR,
+      TO_CHAR(C.KOD_SGR*1000000000000000+C.KOD_SPG*1000000000000+C.KOD_RZD*1000000000+C.KOD_PRZ*1000000+C.KOD_GRP*1000+C.KOD_PGR) AS PLANSTRU_ORDER,
+      MONTH.PLANSTRU_ID,
+      pDateEnd AS DATE_FACT,
+      pTimeEnd AS TIME_FACT,
+	  SUM(CASE
+	        WHEN A.DATE_OFORML>=TO_DATE(DateEnd || ' ' || pTimeEnd,'dd.mm.yyyy hh24:mi')-1 THEN A.VES_BRUTTO
+			ELSE 0
+		  END) as FACT_SUT_V,
+      SUM(A.VES_BRUTTO) AS FACT_V,
+	  SUM(CASE
+	        WHEN A.DATE_OFORML<TO_DATE(pDateEnd7 || ' ' || pTimeEnd,'dd.mm.yyyy hh24:mi') THEN A.VES_BRUTTO
+			ELSE 0
+		  END) as FACT_NAR_7,
+	  SUM(CASE
+	        WHEN TO_NUMBER(TO_CHAR(A.DATE_OTGR,'DD'))<=10 THEN A.VES_BRUTTO
+			ELSE 0
+		  END) as FACT_DECADA_1,
+	  SUM(CASE
+	        WHEN TO_NUMBER(TO_CHAR(A.DATE_OTGR,'DD'))>10 AND TO_NUMBER(TO_CHAR(A.DATE_OTGR,'DD'))<=20 THEN A.VES_BRUTTO
+			ELSE 0
+		  END) as FACT_DECADA_2,
+	  SUM(CASE
+	        WHEN TO_NUMBER(TO_CHAR(A.DATE_OTGR,'DD'))>20 THEN A.VES_BRUTTO
+			ELSE 0
+		  END) as FACT_DECADA_3,
+      TO_DATE(DateEndPlan,'dd.mm.yyyy') AS DATE_PLAN	  
+    FROM KVIT A, MONTH, V_KLS_PLANSTRU C, KLS_VID_OTGR 
+    WHERE MONTH.PLANSTRU_ID=C.ID    
+	  AND A.NOM_ZD=MONTH.NOM_ZD 
+      AND MONTH.DATE_PLAN BETWEEN vDateBegPlan AND vDateEndPlan
+	  AND MONTH.NAZN_OTG_ID<>10
+      --AND a.prod_id_npr<>'90000'
+      AND C.IS_SNP=DECODE(IsSNP,1,1,C.IS_SNP)
+--      AND A.DATE_OFORML>=TO_DATE(DateBeg || ' ' || pTimeBeg,'dd.mm.yyyy hh24:mi')
+      AND A.DATE_OFORML <TO_DATE(DateEnd || ' ' || pTimeEnd,'dd.mm.yyyy hh24:mi')
+	  AND MONTH.LOAD_ABBR=KLS_VID_OTGR.LOAD_ABBR
+	  AND KLS_VID_OTGR.LOAD_TYPE_ID=2
+    GROUP BY     
+      TO_NUMBER(A.PROD_ID_NPR),
+      A.PROD_ID_NPR,
+      TO_CHAR(C.KOD_SGR*1000000000000000+C.KOD_SPG*1000000000000+C.KOD_RZD*1000000000+C.KOD_PRZ*1000000+C.KOD_GRP*1000+C.KOD_PGR),
+      MONTH.PLANSTRU_ID,
+	  (CASE
+	        WHEN A.DATE_OTGR>=vDateBegPlan+20 THEN 3
+	        WHEN A.DATE_OTGR>=vDateBegPlan+10 THEN 2
+			ELSE 1
+		  END);
+  
+    COMMIT;
+  END;
+
+  -- Заполнить факт по плану поставок
+  PROCEDURE FillFactPostSNP (DateBegPlan VARCHAR2, DateEndPlan VARCHAR2, TimeBeg VARCHAR2, DateBeg VARCHAR2, TimeEnd VARCHAR2, DateEnd VARCHAR2) IS
+    vDateBegPlan DATE;
+	vDateEndPlan DATE;
+	pTimeBeg VARCHAR2(5);
+	pTimeEnd VARCHAR2(5);
+	pDateEnd DATE;
+  BEGIN
+	vDateBegPlan:=TRUNC(TO_DATE(DateBegPlan,'dd.mm.yyyy'),'MONTH'); -- Начало месяца
+	vDateEndPlan:=LAST_DAY(TO_DATE(DateEndPlan,'dd.mm.yyyy')); -- Конец месяца
+	pTimeBeg:=SUBSTR(TimeBeg,1,5); 
+    pDateEnd:=TO_DATE(DateEnd,'dd.mm.yyyy'); 
+	pTimeEnd:=SUBSTR(TimeEnd,1,5);
+
+    INSERT INTO PLAN_FACT (TIP_ROW, PROD_ORDER, PROD_ID_NPR, PLANSTRU_ORDER, PLANSTRU_ID, DATE_FACT, TIME_FACT, FACT_SUT_V, FACT_V) 
+    SELECT
+      'ПОСТАВКА' AS TIP_ROW,
+      TO_NUMBER(A.PROD_ID_NPR) AS PROD_ORDER,
+      A.PROD_ID_NPR,
+      TO_CHAR(C.KOD_SGR*1000000000000000+C.KOD_SPG*1000000000000+C.KOD_RZD*1000000000+C.KOD_PRZ*1000000+C.KOD_GRP*1000+C.KOD_PGR) AS PLANSTRU_ORDER,
+      C.ID as PLANSTRU_ID,
+      pDateEnd AS DATE_FACT,
+      pTimeEnd AS TIME_FACT,
+	  SUM(CASE
+	        WHEN A.DATE_OFORML>=TO_DATE(DateEnd || ' ' || pTimeEnd,'dd.mm.yyyy hh24:mi')-1 THEN A.VES_BRUTTO
+			ELSE 0
+		  END) as FACT_SUT_V,
+      SUM(A.VES_BRUTTO) AS FACT_V
+    FROM KVIT A, MONTH, V_KLS_PLANSTRU C, ZAKAZ unp, ZAKAZ snp 
+    WHERE MONTH.ZAKAZ_ID=unp.ID(+) AND unp.LINK_ID=snp.ID(+) 
+	  AND NVL(snp.PLANSTRU_ID,MONTH.PLANSTRU_ID)=C.ID     
+	  AND A.NOM_ZD=MONTH.NOM_ZD 
+      AND MONTH.DATE_PLAN BETWEEN vDateBegPlan AND vDateEndPlan
+	  AND MONTH.NAZN_OTG_ID<>10
+      --AND a.prod_id_npr<>'90000'
+      AND C.IS_SNP=1
+      AND A.DATE_OFORML <TO_DATE(DateEnd || ' ' || pTimeEnd,'dd.mm.yyyy hh24:mi')
+    GROUP BY     
+      TO_NUMBER(A.PROD_ID_NPR),
+      A.PROD_ID_NPR,
+      TO_CHAR(C.KOD_SGR*1000000000000000+C.KOD_SPG*1000000000000+C.KOD_RZD*1000000000+C.KOD_PRZ*1000000+C.KOD_GRP*1000+C.KOD_PGR),
+      C.ID;
+  
+    COMMIT;
+  END;
+  
+  -- Заполнить план перевозок
+  PROCEDURE FillPlanGD (DateBeg VARCHAR2, DateEnd VARCHAR2) IS
+    vDateBeg DATE;
+	vDateEnd DATE;
+	pDateEnd DATE;
+  BEGIN
+    pDateEnd:=TO_DATE(DateEnd,'dd.mm.yyyy'); 
+	vDateBeg:=TRUNC(TO_DATE(DateBeg,'dd.mm.yyyy'),'MONTH'); -- Начало месяца
+	vDateEnd:=LAST_DAY(TO_DATE(DateEnd,'dd.mm.yyyy')); -- Конец месяца
+
+    -- План перевозок за месяц 	
+    INSERT INTO PLAN_FACT (TIP_ROW, GROUP_ORDER, GROUP_NAME, PROD_ORDER, PROD_ID_NPR, PLANSTRU_ORDER, PLANSTRU_ID, DATE_PLAN, PLAN_MON_C, PLAN_MON_V, PLAN_MON_SOBS_C, PLAN_MON_SOBS_V) 
+    SELECT
+      'ПЕРЕВОЗКА' AS TIP_ROW,
+      KLS_LOAD_TYPE.ID AS GROUP_ORDER,
+      KLS_LOAD_TYPE.TYPE_OTGR_NAME AS GROUP_NAME,
+      GU12_A.PROD_ID AS PROD_ORDER,
+      TO_CHAR(GU12_A.PROD_ID) AS PROD_ID_NPR,
+      DECODE(GU12_A.EXPED_ID,NULL,'1','2') AS PLANSTRU_ORDER,
+      DECODE(GU12_A.EXPED_ID,NULL,1,2) AS PLANSTRU_ID,
+      pDateEnd AS DATE_PLAN,
+      SUM(DECODE(GU12_b.PRINVAG_ID,207,GU12_B.KOL_VAG,0)) AS PLAN_MON_C,
+      SUM(DECODE(GU12_b.PRINVAG_ID,207,GU12_B.VES,0)) AS PLAN_MON_V,
+      SUM(DECODE(GU12_b.PRINVAG_ID,207,0,GU12_B.KOL_VAG)) AS PLAN_MON_SOBS_C,
+      SUM(DECODE(GU12_b.PRINVAG_ID,207,0,GU12_B.VES)) AS PLAN_MON_SOBS_V
+    FROM GU12_A, GU12_B, KLS_LOAD_TYPE
+    WHERE GU12_A.ID=GU12_B.ID_A 
+	  AND KLS_LOAD_TYPE.ID=1
+      AND TRUNC(GU12_A.FROM_DATE,'MM')=TRUNC(vDateEnd,'MM')
+    GROUP BY     
+      KLS_LOAD_TYPE.ID,
+      KLS_LOAD_TYPE.TYPE_OTGR_NAME,
+      GU12_A.PROD_ID,
+      DECODE(GU12_A.EXPED_ID,NULL,'1','2'),
+      DECODE(GU12_A.EXPED_ID,NULL,1,2);
+	  
+	COMMIT;
+	
+	-- План перевозок нарастающий  
+    INSERT INTO PLAN_FACT (TIP_ROW, GROUP_ORDER, GROUP_NAME, PROD_ORDER, PROD_ID_NPR, 
+        PLANSTRU_ORDER, PLANSTRU_ID, DATE_PLAN, PLAN_NAR_C, PLAN_NAR_V, PLAN_NAR_SOBS_C, PLAN_NAR_SOBS_V) 
+    SELECT
+      'ПЕРЕВОЗКА' AS TIP_ROW,
+      KLS_LOAD_TYPE.ID AS GROUP_ORDER,
+      KLS_LOAD_TYPE.TYPE_OTGR_NAME AS GROUP_NAME,
+      GU12_A.PROD_ID AS PROD_ORDER,
+      TO_CHAR(GU12_A.PROD_ID) AS PROD_ID_NPR,
+      DECODE(GU12_A.EXPED_ID,NULL,'1','2') AS PLANSTRU_ORDER,
+      DECODE(GU12_A.EXPED_ID,NULL,1,2) AS PLANSTRU_ID,
+      pDateEnd AS DATE_PLAN,
+      SUM(DECODE(GU12_B.PRINVAG_ID,207,GU12_BR.KOL_VAG,0)) AS PLAN_NAR_C,
+      SUM(DECODE(GU12_B.PRINVAG_ID,207,GU12_BR.VES,0)) AS PLAN_NAR_V,
+      SUM(DECODE(GU12_B.PRINVAG_ID,207,0,GU12_BR.KOL_VAG)) AS PLAN_NAR_SOBS_C,
+      SUM(DECODE(GU12_B.PRINVAG_ID,207,0,GU12_BR.VES)) AS PLAN_NAR_SOBS_V
+    FROM GU12_A, GU12_B, GU12_BR,KLS_LOAD_TYPE
+    WHERE GU12_A.ID=GU12_B.ID_A AND GU12_B.ID=GU12_BR.ID_B 
+	  AND KLS_LOAD_TYPE.ID=1
+      AND TRUNC(GU12_A.FROM_DATE,'MM')=TRUNC(vDateEnd,'MM')
+      AND GU12_BR.DATE_R<=pDateEnd
+    GROUP BY     
+      KLS_LOAD_TYPE.ID,
+      KLS_LOAD_TYPE.TYPE_OTGR_NAME,
+      GU12_A.PROD_ID,
+      DECODE(GU12_A.EXPED_ID,NULL,'1','2'),
+      DECODE(GU12_A.EXPED_ID,NULL,1,2);
+
+	COMMIT;   
+  END;
+  
+  -- Заполнить факт по плану перевозок
+  PROCEDURE FillFactGD (TimeBeg VARCHAR2, DateBeg VARCHAR2, TimeEnd VARCHAR2, DateEnd VARCHAR2) IS
+    vDateBeg DATE;
+	vDateEnd DATE;
+	pTimeBeg VARCHAR2(5);
+	pTimeEnd VARCHAR2(5);
+	pDateEnd DATE;
+  BEGIN
+	vDateBeg:=TRUNC(TO_DATE(DateBeg,'dd.mm.yyyy'),'MONTH'); -- Начало месяца
+	vDateEnd:=LAST_DAY(TO_DATE(DateEnd,'dd.mm.yyyy')); -- Конец месяца
+	pTimeBeg:=SUBSTR(TimeBeg,1,5); 
+    pDateEnd:=TO_DATE(DateEnd,'dd.mm.yyyy'); 
+	pTimeEnd:=SUBSTR(TimeEnd,1,5);
+	
+    INSERT INTO PLAN_FACT (TIP_ROW, GROUP_ORDER, GROUP_NAME, PROD_ORDER, PROD_ID_NPR, PLANSTRU_ORDER, PLANSTRU_ID, DATE_FACT, TIME_FACT, FACT_C, FACT_V, FACT_SOBS_C, FACT_SOBS_V) 
+    SELECT
+      'ПЕРЕВОЗКА' AS TIP_ROW,
+      KLS_LOAD_TYPE.ID AS GROUP_ORDER,
+      KLS_LOAD_TYPE.TYPE_OTGR_NAME AS GROUP_NAME,
+      TO_NUMBER(KLS_PROD.PROD_GU12_ID) AS PROD_ORDER,
+      KLS_PROD.PROD_GU12_ID AS PROD_ID_NPR,
+      TO_CHAR(MONTH.IS_EXP+1) AS PLANSTRU_ORDER,
+      MONTH.IS_EXP+1 AS PLANSTRU_ID,
+      pDateEnd AS DATE_FACT,
+      pTimeEnd AS TIME_FACT,
+      SUM(DECODE(A.VAGOWNER_ID,3,1,0)) AS FACT_C,
+      SUM(DECODE(A.VAGOWNER_ID,3,A.VES_BRUTTO,0)) AS FACT_V,
+      SUM(DECODE(A.VAGOWNER_ID,3,0,1)) AS FACT_SOBS_C,
+      SUM(DECODE(A.VAGOWNER_ID,3,0,A.VES_BRUTTO)) AS FACT_SOBS_V
+    FROM KVIT A, MONTH, KLS_VID_OTGR, KLS_LOAD_TYPE, KLS_PROD
+    WHERE A.NOM_ZD=MONTH.NOM_ZD 
+      AND A.PROD_ID_NPR=KLS_PROD.ID_NPR
+      AND MONTH.LOAD_ABBR=KLS_VID_OTGR.LOAD_ABBR
+      AND KLS_VID_OTGR.LOAD_TYPE_ID=KLS_LOAD_TYPE.ID 
+      AND A.DATE_OFORML>=TO_DATE(DateBeg || ' ' || pTimeBeg,'dd.mm.yyyy hh24:mi')
+      AND A.DATE_OFORML <TO_DATE(DateEnd || ' ' || pTimeEnd,'dd.mm.yyyy hh24:mi')
+	  AND KLS_VID_OTGR.LOAD_TYPE_ID IN (1,2,6)
+    GROUP BY     
+      KLS_LOAD_TYPE.ID,
+      KLS_LOAD_TYPE.TYPE_OTGR_NAME,
+      TO_NUMBER(KLS_PROD.PROD_GU12_ID),
+      KLS_PROD.PROD_GU12_ID,
+      TO_CHAR(MONTH.IS_EXP+1),
+      MONTH.IS_EXP+1;
+
+	COMMIT;
+  END;
+
+  -- Заполнение плана/факта по плану перевозок и поставки  
+  PROCEDURE FillAll (PlanId NUMBER, DateBegPlanPost VARCHAR2, DateEndPlanPost VARCHAR2,  
+     TimeBegFactPost VARCHAR2, DateBegFactPost VARCHAR2, TimeEndFactPost VARCHAR2, DateEndFactPost VARCHAR2,
+	 DateBegPlanGD VARCHAR2, DateEndPlanGD VARCHAR2,   
+     TimeBegFactGD VARCHAR2, DateBegFactGD VARCHAR2, TimeEndFactGD VARCHAR2, DateEndFactGD VARCHAR2) IS
+	 i NUMBER;
+  BEGIN
+    EmptyPlanFact;
+    i:=FOR_TEMP.SET_VARI('BEGIN_DATE',DateBegPlanPost,'MASTER','FOR_PLANFACT');
+    i:=FOR_TEMP.SET_VARI('END_DATE',DateEndPlanPost,'MASTER','FOR_PLANFACT');
+
+    FillPlanPost (PlanId,DateBegPlanPost,DateEndPlanPost);
+    FillZayv (DateBegPlanPost,DateEndPlanPost);
+    FillFactPost (DateBegPlanPost,DateEndPlanPost,TimeBegFactPost,DateBegFactPost,
+	  TimeEndFactPost, DateEndFactPost);
+    FillPlanGD (DateBegPlanGD,DateEndPlanGD);
+    FillFactGD (TimeBegFactGD,DateBegFactGD,TimeEndFactGD,DateEndFactGD);
+	FillEmptyVol ('00:00'/*TimeEndFactPost*/, DateEndFactPost);
+	
+	COMMIT;
+  END;	 
+
+  -- Заполнение плана/факта по плану поставки для СНП  
+  PROCEDURE FillSNP (PlanId NUMBER, DateBegPlanPost VARCHAR2, DateEndPlanPost VARCHAR2,  
+     TimeBegFactPost VARCHAR2, DateBegFactPost VARCHAR2, TimeEndFactPost VARCHAR2, DateEndFactPost VARCHAR2,
+	 DateBegPlanGD VARCHAR2, DateEndPlanGD VARCHAR2,   
+     TimeBegFactGD VARCHAR2, DateBegFactGD VARCHAR2, TimeEndFactGD VARCHAR2, DateEndFactGD VARCHAR2) IS
+	 i NUMBER;
+  BEGIN
+    EmptyPlanFact;
+    i:=FOR_TEMP.SET_VARI('BEGIN_DATE',DateBegPlanPost,'MASTER','FOR_PLANFACT');
+    i:=FOR_TEMP.SET_VARI('END_DATE',DateEndPlanPost,'MASTER','FOR_PLANFACT');
+
+    FillPlanPost (PlanId,DateBegPlanPost,DateEndPlanPost,1);
+    FillZayv (DateBegPlanPost,DateEndPlanPost,1);
+    FillFactPostSNP (DateBegPlanPost,DateEndPlanPost,TimeBegFactPost,DateBegFactPost,
+	  TimeEndFactPost, DateEndFactPost);
+
+	COMMIT;
+  END;	 
+
+  -- Заполнение оперативной сводки  
+  PROCEDURE FillOper (PlanId NUMBER, DateBegPlanPost VARCHAR2, DateEndPlanPost VARCHAR2,  
+     TimeBegFactPost VARCHAR2, DateBegFactPost VARCHAR2, TimeEndFactPost VARCHAR2, DateEndFactPost VARCHAR2,
+	 DateBegPlanGD VARCHAR2, DateEndPlanGD VARCHAR2,   
+     TimeBegFactGD VARCHAR2, DateBegFactGD VARCHAR2, TimeEndFactGD VARCHAR2, DateEndFactGD VARCHAR2) IS
+	 i NUMBER;
+  BEGIN
+    EmptyPlanFact;
+    i:=FOR_TEMP.SET_VARI('BEGIN_DATE',DateBegPlanPost,'MASTER','FOR_PLANFACT');
+    i:=FOR_TEMP.SET_VARI('END_DATE',DateEndPlanPost,'MASTER','FOR_PLANFACT');
+	
+	FillPlanPost (PlanId,DateBegPlanPost,DateEndPlanPost);
+	FillPlanPost (14,DateBegPlanPost,DateEndPlanPost);
+    FillFactPost (DateBegPlanPost,DateEndPlanPost,TimeBegFactPost,DateBegFactPost,
+	  TimeEndFactPost, DateEndFactPost);
+
+    DELETE FROM V_PLAN_FACT
+     WHERE PLANSTRU_ORDER>=91010000000000000 and PLANSTRU_ORDER<>91010095000000000 and (PLANSTRU_ORDER<91010040000000000 or PLANSTRU_ORDER>=91010080000000000) and planstru_id<>253;
+
+	-- Данные для стр.2 "Выполнение плана по декадам"
+    INSERT INTO PLAN_FACT (
+	    TIP_ROW, PROD_ORDER, PROD_ID_NPR, PLANSTRU_ID, DATE_PLAN, 
+		PLAN_MON_V, PLAN_NAR_V, PLAN_NAR_RASP, 
+		OBR_MON_V, OBR_NAR_V, OBR_NAR_RASP,
+		NUM_DECADA, 
+		PLAN_DECADA_1, PLAN_DECADA_2, PLAN_DECADA_3,
+		DATE_FACT, TIME_FACT, 
+		FACT_SUT_V, FACT_V, 
+     	FACT_DECADA_1,FACT_DECADA_2,FACT_DECADA_3)
+      SELECT
+        'ПОДЕКАДНО' AS TIP_ROW,
+        PROD_ORDER, PROD_ID_NPR, PLANSTRU_ID, DATE_PLAN, 
+		PLAN_MON, PLAN_NAR, PLAN_NAR_RASP, 
+		OBR_MON, OBR_NAR, OBR_NAR_RASP,
+		NUM_DECADA, 
+		PLAN_DECADA_1, PLAN_DECADA_2, PLAN_DECADA_3,
+		DATE_FACT, TIME_FACT, 
+		FACT_SUT, FACT, 
+     	FACT_DECADA_1,FACT_DECADA_2,FACT_DECADA_3
+      FROM V_PLAN_FACT
+      WHERE TIP_ROW IN ('ПОСТАВКА'); 
+	
+    DELETE FROM V_PLAN_FACT
+     WHERE PLANSTRU_ID IN (SELECT ID FROM KLS_PLANSTRU WHERE NAZN_OTG_ID=9);
+
+    DELETE FROM V_PLAN_FACT
+     WHERE TIP_ROW='ПОСТ_АВТО' AND PROD_ID_NPR NOT IN ('13007','13008','13009');
+	
+	COMMIT;
+  END;	 
+
+  -- Заполнение справки для видеоконференции  
+  PROCEDURE FillConf (PlanId NUMBER, DateBegPlanPost VARCHAR2, DateEndPlanPost VARCHAR2,  
+     TimeBegFactPost VARCHAR2, DateBegFactPost VARCHAR2, TimeEndFactPost VARCHAR2, DateEndFactPost VARCHAR2,
+	 DateBegPlanGD VARCHAR2, DateEndPlanGD VARCHAR2,   
+     TimeBegFactGD VARCHAR2, DateBegFactGD VARCHAR2, TimeEndFactGD VARCHAR2, DateEndFactGD VARCHAR2) IS
+	 i NUMBER;
+  BEGIN
+    EmptyPlanFact;
+    i:=FOR_TEMP.SET_VARI('BEGIN_DATE',DateBegPlanPost,'MASTER','FOR_PLANFACT');
+    i:=FOR_TEMP.SET_VARI('END_DATE',DateEndPlanPost,'MASTER','FOR_PLANFACT');
+
+    FillPlanPost (PlanId,DateBegPlanPost,DateEndPlanPost);
+    FillFactPost (DateBegPlanPost,DateEndPlanPost,TimeBegFactPost,DateBegFactPost,
+	  TimeEndFactPost, DateEndFactPost);
+	
+    DELETE FROM PLAN_FACT
+     WHERE TERMINAL_NAME = For_Init.GetCurrTerm
+       AND OSUSER_NAME = For_Init.GetCurrUser
+	   AND PLANSTRU_ORDER>=91010080000000000;
+	
+	COMMIT;
+  END;	 
+  
+END; 
+/
+

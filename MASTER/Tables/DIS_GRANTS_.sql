@@ -1,0 +1,13 @@
+--
+-- DIS_GRANTS_  (Table) 
+--
+CREATE TABLE MASTER.DIS_GRANTS_
+(
+  DOCUMENT_ID  NUMBER(10)                       NOT NULL,
+  OWNER        VARCHAR2(30 BYTE),
+  GRANTEE      VARCHAR2(30 BYTE)                NOT NULL
+)
+TABLESPACE USERS2
+NOCOMPRESS ;
+
+

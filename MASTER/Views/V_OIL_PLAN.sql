@@ -1,0 +1,13 @@
+--
+-- V_OIL_PLAN  (View) 
+--
+CREATE OR REPLACE FORCE VIEW MASTER.V_OIL_PLAN
+(KOD, SOBSTVEN, POSTAV, PER, MESTOR, 
+ DATAPLAN, OSTATKI, OSTMRT, OSTMRTK, PLAN, 
+ PLANPERER, POBR, PEROBR, ID_PROD_NPR, KSSS_PROD_ID)
+AS 
+select p."KOD",p."SOBSTVEN",p."POSTAV",p."PER",p."MESTOR",p."DATAPLAN",p."OSTATKI",p."OSTMRT",p."OSTMRTK",p."PLAN",p."PLANPERER",p."POBR",p."PEROBR",p."ID_PROD_NPR", k.ksss_prod_id
+from oil_plan p, kls_prod k
+where p.id_prod_npr=k.id_npr;
+
+

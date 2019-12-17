@@ -1,0 +1,12 @@
+--
+-- ZAKAZ_SNP_LINKS  (Table) 
+--
+CREATE TABLE MASTER.ZAKAZ_SNP_LINKS
+(
+  DOC301_ID     NUMBER(16)                      NOT NULL,
+  ZAKAZ_SNP_ID  NUMBER(16)                      NOT NULL
+)
+TABLESPACE USERS
+NOCOMPRESS ;
+
+

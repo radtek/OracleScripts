@@ -1,0 +1,13 @@
+--
+-- KLS_VID_USL  (Table) 
+--
+CREATE TABLE MASTER.KLS_VID_USL
+(
+  ID            NUMBER(2)                       NOT NULL,
+  USL_NAME      VARCHAR2(82 BYTE),
+  OWNERSHIP_ID  NUMBER(10)
+)
+TABLESPACE USERS2
+NOCOMPRESS ;
+
+

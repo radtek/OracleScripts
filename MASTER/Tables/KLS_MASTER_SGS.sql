@@ -1,0 +1,20 @@
+--
+-- KLS_MASTER_SGS  (Table) 
+--
+CREATE TABLE MASTER.KLS_MASTER_SGS
+(
+  ID    NUMBER(7),
+  NAME  VARCHAR2(50 BYTE),
+  POST  VARCHAR2(50 BYTE)
+)
+TABLESPACE USERS2
+NOCOMPRESS ;
+
+COMMENT ON TABLE MASTER.KLS_MASTER_SGS IS 'Справочник представителей СЖС (для печати автов об остатках нефти из Модуля отгрузки)';
+
+COMMENT ON COLUMN MASTER.KLS_MASTER_SGS.NAME IS 'ФИО ';
+
+COMMENT ON COLUMN MASTER.KLS_MASTER_SGS.POST IS 'Должность';
+
+
+

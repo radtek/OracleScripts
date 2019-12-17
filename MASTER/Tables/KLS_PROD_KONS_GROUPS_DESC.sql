@@ -1,0 +1,17 @@
+--
+-- KLS_PROD_KONS_GROUPS_DESC  (Table) 
+--
+CREATE TABLE MASTER.KLS_PROD_KONS_GROUPS_DESC
+(
+  ID              NUMBER(10)                    NOT NULL,
+  PROD_KONS_ID    VARCHAR2(21 BYTE),
+  PROD_GROUPS_ID  NUMBER(10),
+  IS_AUTO_LINK    NUMBER(1)                     DEFAULT 1
+)
+TABLESPACE USERS2
+NOCOMPRESS ;
+
+COMMENT ON TABLE MASTER.KLS_PROD_KONS_GROUPS_DESC IS 'Связь "Продукты КО" - "Продукты для диаграмм по КО"';
+
+
+

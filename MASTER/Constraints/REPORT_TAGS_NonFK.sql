@@ -1,0 +1,7 @@
+-- 
+-- Non Foreign Key Constraints for Table REPORT_TAGS 
+-- 
+ALTER TABLE MASTER.REPORT_TAGS ADD (
+  CHECK ("NAME" IS NOT NULL)
+  DISABLE NOVALIDATE);
+

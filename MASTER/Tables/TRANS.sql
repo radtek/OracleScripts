@@ -1,0 +1,75 @@
+--
+-- TRANS  (Table) 
+--
+CREATE TABLE MASTER.TRANS
+(
+  ID             NUMBER(10)                     NOT NULL,
+  DATE_CUR       DATE,
+  DATE_REP       DATE,
+  DATE_UNP       DATE,
+  DATE_REZ       DATE,
+  DATE_GD        DATE,
+  PLAN_CIST      NUMBER(10)                     DEFAULT 0,
+  PLAN_VES       NUMBER(14,3)                   DEFAULT 0,
+  PLANDAY_C      NUMBER(10)                     DEFAULT 0,
+  PLANDAY_V      NUMBER(14,3)                   DEFAULT 0,
+  FACTDAY_C      NUMBER(10)                     DEFAULT 0,
+  FACTDAY_V      NUMBER(14,3)                   DEFAULT 0,
+  PRICHDAY       VARCHAR2(100 BYTE),
+  PLANNAR_C      NUMBER(10)                     DEFAULT 0,
+  PLANNAR_V      NUMBER(14,3)                   DEFAULT 0,
+  FACTNAR_C      NUMBER(10)                     DEFAULT 0,
+  FACTNAR_V      NUMBER(14,3)                   DEFAULT 0,
+  CIST_EMPTY     NUMBER(10)                     DEFAULT 0,
+  CIST_READY     NUMBER(10)                     DEFAULT 0,
+  PROD_GU12_ID   VARCHAR2(10 BYTE),
+  VAGOWN_MOS_ID  NUMBER(10),
+  LOAD_MOS_ID    NUMBER(10),
+  MOS_GRP_ID     VARCHAR2(10 BYTE),
+  NAPR_MOS_ID    NUMBER(10)
+)
+TABLESPACE USERS2
+NOCOMPRESS ;
+
+COMMENT ON TABLE MASTER.TRANS IS 'Сообщение ТРАНС';
+
+COMMENT ON COLUMN MASTER.TRANS.ID IS 'Сообщение ТРАНС';
+
+COMMENT ON COLUMN MASTER.TRANS.DATE_CUR IS 'Дата_время генерации';
+
+COMMENT ON COLUMN MASTER.TRANS.DATE_REP IS 'Отчетная дата_время';
+
+COMMENT ON COLUMN MASTER.TRANS.DATE_UNP IS 'Дата_время приемки н_пр';
+
+COMMENT ON COLUMN MASTER.TRANS.DATE_REZ IS 'Дата_время данных по резервуарам';
+
+COMMENT ON COLUMN MASTER.TRANS.DATE_GD IS 'Дата_время отгрузки';
+
+COMMENT ON COLUMN MASTER.TRANS.PLAN_CIST IS 'План на месяц (цс)';
+
+COMMENT ON COLUMN MASTER.TRANS.PLAN_VES IS 'План на месяц (т.)';
+
+COMMENT ON COLUMN MASTER.TRANS.PLANDAY_C IS 'План на день';
+
+COMMENT ON COLUMN MASTER.TRANS.PLANDAY_V IS 'План на день';
+
+COMMENT ON COLUMN MASTER.TRANS.FACTDAY_C IS 'Факт за день';
+
+COMMENT ON COLUMN MASTER.TRANS.FACTDAY_V IS 'Факт за день';
+
+COMMENT ON COLUMN MASTER.TRANS.PRICHDAY IS 'Причина отклонения';
+
+COMMENT ON COLUMN MASTER.TRANS.PLANNAR_C IS 'План нарастающий';
+
+COMMENT ON COLUMN MASTER.TRANS.PLANNAR_V IS 'План нарастающий';
+
+COMMENT ON COLUMN MASTER.TRANS.FACTNAR_C IS 'Факт нарастающий';
+
+COMMENT ON COLUMN MASTER.TRANS.FACTNAR_V IS 'Факт нарастающий';
+
+COMMENT ON COLUMN MASTER.TRANS.CIST_EMPTY IS 'Подано цистерн';
+
+COMMENT ON COLUMN MASTER.TRANS.CIST_READY IS 'Годно цистерн';
+
+
+

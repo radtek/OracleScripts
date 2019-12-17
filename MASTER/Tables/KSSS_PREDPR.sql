@@ -1,0 +1,32 @@
+--
+-- KSSS_PREDPR  (Table) 
+--
+CREATE TABLE MASTER.KSSS_PREDPR
+(
+  KSSS_PREDPR_ID      NUMBER(10)                NOT NULL,
+  NAME                VARCHAR2(150 BYTE),
+  OKONX               VARCHAR2(20 BYTE),
+  KSSS_STATE_ID       NUMBER(10),
+  INDEX_J             VARCHAR2(15 BYTE),
+  CITY_J              VARCHAR2(30 BYTE),
+  STREET_J            VARCHAR2(60 BYTE),
+  INN                 VARCHAR2(15 BYTE),
+  OKPO                VARCHAR2(10 BYTE),
+  KSSS_BANK_STATE_ID  NUMBER(10),
+  KSSS_BANK_ID        NUMBER(10),
+  KORR                VARCHAR2(20 BYTE),
+  PREDPR_ID           NUMBER(10),
+  IS_AUTO_LINK        NUMBER(1)                 DEFAULT 1,
+  TAG                 VARCHAR2(150 BYTE)
+)
+TABLESPACE USERS2
+NOCOMPRESS ;
+
+COMMENT ON TABLE MASTER.KSSS_PREDPR IS 'КССС: Справочник предприятий';
+
+COMMENT ON COLUMN MASTER.KSSS_PREDPR.PREDPR_ID IS 'Контрагент из KLS_PREDPR';
+
+COMMENT ON COLUMN MASTER.KSSS_PREDPR.IS_AUTO_LINK IS 'Признак автоматической привязки';
+
+
+

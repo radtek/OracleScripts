@@ -1,0 +1,34 @@
+--
+-- BILL_POS_SNP  (Table) 
+--
+CREATE TABLE MASTER.BILL_POS_SNP
+(
+  NOM_DOK            NUMBER(7)                  NOT NULL,
+  BILL_POS_SNP_ID    NUMBER(7)                  NOT NULL,
+  VES                NUMBER(15,6),
+  KVIT_VES           NUMBER(15,6),
+  SVED_NUM           NUMBER(6),
+  DATE_OTGR          DATE,
+  CENA_BN            NUMBER(12,2),
+  CENA               NUMBER(12,2),
+  SUMMA_BN           NUMBER(15,2),
+  SUMMA_AKCIZ        NUMBER(15,2),
+  SUMMA_NDS20        NUMBER(15,2),
+  SUMMA_GSM25        NUMBER(15,2),
+  SUMMA              NUMBER(15,2),
+  CENA_POKUP         NUMBER(12,2),
+  SUMMA_BN_POKUP     NUMBER(15,2),
+  SUMMA_NDS20_POKUP  NUMBER(15,2),
+  SUMMA_GSM25_POKUP  NUMBER(15,2),
+  DATE_REALIZ        DATE,
+  ID_OLD             NUMBER(7),
+  PROD_ID_NPR        VARCHAR2(5 BYTE),
+  OWNERSHIP_ID       NUMBER(3),
+  ANALIT_ID          NUMBER(3),
+  IS_AGENT           NUMBER(1),
+  NPR_PRICES_ID      NUMBER(10)
+)
+TABLESPACE USERS2
+NOCOMPRESS ;
+
+

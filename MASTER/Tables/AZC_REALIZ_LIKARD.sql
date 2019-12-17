@@ -1,0 +1,28 @@
+--
+-- AZC_REALIZ_LIKARD  (Table) 
+--
+CREATE TABLE MASTER.AZC_REALIZ_LIKARD
+(
+  ID           NUMBER(10)                       NOT NULL,
+  DATE_OPER    DATE,
+  DENCITY      NUMBER(6,4)                      DEFAULT 0,
+  VES          NUMBER(10)                       DEFAULT 0,
+  VOLUME       NUMBER(10)                       DEFAULT 0,
+  NOTE         VARCHAR2(100 BYTE),
+  PROD_ID_NPR  VARCHAR2(5 BYTE),
+  ORG_STRU_ID  NUMBER(10),
+  SOBSTV_ID    NUMBER(6),
+  SUMMA        NUMBER(8,2),
+  PRICE        NUMBER(8,2),
+  DISCOUNT     NUMBER(2)                        DEFAULT 0,
+  DATE_INTO    DATE                             DEFAULT SYSDATE
+)
+TABLESPACE USERS2
+NOCOMPRESS ;
+
+COMMENT ON TABLE MASTER.AZC_REALIZ_LIKARD IS 'Ликард';
+
+COMMENT ON COLUMN MASTER.AZC_REALIZ_LIKARD.ORG_STRU_ID IS 'ID ОСЕ';
+
+
+

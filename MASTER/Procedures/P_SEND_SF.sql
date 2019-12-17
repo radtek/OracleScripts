@@ -1,0 +1,493 @@
+--
+-- P_SEND_SF  (Procedure) 
+--
+CREATE OR REPLACE PROCEDURE MASTER.P_SEND_SF (D1 DATE, D2 DATE) IS
+  N_FIVE NUMBER; 
+  CHISLO NUMBER;
+  S_DOPOLN VARCHAR2(250);
+  TIPDOK VARCHAR(30);
+  NUMDOK VARCHAR(200);
+  DATEDOK VARCHAR2(30);
+BEGIN
+
+N_FIVE:=0;
+CHISLO:=TO_NUMBER(SUBSTR(TO_CHAR(D1),1,2));
+IF CHISLO=1 THEN
+  N_FIVE:=2;
+END IF;
+IF CHISLO=11 THEN
+  N_FIVE:=4;
+END IF;
+IF CHISLO=21 THEN
+  N_FIVE:=6;
+END IF;
+  
+DELETE FROM SVETA.SEND_SFAK_POKUP;
+DELETE FROM SVETA.SEND_POZ_POKUP;
+DELETE FROM SVETA.SEND_OTGR_POKUP;
+DELETE FROM SVETA.SEND_SFAK_POKUP_USL;
+DELETE FROM SVETA.SEND_POZ_POKUP_USL;
+
+FOR rec1 IN (
+SELECT
+  6 AS NPZ
+  ,B.NOM_DOK AS KOD_POKUP
+  ,P1.KSSS_PREDPR_ID AS ID_PLAT
+  ,P0.KSSS_PREDPR_ID AS ID_POST
+  ,TRIM(P1.INN) AS INN_NPLAT
+  ,TRIM(P0.INN) AS INN_POST
+  ,(CASE
+      WHEN b.PROD_ID_NPR IN ('10093','10094') THEN '-'
+      ELSE 'ОАО "ЛУКОЙЛ-УНП"'
+	END) as grotpr
+  ,(CASE
+      WHEN b.PROD_ID_NPR IN ('10093','10094') THEN '-'
+      ELSE GET_ADDR(R4.ID,P4.POSTINDEX_P,P4.CITY_P,P4.ADDRESS_P,R4.REGION_NAME)
+	END) as GROTPR_AD
+  ,(CASE
+      WHEN b.PROD_ID_NPR IN ('10093','10094') THEN '-'
+      ELSE p2.sf_name
+	END) as grpol
+  ,(CASE
+      WHEN b.PROD_ID_NPR IN ('10093','10094') THEN '-'
+      ELSE GET_ADDR(R2.ID,P2.POSTINDEX_P,P2.CITY_P,P2.ADDRESS_P,R2.REGION_NAME)
+	END) as GRPOL_AD
+/*
+  ,(CASE
+      WHEN b.PROD_ID_NPR='10080' THEN 'Акт приема-передачи № ' || bp.NUM_AKT || ' от ' || TO_CHAR(b.date_kvit,'dd.mm.yyyy')
+	  ELSE 'Квит. № ' || GET_LIST_NAKL_NUM(b.nom_dok) || ' от ' || TO_CHAR(b.date_kvit,'dd.mm.yyyy')
+	END) as DOPOLN1
+*/
+--  ,'КВИТ. № ' || GET_LIST_NAKL_NUM(B.NOM_DOK) || ' ОТ ' || TO_CHAR(B.DATE_KVIT,'DD.MM.YYYY') AS DOPOLN1
+  ,(CASE
+       WHEN NVL(B.OLD_NOM_DOK,0)=0 THEN 0
+	   ELSE (CASE
+	             WHEN B.SUMMA_DOK <0 THEN 4
+				 ELSE 5
+			 END)
+	END) AS STATUS
+  ,B.OLD_NOM_DOK AS KOD_STORN
+  ,D.DOG_NUMBER AS DOGOVOR
+  ,D.DOG_DATE AS DATADOG
+--  ,P0.SF_NAME AS NAME_POST
+  ,'ОАО "ЛУКОЙЛ-УНП"' AS NAME_POST
+  ,GET_ADDR(R0.ID,P0.POSTINDEX_J,P0.CITY_J,P0.ADDRESS_J,R0.REGION_NAME) AS ADDR_POST
+  ,TRIM(P0.KPP) AS KPP_POST
+  ,P1.SF_NAME AS NAME_NPLAT
+  ,TRIM(P1.KPP) AS KPP_PLAT
+  ,B.DATE_VYP_SF AS DATA_SF
+  ,TO_CHAR(B.NOM_SF) AS SCHETF
+--  ,B.NUM_5_DAY AS N_5
+  ,N_FIVE AS N_5
+  ,LT.SF_POKUP_VTR AS VTR
+  ,b.PROD_ID_NPR
+  ,b.DATE_KVIT
+  ,PR.SF_NAME as PROD_NAME
+FROM
+  MASTER.BILLS B
+/*
+  ,(SELECT MAX(MASTER.BILL_POS.NUM_AKT) AS NUM_AKT 
+   FROM MASTER.BILL_POS 
+   WHERE MASTER.BILL_POS.DATE_REALIZ>=D1 AND MASTER.BILL_POS.DATE_REALIZ<=D2  
+   GROUP BY MASTER.BILL_POS.NOM_DOK) BP
+*/
+  ,MASTER.KLS_DOG D
+  ,MASTER.KLS_PREDPR P0 --ПРОДАВЕЦ
+  ,MASTER.KLS_PREDPR P1 --ПЛАТЕЛЬЩИК
+  ,MASTER.KLS_PREDPR P2 --ПОЛУЧАТЕЛЬ
+  ,MASTER.KLS_PREDPR P4 --ОТПРАВИТЕЛЬ
+  ,MASTER.KLS_REGION R0 --ПРОДАВЕЦ
+  ,MASTER.KLS_REGION R1 --ПЛАТЕЛЬЩИК
+  ,MASTER.KLS_REGION R2 --ПОЛУЧАТЕЛЬ
+  ,MASTER.KLS_REGION R4 --ОТПРАВИТЕЛЬ
+  ,MASTER.MONTH M
+  ,MASTER.KLS_VID_OTGR VO
+  ,MASTER.KLS_LOAD_TYPE LT
+  ,KLS_PROD PR
+WHERE B.DOG_ID=D.ID
+  AND D.PREDPR_ID=P1.ID
+  AND B.NOM_ZD=M.NOM_ZD(+)
+  AND M.LOAD_ABBR=VO.LOAD_ABBR(+)
+  AND VO.LOAD_TYPE_ID=LT.ID(+)
+--  AND M.NPR_SOBSTV_ID=P0.ID(+)
+--  AND M.POTREB_ID=P2.ID(+)
+--  AND M.GROTP_ID=P4.ID(+)
+  AND B.OWNER_ID = P0.ID
+  AND (CASE
+         WHEN NVL(M.POTREB_ID,0)>0 THEN M.POTREB_ID
+		 ELSE P1.ID
+	   END) = P2.ID
+  AND (CASE
+         WHEN NVL(M.GROTP_ID,0)>0 THEN M.GROTP_ID
+		 ELSE 8
+	   END) = P4.ID
+  AND P0.REGION_ID=R0.ID(+)
+  AND P1.REGION_ID=R1.ID(+)
+  AND P2.REGION_P_ID=R2.ID(+)
+  AND P4.REGION_P_ID=R4.ID(+)
+  AND D.AGENT_ID=8 -- Договора УНП
+  AND D.PREDPR_ID=1 -- Плательщик ЛУКОЙЛ
+--  AND B.DOG_ID=2519
+--  AND B.DOG_ID=2481 --ДЛЯ ПРОБЫ
+--  AND B.NOM_DOK=6124887 --ДЛЯ ПРОБЫ
+--  AND B.DATE_VYP_SF>=D1
+--  AND B.DATE_VYP_SF<=D2
+  AND B.DATE_MOS>=D1 
+  AND B.DATE_MOS<=D2 
+  AND B.PROD_ID_NPR=PR.ID_NPR
+)
+LOOP
+
+--ДОПОЛНЕНИЕ
+S_DOPOLN:='';
+TIPDOK:='';
+NUMDOK:='';
+DATEDOK:='';
+
+FOR rec5 IN (
+	SELECT 
+	  (CASE
+          WHEN rec1.PROD_ID_NPR IN ('10090','10091','10092') THEN 'Договор'
+          WHEN rec1.PROD_ID_NPR IN ('10093','10094') THEN 'Договор'
+          WHEN rec1.PROD_ID_NPR='10080' THEN 'Акт приема-передачи'
+          WHEN rec1.PROD_ID_NPR<'10100' AND rec1.PROD_ID_NPR<>'10080' THEN 'Отчет агента'
+	      ELSE 'Квитанция'
+	     END) as TIPDOK2,
+	  (CASE
+          WHEN rec1.PROD_ID_NPR IN ('10090','10091','10092') THEN 'Согласно договору '|| rec1.dogovor || 'от ' || TO_CHAR(rec1.datadog,'dd.mm.yyyy') ||' г. '
+          WHEN rec1.PROD_ID_NPR IN ('10093','10094') THEN rec1.PROD_NAME || ' за '||NLS_LOWER(RUSMONTH(rec1.DATE_KVIT)) || ' согласно договору '|| rec1.dogovor || ' от ' || TO_CHAR(rec1.datadog,'dd.mm.yyyy') ||'г. '
+          WHEN rec1.PROD_ID_NPR='10080' THEN 'Акт приема-передачи № ' || MBP.NUM_AKT || ' от ' || TO_CHAR(rec1.date_kvit,'dd.mm.yyyy') ||' г. '
+          WHEN rec1.PROD_ID_NPR<'10100' AND rec1.PROD_ID_NPR<>'10080' THEN 'Согласно отчета агента от ' || TO_CHAR(rec1.date_kvit,'dd.mm.yyyy') ||' г. '
+	      ELSE 'Квит. № ' || GET_LIST_NAKL_NUM(rec1.KOD_POKUP) || ' от ' || TO_CHAR(rec1.date_kvit,'dd.mm.yyyy') ||' г. '
+	     END) as dopoln2,
+	  (CASE
+          WHEN rec1.PROD_ID_NPR IN ('10090','10091','10092') THEN rec1.dogovor
+          WHEN rec1.PROD_ID_NPR IN ('10093','10094') THEN rec1.dogovor
+          WHEN rec1.PROD_ID_NPR='10080' THEN TO_CHAR(MBP.NUM_AKT)
+          WHEN rec1.PROD_ID_NPR<'10100'  AND rec1.PROD_ID_NPR<>'10080' THEN '-'
+	      ELSE GET_LIST_NAKL_NUM(rec1.KOD_POKUP)
+	     END) as numdok2,
+	  (CASE
+          WHEN rec1.PROD_ID_NPR IN ('10090','10091','10092') THEN rec1.datadog
+          WHEN rec1.PROD_ID_NPR IN ('10093','10094') THEN rec1.datadog
+          WHEN rec1.PROD_ID_NPR='10080' THEN rec1.date_kvit
+          WHEN rec1.PROD_ID_NPR<'10100'  AND rec1.PROD_ID_NPR<>'10080' THEN rec1.date_kvit
+	      ELSE rec1.DATE_KVIT
+	     END) as datedok2
+	FROM MASTER.BILL_POS MBP
+	WHERE MBP.NOM_DOK=rec1.KOD_POKUP
+    	    AND (MBP.BILL_POS_ID<10 OR rec1.PROD_ID_NPR<'10100'))
+	LOOP
+	  S_DOPOLN:=rec5.dopoln2;
+      TIPDOK:=rec5.tipdok2;
+      NUMDOK:=rec5.numdok2;
+      DATEDOK:=rec5.datedok2;
+  	  EXIT;
+	END LOOP;
+
+IF rec1.PROD_ID_NPR<'10100' AND rec1.PROD_ID_NPR<>'10080' THEN
+-- Услуги  	
+
+INSERT INTO SVETA.SEND_SFAK_POKUP_USL (
+  NPZ
+  ,KOD_POKUP
+  ,ID_PLAT
+  ,ID_POST
+  ,INN_NPLAT
+  ,INN_POST
+  ,GROTPR
+  ,GROTPR_AD
+  ,GRPOL
+  ,GRPOL_AD
+  ,DOPOLN1
+  ,STATUS
+  ,KOD_STORN
+  ,DOGOVOR
+  ,DATADOG
+  ,NAME_POST
+  ,ADDR_POST
+  ,KPP_POST
+  ,NAME_NPLAT
+  ,KPP_PLAT
+  ,DATA_SF
+  ,SCHETF )
+VALUES
+(
+  rec1.NPZ
+  ,rec1.KOD_POKUP
+  ,rec1.ID_PLAT
+  ,rec1.ID_POST
+  ,rec1.INN_NPLAT
+  ,rec1.INN_POST
+  ,rec1.GROTPR
+  ,rec1.GROTPR_AD
+  ,rec1.GRPOL
+  ,rec1.GRPOL_AD
+  ,S_DOPOLN
+--  ,rec1.DOPOLN1
+  ,rec1.STATUS
+  ,rec1.KOD_STORN
+  ,rec1.DOGOVOR
+  ,rec1.DATADOG
+  ,rec1.NAME_POST
+  ,rec1.ADDR_POST
+  ,rec1.KPP_POST
+  ,rec1.NAME_NPLAT
+  ,rec1.KPP_PLAT
+  ,rec1.DATA_SF
+  ,rec1.SCHETF
+   );
+--
+ELSE
+-- Нефтепродукты
+INSERT INTO SVETA.SEND_SFAK_POKUP (
+  NPZ
+  ,KOD_POKUP
+  ,ID_PLAT
+  ,ID_POST
+  ,INN_NPLAT
+  ,INN_POST
+  ,GROTPR
+  ,GROTPR_AD
+  ,GRPOL
+  ,GRPOL_AD
+  ,DOPOLN1
+  ,STATUS
+  ,KOD_STORN
+  ,DOGOVOR
+  ,DATADOG
+  ,NAME_POST
+  ,ADDR_POST
+  ,KPP_POST
+  ,NAME_NPLAT
+  ,KPP_PLAT
+  ,DATA_SF
+  ,SCHETF )
+VALUES
+(
+  rec1.NPZ
+  ,rec1.KOD_POKUP
+  ,rec1.ID_PLAT
+  ,rec1.ID_POST
+  ,rec1.INN_NPLAT
+  ,rec1.INN_POST
+  ,rec1.GROTPR
+  ,rec1.GROTPR_AD
+  ,rec1.GRPOL
+  ,rec1.GRPOL_AD
+  ,S_DOPOLN
+--  ,rec1.DOPOLN1
+  ,rec1.STATUS
+  ,rec1.KOD_STORN
+  ,rec1.DOGOVOR
+  ,rec1.DATADOG
+  ,rec1.NAME_POST
+  ,rec1.ADDR_POST
+  ,rec1.KPP_POST
+  ,rec1.NAME_NPLAT
+  ,rec1.KPP_PLAT
+  ,rec1.DATA_SF
+  ,rec1.SCHETF
+   );
+end if;
+
+-- Позиции
+FOR rec2 IN (
+SELECT
+  BP.NOM_DOK*100+BP.BILL_POS_ID AS ID_POZ_POK
+  ,(CASE
+      WHEN rec1.PROD_ID_NPR IN ('10090','10091','10092','10093','10094') THEN rec1.PROD_NAME || ' за '||NLS_LOWER(RUSMONTH(rec1.DATE_KVIT))
+	  ELSE pr.sf_name
+	END) as naim_tov
+  ,'ТН' AS EDIZM
+  ,BP.CENA_BN AS CENA
+  ,BP.SUMMA_AKCIZ AS AKCIZ
+  ,18 AS NDS
+  ,BP.VES AS KOL
+  ,BP.SUMMA_BN AS SUMMA
+  ,BP.SUMMA_NDS20 AS SUMNDS
+  ,BP.SUMMA AS ALLNDS
+  ,'18' AS STNDS
+  ,PR.MATNR AS MATNR
+  ,PR.KSSS_PROD_ID AS KSSS_ID
+  ,(CASE
+      WHEN PR.AKCIZ=1 THEN 'БЕЗ АКЦИЗА'
+	  ELSE '' 
+    END) AS NO_AKCIZ
+  ,BP.BILL_POS_ID	
+FROM
+  MASTER.BILL_POS BP
+  ,MASTER.KLS_PROD PR
+WHERE rec1.KOD_POKUP=BP.NOM_DOK
+  AND BP.PROD_ID_NPR=PR.ID_NPR
+) LOOP
+
+
+IF rec1.PROD_ID_NPR<'10100' AND rec1.PROD_ID_NPR<>'10080' THEN
+-- Услуги  	
+
+    INSERT INTO SVETA.SEND_POZ_POKUP_USL (
+      NPZ
+      ,KOD_POKUP
+      ,ID_POZ_POK
+      ,NAIM_TOV
+      ,KSSS_USL
+      ,CENA
+      ,AKCIZ
+      ,NDS
+      ,KOL
+      ,SUMMA
+      ,SUMNDS
+      ,ALLNDS
+      ,STNDS
+      ,DATE_OTG
+      ,DOC_TYPE
+	  ,DOC_NUM
+	  ,DOC_DATE
+      ,N_5
+ )
+VALUES
+(
+  rec1.NPZ
+  ,rec1.KOD_POKUP
+  ,rec2.ID_POZ_POK
+  ,rec2.NAIM_TOV
+  ,rec2.KSSS_ID
+  ,rec2.CENA
+  ,rec2.AKCIZ
+  ,rec2.NDS
+  ,rec2.KOL
+  ,rec2.SUMMA
+  ,rec2.SUMNDS
+  ,rec2.ALLNDS
+  ,rec2.STNDS
+  ,rec1.DATE_KVIT
+  ,NULL
+  ,NULL
+--  ,TIPDOK
+--  ,NUMDOK
+  ,DATEDOK
+  ,rec1.N_5
+);
+
+ELSE
+-- Нефтепродукты
+    INSERT INTO SVETA.SEND_POZ_POKUP (
+      NPZ
+      ,KOD_POKUP
+      ,ID_POZ_POK
+      ,NAIM_TOV
+      ,EDIZM
+      ,CENA
+      ,AKCIZ
+      ,NDS
+      ,KOL
+      ,SUMMA
+      ,SUMNDS
+      ,ALLNDS
+      ,STNDS
+      ,MATNR
+      ,KSSS_ID
+      ,N_5
+	  ,NO_AKCIZ
+ )
+VALUES
+(
+  rec1.NPZ
+  ,rec1.KOD_POKUP
+  ,rec2.ID_POZ_POK
+  ,rec2.NAIM_TOV
+  ,rec2.EDIZM
+  ,rec2.CENA
+  ,rec2.AKCIZ
+  ,rec2.NDS
+  ,rec2.KOL
+  ,rec2.SUMMA
+  ,rec2.SUMNDS
+  ,rec2.ALLNDS
+  ,rec2.STNDS
+  ,rec2.MATNR
+  ,rec2.KSSS_ID
+  ,rec1.N_5
+  ,rec2.NO_AKCIZ
+);
+
+END IF;
+
+FOR rec3 IN (
+SELECT
+--REC1  6 AS NPZ
+  KV.DATE_KVIT AS DATE_OTG
+  ,TIPDOK AS DOC_TYPE
+--  ,'АКТ' AS DOC_TYPE
+  ,NUMDOK AS DOC_NUM	
+--  ,KV.NUM_KVIT AS DOC_NUM
+  ,DATEDOK AS DOC_DATE
+  ,KV.VES_BRUTTO AS KOL
+--REC1  ,LT.SF_POKUP_VTR AS VTR
+  ,KV.NUM_CIST AS NOMVAG
+--REC1  ,B.NOM_SF AS SCHETF
+--REC1  ,B.NOM_DOK AS KOD_POKUP
+  ,rec2.ID_POZ_POK AS ID_POZ_POK
+--  ,KV.BILL_POS_ID AS ID_POZ_POK
+--REC1  ,B.DATE_VYP_SF AS DSCH
+  ,PR.KSSS_PROD_ID AS NP_KOD
+  ,PR.MATNR AS MATNR
+  ,943 AS TARA_KOD
+  ,kv.PROD_ID_NPR
+FROM
+  MASTER.KLS_PROD PR
+  ,MASTER.V_KVIT_ALL KV
+WHERE
+  rec1.KOD_POKUP=KV.BILL_ID(+)
+  AND rec2.BILL_POS_ID=KV.BILL_POS_ID(+)
+  AND kv.PROD_ID_NPR=PR.ID_NPR
+)
+LOOP
+
+INSERT INTO SVETA.SEND_OTGR_POKUP (
+  NPZ
+  ,DATE_OTG
+  ,DOC_TYPE
+  ,DOC_NUM
+  ,DOC_DATE
+  ,KOL
+  ,VTR
+  ,NOMVAG
+  ,SCHETF
+  ,KOD_POKUP
+  ,ID_POZ_POK
+  ,DSCH
+  ,NP_KOD
+  ,MATNR
+  ,TARA_KOD
+)
+VALUES
+(
+  rec1.NPZ
+  ,rec3.DATE_OTG
+  ,rec3.DOC_TYPE
+  ,rec3.DOC_NUM
+  ,rec3.DOC_DATE
+  ,rec3.KOL
+  ,rec1.VTR
+  ,rec3.NOMVAG
+  ,rec1.SCHETF
+  ,rec1.KOD_POKUP
+  ,rec3.ID_POZ_POK
+  ,rec1.DATA_SF --DSCH
+  ,rec3.NP_KOD
+  ,rec3.MATNR
+  ,rec3.TARA_KOD
+);
+
+END LOOP;
+END LOOP;
+END LOOP;
+
+COMMIT;
+
+END P_SEND_SF;
+
+/
+

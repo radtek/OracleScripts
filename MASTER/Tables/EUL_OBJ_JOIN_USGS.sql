@@ -1,0 +1,16 @@
+--
+-- EUL_OBJ_JOIN_USGS  (Table) 
+--
+CREATE TABLE MASTER.EUL_OBJ_JOIN_USGS
+(
+  OJU_ID             NUMBER(10)                 NOT NULL,
+  OJU_OBJ_ID         NUMBER(10),
+  OJU_JOIN_MODIFIED  NUMBER(1),
+  OJU_KEY_ID         NUMBER(10),
+  OJU_SUMO_ID        NUMBER(10),
+  NOTM               NUMBER(10)
+)
+TABLESPACE USERS2
+NOCOMPRESS ;
+
+

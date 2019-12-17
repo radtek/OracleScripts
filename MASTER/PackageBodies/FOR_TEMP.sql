@@ -1,0 +1,374 @@
+--
+-- FOR_TEMP  (Package Body) 
+--
+CREATE OR REPLACE PACKAGE BODY MASTER.For_Temp AS
+
+FUNCTION STR2NUM (InS VARCHAR2, L NUMBER:=1) RETURN NUMBER IS
+  v_tmp NUMBER;
+  s VARCHAR(240);
+BEGIN
+  s:=SUBSTR(InS,l,240);
+  s:=TRANSLATE(s,'QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnmЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮЁйцукенгшщзхъфывапролджэячсмитьбюё`~!@#$%^&*()_+-=|\:";<>?/.,[]{}№''',
+                 '                                                                                                                                                           ');
+  s:=LTRIM(RTRIM(s));				 
+  v_tmp:=INSTR(s,' ');
+  IF v_tmp>0 THEN 
+    RETURN TO_NUMBER(SUBSTR(s,1,v_tmp-1));
+  ELSE
+    IF s IS NULL THEN
+	  RETURN 0;
+	ELSE  
+      RETURN TO_NUMBER(s);
+	END IF;  
+  END IF; 	
+END STR2NUM;
+
+FUNCTION GET_VARI(pVariName VARCHAR2, pAppName VARCHAR2:='', pUnitName VARCHAR2:='', PVariId NUMBER:=NULL, pVariType OUT VARCHAR2, pVariNum OUT NUMBER, pVariDate OUT DATE, pVariChar OUT VARCHAR2) RETURN NUMBER IS
+
+ CURSOR tmp_cur1 IS    
+  SELECT * FROM v_tempvari
+   WHERE (Vari_Name = NLS_UPPER(pVariName)) 
+	 AND (App_Name = NLS_UPPER(pAppName) OR (App_Name IS NULL AND pAppName IS NULL))
+	 AND (Unit_Name = NLS_UPPER(pUnitName) OR (Unit_Name IS NULL AND pUnitName IS NULL));
+
+ CURSOR tmp_cur2 IS    
+  SELECT * FROM v_tempvari WHERE ID = pVariId; 
+	   
+BEGIN
+  IF pVariName IS NOT NULL THEN
+    FOR lcur IN tmp_cur1 							   
+    LOOP
+	  pVariType := lcur.VARI_TYPE;
+	  pVariNum := lcur.VARI_NUM;
+	  pVariDate := lcur.VARI_DATE;
+	  pVariChar := lcur.VARI_CHAR;
+	  RETURN lcur.ID;
+    END LOOP;
+  ELSIF pVariId IS NOT NULL THEN
+    FOR lcur IN tmp_cur2 							   
+    LOOP
+	  pVariType := lcur.VARI_TYPE;
+	  pVariNum := lcur.VARI_NUM;
+	  pVariDate := lcur.VARI_DATE;
+	  pVariChar := lcur.VARI_CHAR;
+	  RETURN lcur.ID;
+    END LOOP;
+  END IF; 	
+  RETURN NULL;
+END;
+
+FUNCTION GET_AS_NUM(pVariName VARCHAR2, pAppName VARCHAR2:='', pUnitName VARCHAR2:='', PVariId NUMBER:=NULL) RETURN NUMBER IS
+  vType VARCHAR2(10);
+  vNum NUMBER;
+  vDate DATE;
+  vChar VARCHAR2(250);
+  vId NUMBER;
+BEGIN
+  IF pVariId = 0 THEN
+    vId:=NULL;
+  ELSE
+    vId:=pVariId;
+  END IF;		
+  IF GET_VARI(pVariName, pAppName, pUnitName, vId, vType, vNum, vDate, vChar) IS NOT NULL THEN
+    IF vType='NUM' THEN
+  	  RETURN vNum;
+	ELSIF vType='DATE' THEN
+	  RETURN vDate-TO_DATE('01.01.1900','dd.mm.yyyy');
+	ELSE
+	  RETURN STR2NUM(vChar);
+	END IF;      
+  END IF;
+  RETURN NULL;
+END;		
+
+FUNCTION GET_AS_DATE(pVariName VARCHAR2, pAppName VARCHAR2:='', pUnitName VARCHAR2:='', pVariId NUMBER:=NULL, pFormat VARCHAR2:='dd.mm.yyyy hh24:mi:ss') RETURN DATE IS
+  vType VARCHAR2(10);
+  vNum NUMBER;
+  vDate DATE;
+  vChar VARCHAR2(250);
+  vId NUMBER;
+BEGIN
+  IF pVariId = 0 THEN
+    vId:=NULL;
+  ELSE
+    vId:=pVariId;
+  END IF;		
+  IF GET_VARI(pVariName, pAppName, pUnitName, vId, vType, vNum, vDate, vChar) IS NOT NULL THEN
+    IF vType='NUM' THEN
+  	  RETURN TO_DATE('01.01.1900','dd.mm.yyyy')+vNum;
+	ELSIF vType='DATE' THEN
+	  RETURN vDate;
+	ELSE
+	  RETURN TO_DATE(vChar,pFormat);
+	END IF;      
+  END IF;
+  RETURN NULL;
+END;		
+
+FUNCTION GET_AS_CHAR(pVariName VARCHAR2, pAppName VARCHAR2:='', pUnitName VARCHAR2:='', PVariId NUMBER:=NULL, pFormat VARCHAR2:='dd.mm.yyyy hh24:mi:ss') RETURN VARCHAR2 IS
+  vType VARCHAR2(10);
+  vNum NUMBER;
+  vDate DATE;
+  vChar VARCHAR2(250);
+  vId NUMBER;
+BEGIN
+  IF pVariId = 0 THEN
+    vId:=NULL;
+  ELSE
+    vId:=pVariId;
+  END IF;		
+  IF GET_VARI(pVariName, pAppName, pUnitName, vId, vType, vNum, vDate, vChar) IS NOT NULL THEN
+    IF vType='NUM' THEN
+  	  RETURN TO_CHAR(vNum);
+	ELSIF vType='DATE' THEN
+	  RETURN TO_CHAR(vDate,pFormat);
+	ELSE
+	  RETURN vChar;
+	END IF;      
+  END IF;
+  RETURN NULL;
+END;		
+
+PROCEDURE CLEAR_TEMP_VARI IS
+BEGIN
+  DELETE FROM TEMPVARI WHERE NOT (SYSDATE BETWEEN BEGIN_DATE AND END_DATE);
+  DELETE FROM MASTER_REPORTS WHERE NOT (SYSDATE<=REPORT_AGE);
+END;
+
+PROCEDURE SET_VARI_VALUE (pId NUMBER,pVariValue NUMBER,pTime NUMBER:=1) IS
+BEGIN
+  IF pId IS NOT NULL THEN
+    UPDATE TEMPVARI SET NUM1=pVariValue, DATE1=NULL, CHAR1=NULL, 
+	   VARI_TYPE='NUM', BEGIN_DATE = SYSDATE, END_DATE = BEGIN_DATE+pTime 
+	   WHERE ID=pId;
+	COMMIT;   
+  END IF;	 
+END;   
+
+PROCEDURE SET_VARI_VALUE (pId NUMBER,pVariValue DATE,pTime NUMBER:=1) IS
+BEGIN
+  IF pId IS NOT NULL THEN
+    UPDATE TEMPVARI SET NUM1=NULL, DATE1=pVariValue, CHAR1=NULL, 
+	   VARI_TYPE='DATE', BEGIN_DATE = SYSDATE, END_DATE = BEGIN_DATE+pTime 
+	   WHERE ID=pId;
+	COMMIT;   
+  END IF;	 
+END;   
+
+PROCEDURE SET_VARI_VALUE (pId NUMBER,pVariValue VARCHAR2,pTime NUMBER:=1) IS
+BEGIN
+  IF pId IS NOT NULL THEN
+    UPDATE TEMPVARI SET NUM1=NULL, DATE1=NULL, CHAR1=pVariValue, 
+	   VARI_TYPE='CHAR', BEGIN_DATE = SYSDATE, END_DATE = BEGIN_DATE+pTime 
+	   WHERE ID=pId;
+	COMMIT;   
+  END IF;	 
+END;   
+
+FUNCTION ADD_VARI (pVariName VARCHAR2, PVariValue NUMBER, pAppName VARCHAR2:='', pUnitName VARCHAR2:='', pTime NUMBER := 1) RETURN NUMBER IS
+  vType VARCHAR2(10);
+  vNum NUMBER;
+  vDate DATE;
+  vChar VARCHAR2(250);
+  vId NUMBER;
+BEGIN
+  IF pVariName IS NOT NULL THEN
+    INSERT INTO TEMPVARI (APP_NAME, UNIT_NAME, BEGIN_DATE, END_DATE, VARI_TYPE, VARI_NAME, NUM1) 
+	  VALUES (pAppName, pUnitName, SYSDATE, SYSDATE+pTime, 'NUM', pVariName, pVariValue);
+	COMMIT;   
+    RETURN GET_VARI(pVariName, pAppName, pUnitName, NULL, vType, vNum, vDate, vChar);
+  END IF;	 
+  RETURN NULL;	 
+END;   
+
+FUNCTION ADD_VARI (pVariName VARCHAR2, PVariValue DATE, pAppName VARCHAR2:='', pUnitName VARCHAR2:='', pTime NUMBER := 1) RETURN NUMBER IS
+  vType VARCHAR2(10);
+  vNum NUMBER;
+  vDate DATE;
+  vChar VARCHAR2(250);
+  vId NUMBER;
+BEGIN
+  IF pVariName IS NOT NULL THEN
+    INSERT INTO TEMPVARI (APP_NAME, UNIT_NAME, BEGIN_DATE, END_DATE, VARI_TYPE, VARI_NAME, DATE1) 
+	  VALUES (pAppName, pUnitName, SYSDATE, SYSDATE+pTime, 'DATE', pVariName, pVariValue);
+	COMMIT;   
+    RETURN GET_VARI(pVariName, pAppName, pUnitName, NULL, vType, vNum, vDate, vChar);
+  END IF;	 
+  RETURN NULL;	 
+END;   
+
+FUNCTION ADD_VARI (pVariName VARCHAR2, PVariValue VARCHAR2, pAppName VARCHAR2:='', pUnitName VARCHAR2:='', pTime NUMBER := 1) RETURN NUMBER IS
+  vType VARCHAR2(10);
+  vNum NUMBER;
+  vDate DATE;
+  vChar VARCHAR2(250);
+  vId NUMBER;
+BEGIN
+  IF pVariName IS NOT NULL THEN
+    INSERT INTO TEMPVARI (APP_NAME, UNIT_NAME, BEGIN_DATE, END_DATE, VARI_TYPE, VARI_NAME, CHAR1) 
+	  VALUES (pAppName, pUnitName, SYSDATE, SYSDATE+pTime, 'CHAR', pVariName, pVariValue);
+	COMMIT;   
+    RETURN GET_VARI(pVariName, pAppName, pUnitName, NULL, vType, vNum, vDate, vChar);
+  END IF;
+  RETURN NULL;	 
+END;   
+
+FUNCTION SET_VARI(pVariName VARCHAR2, PVariValue NUMBER, pAppName VARCHAR2:='', pUnitName VARCHAR2:='', pTime NUMBER := 1) RETURN NUMBER IS
+  vType VARCHAR2(10);
+  vNum NUMBER;
+  vDate DATE;
+  vChar VARCHAR2(250);
+  vId NUMBER;
+BEGIN
+  IF pVariName IS NULL THEN
+    RETURN NULL; 
+  END IF;	
+  vId:=GET_VARI(pVariName, pAppName, pUnitName, NULL, vType, vNum, vDate, vChar);
+  IF vId IS NOT NULL THEN
+	SET_VARI_VALUE(vId,pVariValue,pTime);
+  ELSE
+    vId:=ADD_VARI(pVariName, pVariValue, pAppName, pUnitName, pTime);
+  END IF;
+  RETURN vId;  
+END;  		  
+
+FUNCTION SET_VARI(pVariName VARCHAR2, PVariValue DATE, pAppName VARCHAR2:='', pUnitName VARCHAR2:='', pTime NUMBER := 1) RETURN NUMBER IS
+  vType VARCHAR2(10);
+  vNum NUMBER;
+  vDate DATE;
+  vChar VARCHAR2(250);
+  vId NUMBER;
+BEGIN
+  IF pVariName IS NULL THEN
+    RETURN NULL; 
+  END IF;	
+  vId:=GET_VARI(pVariName, pAppName, pUnitName, NULL, vType, vNum, vDate, vChar);
+  IF vId IS NOT NULL THEN
+	SET_VARI_VALUE(vId,pVariValue,pTime);
+  ELSE
+    vId:=ADD_VARI(pVariName, pVariValue, pAppName, pUnitName, pTime);
+  END IF;
+  RETURN vId;  
+END;  		  
+
+FUNCTION SET_VARI(pVariName VARCHAR2, PVariValue VARCHAR2, pAppName VARCHAR2:='', pUnitName VARCHAR2:='', pTime NUMBER := 1) RETURN NUMBER IS
+  vType VARCHAR2(10);
+  vNum NUMBER;
+  vDate DATE;
+  vChar VARCHAR2(250);
+  vId NUMBER;
+BEGIN
+  IF pVariName IS NULL THEN
+    RETURN NULL; 
+  END IF;	
+  vId:=GET_VARI(pVariName, pAppName, pUnitName, NULL, vType, vNum, vDate, vChar);
+  IF vId IS NOT NULL THEN
+	SET_VARI_VALUE(vId,pVariValue,pTime);
+  ELSE
+    vId:=ADD_VARI(pVariName, pVariValue, pAppName, pUnitName, pTime);
+  END IF;
+  RETURN vId;  
+END;  		  
+
+/* Параметры отчета */
+PROCEDURE SET_REPORT_PARAM_VALUE (pREP_ID NUMBER) AS
+
+  vREPORT_NAME VARCHAR2(100); 
+  vREPORT_FILE VARCHAR2(30); 
+  vREPORT_GROUP VARCHAR2(30); 
+  vREPORT_TYPE VARCHAR2(15); 
+  vREPORT_TITLE VARCHAR2(250);	
+  vDIAGRAM_TYPE VARCHAR2(15);
+  vAXES_X_NAME VARCHAR2(30);
+  vCOUNT_COLS_X NUMBER;
+  vAXES_Y_NAME VARCHAR2(30);
+  vCOUNT_COLS_Y NUMBER;
+BEGIN
+  -- Выбираем название файла с отчетом
+  SELECT NLS_UPPER(REPORT_FILE) INTO vREPORT_FILE FROM REPORTS WHERE ID=pREP_ID;	
+
+  -- Проверяем наличие записи с параметрами отчета во временной таблице
+  UPDATE V_MASTER_REPORTS SET REP_ID=pREP_ID
+   WHERE REPORT_FILE=vREPORT_FILE;
+
+  -- Если нет - добавляем 
+  IF SQL%NOTFOUND THEN
+    INSERT INTO MASTER_REPORTS (REP_ID,REPORT_FILE) VALUES (pREP_ID,vREPORT_FILE);
+  END IF;
+
+  COMMIT;
+  	   
+  -- Дописываем остальные параметры
+  UPDATE V_MASTER_REPORTS SET (APP_NAME, REP_ID, REPORT_NAME, REPORT_FILE, REPORT_GROUP, REPORT_TYPE, 
+    REPORT_TITLE, BEGIN_DATE, BEGIN_TIME, END_DATE, END_TIME, DATE_REE, DATE_PLAN, FROM_PARUS, 
+	VIEW_PROD, VIEW_DAYS, IS_AGENT, DIAGRAM_TYPE, DIAGRAM_KIND, AXES_X_NAME, COUNT_COLS_X, 
+	AXES_Y_NAME, COUNT_COLS_Y,FILIAL_ID, GROUP_KIND_ID, AZC_ID, DOG_NUMBER, PLAT_ID, GRP_ID_NPR, PROD_ID_NPR,IS_SNP,IS_UNP)=
+  (SELECT
+    'MASTER',
+    REPORTS.ID,
+    REPORTS.REPORT_NAME,
+    REPORTS.REPORT_FILE,
+    REPORTS.REPORT_GROUP,
+    REPORTS.REPORT_TYPE,
+    NVL(REPORTS.REPORT_TITLE,' '),
+    NVL(For_Temp.GET_AS_DATE('BEGIN_DATE', 'MASTER', REPORTS.REPORT_FILE),TRUNC(SYSDATE)) AS BEGIN_DATE,
+    NVL(For_Temp.GET_AS_CHAR('BEGIN_TIME', 'MASTER', REPORTS.REPORT_FILE),'00:00') AS BEGIN_TIME,
+    NVL(For_Temp.GET_AS_DATE('END_DATE', 'MASTER', REPORTS.REPORT_FILE),TRUNC(SYSDATE)) AS END_DATE,
+    NVL(For_Temp.GET_AS_CHAR('END_TIME', 'MASTER', REPORTS.REPORT_FILE),'00:00') AS END_TIME,
+    NVL(For_Temp.GET_AS_CHAR('DATE_REE', 'MASTER', REPORTS.REPORT_FILE),TO_CHAR(SYSDATE+1,'dd.mm.yyyy')) AS DATE_REE,
+    NVL(For_Temp.GET_AS_CHAR('DATE_PLAN', 'MASTER', REPORTS.REPORT_FILE),TO_CHAR(TRUNC(SYSDATE,'MONTH'),'dd.mm.yyyy')) AS DATE_PLAN,
+    NVL(For_Temp.GET_AS_NUM('FROM_PARUS', 'MASTER', REPORTS.REPORT_FILE),0) AS FROM_PARUS,
+    NVL(For_Temp.GET_AS_NUM('VIEW_PROD', 'MASTER', REPORTS.REPORT_FILE),0) AS VIEW_PROD,
+    NVL(For_Temp.GET_AS_NUM('VIEW_DAYS', 'MASTER', REPORTS.REPORT_FILE),0) AS VIEW_DAYS,
+    NVL(For_Temp.GET_AS_NUM('IS_AGENT', 'MASTER', REPORTS.REPORT_FILE),0) AS IS_AGENT,
+    REPORTS.DIAGRAM_TYPE,
+    NVL(For_Temp.GET_AS_CHAR('DIAGRAM_KIND', 'MASTER', REPORTS.REPORT_FILE),'') AS DIAGRAM_KIND,
+    REPORTS.AXES_X_NAME,
+    REPORTS.COUNT_COLS_X,
+    REPORTS.AXES_Y_NAME,
+    REPORTS.COUNT_COLS_Y,
+    NVL(For_Temp.GET_AS_NUM('FILIAL_ID', 'MASTER', REPORTS.REPORT_FILE),0) AS FILIAL_ID,
+    NVL(For_Temp.GET_AS_NUM('GROUP_KIND_ID', 'MASTER', REPORTS.REPORT_FILE),0) AS GROUP_KIND_ID,
+    NVL(For_Temp.GET_AS_NUM('AZC_ID', 'MASTER', REPORTS.REPORT_FILE),0) AS AZC_ID,
+    NVL(For_Temp.GET_AS_CHAR('DOG_NUMBER', 'MASTER', REPORTS.REPORT_FILE),'%') AS DOG_NUMBER,
+    NVL(For_Temp.GET_AS_NUM('PLAT_ID', 'MASTER', REPORTS.REPORT_FILE),0) AS PLAT_ID,
+    NVL(For_Temp.GET_AS_CHAR('GROUP_NPR_ID', 'MASTER',REPORTS.REPORT_FILE),'*') AS GRP_ID_NPR,
+    NVL(For_Temp.GET_AS_CHAR('NPR_ID', 'MASTER', REPORTS.REPORT_FILE),'*') AS PROD_ID_NPR,
+	For_Init.AppUserSnp,
+	For_Init.AppUserUnp
+  FROM REPORTS
+  WHERE REPORTS.ID=pREP_ID
+  )
+  WHERE V_MASTER_REPORTS.REP_ID=pREP_ID;
+  COMMIT;
+
+EXCEPTION
+  WHEN OTHERS THEN
+    NULL;    
+END;	
+
+/* Очистить параметры отчета */
+PROCEDURE EMPTY_REPORT_PARAM_VALUE (pREP_ID NUMBER) AS
+
+  vREPORT_FILE VARCHAR2(30); 
+BEGIN
+  -- Выбираем название файла с отчетом
+  SELECT NLS_UPPER(REPORT_FILE) INTO vREPORT_FILE FROM REPORTS WHERE ID=pREP_ID;	
+
+  -- Удаляем строку с описанием отчета
+  DELETE FROM V_MASTER_REPORTS WHERE REPORT_FILE=vREPORT_FILE;
+
+  -- Удаляем параметры отчета 
+  DELETE FROM V_TEMPVARI WHERE APP_NAME='MASTER' AND UNIT_NAME=vREPORT_FILE;
+
+  COMMIT;
+
+EXCEPTION
+  WHEN OTHERS THEN
+    NULL;    
+END;	
+
+END;
+
+/
+

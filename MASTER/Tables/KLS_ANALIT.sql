@@ -1,0 +1,12 @@
+--
+-- KLS_ANALIT  (Table) 
+--
+CREATE TABLE MASTER.KLS_ANALIT
+(
+  ID           NUMBER(3)                        NOT NULL,
+  ANALIT_NAME  VARCHAR2(50 BYTE)
+)
+TABLESPACE USERS2
+NOCOMPRESS ;
+
+

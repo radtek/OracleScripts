@@ -1,0 +1,71 @@
+--
+-- TRG_AIUDR_PLAN_PERIODS  (Trigger) 
+--
+CREATE OR REPLACE TRIGGER MASTER.TRG_AIUDR_PLAN_PERIODS
+AFTER INSERT OR DELETE OR UPDATE OF ID, NUM_IZM_RESU, END_DATE, DATE_PLAN, BEGIN_DATE, PLAN_ID, NUM_IZM_POST
+ON MASTER.PLAN_PERIODS
+FOR EACH ROW
+DECLARE
+  v_old PLAN_PERIODS%ROWTYPE;
+  v_new PLAN_PERIODS%ROWTYPE;
+  v_tmp NUMBER;
+BEGIN
+
+  IF DELETING() OR UPDATING() THEN
+    -- Старые значения
+    v_old.ID := :OLD.ID;
+    v_old.PLAN_ID := :OLD.PLAN_ID;
+    v_old.DATE_PLAN := :OLD.DATE_PLAN;
+    v_old.NUM_IZM_POST := :OLD.NUM_IZM_POST;
+    v_old.NUM_IZM_RESU := :OLD.NUM_IZM_RESU;
+    v_old.BEGIN_DATE := :OLD.BEGIN_DATE;
+    v_old.END_DATE := :OLD.END_DATE;
+  END IF;
+
+  -- После удаления
+  IF DELETING() THEN
+    NULL;
+    -- Удаление из теневой таблицы
+    DELETE FROM MASTER_SHADOW.PLAN_PERIODS_SHADOW
+     WHERE ID=v_old.ID
+       AND PLAN_ID=v_old.PLAN_ID;
+  END IF;
+
+  IF INSERTING() OR UPDATING() THEN
+    -- Новые значения
+    v_new.ID := :NEW.ID;
+    v_new.PLAN_ID := :NEW.PLAN_ID;
+    v_new.DATE_PLAN := :NEW.DATE_PLAN;
+    v_new.NUM_IZM_POST := :NEW.NUM_IZM_POST;
+    v_new.NUM_IZM_RESU := :NEW.NUM_IZM_RESU;
+    v_new.BEGIN_DATE := :NEW.BEGIN_DATE;
+    v_new.END_DATE := :NEW.END_DATE;
+
+    -- Обновление теневой таблицы
+    UPDATE MASTER_SHADOW.PLAN_PERIODS_SHADOW SET
+      (ID,PLAN_ID,DATE_PLAN,NUM_IZM_POST,NUM_IZM_RESU,BEGIN_DATE,END_DATE)=
+      (SELECT v_new.ID,v_new.PLAN_ID,v_new.DATE_PLAN,v_new.NUM_IZM_POST,v_new.NUM_IZM_RESU,v_new.BEGIN_DATE,v_new.END_DATE FROM dual)
+      WHERE ID=v_old.ID AND PLAN_ID=v_old.PLAN_ID;
+
+    IF SQL%NOTFOUND THEN
+      INSERT INTO MASTER_SHADOW.PLAN_PERIODS_SHADOW
+        (ID,PLAN_ID,DATE_PLAN,NUM_IZM_POST,NUM_IZM_RESU,BEGIN_DATE,END_DATE)
+        VALUES
+        (v_new.ID,v_new.PLAN_ID,v_new.DATE_PLAN,v_new.NUM_IZM_POST,v_new.NUM_IZM_RESU,v_new.BEGIN_DATE,v_new.END_DATE);
+    END IF;
+
+    -- После обновления
+    IF UPDATING() THEN
+      NULL;
+    END IF;
+
+    -- После добавления
+    IF INSERTING() THEN
+      NULL;
+    END IF;
+
+  END IF;
+END;
+/
+
+

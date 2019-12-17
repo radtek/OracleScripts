@@ -1,0 +1,7 @@
+-- 
+-- Non Foreign Key Constraints for Table KLS_SHABVOZ 
+-- 
+ALTER TABLE MASTER.KLS_SHABVOZ ADD (
+  CHECK ("ID" IS NOT NULL)
+  DISABLE NOVALIDATE);
+

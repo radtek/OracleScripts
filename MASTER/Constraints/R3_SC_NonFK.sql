@@ -1,0 +1,10 @@
+-- 
+-- Non Foreign Key Constraints for Table R3_SC 
+-- 
+ALTER TABLE MASTER.R3_SC ADD (
+  CONSTRAINT SC_PK
+  PRIMARY KEY
+  (ASNUM)
+  USING INDEX MASTER.SC_PK
+  ENABLE VALIDATE);
+

@@ -1,0 +1,12 @@
+--
+-- KLS_AR_TOV  (Table) 
+--
+CREATE TABLE MASTER.KLS_AR_TOV
+(
+  ID    NUMBER(2)                               NOT NULL,
+  NAME  VARCHAR2(30 BYTE)
+)
+TABLESPACE USERS2
+NOCOMPRESS ;
+
+

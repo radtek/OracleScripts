@@ -1,0 +1,17 @@
+--
+-- KLS_CIST_DENI  (Table) 
+--
+CREATE TABLE MASTER.KLS_CIST_DENI
+(
+  NUM_CIST  NUMBER(9)                           NOT NULL,
+  BEG_DENI  DATE,
+  END_DENI  DATE,
+  PRIM      VARCHAR2(50 BYTE)
+)
+TABLESPACE USERS2
+NOCOMPRESS ;
+
+COMMENT ON TABLE MASTER.KLS_CIST_DENI IS 'Предупреждения по вагонам';
+
+
+

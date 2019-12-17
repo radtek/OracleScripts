@@ -1,0 +1,12 @@
+--
+-- KLS_GOSPROG  (Table) 
+--
+CREATE TABLE MASTER.KLS_GOSPROG
+(
+  ID            NUMBER(2)                       NOT NULL,
+  GOSPROG_NAME  VARCHAR2(30 BYTE)
+)
+TABLESPACE USERS2
+NOCOMPRESS ;
+
+

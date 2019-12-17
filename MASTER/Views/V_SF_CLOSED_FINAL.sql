@@ -1,0 +1,16 @@
+--
+-- V_SF_CLOSED_FINAL  (View) 
+--
+CREATE OR REPLACE FORCE VIEW MASTER.V_SF_CLOSED_FINAL
+(VES, D_41, SUM_AKCIZ, D_191, SUM_NALIV, 
+ NDC_NAL20, NDC_NAL03, D_441, D_194, D_442, 
+ NDC_TR20, NOM_SF, SUM_NACEN, NOM_POR, CLOSE_DATE, 
+ DOG_NUMBER, PREDPR_NAME, NAME_NPR)
+AS 
+select c.VES, c.D_41, c.SUM_AKCIZ, c.D_191, c.SUM_NALIV, c.NDC_NAL20, c.NDC_NAL03,
+       c.D_441, c.D_194, c.D_442, c.NDC_TR20, c.NOM_SF,c.SUM_NACEN,
+	   c.NOM_POR, c.CLOSE_DATE,d.DOG_NUMBER, o.PREDPR_NAME,p.NAME_NPR
+from v_sf_closed c,v_kvit_group k, kls_dog d,kls_predpr o,kls_prod p
+where c.NOM_DOK=k.BILL_ID(+) and c.kod_nfp=p.ID_NPR(+) and c.DOG_REALP=d.SHORT_NUMBER and c.KOD_REALP=o.ID;
+
+

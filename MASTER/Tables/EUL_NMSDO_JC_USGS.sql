@@ -1,0 +1,14 @@
+--
+-- EUL_NMSDO_JC_USGS  (Table) 
+--
+CREATE TABLE MASTER.EUL_NMSDO_JC_USGS
+(
+  NJU_ID        NUMBER(10)                      NOT NULL,
+  NJU_JC_ID     NUMBER(10),
+  NJU_NMSDO_ID  NUMBER(10),
+  NOTM          NUMBER(10)
+)
+TABLESPACE USERS2
+NOCOMPRESS ;
+
+

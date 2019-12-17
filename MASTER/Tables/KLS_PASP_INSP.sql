@@ -1,0 +1,12 @@
+--
+-- KLS_PASP_INSP  (Table) 
+--
+CREATE TABLE MASTER.KLS_PASP_INSP
+(
+  ID    NUMBER(10)                              NOT NULL,
+  NAME  VARCHAR2(50 BYTE)
+)
+TABLESPACE USERS2
+NOCOMPRESS ;
+
+

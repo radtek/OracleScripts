@@ -1,0 +1,12 @@
+--
+-- KLS_NAZN_OTG  (Table) 
+--
+CREATE TABLE MASTER.KLS_NAZN_OTG
+(
+  ID             NUMBER(2)                      NOT NULL,
+  NAZN_OTG_NAME  VARCHAR2(50 BYTE)
+)
+TABLESPACE USERS2
+NOCOMPRESS ;
+
+

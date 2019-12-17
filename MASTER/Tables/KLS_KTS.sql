@@ -1,0 +1,12 @@
+--
+-- KLS_KTS  (Table) 
+--
+CREATE TABLE MASTER.KLS_KTS
+(
+  KTS  VARCHAR2(8 BYTE)                         NOT NULL,
+  GTD  VARCHAR2(20 BYTE)
+)
+TABLESPACE USERS2
+NOCOMPRESS ;
+
+

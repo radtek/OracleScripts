@@ -1,0 +1,10 @@
+-- 
+-- Non Foreign Key Constraints for Table XX100A 
+-- 
+ALTER TABLE MASTER.XX100A ADD (
+  PRIMARY KEY
+  (ANAME)
+  USING INDEX
+    TABLESPACE USERS
+  ENABLE VALIDATE);
+

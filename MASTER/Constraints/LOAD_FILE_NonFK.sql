@@ -1,0 +1,7 @@
+-- 
+-- Non Foreign Key Constraints for Table LOAD_FILE 
+-- 
+ALTER TABLE MASTER.LOAD_FILE ADD (
+  CHECK ("LINE" IS NOT NULL)
+  DISABLE NOVALIDATE);
+

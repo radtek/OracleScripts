@@ -1,0 +1,181 @@
+--
+-- TRG_AIUDR_REESTR  (Trigger) 
+--
+CREATE OR REPLACE TRIGGER MASTER.TRG_AIUDR_REESTR
+AFTER INSERT OR DELETE OR UPDATE
+ON MASTER.REESTR
+FOR EACH ROW
+DECLARE
+ vNEW_NOM_ZD VARCHAR2(12);
+ vOLD_NOM_ZD VARCHAR2(12);
+ vNUM_NAR KLS_NARIAD.NUM_NAR%TYPE;
+ vKOL KLS_NAR_LINE.KOL%TYPE;
+ vVES KLS_NAR_LINE.VES%TYPE;
+ vFACT_KOL KLS_NAR_LINE.FACT_KOL%TYPE;
+ vFACT_VES KLS_NAR_LINE.FACT_VES%TYPE;
+ vCIST_RAZNAR MONTH.CIST_RAZNAR%TYPE;
+ vTONN_RAZNAR MONTH.TONN_RAZNAR%TYPE;
+ vCIST_FACT MONTH.CIST_FACT%TYPE;
+ vTONN_FACT MONTH.TONN_FACT%TYPE;
+ vLOAD_TYPE_ID KLS_VID_OTGR.LOAD_TYPE_ID%TYPE;
+ vNEW_GROUP_NPR KLS_PROD.ID_GROUP_NPR%TYPE;
+ vOLD_GROUP_NPR KLS_PROD.ID_GROUP_NPR%TYPE;
+ vSVED_NUM SVED.SVED_NUM%TYPE;
+ vPASP_ID SVED.PASP_ID%TYPE;
+ vPROD_ID_NPR SVED.PROD_ID_NPR%TYPE;
+BEGIN
+  -- Обновляем кол-во и веса в заголовке документа, факт отгрузки в заявке и разрешении диспетчера
+  IF INSERTING() THEN
+    UPDATE SVED
+	   SET SVED_CNT=NVL(SVED_CNT,0)+1,
+	       SVED_VES=NVL(SVED_VES,0)+NVL(:NEW.VES,0),
+	       VES_CIST=NVL(VES_CIST,0)+NVL(:NEW.VES_CIST,0),
+	       KOL_NET=NVL(KOL_NET,0)+NVL(:NEW.KOL_NET,0),
+	       VES_ALL=NVL(VES_ALL,0)+NVL(:NEW.VES_ALL,0)
+ 	 WHERE ID=:NEW.SVED_ID;
+  END IF;
+  IF DELETING() THEN
+    UPDATE SVED
+	   SET SVED_CNT=NVL(SVED_CNT,0)-1,
+	       SVED_VES=NVL(SVED_VES,0)-NVL(:OLD.VES,0),
+	       VES_CIST=NVL(VES_CIST,0)-NVL(:OLD.VES_CIST,0),
+	       KOL_NET=NVL(KOL_NET,0)+NVL(:OLD.KOL_NET,0),
+	       VES_ALL=NVL(VES_ALL,0)-NVL(:OLD.VES_ALL,0)
+	 WHERE ID=:OLD.SVED_ID;
+  END IF;
+  IF UPDATING('SVED_ID') OR UPDATING('VES') OR UPDATING('VES_CIST') OR UPDATING('KOL_NET') OR UPDATING('VES_ALL') THEN
+    -- "минус" со старого сведения
+    UPDATE SVED
+	   SET SVED_VES=NVL(SVED_VES,0)-NVL(:OLD.VES,0),
+	       VES_CIST=NVL(VES_CIST,0)-NVL(:OLD.VES_CIST,0),
+	       KOL_NET=NVL(KOL_NET,0)-NVL(:OLD.KOL_NET,0),
+	       VES_ALL=NVL(VES_ALL,0)-NVL(:OLD.VES_ALL,0)
+	 WHERE ID=:OLD.SVED_ID;
+    -- "плюс" на новое сведение
+    UPDATE SVED
+	   SET SVED_VES=NVL(SVED_VES,0)+NVL(:NEW.VES,0),
+	       VES_CIST=NVL(VES_CIST,0)+NVL(:NEW.VES_CIST,0),
+	       KOL_NET=NVL(KOL_NET,0)+NVL(:NEW.KOL_NET,0),
+	       VES_ALL=NVL(VES_ALL,0)+NVL(:NEW.VES_ALL,0)
+	 WHERE ID=:NEW.SVED_ID;
+  END IF;
+
+  IF NVL(:OLD.NAR_LINE_ID,0)<>NVL(:NEW.NAR_LINE_ID,0) THEN
+    -- Действия при адресации вагона
+    -- Снимаем факт отгрузки со старого задания
+    vOLD_NOM_ZD:='';
+    IF NVL(:OLD.NAR_LINE_ID,0)<>0 THEN
+      -- Обновляем KLS_NAR_LINE
+ 	  UPDATE KLS_NAR_LINE SET FACT_KOL=FACT_KOL-1, FACT_VES=FACT_VES-NVL(:NEW.VES,0) WHERE ID=:OLD.NAR_LINE_ID;
+	  -- Определяем № предыдущего задания
+  	  BEGIN
+	    SELECT NOM_ZD INTO vOLD_NOM_ZD
+	      FROM KLS_NAR_LINE
+	     WHERE ID=:OLD.NAR_LINE_ID;
+	  EXCEPTION
+	    WHEN OTHERS THEN
+	      vOLD_NOM_ZD:='';
+  	  END;
+	END IF;
+
+    -- Вешаем факт отгрузки на новое задание
+    vNEW_NOM_ZD:='';
+    IF NVL(:NEW.NAR_LINE_ID,0)<>0 THEN
+	  -- Определяем № нового задания
+	  BEGIN
+	    SELECT b.NUM_NAR,a.NOM_ZD,a.KOL,a.VES,a.FACT_KOL,a.FACT_VES,
+               m.CIST_RAZNAR,m.TONN_RAZNAR,m.CIST_FACT,m.TONN_FACT,v.LOAD_TYPE_ID,p.ID_GROUP_NPR
+		  INTO vNUM_NAR,vNEW_NOM_ZD,vKOL,vVES,vFACT_KOL,vFACT_VES,
+		       vCIST_RAZNAR,vTONN_RAZNAR,vCIST_FACT,vTONN_FACT,vLOAD_TYPE_ID,vNEW_GROUP_NPR
+	      FROM KLS_NAR_LINE a,KLS_NARIAD b,MONTH m,KLS_PROD p,KLS_VID_OTGR v
+	     WHERE a.NARIAD_ID=b.ID
+		   AND a.NOM_ZD=m.NOM_ZD
+		   AND m.PROD_ID_NPR=p.ID_NPR
+		   AND m.LOAD_ABBR=v.LOAD_ABBR
+		   AND a.ID=:NEW.NAR_LINE_ID;
+	  EXCEPTION
+	    WHEN OTHERS THEN
+	      vNEW_NOM_ZD:=NULL;
+	  END;
+
+/*	  IF vNEW_NOM_ZD IS NOT NULL AND (vOLD_NOM_ZD||' '<>vNEW_NOM_ZD||' ' OR vOLD_NOM_ZD IS NULL) THEN
+	    -- Проверяем на перегруз заявки
+		IF NVL(vCIST_RAZNAR,0)-NVL(vCIST_FACT,0)<=0 THEN
+    	  RAISE_APPLICATION_ERROR(For_Scripts.SG$NO_CORRECT, 'Попытка перегрузить задание '||vNEW_NOM_ZD||' - по кол-ву транспортных средств!');
+		END IF;
+		IF NVL(vTONN_RAZNAR,0)-NVL(vTONN_FACT,0)<FOR_SVED.GET_MIN_OSTAT_VES(vLOAD_TYPE_ID,vNEW_GROUP_NPR) THEN
+    	  RAISE_APPLICATION_ERROR(For_Scripts.SG$NO_CORRECT, 'Попытка перегрузить задание '||vNEW_NOM_ZD||' - по весу!');
+		END IF;
+      END IF;
+
+      -- Проверяем на перегруз позиции разрешения
+	  IF NVL(vKOL,0)-NVL(vFACT_KOL,0)<=0 THEN
+    	RAISE_APPLICATION_ERROR(For_Scripts.SG$NO_CORRECT, 'Попытка перегрузить разрешение '||vNUM_NAR||', позиция '||vNEW_NOM_ZD||' - по кол-ву транспортных средств!');
+	  END IF;
+  	  IF NVL(vVES,0)-NVL(vFACT_VES,0)<FOR_SVED.GET_MIN_OSTAT_VES(vLOAD_TYPE_ID,vNEW_GROUP_NPR) THEN
+    	RAISE_APPLICATION_ERROR(For_Scripts.SG$NO_CORRECT, 'Попытка перегрузить разрешение '||vNUM_NAR||', позиция '||vNEW_NOM_ZD||' - по весу!');
+      END IF;
+*/
+      -- Обновляем KLS_NAR_LINE
+ 	  UPDATE KLS_NAR_LINE SET FACT_KOL=FACT_KOL+1, FACT_VES=FACT_VES+NVL(:NEW.VES,0) WHERE ID=:NEW.NAR_LINE_ID;
+
+ 	  -- Считываем номер задания из сведения
+	  SELECT s.NOM_ZD,s.SVED_NUM,p.ID_GROUP_NPR,s.PASP_ID INTO vOLD_NOM_ZD,vSVED_NUM,vOLD_GROUP_NPR,vPASP_ID
+	    FROM SVED s,KLS_PROD p
+	   WHERE s.PROD_ID_NPR=p.ID_NPR
+	     AND s.ID=:NEW.SVED_ID;
+	  -- Проверяем соответствие
+	  IF vNEW_NOM_ZD||' '<>vOLD_NOM_ZD||' ' AND vOLD_NOM_ZD IS NOT NULL THEN
+	    -- Попытка присвоить вагонам в сведении разные № заданий
+  	    RAISE_APPLICATION_ERROR(For_Scripts.SG$NO_CORRECT, 'Нельзя изменить номер задания '||vOLD_NOM_ZD||' на '||vNEW_NOM_ZD||' в сведении N '||vSVED_NUM||'. Сначала отмените адреса у всех вагонов в сведении или выполните переадресацию сведения целиком!');
+	  END IF;
+	  IF vNEW_GROUP_NPR||' '<>vOLD_GROUP_NPR||' ' AND vOLD_GROUP_NPR IS NOT NULL AND vPASP_ID IS NOT NULL THEN
+	    -- Попытка присвоить № задания с группой продукта не соответствующей группе продукта в паспорте
+    	RAISE_APPLICATION_ERROR(For_Scripts.SG$NO_CORRECT, 'Нельзя изменить группу продукта в сведении N '||vSVED_NUM||' - уже проставлен паспорт на другую группу');
+	  END IF;
+	  -- Обновляем номер задания
+	  UPDATE SVED SET NOM_ZD=vNEW_NOM_ZD WHERE ID=:NEW.SVED_ID;
+	END IF;
+  ELSE
+    -- Действия, если адрес не изменился, но изменился вес
+    IF NVL(:NEW.NAR_LINE_ID,0)<>0 AND NVL(:NEW.VES,0)<>NVL(:OLD.VES,0) THEN
+      -- Обновляем KLS_NAR_LINE
+ 	  UPDATE KLS_NAR_LINE SET FACT_VES=FACT_VES-NVL(:OLD.VES,0)+NVL(:NEW.VES,0) WHERE ID=:NEW.NAR_LINE_ID;
+	END IF;
+  END IF;
+
+  IF DELETING() THEN
+    -- Очищаем SVED.NOM_ZD при удалении последнего вагона
+    UPDATE SVED SET NOM_ZD='' WHERE ID=:OLD.SVED_ID AND SVED_CNT=0;
+  END IF;
+
+  -- Сохранить изменения в справочнике вагонов
+  BEGIN
+	SELECT LOAD_TYPE_ID,PROD_ID_NPR INTO vLOAD_TYPE_ID,vPROD_ID_NPR
+	  FROM SVED
+	 WHERE ID=:NEW.SVED_ID;
+  EXCEPTION
+    WHEN OTHERS THEN
+	  vLOAD_TYPE_ID:=NULL;
+  END;
+
+  IF INSERTING() OR UPDATING('NUM_CIST') OR UPDATING('NCISTDOP') OR UPDATING('AXES') OR UPDATING('CAPACITY') OR UPDATING('WES1') OR 
+     UPDATING('VES_CIST') OR UPDATING('VAGONTYPE_ID') OR UPDATING('KALIBR_ID') OR UPDATING('TIP1') OR UPDATING('VAGOWNER_ID') THEN
+	FOR_CIST.ADD_CIST(0,:NEW.NUM_CIST,vLOAD_TYPE_ID,:NEW.VAGONTYPE_ID,:NEW.KALIBR_ID,:NEW.TIP1,:NEW.CAPACITY,:NEW.WES1,:NEW.NCISTDOP,:NEW.AXES,:NEW.VES_CIST,:NEW.VAGOWNER_ID,vPROD_ID_NPR);
+  END IF;
+
+  IF INSERTING() OR UPDATING('ZPU_TYPE1') THEN
+    IF NVL(:NEW.ZPU_TYPE1,0)<>0 THEN
+      FOR_ENVIRONMENT.SET_ENV('MASTER','VARI','ZPU_TYPE1',:NEW.ZPU_TYPE1,FOR_INIT.GetCurrUser);
+	END IF;  
+  END IF;
+  IF INSERTING() OR UPDATING('ZPU_TYPE2') THEN
+    IF NVL(:NEW.ZPU_TYPE2,0)<>0 THEN
+      FOR_ENVIRONMENT.SET_ENV('MASTER','VARI','ZPU_TYPE2',:NEW.ZPU_TYPE2,FOR_INIT.GetCurrUser);
+	END IF;  
+  END IF;
+
+END;
+/
+
+

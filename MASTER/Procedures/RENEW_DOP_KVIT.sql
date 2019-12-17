@@ -1,0 +1,81 @@
+--
+-- RENEW_DOP_KVIT  (Procedure) 
+--
+CREATE OR REPLACE PROCEDURE MASTER.Renew_Dop_Kvit (DATE_BEG DATE:=TRUNC(SYSDATE,'MONTH') ,DATE_END DATE:=SYSDATE, param1 VARCHAR2:='', param2 VARCHAR2:='', param3 VARCHAR2:='') IS
+  date_inc DATE;
+BEGIN
+return;
+
+UPDATE load_buffer.DOP_KVIT SET np_timep='00:00' WHERE SUBSTR(np_timep,1,1)=' ' OR np_timep IS NULL;
+UPDATE load_buffer.DOP_KVIT SET time_e='00:00' WHERE SUBSTR(time_e,1,1)=' ' OR time_e IS NULL;
+UPDATE load_buffer.DOP_KVIT SET np_data_o=date_otgr WHERE np_data_o IS NULL;
+UPDATE load_buffer.DOP_KVIT SET date_e=date_otgr WHERE date_e IS NULL;
+UPDATE load_buffer.DOP_KVIT SET kod_perer=0 WHERE kod_perer IS NULL;
+COMMIT;
+
+UPDATE MASTER.DOP_KVIT a SET
+  (FLG_OPERDATA,MESTO_ID,NOM_ZD,PROD_ID_NPR,TEX_PD_ID,NUM_CIST,DATE_OTGR,
+   VES,VES_BRUTTO,VES_ED,KOL_ED,TARIF,TARIF19,TARIF_ORIG,NUM_KVIT,DATE_KVIT,
+   NUM_MILITARY,FLG_DOP_CIST,FLG_VAG_KLIENT,VAGOWNER_ID,VAGONTYPE_ID,KALIBR_ID,
+   VES_CIST,DATE_VOZ,KVIT_VOZ,SUM_VOZ,DATE_OTV,PLOMBA1,PLOMBA2,ROSINSPL1,ROSINSPL2,
+   VZLIV,TEMPER,FAKT_PL,FORMNAKL_ID,SHABEXP_ID,GTD,EXPED_ID,VETKA_OTP_ID,
+   BILL_ID,NUM_EXP_MAR,DATE_OFORML,SVED_NUM,SVED_ID,PASP_ID,NUM_DOVER,NUM_NAR,PERER_ID,
+   DATE_EDIT,JKCOMMIT,GROTP_ID,PERECH_TEXPD_NUM, PERECH_TEXPD_DATE,
+   SUM_PROD, SUM_AKCIZ, SUM_PROD_NDS, TARIF_NDS, SUM_VOZN11, SUM_VOZN11_NDS, SUM_VOZN12, SUM_VOZN12_NDS, SUM_STRAH, cena_vozn,TARIF_GUARD,TARIF_GUARD_NDS,TARIF_ALT,
+   CENA,CENA_OTP,NACENKA,SHIELDS,PODDONS,UPAK_ID,UPAK_VES,NUM_AKT,PROTO_NUM,PROTO_DATE,NO_AKCIZ,PERECH_GUARD_NUM,PERECH_GUARD_DATE)
+ = (SELECT 0,k.mesto,k.nom_zd,k.kod_npr,k.plat_tarif,k.num_cist,k.date_otgr,
+   k.ves,SIGN(k.ves)*ABS(k.ves_brutto),k.wes_ed,k.kol_ed,k.TARIF,k.TARIF19,k.TARIF_ORIG,k.num_kvit,k.date_kvit,
+   LTRIM(RTRIM(k.transp)),Iif(k.DOP_CIST,1,0),Iif(k.VAG_KLIENT,1,0),NVL(k.tipv,0),NVL(k.rodv,0),NVL(k.tip,'0'),
+   k.tara_all,k.date_voz,k.KVIT_VOZ,k.SUM_VOZ,k.date_otv,k.PLOMBA1,k.PLOMBA2,k.ROSINSPL1,k.ROSINSPL2,
+   k.VZLIV,k.TEMPER,k.XPL,0,k.rexp,NVL(k.GTD,''),E.KOD_PREDPR,k.gd_track,
+   k.n_plat,k.n_mar,TO_DATE(TO_CHAR(np_data_o,'dd.mm.yyyy ') || SUBSTR(np_timep,1,5),'dd.mm.yyyy hh24:mi'),k.NP,k.sved_id,k.KODPASP,k.doveren,k.nariad,p_r.PREDPR_ID,
+   TO_DATE(TO_CHAR(date_e,'dd.mm.yyyy ') || SUBSTR(time_e,1,5),'dd.mm.yyyy hh24:mi'),1,k.KOD_GROTP,k.NUM_PERECH,k.DAT_PERECH,
+   k.D_41, k.SUM_AKCIZ, k.D_191, k.D_194, k.SUM_NALIV, k.NDC_NAL20, k.D_442, k.NDC_TR20, k.SUM_NACEN, k.cena_vozn,NVL(k.dop_tarif,0),NVL(k.ndc_doptar,0),NVL(k.tarif_alt,0),
+   k.CENA,k.CENA_OTP,k.NACENKA,k.shields,k.poddons,u.ID,k.bag_ves,k.REESTR,k.PROTO_NUM,k.PROTO_DATE,IIF(k.NO_AKCIZ,1,0),
+   k.n_per_ohr,k.d_per_ohr
+          FROM load_buffer.DOP_KVIT k, load_buffer.exped e, MASTER.PREDPR_ROLE p_r, MASTER.KLS_UPAK u
+		  WHERE k.ID=a.ID AND k.N_PLAT=a.BILL_ID AND E.kod=K.EXPED AND p_r.KLS_ROLE_ID=2 AND p_r.FOX_KOD=k.KOD_PERER AND k.BAG_ID=u.BAG_ID(+))
+  WHERE EXISTS (SELECT k.ID FROM load_buffer.DOP_KVIT k WHERE k.ID=a.ID AND k.N_PLAT=a.BILL_ID);
+
+
+date_inc:=DATE_BEG;
+
+INSERT INTO MASTER.DOP_KVIT
+     (ID,FLG_OPERDATA,MESTO_ID,NOM_ZD,PROD_ID_NPR,TEX_PD_ID,NUM_CIST,DATE_OTGR,
+      VES,VES_BRUTTO,VES_ED,KOL_ED,TARIF,TARIF19,TARIF_ORIG,NUM_KVIT,DATE_KVIT,
+      NUM_MILITARY,FLG_DOP_CIST,FLG_VAG_KLIENT,VAGOWNER_ID,VAGONTYPE_ID,KALIBR_ID,
+      VES_CIST,DATE_VOZ,KVIT_VOZ,SUM_VOZ,DATE_OTV,PLOMBA1,PLOMBA2,ROSINSPL1,ROSINSPL2,
+      VZLIV,TEMPER,FAKT_PL,FORMNAKL_ID,SHABEXP_ID,GTD,EXPED_ID,VETKA_OTP_ID,
+	  BILL_ID,NUM_EXP_MAR,DATE_OFORML,SVED_NUM,SVED_ID,PASP_ID,NUM_DOVER,NUM_NAR,PERER_ID,
+      DATE_EDIT,JKCOMMIT,GROTP_ID,PERECH_TEXPD_NUM, PERECH_TEXPD_DATE,
+	  SUM_PROD, SUM_AKCIZ, SUM_PROD_NDS, TARIF_NDS, SUM_VOZN11, SUM_VOZN11_NDS, SUM_VOZN12, SUM_VOZN12_NDS, SUM_STRAH, cena_vozn,TARIF_GUARD,TARIF_GUARD_NDS,TARIF_ALT,
+	  CENA,CENA_OTP,NACENKA,SHIELDS,PODDONS,UPAK_ID,UPAK_VES,NUM_AKT,PROTO_NUM,PROTO_DATE,NO_AKCIZ,PERECH_GUARD_NUM,PERECH_GUARD_DATE)
+      (SELECT k.ID,0,k.mesto,k.nom_zd,k.kod_npr,k.plat_tarif,k.num_cist,k.date_otgr,
+          k.ves,SIGN(k.ves)*ABS(k.ves_brutto),k.wes_ed,k.kol_ed,k.TARIF,k.TARIF19,k.TARIF_ORIG,k.num_kvit,k.date_kvit,
+          LTRIM(RTRIM(k.transp)),Iif(k.DOP_CIST,1,0),Iif(k.VAG_KLIENT,1,0),NVL(k.tipv,0),NVL(k.rodv,0),NVL(k.tip,'0'),
+          k.tara_all,k.date_voz,k.KVIT_VOZ,k.SUM_VOZ,k.date_otv,k.PLOMBA1,k.PLOMBA2,k.ROSINSPL1,k.ROSINSPL2,
+          k.VZLIV,k.TEMPER,k.XPL,0,k.rexp,NVL(k.GTD,''),E.KOD_PREDPR,k.gd_track,
+		  k.n_plat,k.n_mar,TO_DATE(TO_CHAR(np_data_o,'dd.mm.yyyy ') || SUBSTR(np_timep,1,5),'dd.mm.yyyy hh24:mi'),k.NP,k.sved_id,k.kodpasp,k.doveren,k.nariad,p_r.PREDPR_ID,
+          TO_DATE(TO_CHAR(date_e,'dd.mm.yyyy ') || SUBSTR(time_e,1,5),'dd.mm.yyyy hh24:mi'),1,k.KOD_GROTP,k.NUM_PERECH,k.DAT_PERECH,
+		  k.D_41, k.SUM_AKCIZ, k.D_191, k.D_194, k.SUM_NALIV, k.NDC_NAL20, k.D_442, k.NDC_TR20, k.SUM_NACEN, k.cena_vozn,NVL(k.dop_tarif,0),NVL(k.ndc_doptar,0),NVL(k.tarif_alt,0),
+		  k.CENA,k.CENA_OTP,k.NACENKA,k.shields,k.poddons,u.ID,k.bag_ves,k.reestr,k.PROTO_NUM,k.PROTO_DATE,IIF(k.NO_AKCIZ,1,0),
+		  k.n_per_ohr,k.d_per_ohr
+        FROM load_buffer.DOP_KVIT k, load_buffer.exped e, MASTER.PREDPR_ROLE p_r, MASTER.KLS_UPAK u
+        WHERE E.kod=K.EXPED AND p_r.KLS_ROLE_ID=2 AND p_r.FOX_KOD=k.KOD_PERER AND k.BAG_ID=u.BAG_ID(+) AND
+  	       NOT EXISTS (SELECT a.ID FROM MASTER.DOP_KVIT a WHERE a.ID=k.ID AND a.BILL_ID=k.N_PLAT));
+
+UPDATE DOP_KVIT SET BILL_POS_ID=1 WHERE  BILL_POS_ID IS NULL AND date_otgr BETWEEN date_beg AND date_end;
+		   
+DELETE FROM MASTER.DOP_KVIT A WHERE A.FLG_OPERDATA=0 AND
+    NOT EXISTS (SELECT k.ID FROM load_buffer.DOP_KVIT k WHERE k.ID = A.ID AND  k.n_plat = A.BILL_ID) AND
+    A.date_otgr BETWEEN date_beg AND date_end;
+
+
+UPDATE DOP_KVIT SET ves_brutto=ves 
+WHERE EXISTS (SELECT NULL FROM MONTH WHERE MONTH.nom_zd=DOP_KVIT.nom_zd AND MONTH.NAZN_OTG_ID<>4);
+
+COMMIT;
+
+END Renew_Dop_Kvit; 
+/
+

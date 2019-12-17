@@ -1,0 +1,17 @@
+--
+-- GET_NUM_5  (Function) 
+--
+CREATE OR REPLACE FUNCTION MASTER.Get_Num_5
+ (dat# DATE)
+RETURN NUMBER
+AS
+BEGIN
+  IF TO_NUMBER(TO_CHAR(dat#,'DD'))=31 THEN
+    RETURN 6;
+  ELSE	
+    RETURN TRUNC((TO_NUMBER(TO_CHAR(dat#,'DD'))-1)/5)+1;
+  END IF;	
+END Get_Num_5;
+
+/
+

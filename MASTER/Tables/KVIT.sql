@@ -1,0 +1,314 @@
+--
+-- KVIT  (Table) 
+--
+CREATE TABLE MASTER.KVIT
+(
+  ID                 NUMBER(16)                 NOT NULL,
+  FLG_OPERDATA       NUMBER(1)                  NOT NULL,
+  MESTO_ID           NUMBER(2),
+  NOM_ZD             VARCHAR2(12 BYTE),
+  PROD_ID_NPR        VARCHAR2(5 BYTE),
+  TEX_PD_ID          NUMBER(10),
+  NUM_CIST           VARCHAR2(10 BYTE),
+  DATE_OTGR          DATE,
+  VES                NUMBER(10,3),
+  VES_BRUTTO         NUMBER(10,3),
+  VES_ED             NUMBER(10,3),
+  KOL_ED             NUMBER(6),
+  TARIF              NUMBER(12,2),
+  TARIF19            NUMBER(12,2),
+  TARIF_ORIG         NUMBER(12,2),
+  NUM_KVIT           NUMBER(10),
+  DATE_KVIT          DATE,
+  NUM_MILITARY       VARCHAR2(20 BYTE),
+  FLG_DOP_CIST       NUMBER(1),
+  FLG_VAG_KLIENT     NUMBER(1),
+  VAGOWNER_ID        NUMBER(3),
+  VAGONTYPE_ID       NUMBER(2),
+  KALIBR_ID          VARCHAR2(5 BYTE),
+  VES_CIST           NUMBER(10,3),
+  DATE_VOZ           DATE,
+  KVIT_VOZ           VARCHAR2(12 BYTE),
+  SUM_VOZ            NUMBER(12,2),
+  DATE_OTV           DATE,
+  PLOMBA1            VARCHAR2(15 BYTE),
+  PLOMBA2            VARCHAR2(15 BYTE),
+  ROSINSPL1          VARCHAR2(6 BYTE),
+  ROSINSPL2          VARCHAR2(6 BYTE),
+  VZLIV              NUMBER(6),
+  TEMPER             NUMBER(10,1),
+  FAKT_PL            NUMBER(10,4),
+  FORMNAKL_ID        NUMBER(2),
+  SHABEXP_ID         NUMBER(10),
+  GTD                VARCHAR2(23 BYTE),
+  EXPED_ID           NUMBER(6),
+  VETKA_OTP_ID       NUMBER(10),
+  NUM_EXP_MAR        VARCHAR2(10 BYTE),
+  BILL_ID            NUMBER(10)                 DEFAULT 0,
+  SVED_ID            VARCHAR2(9 BYTE),
+  DATE_OFORML        DATE,
+  SVED_NUM           NUMBER(16)                 DEFAULT 0,
+  PASP_ID            VARCHAR2(9 BYTE),
+  NUM_NAR            VARCHAR2(15 BYTE),
+  NUM_DOVER          VARCHAR2(15 BYTE),
+  PERER_ID           NUMBER(6),
+  DATE_EDIT          DATE,
+  JKCOMMIT           NUMBER(1),
+  GROTP_ID           NUMBER(6)                  DEFAULT 0,
+  PERECH_TEXPD_DATE  DATE,
+  PERECH_TEXPD_NUM   VARCHAR2(10 BYTE),
+  SUM_PROD           NUMBER(15,2)               DEFAULT 0,
+  SUM_AKCIZ          NUMBER(15,2)               DEFAULT 0,
+  SUM_PROD_NDS       NUMBER(15,2)               DEFAULT 0,
+  TARIF_NDS          NUMBER(15,2)               DEFAULT 0,
+  SUM_VOZN11         NUMBER(15,2)               DEFAULT 0,
+  SUM_VOZN11_NDS     NUMBER(15,2)               DEFAULT 0,
+  SUM_VOZN12         NUMBER(15,2)               DEFAULT 0,
+  SUM_VOZN12_NDS     NUMBER(15,2)               DEFAULT 0,
+  SUM_STRAH          NUMBER(15,2)               DEFAULT 0,
+  CENA               NUMBER(10,2),
+  CENA_OTP           NUMBER(10,2),
+  DATE_CENA          DATE,
+  CENA_VOZN          NUMBER(10,2)               DEFAULT 0,
+  CAPACITY           VARCHAR2(10 BYTE),
+  TARIF_GUARD        NUMBER(12,2)               DEFAULT 0,
+  TARIF_GUARD_NDS    NUMBER(12,2)               DEFAULT 0,
+  TARIF_ALT          NUMBER(12,2),
+  NACENKA            NUMBER(10,2)               DEFAULT 0,
+  PODDONS            NUMBER(5),
+  SHIELDS            NUMBER(5),
+  UPAK_ID            NUMBER(10),
+  UPAK_VES           NUMBER(15,6),
+  KOL_NET            NUMBER(19,5),
+  UPAK_VES_ED        NUMBER(7,2),
+  SHIELD_VES         NUMBER(7,2),
+  PODDON_VES         NUMBER(7,2),
+  PL                 NUMBER(10,4),
+  NUM_AKT            NUMBER(10),
+  BILL_POS_ID        NUMBER(10),
+  PROTO_NUM          VARCHAR2(15 BYTE),
+  PROTO_DATE         DATE,
+  NO_AKCIZ           NUMBER(1),
+  PERECH_GUARD_DATE  DATE,
+  PERECH_GUARD_NUM   VARCHAR2(10 BYTE),
+  TTN_ID             NUMBER(15),
+  DATE_DOVER         DATE,
+  FIO_DRIVER         VARCHAR2(30 BYTE),
+  IS_LOADED          NUMBER(1)                  DEFAULT 0,
+  AXES               NUMBER(3),
+  CTLV               NUMBER(6,4),
+  DEFI_MASS_ID       NUMBER(2),
+  VOLUME             NUMBER(10),
+  VOLUME15           NUMBER(10),
+  ZPU_TYPE1          NUMBER(5),
+  ZPU_TYPE2          NUMBER(5),
+  PL15               NUMBER(6,4),
+  DATE_IN            DATE
+)
+TABLESPACE USERS2
+NOCOMPRESS ;
+
+COMMENT ON TABLE MASTER.KVIT IS 'Отгрузки';
+
+COMMENT ON COLUMN MASTER.KVIT.ID IS 'Отгрузка';
+
+COMMENT ON COLUMN MASTER.KVIT.FLG_OPERDATA IS '1- Признак оперативной отгрузки';
+
+COMMENT ON COLUMN MASTER.KVIT.MESTO_ID IS 'Место отгрузки';
+
+COMMENT ON COLUMN MASTER.KVIT.NOM_ZD IS 'N задания';
+
+COMMENT ON COLUMN MASTER.KVIT.PROD_ID_NPR IS 'Продукт';
+
+COMMENT ON COLUMN MASTER.KVIT.TEX_PD_ID IS 'ТЕХ ПД';
+
+COMMENT ON COLUMN MASTER.KVIT.NUM_CIST IS 'Номер транспортного ср-ва';
+
+COMMENT ON COLUMN MASTER.KVIT.DATE_OTGR IS 'Дата сведения';
+
+COMMENT ON COLUMN MASTER.KVIT.VES IS 'Вес груза';
+
+COMMENT ON COLUMN MASTER.KVIT.VES_BRUTTO IS 'Вес груза';
+
+COMMENT ON COLUMN MASTER.KVIT.VES_ED IS 'Вес ед.груза';
+
+COMMENT ON COLUMN MASTER.KVIT.KOL_ED IS 'Кол-во ед-ц';
+
+COMMENT ON COLUMN MASTER.KVIT.TARIF IS 'Тариф';
+
+COMMENT ON COLUMN MASTER.KVIT.TARIF19 IS 'Тариф по схеме 19 - для расчета вознаграждения';
+
+COMMENT ON COLUMN MASTER.KVIT.TARIF_ORIG IS 'Оригинальный тариф из квитанции (без скидок и т.п.)';
+
+COMMENT ON COLUMN MASTER.KVIT.NUM_KVIT IS 'N квитанции или накладной';
+
+COMMENT ON COLUMN MASTER.KVIT.DATE_KVIT IS 'Дата квитанции или накладной';
+
+COMMENT ON COLUMN MASTER.KVIT.NUM_MILITARY IS 'N транспорта';
+
+COMMENT ON COLUMN MASTER.KVIT.FLG_DOP_CIST IS 'Признак доп поставки';
+
+COMMENT ON COLUMN MASTER.KVIT.FLG_VAG_KLIENT IS 'Вагон клиента';
+
+COMMENT ON COLUMN MASTER.KVIT.VAGOWNER_ID IS 'Собственник тр.ср-ва';
+
+COMMENT ON COLUMN MASTER.KVIT.VAGONTYPE_ID IS 'Род вагона (ЦС,КР и т.п.)';
+
+COMMENT ON COLUMN MASTER.KVIT.KALIBR_ID IS 'Тип вагона (номер)';
+
+COMMENT ON COLUMN MASTER.KVIT.VES_CIST IS 'Вес вагона';
+
+COMMENT ON COLUMN MASTER.KVIT.DATE_VOZ IS 'Дата возврата';
+
+COMMENT ON COLUMN MASTER.KVIT.KVIT_VOZ IS 'Квитанция на возврат';
+
+COMMENT ON COLUMN MASTER.KVIT.SUM_VOZ IS 'Сумма тарифа за возврат';
+
+COMMENT ON COLUMN MASTER.KVIT.PLOMBA1 IS 'Пломба 1';
+
+COMMENT ON COLUMN MASTER.KVIT.PLOMBA2 IS 'Пломба 2';
+
+COMMENT ON COLUMN MASTER.KVIT.ROSINSPL1 IS 'Пломба Росинспектората 1';
+
+COMMENT ON COLUMN MASTER.KVIT.ROSINSPL2 IS 'Пломба Росинспектората 2';
+
+COMMENT ON COLUMN MASTER.KVIT.VZLIV IS 'Взлив или объем';
+
+COMMENT ON COLUMN MASTER.KVIT.TEMPER IS 'Температура';
+
+COMMENT ON COLUMN MASTER.KVIT.FAKT_PL IS 'Факт.плотность';
+
+COMMENT ON COLUMN MASTER.KVIT.FORMNAKL_ID IS 'Форма накладной';
+
+COMMENT ON COLUMN MASTER.KVIT.SHABEXP_ID IS 'Шаблон экспортной накладной';
+
+COMMENT ON COLUMN MASTER.KVIT.GTD IS 'ГТД';
+
+COMMENT ON COLUMN MASTER.KVIT.EXPED_ID IS 'Экспедитор';
+
+COMMENT ON COLUMN MASTER.KVIT.VETKA_OTP_ID IS 'Ветка отправителя';
+
+COMMENT ON COLUMN MASTER.KVIT.NUM_EXP_MAR IS 'N маршрутной отправки';
+
+COMMENT ON COLUMN MASTER.KVIT.BILL_ID IS 'Счет-фактура';
+
+COMMENT ON COLUMN MASTER.KVIT.SVED_ID IS 'Сведение';
+
+COMMENT ON COLUMN MASTER.KVIT.DATE_OFORML IS 'Дата оформления';
+
+COMMENT ON COLUMN MASTER.KVIT.SVED_NUM IS 'N сведения';
+
+COMMENT ON COLUMN MASTER.KVIT.PASP_ID IS 'Паспорт';
+
+COMMENT ON COLUMN MASTER.KVIT.NUM_NAR IS 'N наряда';
+
+COMMENT ON COLUMN MASTER.KVIT.NUM_DOVER IS 'N доверенности';
+
+COMMENT ON COLUMN MASTER.KVIT.PERER_ID IS 'Переработчик';
+
+COMMENT ON COLUMN MASTER.KVIT.DATE_EDIT IS 'Дата редактирования';
+
+COMMENT ON COLUMN MASTER.KVIT.JKCOMMIT IS 'Признак подтвержденного сведения';
+
+COMMENT ON COLUMN MASTER.KVIT.GROTP_ID IS 'Грузоотправитель';
+
+COMMENT ON COLUMN MASTER.KVIT.PERECH_TEXPD_DATE IS 'Дата перечня ТЕХ ПД';
+
+COMMENT ON COLUMN MASTER.KVIT.PERECH_TEXPD_NUM IS 'N перечня ТЕХ ПД';
+
+COMMENT ON COLUMN MASTER.KVIT.SUM_PROD IS 'За продукт';
+
+COMMENT ON COLUMN MASTER.KVIT.SUM_AKCIZ IS 'Акциз';
+
+COMMENT ON COLUMN MASTER.KVIT.SUM_PROD_NDS IS 'НДС на продукт';
+
+COMMENT ON COLUMN MASTER.KVIT.TARIF_NDS IS 'НДС на тариф';
+
+COMMENT ON COLUMN MASTER.KVIT.SUM_VOZN11 IS 'Вознаграждение за тонну';
+
+COMMENT ON COLUMN MASTER.KVIT.SUM_VOZN11_NDS IS 'НДС на вознаграждение';
+
+COMMENT ON COLUMN MASTER.KVIT.SUM_VOZN12 IS 'Вознаграждение (19-20)';
+
+COMMENT ON COLUMN MASTER.KVIT.SUM_VOZN12_NDS IS 'НДС на вознаграждение';
+
+COMMENT ON COLUMN MASTER.KVIT.SUM_STRAH IS 'Страховка';
+
+COMMENT ON COLUMN MASTER.KVIT.CENA IS 'Цена без НДС';
+
+COMMENT ON COLUMN MASTER.KVIT.CENA_OTP IS 'Цена отпускная';
+
+COMMENT ON COLUMN MASTER.KVIT.DATE_CENA IS 'Дата цены';
+
+COMMENT ON COLUMN MASTER.KVIT.CENA_VOZN IS 'Цена вознаграждения (руб./тн.)';
+
+COMMENT ON COLUMN MASTER.KVIT.CAPACITY IS 'Грузоподъемность';
+
+COMMENT ON COLUMN MASTER.KVIT.TARIF_GUARD IS 'Плата за охрану';
+
+COMMENT ON COLUMN MASTER.KVIT.TARIF_GUARD_NDS IS 'Плата за охрану (НДС)';
+
+COMMENT ON COLUMN MASTER.KVIT.TARIF_ALT IS 'Тариф по альтернативной схеме - оригинальный';
+
+COMMENT ON COLUMN MASTER.KVIT.NACENKA IS 'Страховой тариф';
+
+COMMENT ON COLUMN MASTER.KVIT.PODDONS IS 'Кол-во поддонов';
+
+COMMENT ON COLUMN MASTER.KVIT.SHIELDS IS 'Кол-во щитов';
+
+COMMENT ON COLUMN MASTER.KVIT.UPAK_ID IS 'Вид упаковки';
+
+COMMENT ON COLUMN MASTER.KVIT.UPAK_VES IS 'Вес упаковки';
+
+COMMENT ON COLUMN MASTER.KVIT.KOL_NET IS 'Вес НЕТТО (для нефти)';
+
+COMMENT ON COLUMN MASTER.KVIT.UPAK_VES_ED IS 'Вес (КГ) пустой упаковки 1 ед-цы товара';
+
+COMMENT ON COLUMN MASTER.KVIT.SHIELD_VES IS 'Вес (КГ) 1 щита';
+
+COMMENT ON COLUMN MASTER.KVIT.PODDON_VES IS 'Вес (КГ) 1 поддона';
+
+COMMENT ON COLUMN MASTER.KVIT.PL IS 'Плотнтость из паспорта';
+
+COMMENT ON COLUMN MASTER.KVIT.NUM_AKT IS '№ акта приема/передачи при продаже ЛУКОЙЛ''у';
+
+COMMENT ON COLUMN MASTER.KVIT.BILL_POS_ID IS 'ID позиции СФ (продажа ЛУКОЙЛу)';
+
+COMMENT ON COLUMN MASTER.KVIT.PROTO_NUM IS 'Протокол цен';
+
+COMMENT ON COLUMN MASTER.KVIT.PROTO_DATE IS 'Дата протокола цена';
+
+COMMENT ON COLUMN MASTER.KVIT.NO_AKCIZ IS 'Цена без акциза';
+
+COMMENT ON COLUMN MASTER.KVIT.PERECH_GUARD_DATE IS 'Дата перечня ТЕХ ПД (охрана)';
+
+COMMENT ON COLUMN MASTER.KVIT.PERECH_GUARD_NUM IS 'N перечня ТЕХ ПД (охрана)';
+
+COMMENT ON COLUMN MASTER.KVIT.TTN_ID IS 'ID накладной';
+
+COMMENT ON COLUMN MASTER.KVIT.DATE_DOVER IS 'Дата доверенности';
+
+COMMENT ON COLUMN MASTER.KVIT.FIO_DRIVER IS 'Водитель';
+
+COMMENT ON COLUMN MASTER.KVIT.IS_LOADED IS '0-Добавлен, но не загружен, 1-обновлен, но не загружен, 9-загружен в ИСУ Переработка';
+
+COMMENT ON COLUMN MASTER.KVIT.AXES IS 'Кол-во осей';
+
+COMMENT ON COLUMN MASTER.KVIT.CTLV IS 'Коэф.коррекции объема';
+
+COMMENT ON COLUMN MASTER.KVIT.DEFI_MASS_ID IS 'Тип замера массы';
+
+COMMENT ON COLUMN MASTER.KVIT.VOLUME IS 'Объем';
+
+COMMENT ON COLUMN MASTER.KVIT.VOLUME15 IS 'Объем при 15';
+
+COMMENT ON COLUMN MASTER.KVIT.ZPU_TYPE1 IS 'Тип пломбы 1';
+
+COMMENT ON COLUMN MASTER.KVIT.ZPU_TYPE2 IS 'Тип пломбы 2';
+
+COMMENT ON COLUMN MASTER.KVIT.PL15 IS 'Плотность при 15';
+
+COMMENT ON COLUMN MASTER.KVIT.DATE_IN IS 'Дата получения грузополучателем';
+
+
+

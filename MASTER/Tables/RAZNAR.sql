@@ -1,0 +1,41 @@
+--
+-- RAZNAR  (Table) 
+--
+CREATE TABLE MASTER.RAZNAR
+(
+  ID           NUMBER(10)                       NOT NULL,
+  NOM_ZD       VARCHAR2(12 BYTE),
+  DATE_RAZN    DATE,
+  DATE_SEND    DATE,
+  TIME_SEND    VARCHAR2(8 BYTE),
+  USER_SEND    VARCHAR2(30 BYTE),
+  MESTO_ID     NUMBER(10),
+  FLAG_SEND    NUMBER(1),
+  TONN_RAZNAR  NUMBER(10,3)                     DEFAULT 0,
+  CIST_RAZNAR  NUMBER(5)                        DEFAULT 0
+)
+TABLESPACE USERS2
+NOCOMPRESS ;
+
+COMMENT ON TABLE MASTER.RAZNAR IS 'Разнарядки на места отгрузки (История заявки)';
+
+COMMENT ON COLUMN MASTER.RAZNAR.NOM_ZD IS 'Заявка';
+
+COMMENT ON COLUMN MASTER.RAZNAR.DATE_RAZN IS 'Дата изменения заявки';
+
+COMMENT ON COLUMN MASTER.RAZNAR.DATE_SEND IS 'Дата отправки на место отгрузки';
+
+COMMENT ON COLUMN MASTER.RAZNAR.TIME_SEND IS 'Время отправки на место отгрузки';
+
+COMMENT ON COLUMN MASTER.RAZNAR.USER_SEND IS 'Пользователь';
+
+COMMENT ON COLUMN MASTER.RAZNAR.MESTO_ID IS 'Место отгрузки';
+
+COMMENT ON COLUMN MASTER.RAZNAR.FLAG_SEND IS 'Флаг передачи';
+
+COMMENT ON COLUMN MASTER.RAZNAR.TONN_RAZNAR IS 'Тонн разнаряжено';
+
+COMMENT ON COLUMN MASTER.RAZNAR.CIST_RAZNAR IS 'Цистерн разнаряжено';
+
+
+

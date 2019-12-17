@@ -1,0 +1,10 @@
+-- 
+-- Non Foreign Key Constraints for Table AZS_R_TMP 
+-- 
+ALTER TABLE MASTER.AZS_R_TMP ADD (
+  CONSTRAINT RN_R
+  PRIMARY KEY
+  (AZS_R, DATE_R, TYPE_R, TRK_R)
+  USING INDEX MASTER.RN_R
+  ENABLE VALIDATE);
+

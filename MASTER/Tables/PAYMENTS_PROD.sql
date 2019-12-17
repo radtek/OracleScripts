@@ -1,0 +1,15 @@
+--
+-- PAYMENTS_PROD  (Table) 
+--
+CREATE TABLE MASTER.PAYMENTS_PROD
+(
+  PAYMENTS_ID  NUMBER                           NOT NULL,
+  PROD_ID_NPR  VARCHAR2(5 BYTE)                 NOT NULL
+)
+TABLESPACE USERS2
+NOCOMPRESS ;
+
+COMMENT ON TABLE MASTER.PAYMENTS_PROD IS 'Назначения платежа (Номенклатура)';
+
+
+

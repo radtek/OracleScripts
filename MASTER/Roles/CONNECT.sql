@@ -1,0 +1,10 @@
+--
+-- CONNECT  (Role) 
+--
+CREATE ROLE CONNECT NOT IDENTIFIED;
+
+-- System privileges granted to CONNECT
+GRANT CREATE SESSION TO CONNECT;
+
+
+

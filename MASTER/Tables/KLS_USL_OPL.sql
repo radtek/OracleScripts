@@ -1,0 +1,13 @@
+--
+-- KLS_USL_OPL  (Table) 
+--
+CREATE TABLE MASTER.KLS_USL_OPL
+(
+  ID      NUMBER(10)                            NOT NULL,
+  NAME    VARCHAR2(40 BYTE),
+  KOL_DN  NUMBER(5)
+)
+TABLESPACE USERS2
+NOCOMPRESS ;
+
+

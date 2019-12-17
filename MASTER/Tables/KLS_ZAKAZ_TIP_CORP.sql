@@ -1,0 +1,15 @@
+--
+-- KLS_ZAKAZ_TIP_CORP  (Table) 
+--
+CREATE TABLE MASTER.KLS_ZAKAZ_TIP_CORP
+(
+  ID    NUMBER(10),
+  NAME  VARCHAR2(30 BYTE)
+)
+TABLESPACE USERS2
+NOCOMPRESS ;
+
+COMMENT ON TABLE MASTER.KLS_ZAKAZ_TIP_CORP IS 'Тип заказа внутрикорпоративный или собственный';
+
+
+

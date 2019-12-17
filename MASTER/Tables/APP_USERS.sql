@@ -1,0 +1,40 @@
+--
+-- APP_USERS  (Table) 
+--
+CREATE TABLE MASTER.APP_USERS
+(
+  ID         NUMBER(10)                         NOT NULL,
+  NAME       VARCHAR2(30 BYTE),
+  PASSW      VARCHAR2(15 BYTE),
+  NETNAME    VARCHAR2(30 BYTE),
+  SNP        NUMBER(1)                          DEFAULT 0,
+  UNP        NUMBER(1)                          DEFAULT 0,
+  IS_ADMIN   NUMBER(1)                          DEFAULT 0,
+  MNOS       NUMBER(1)                          DEFAULT 0,
+  POST       VARCHAR2(40 BYTE),
+  FULLNAME   VARCHAR2(50 BYTE),
+  FILE_SIGN  VARCHAR2(12 BYTE)
+)
+TABLESPACE USERS2
+NOCOMPRESS ;
+
+COMMENT ON TABLE MASTER.APP_USERS IS 'Пользователи приложения';
+
+COMMENT ON COLUMN MASTER.APP_USERS.NAME IS 'ФИО';
+
+COMMENT ON COLUMN MASTER.APP_USERS.PASSW IS 'Пароль';
+
+COMMENT ON COLUMN MASTER.APP_USERS.NETNAME IS 'Сетевое имя пользователя';
+
+COMMENT ON COLUMN MASTER.APP_USERS.SNP IS '1-Пользователь СНП';
+
+COMMENT ON COLUMN MASTER.APP_USERS.UNP IS '1-Пользователь УНП';
+
+COMMENT ON COLUMN MASTER.APP_USERS.IS_ADMIN IS 'Пользователь-админ?';
+
+COMMENT ON COLUMN MASTER.APP_USERS.MNOS IS 'Пользователь МНОС';
+
+COMMENT ON COLUMN MASTER.APP_USERS.POST IS 'Должность оператора';
+
+
+

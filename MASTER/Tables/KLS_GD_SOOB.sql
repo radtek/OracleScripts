@@ -1,0 +1,12 @@
+--
+-- KLS_GD_SOOB  (Table) 
+--
+CREATE TABLE MASTER.KLS_GD_SOOB
+(
+  ID    NUMBER(10)                              NOT NULL,
+  NAME  VARCHAR2(30 BYTE)
+)
+TABLESPACE USERS2
+NOCOMPRESS ;
+
+

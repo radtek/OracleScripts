@@ -1,0 +1,14 @@
+--
+-- XX101_STATISTICS  (Table) 
+--
+CREATE TABLE MASTER.XX101_STATISTICS
+(
+  ID          NUMBER(10),
+  ACTIONTYPE  NUMBER(1)                         NOT NULL,
+  INFO        VARCHAR2(50 BYTE),
+  DATETIME    DATE                              NOT NULL
+)
+TABLESPACE USERS
+NOCOMPRESS ;
+
+

@@ -1,0 +1,16 @@
+--
+-- KLS_PROD_RAZMET  (Table) 
+--
+CREATE TABLE MASTER.KLS_PROD_RAZMET
+(
+  RAZMET        VARCHAR2(30 BYTE)               NOT NULL,
+  PROD_ID_NPR   VARCHAR2(5 BYTE),
+  IS_AUTO_LINK  NUMBER(1)                       DEFAULT 1
+)
+TABLESPACE USERS2
+NOCOMPRESS ;
+
+COMMENT ON TABLE MASTER.KLS_PROD_RAZMET IS 'Соответствия разметки и продуктов';
+
+
+

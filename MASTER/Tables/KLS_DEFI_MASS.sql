@@ -1,0 +1,16 @@
+--
+-- KLS_DEFI_MASS  (Table) 
+--
+CREATE TABLE MASTER.KLS_DEFI_MASS
+(
+  ID       NUMBER(10)                           NOT NULL,
+  NAME     VARCHAR2(20 BYTE),
+  GD_NAME  VARCHAR2(50 BYTE)
+)
+TABLESPACE USERS2
+NOCOMPRESS ;
+
+COMMENT ON TABLE MASTER.KLS_DEFI_MASS IS 'Методы определения массы';
+
+
+

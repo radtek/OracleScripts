@@ -1,0 +1,9 @@
+--
+-- FOR_SCRIPTS  (Package Body) 
+--
+CREATE OR REPLACE PACKAGE BODY MASTER.FOR_SCRIPTS AS
+
+END;
+
+/
+

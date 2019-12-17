@@ -1,0 +1,22 @@
+--
+-- TRG_BIR_MONTH_VISIR_LOC  (Trigger) 
+--
+CREATE OR REPLACE TRIGGER MASTER.TRG_BIR_MONTH_VISIR_LOC
+BEFORE INSERT
+ON MASTER.MONTH_VISIR_LOC
+FOR EACH ROW
+DECLARE
+tmpVar NUMBER;
+BEGIN
+  IF INSERTING() THEN
+    IF :NEW.ID=0 OR :NEW.ID is NULL THEN
+      tmpVar := 0;
+      Select seq_Month_Visir_Loc.NextVal into tmpVar from dual;
+     :NEW.ID := tmpVar;
+    END IF;
+  END IF;
+
+END TRG_BIR_MONTH_VISIR_LOC;
+/
+
+

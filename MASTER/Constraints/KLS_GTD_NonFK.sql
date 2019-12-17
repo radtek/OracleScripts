@@ -1,0 +1,10 @@
+-- 
+-- Non Foreign Key Constraints for Table KLS_GTD 
+-- 
+ALTER TABLE MASTER.KLS_GTD ADD (
+  CONSTRAINT GTD_PK
+  PRIMARY KEY
+  (GTD)
+  USING INDEX MASTER.GTD_PK
+  ENABLE VALIDATE);
+

@@ -1,0 +1,16 @@
+--
+-- KLS_TABLPOK  (Table) 
+--
+CREATE TABLE MASTER.KLS_TABLPOK
+(
+  PROD_ID_NPR  VARCHAR2(5 BYTE)                 NOT NULL,
+  KODIF_ID     NUMBER(5)                        NOT NULL,
+  NPP          NUMBER(10),
+  SORTBY       NUMBER(10),
+  NORMTU       VARCHAR2(50 BYTE),
+  DATEUPLOAD   DATE
+)
+TABLESPACE USERS2
+NOCOMPRESS ;
+
+

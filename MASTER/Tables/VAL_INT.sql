@@ -1,0 +1,27 @@
+--
+-- VAL_INT  (Table) 
+--
+CREATE TABLE MASTER.VAL_INT
+(
+  DD_MM_YYYY   DATE,
+  INTERV       NUMBER(3),
+  N_INTER      NUMBER(4),
+  SYB_RNK      NUMBER(5),
+  N_OB         NUMBER(8),
+  N_GR_INTEGR  NUMBER(4),
+  VAR_VR_ZON   NUMBER(4),
+  VR_ZON       NUMBER(4),
+  KOL_DB       NUMBER(7),
+  KOL          NUMBER(7),
+  STAT         VARCHAR2(1 BYTE),
+  VAL          NUMBER,
+  MIN_0        NUMBER(4),
+  MIN_1        NUMBER(4),
+  SK           VARCHAR2(1 BYTE),
+  RASH_POLN    NUMBER,
+  IS_COPYED    NUMBER
+)
+TABLESPACE USERS2
+NOCOMPRESS ;
+
+

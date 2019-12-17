@@ -1,0 +1,13 @@
+--
+-- KLS_GD_PRICH  (Table) 
+--
+CREATE TABLE MASTER.KLS_GD_PRICH
+(
+  ID      NUMBER(10)                            NOT NULL,
+  NAME    VARCHAR2(100 BYTE),
+  SORTBY  NUMBER(2)
+)
+TABLESPACE USERS2
+NOCOMPRESS ;
+
+

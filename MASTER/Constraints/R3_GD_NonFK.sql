@@ -1,0 +1,10 @@
+-- 
+-- Non Foreign Key Constraints for Table R3_GD 
+-- 
+ALTER TABLE MASTER.R3_GD ADD (
+  CONSTRAINT R3_GD_PK
+  PRIMARY KEY
+  (BAHNR)
+  USING INDEX MASTER.R3_GD_PK
+  ENABLE VALIDATE);
+

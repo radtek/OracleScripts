@@ -1,0 +1,13 @@
+--
+-- AZC_SYS_PAGE  (Table) 
+--
+CREATE TABLE MASTER.AZC_SYS_PAGE
+(
+  ID      NUMBER                                NOT NULL,
+  NAME    VARCHAR2(21 BYTE),
+  QUERY_  VARCHAR2(180 BYTE)
+)
+TABLESPACE USERS2
+NOCOMPRESS ;
+
+

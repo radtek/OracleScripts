@@ -1,0 +1,19 @@
+--
+-- KLS_PROD_TYPE_GRP  (Table) 
+--
+CREATE TABLE MASTER.KLS_PROD_TYPE_GRP
+(
+  ID    NUMBER(10)                              NOT NULL,
+  NAME  VARCHAR2(100 BYTE)
+)
+TABLESPACE USERS2
+NOCOMPRESS ;
+
+COMMENT ON TABLE MASTER.KLS_PROD_TYPE_GRP IS 'Типы классификации продуктов';
+
+COMMENT ON COLUMN MASTER.KLS_PROD_TYPE_GRP.ID IS 'Типы классификации продуктов';
+
+COMMENT ON COLUMN MASTER.KLS_PROD_TYPE_GRP.NAME IS 'Наименование';
+
+
+

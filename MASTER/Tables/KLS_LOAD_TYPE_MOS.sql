@@ -1,0 +1,12 @@
+--
+-- KLS_LOAD_TYPE_MOS  (Table) 
+--
+CREATE TABLE MASTER.KLS_LOAD_TYPE_MOS
+(
+  ID    NUMBER(10)                              NOT NULL,
+  NAME  VARCHAR2(30 BYTE)
+)
+TABLESPACE USERS2
+NOCOMPRESS ;
+
+

@@ -1,0 +1,24 @@
+/* This object may not be sorted properly in the script due to cirular references. */
+--
+-- EUL_SEGMENTS  (Table) 
+--
+CREATE TABLE MASTER.EUL_SEGMENTS
+(
+  OSS_ID           NUMBER(10)                   NOT NULL,
+  OSS_SEG_TYPE     NUMBER(1),
+  OSS_SEQUENCE     NUMBER(22),
+  OSS_OBJ_ID       NUMBER(10),
+  OSS_SUMO_ID      NUMBER(10),
+  OSS_CUO_ID       NUMBER(10),
+  OSS_BQ_ID        NUMBER(10),
+  OSS_EXP_ID       NUMBER(10),
+  OSS_OBJECT_SQL1  VARCHAR2(250 BYTE),
+  OSS_OBJECT_SQL2  VARCHAR2(250 BYTE),
+  OSS_OBJECT_SQL3  VARCHAR2(250 BYTE),
+  OSS_OBJECT_SQL4  VARCHAR2(250 BYTE),
+  NOTM             NUMBER(10)
+)
+TABLESPACE USERS2
+NOCOMPRESS ;
+
+

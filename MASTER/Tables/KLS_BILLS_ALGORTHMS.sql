@@ -1,0 +1,15 @@
+--
+-- KLS_BILLS_ALGORTHMS  (Table) 
+--
+CREATE TABLE MASTER.KLS_BILLS_ALGORTHMS
+(
+  ID        NUMBER                              NOT NULL,
+  NAME_ALG  VARCHAR2(50 BYTE)
+)
+TABLESPACE USERS2
+NOCOMPRESS ;
+
+COMMENT ON TABLE MASTER.KLS_BILLS_ALGORTHMS IS 'Алгоритмы расчета услуг для счетов без отгрузки';
+
+
+

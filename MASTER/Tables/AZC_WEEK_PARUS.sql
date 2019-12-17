@@ -1,0 +1,16 @@
+--
+-- AZC_WEEK_PARUS  (Table) 
+--
+CREATE TABLE MASTER.AZC_WEEK_PARUS
+(
+  ID          NUMBER                            NOT NULL,
+  ID_ORG      NUMBER,
+  ID_PROD     VARCHAR2(5 BYTE),
+  ALL_VES     NUMBER,
+  REALIZ_VES  NUMBER,
+  OSTATOK     NUMBER
+)
+TABLESPACE USERS2
+NOCOMPRESS ;
+
+

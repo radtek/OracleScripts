@@ -1,0 +1,404 @@
+SQL> 
+SQL> SELECT  'ALTER USER '||username||' DEFAULT TABLESPACE PARUS ;' FROM sys.dba_users a;
+
+'ALTERUSER'||USERNAME||'DEFAULTTABLESPACEPARUS;'                                
+--------------------------------------------------------------------            
+ALTER USER SYS DEFAULT TABLESPACE PARUS ;                                       
+ALTER USER SYSTEM DEFAULT TABLESPACE PARUS ;                                    
+ALTER USER TOAD DEFAULT TABLESPACE PARUS ;                                      
+ALTER USER DBSNMP DEFAULT TABLESPACE PARUS ;                                    
+ALTER USER KORELSKAY DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER HAYRTDINOVA DEFAULT TABLESPACE PARUS ;                               
+ALTER USER VELIYEV DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER AGIMOVA DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER VITYAZEVA DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER KRUGLOVA DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER KARADGOV DEFAULT TABLESPACE PARUS ;                                  
+
+'ALTERUSER'||USERNAME||'DEFAULTTABLESPACEPARUS;'                                
+--------------------------------------------------------------------            
+ALTER USER MELNIKOVA DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER ZHUKOVP DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER YUSUPOV DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER PRUCAKOVA DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER PERFSTAT DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER SQLLAB DEFAULT TABLESPACE PARUS ;                                    
+ALTER USER TEST DEFAULT TABLESPACE PARUS ;                                      
+ALTER USER EXPORT DEFAULT TABLESPACE PARUS ;                                    
+ALTER USER USACHEV DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER BULUGINA DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER MATUSHEV DEFAULT TABLESPACE PARUS ;                                  
+
+'ALTERUSER'||USERNAME||'DEFAULTTABLESPACEPARUS;'                                
+--------------------------------------------------------------------            
+ALTER USER SAYDULAEVA DEFAULT TABLESPACE PARUS ;                                
+ALTER USER TLARIONOVA DEFAULT TABLESPACE PARUS ;                                
+ALTER USER LARIONOVA DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER VKOVALEVA DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER GRIASEVA DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER ZHUPIKOV DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER KOTELNIKOVA DEFAULT TABLESPACE PARUS ;                               
+ALTER USER ILICHEV DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER NIKITIN DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER PAVLYUSHIN DEFAULT TABLESPACE PARUS ;                                
+ALTER USER USOLCEVA DEFAULT TABLESPACE PARUS ;                                  
+
+'ALTERUSER'||USERNAME||'DEFAULTTABLESPACEPARUS;'                                
+--------------------------------------------------------------------            
+ALTER USER ZVYGENCEVA DEFAULT TABLESPACE PARUS ;                                
+ALTER USER JEJEROUN DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER FILIPOVSKAY DEFAULT TABLESPACE PARUS ;                               
+ALTER USER KATILOVA DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER KAVELIN DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER IVANOV DEFAULT TABLESPACE PARUS ;                                    
+ALTER USER KUSTISHEV DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER KUSTISHEVA DEFAULT TABLESPACE PARUS ;                                
+ALTER USER SIMBIREV DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER MOSKALENKO DEFAULT TABLESPACE PARUS ;                                
+ALTER USER KRACHK_EV DEFAULT TABLESPACE PARUS ;                                 
+
+'ALTERUSER'||USERNAME||'DEFAULTTABLESPACEPARUS;'                                
+--------------------------------------------------------------------            
+ALTER USER LISTOV DEFAULT TABLESPACE PARUS ;                                    
+ALTER USER LUTKOVA DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER MOLOKOEDOVA DEFAULT TABLESPACE PARUS ;                               
+ALTER USER SMINICH DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER SHKURKO DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER DUBOVIKOVA DEFAULT TABLESPACE PARUS ;                                
+ALTER USER SOTNICHUK DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER DUBOVIKOV DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER KRUG DEFAULT TABLESPACE PARUS ;                                      
+ALTER USER OLENEV DEFAULT TABLESPACE PARUS ;                                    
+ALTER USER SAVCHENKO DEFAULT TABLESPACE PARUS ;                                 
+
+'ALTERUSER'||USERNAME||'DEFAULTTABLESPACEPARUS;'                                
+--------------------------------------------------------------------            
+ALTER USER KOZLOVA DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER TURCHINOVICH DEFAULT TABLESPACE PARUS ;                              
+ALTER USER PSHIBAEV DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER VMASHUROVA DEFAULT TABLESPACE PARUS ;                                
+ALTER USER OSEMENOVA DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER RBIRJUKOV DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER ZEZEGOVA DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER GRIGOREVA DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER OPERATOR_NEW DEFAULT TABLESPACE PARUS ;                              
+ALTER USER SHALAR_NEW DEFAULT TABLESPACE PARUS ;                                
+ALTER USER FINANS33 DEFAULT TABLESPACE PARUS ;                                  
+
+'ALTERUSER'||USERNAME||'DEFAULTTABLESPACEPARUS;'                                
+--------------------------------------------------------------------            
+ALTER USER MOROZ DEFAULT TABLESPACE PARUS ;                                     
+ALTER USER ROMANOV DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER SOROKA DEFAULT TABLESPACE PARUS ;                                    
+ALTER USER MARKET4 DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER FINANS6 DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER SHKET DEFAULT TABLESPACE PARUS ;                                     
+ALTER USER HALFAEVA DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER BUZYKAEVA DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER DURKINA DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER TIHONOV DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER ZAYDEL DEFAULT TABLESPACE PARUS ;                                    
+
+'ALTERUSER'||USERNAME||'DEFAULTTABLESPACEPARUS;'                                
+--------------------------------------------------------------------            
+ALTER USER MOHNACHEVA DEFAULT TABLESPACE PARUS ;                                
+ALTER USER OPERR DEFAULT TABLESPACE PARUS ;                                     
+ALTER USER GALIEVA DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER ERTEL DEFAULT TABLESPACE PARUS ;                                     
+ALTER USER TOLKACHEVA DEFAULT TABLESPACE PARUS ;                                
+ALTER USER GENG DEFAULT TABLESPACE PARUS ;                                      
+ALTER USER CHESHMEDZHIEVA DEFAULT TABLESPACE PARUS ;                            
+ALTER USER DOTSENKO DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER OSTAPOVA DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER SHKONDIN DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER OSKIN DEFAULT TABLESPACE PARUS ;                                     
+
+'ALTERUSER'||USERNAME||'DEFAULTTABLESPACEPARUS;'                                
+--------------------------------------------------------------------            
+ALTER USER USATIKH DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER PASHAEV DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER SHVETSOVA DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER KUGAEVSKAYA DEFAULT TABLESPACE PARUS ;                               
+ALTER USER ZINYAK DEFAULT TABLESPACE PARUS ;                                    
+ALTER USER ZAKHVATKINA DEFAULT TABLESPACE PARUS ;                               
+ALTER USER TURYEVA DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER AMIROVA DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER ZHERKOVA DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER CHUMAK DEFAULT TABLESPACE PARUS ;                                    
+ALTER USER BABARYKINA DEFAULT TABLESPACE PARUS ;                                
+
+'ALTERUSER'||USERNAME||'DEFAULTTABLESPACEPARUS;'                                
+--------------------------------------------------------------------            
+ALTER USER POPOV DEFAULT TABLESPACE PARUS ;                                     
+ALTER USER OPERUSN DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER YAKIMTSEVA DEFAULT TABLESPACE PARUS ;                                
+ALTER USER KHARYUKOV DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER SLOBODENYUK DEFAULT TABLESPACE PARUS ;                               
+ALTER USER POTESHKINA DEFAULT TABLESPACE PARUS ;                                
+ALTER USER NAZMIEVA DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER POLYAKOVA DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER TESLIK DEFAULT TABLESPACE PARUS ;                                    
+ALTER USER FINANS5 DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER BUX3 DEFAULT TABLESPACE PARUS ;                                      
+
+'ALTERUSER'||USERNAME||'DEFAULTTABLESPACEPARUS;'                                
+--------------------------------------------------------------------            
+ALTER USER NALOGI1 DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER BERGMAN DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER BUX2 DEFAULT TABLESPACE PARUS ;                                      
+ALTER USER GLBUX DEFAULT TABLESPACE PARUS ;                                     
+ALTER USER MARKET1 DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER ZAMFINANS DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER FINANS4 DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER URIST1 DEFAULT TABLESPACE PARUS ;                                    
+ALTER USER VANEEV DEFAULT TABLESPACE PARUS ;                                    
+ALTER USER DISPETCHER DEFAULT TABLESPACE PARUS ;                                
+ALTER USER BOLSHOVA DEFAULT TABLESPACE PARUS ;                                  
+
+'ALTERUSER'||USERNAME||'DEFAULTTABLESPACEPARUS;'                                
+--------------------------------------------------------------------            
+ALTER USER FINANS3 DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER FINANS2 DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER FINANS1 DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER BUHGALTER1 DEFAULT TABLESPACE PARUS ;                                
+ALTER USER POSTAVKA DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER KASSA DEFAULT TABLESPACE PARUS ;                                     
+ALTER USER FINANS DEFAULT TABLESPACE PARUS ;                                    
+ALTER USER NIKIFOROV DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER VOKUEVA DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER UZBEKOVA DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER SHESTAKOV DEFAULT TABLESPACE PARUS ;                                 
+
+'ALTERUSER'||USERNAME||'DEFAULTTABLESPACEPARUS;'                                
+--------------------------------------------------------------------            
+ALTER USER ZAHAROV DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER KOSHKAREV DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER GUMENUK DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER USENHAN DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER ISAEVA DEFAULT TABLESPACE PARUS ;                                    
+ALTER USER EISAEVA DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER BELOKUROVA DEFAULT TABLESPACE PARUS ;                                
+ALTER USER AGEEV DEFAULT TABLESPACE PARUS ;                                     
+ALTER USER LYASKOVSKIY DEFAULT TABLESPACE PARUS ;                               
+ALTER USER MAYER DEFAULT TABLESPACE PARUS ;                                     
+ALTER USER ZARIPOV DEFAULT TABLESPACE PARUS ;                                   
+
+'ALTERUSER'||USERNAME||'DEFAULTTABLESPACEPARUS;'                                
+--------------------------------------------------------------------            
+ALTER USER HROMENKOV DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER PRUDNIKOV DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER VORONOV DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER LAVROVA DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER SHALAEVA DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER TSYGANOVA DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER SIDOROV DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER ZHURAVLYEV DEFAULT TABLESPACE PARUS ;                                
+ALTER USER MISHINA DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER SIMONENKO DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER SAAKYAN DEFAULT TABLESPACE PARUS ;                                   
+
+'ALTERUSER'||USERNAME||'DEFAULTTABLESPACEPARUS;'                                
+--------------------------------------------------------------------            
+ALTER USER VOL DEFAULT TABLESPACE PARUS ;                                       
+ALTER USER VOLKOVA_ DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER VOLKOVA DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER KONYUHOV DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER NEKRASOVA DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER VORONIN DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER AHRAMOVICH DEFAULT TABLESPACE PARUS ;                                
+ALTER USER DUZJEVA DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER PODLEGAEVA DEFAULT TABLESPACE PARUS ;                                
+ALTER USER BUZAKINA DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER OPER DEFAULT TABLESPACE PARUS ;                                      
+
+'ALTERUSER'||USERNAME||'DEFAULTTABLESPACEPARUS;'                                
+--------------------------------------------------------------------            
+ALTER USER SOROKINA DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER STRILCHUK DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER SHAKIROVA DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER GAINUTDINOVA DEFAULT TABLESPACE PARUS ;                              
+ALTER USER DOLMATSYN DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER PAVLYUSHINA DEFAULT TABLESPACE PARUS ;                               
+ALTER USER SALAHEEVA DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER MININA DEFAULT TABLESPACE PARUS ;                                    
+ALTER USER ONISHENKO DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER DANILEVICH DEFAULT TABLESPACE PARUS ;                                
+ALTER USER SHALAR DEFAULT TABLESPACE PARUS ;                                    
+
+'ALTERUSER'||USERNAME||'DEFAULTTABLESPACEPARUS;'                                
+--------------------------------------------------------------------            
+ALTER USER OPERATOR DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER SEMENOVA DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER SHEMYAKINA DEFAULT TABLESPACE PARUS ;                                
+ALTER USER NECHAEVA DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER CHESNOKOVA DEFAULT TABLESPACE PARUS ;                                
+ALTER USER BUDINA DEFAULT TABLESPACE PARUS ;                                    
+ALTER USER KLEYN DEFAULT TABLESPACE PARUS ;                                     
+ALTER USER SUKHORUCHKO DEFAULT TABLESPACE PARUS ;                               
+ALTER USER BEZRUK DEFAULT TABLESPACE PARUS ;                                    
+ALTER USER PARYAEVA DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER BONDAREVA DEFAULT TABLESPACE PARUS ;                                 
+
+'ALTERUSER'||USERNAME||'DEFAULTTABLESPACEPARUS;'                                
+--------------------------------------------------------------------            
+ALTER USER URBANOVICH DEFAULT TABLESPACE PARUS ;                                
+ALTER USER CHEGLUKOVA DEFAULT TABLESPACE PARUS ;                                
+ALTER USER BURDAEVA DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER LAPSHINA DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER PVZ DEFAULT TABLESPACE PARUS ;                                       
+ALTER USER DMITRUK DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER SKLAD_FAS DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER BOROVKOVA DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER ARLIH DEFAULT TABLESPACE PARUS ;                                     
+ALTER USER SKLAD DEFAULT TABLESPACE PARUS ;                                     
+ALTER USER SKLD DEFAULT TABLESPACE PARUS ;                                      
+
+'ALTERUSER'||USERNAME||'DEFAULTTABLESPACEPARUS;'                                
+--------------------------------------------------------------------            
+ALTER USER TIRANOVA DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER TURISHEVA DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER KUSHNIR DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER PRITULA DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER RYLOVA DEFAULT TABLESPACE PARUS ;                                    
+ALTER USER TERENTEVA DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER NOSKOVA DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER BATAGOVA DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER KOLOSOVA DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER SEREBRYAKOVA DEFAULT TABLESPACE PARUS ;                              
+ALTER USER YANOVA DEFAULT TABLESPACE PARUS ;                                    
+
+'ALTERUSER'||USERNAME||'DEFAULTTABLESPACEPARUS;'                                
+--------------------------------------------------------------------            
+ALTER USER PLAN2 DEFAULT TABLESPACE PARUS ;                                     
+ALTER USER PLECHKINA DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER MALTSEVA DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER SAJINA DEFAULT TABLESPACE PARUS ;                                    
+ALTER USER GURINA DEFAULT TABLESPACE PARUS ;                                    
+ALTER USER KALIMOVA DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER TSVETKOVA DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER KOVALEVA DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER GAVRILOVA DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER OVCHINNIKOVA DEFAULT TABLESPACE PARUS ;                              
+ALTER USER PLAI DEFAULT TABLESPACE PARUS ;                                      
+
+'ALTERUSER'||USERNAME||'DEFAULTTABLESPACEPARUS;'                                
+--------------------------------------------------------------------            
+ALTER USER MINAEVA DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER PARUS DEFAULT TABLESPACE PARUS ;                                     
+ALTER USER TARAEVA DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER ZARVA DEFAULT TABLESPACE PARUS ;                                     
+ALTER USER SELKOVA DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER CHERBINA DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER SHUMSKAYA DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER SKLADTMC DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER MANGARA DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER LOGINOV DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER YARKOVICH DEFAULT TABLESPACE PARUS ;                                 
+
+'ALTERUSER'||USERNAME||'DEFAULTTABLESPACEPARUS;'                                
+--------------------------------------------------------------------            
+ALTER USER PRUDNIKOVÌ DEFAULT TABLESPACE PARUS ;                                
+ALTER USER TKRUGLOVA DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER MONGARA DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER PROKUDINA DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER PEREVYZKO DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER EFIMOV DEFAULT TABLESPACE PARUS ;                                    
+ALTER USER EVANEEV DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER AZSBUFFER DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER SNP_REPL DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER LUBIMOVA DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER KOSAREVA DEFAULT TABLESPACE PARUS ;                                  
+
+'ALTERUSER'||USERNAME||'DEFAULTTABLESPACEPARUS;'                                
+--------------------------------------------------------------------            
+ALTER USER EREMINA DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER PRIEMNAY DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER ANDRUHOVICH DEFAULT TABLESPACE PARUS ;                               
+ALTER USER HASHENKO DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER KSERGEEV DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER MARKET DEFAULT TABLESPACE PARUS ;                                    
+ALTER USER STEPASYUK DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER GREBENKINA DEFAULT TABLESPACE PARUS ;                                
+ALTER USER KUDRYAVTSEVA DEFAULT TABLESPACE PARUS ;                              
+ALTER USER MANTROVA DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER HANMURZINA DEFAULT TABLESPACE PARUS ;                                
+
+'ALTERUSER'||USERNAME||'DEFAULTTABLESPACEPARUS;'                                
+--------------------------------------------------------------------            
+ALTER USER KARTASHOV DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER MARKET3 DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER MARKET2 DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER POSTAVKA1 DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER OVERINA DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER LUKASHOVA DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER NALOGI2 DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER ESIKOVA DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER IGNATOV DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER GORYUCHKINA DEFAULT TABLESPACE PARUS ;                               
+ALTER USER SHPICHAK DEFAULT TABLESPACE PARUS ;                                  
+
+'ALTERUSER'||USERNAME||'DEFAULTTABLESPACEPARUS;'                                
+--------------------------------------------------------------------            
+ALTER USER SIMBIREVA DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER KRACHKOVSKAYA DEFAULT TABLESPACE PARUS ;                             
+ALTER USER FALENKOVA DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER YADESHKO DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER MILASH DEFAULT TABLESPACE PARUS ;                                    
+ALTER USER MENSHAKOVA DEFAULT TABLESPACE PARUS ;                                
+ALTER USER CMIRNOV DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER LUKASHOV DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER USTINOV DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER MOKROVA DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER POPOVA DEFAULT TABLESPACE PARUS ;                                    
+
+'ALTERUSER'||USERNAME||'DEFAULTTABLESPACEPARUS;'                                
+--------------------------------------------------------------------            
+ALTER USER OSHURKOVA DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER ANUFRIEV DEFAULT TABLESPACE PARUS ;                                  
+ALTER USER MINICH DEFAULT TABLESPACE PARUS ;                                    
+ALTER USER RUSANOV DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER NPOTEMKINA DEFAULT TABLESPACE PARUS ;                                
+ALTER USER CHERNISHOVA DEFAULT TABLESPACE PARUS ;                               
+ALTER USER IKONIKOVA DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER ZHUKOV DEFAULT TABLESPACE PARUS ;                                    
+ALTER USER TADM DEFAULT TABLESPACE PARUS ;                                      
+ALTER USER MUHAMETOV DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER ADONINA DEFAULT TABLESPACE PARUS ;                                   
+
+'ALTERUSER'||USERNAME||'DEFAULTTABLESPACEPARUS;'                                
+--------------------------------------------------------------------            
+ALTER USER KOKSHAROVA DEFAULT TABLESPACE PARUS ;                                
+ALTER USER SPROKUSHEV DEFAULT TABLESPACE PARUS ;                                
+ALTER USER VANEEVA DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER KORITOVSKAY DEFAULT TABLESPACE PARUS ;                               
+ALTER USER KORSHIN DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER PARFENTEVA DEFAULT TABLESPACE PARUS ;                                
+ALTER USER MUHIN DEFAULT TABLESPACE PARUS ;                                     
+ALTER USER GIRICH DEFAULT TABLESPACE PARUS ;                                    
+ALTER USER YAMOVA DEFAULT TABLESPACE PARUS ;                                    
+ALTER USER MARCHENKO DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER GAYNULINA DEFAULT TABLESPACE PARUS ;                                 
+
+'ALTERUSER'||USERNAME||'DEFAULTTABLESPACEPARUS;'                                
+--------------------------------------------------------------------            
+ALTER USER SYSDBA DEFAULT TABLESPACE PARUS ;                                    
+ALTER USER GUEST DEFAULT TABLESPACE PARUS ;                                     
+ALTER USER OUTLN DEFAULT TABLESPACE PARUS ;                                     
+ALTER USER ODM DEFAULT TABLESPACE PARUS ;                                       
+ALTER USER ODM_MTR DEFAULT TABLESPACE PARUS ;                                   
+ALTER USER WMSYS DEFAULT TABLESPACE PARUS ;                                     
+ALTER USER ORDSYS DEFAULT TABLESPACE PARUS ;                                    
+ALTER USER ORDPLUGINS DEFAULT TABLESPACE PARUS ;                                
+ALTER USER MDSYS DEFAULT TABLESPACE PARUS ;                                     
+ALTER USER CTXSYS DEFAULT TABLESPACE PARUS ;                                    
+ALTER USER XDB DEFAULT TABLESPACE PARUS ;                                       
+
+'ALTERUSER'||USERNAME||'DEFAULTTABLESPACEPARUS;'                                
+--------------------------------------------------------------------            
+ALTER USER ANONYMOUS DEFAULT TABLESPACE PARUS ;                                 
+ALTER USER OLAPSYS DEFAULT TABLESPACE PARUS ;                                   
+
+310 rows selected.
+
+SQL> 
+SQL> spool off;

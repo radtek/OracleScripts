@@ -1,0 +1,24 @@
+set echo off                                                                                                                                                                                            
+set feedback off                                                                                                                                                                                        
+set pages 0                                                                                                                                                                                             
+set lines 200                                                                                                                                                                                           
+set verify off                                                                                                                                                                                          
+set termout off                                                                                                                                                                                         
+Spool uhta3.sql                                                                                                                                                                                         
+SELECT 'set echo off' as "--" FROM dual;                                                                                                                                                                
+SELECT 'set feedback off' as "--" FROM dual;                                                                                                                                                            
+SELECT 'set pages 0' as "--" FROM dual;                                                                                                                                                                 
+SELECT 'set lines 200' as "--" FROM dual;                                                                                                                                                               
+SELECT 'set verify off' as "--" FROM dual;                                                                                                                                                              
+SELECT 'set termout off' as "--" FROM dual;                                                                                                                                                             
+SELECT 'Spool uhta3.log' as "--" FROM dual;                                                                                                                                                             
+SELECT 'BEGIN' FROM dual UNION ALL                                                                                                                                                                      
+SELECT 'NULL;' FROM dual UNION ALL                                                                                                                                                                      
+SELECT ' PARUS.PR_REPLICATE_CHANGE_RN(''DOCOUTPT'',605489607,'||TO_CHAR(RN)||',1); ' FROM DOCOUTPT WHERE DOCUMENT=605489605 AND 605489607<>DOCOUTPT.RN UNION ALL                                        
+SELECT ' PARUS.PR_REPLICATE_CHANGE_RN(''DOCINPT'',605489606,'||TO_CHAR(RN)||',1); ' FROM DOCINPT WHERE DOCUMENT=603319178 AND 605489606<>DOCINPT.RN UNION ALL                                           
+SELECT 'END;' FROM dual UNION ALL                                                                                                                                                                       
+SELECT '/' FROM dual;                                                                                                                                                                                   
+SELECT 'spool off' FROM dual;                                                                                                                                                                           
+SELECT 'exit' FROM dual;                                                                                                                                                                                
+spool off                                                                                                                                                                                               
+exit                                                                                                                                                                                                    

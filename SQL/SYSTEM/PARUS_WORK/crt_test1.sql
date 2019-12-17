@@ -1,0 +1,38 @@
+set echo on
+--
+-- Создаем управляющие файлы
+--
+STARTUP NOMOUNT PFILE=c:\database\test1\inittest1.ora
+CREATE CONTROLFILE SET DATABASE "TEST1" RESETLOGS ARCHIVELOG
+    MAXLOGFILES 32
+    MAXLOGMEMBERS 5
+    MAXDATAFILES 64
+    MAXINSTANCES 1
+    MAXLOGHISTORY 226
+LOGFILE
+  GROUP 1 (
+    'C:\DATABASE\TEST1\LOG1A.ORA',
+    'C:\DATABASE\TEST1\LOG1B.ORA'
+  ) SIZE 20M,
+  GROUP 2 (
+    'C:\DATABASE\TEST1\LOG2A.ORA',
+    'C:\DATABASE\TEST1\LOG2B.ORA'
+  ) SIZE 20M
+DATAFILE
+  'C:\DATABASE\TEST1\SYSTEM.DAT',
+  'C:\DATABASE\TEST1\PARUS.DAT',
+  'C:\DATABASE\TEST1\PARUS_IND.DAT',
+  'C:\DATABASE\TEST1\PARUS_RLB.DAT',
+  'C:\DATABASE\TEST1\PARUS_TMP.DAT'
+CHARACTER SET CL8MSWIN1251;
+
+alter database open resetlogs;
+shutdown immediate
+
+--
+-- Переводим БД в режим NOARCHIVELOG
+--
+STARTUP MOUNT PFILE=c:\database\test1\inittest1.ora
+alter database noarchivelog;
+alter database open;
+shutdown immediate

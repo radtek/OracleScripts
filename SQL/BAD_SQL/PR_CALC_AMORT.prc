@@ -1,0 +1,171 @@
+CREATE OR REPLACE procedure PR_CALC_AMORT
+(
+nCOMPANY in number,
+dDATE in date,
+sOPER_PREF in varchar2,
+SOPER_CONT in varchar2,
+SCRN_NAME in varchar2,
+sBALUNIT in varchar2,
+sACCOUNT in varchar2,
+sTAXGROUP in varchar2
+)
+ is
+
+ nIDENT    number(17);
+ nIDENT_   number(17);
+ nBALUNIT  number(17):=null;
+ nACCOUNT  number(17):=null;
+ nTAXGROUP number(17):=null;
+ nCOUNT    number(17);
+ nCNT_IN       number(17);
+ nCNT_OUT      number(17);
+
+begin
+
+if sBALUNIT is not null then
+ FIND_BALUNIT_MNEMO( 0,nCOMPANY,sBALUNIT,nBALUNIT );
+end if;
+if sACCOUNT is not null then
+FIND_ACCOUNT_BY_NUMBER(  nCOMPANY,  sACCOUNT,  nACCOUNT);
+end if;
+if sTAXGROUP is not null then
+FIND_INVTAXGR_BY_CODE(0,  sTAXGROUP,  nTAXGROUP);
+end if;
+/*for F in (
+select count(*),I.TAX_ACCOUNT_DEBIT,
+TAX_ANALYTIC_DEBIT1,
+TAX_ANALYTIC_DEBIT2,
+TAX_ANALYTIC_DEBIT3,
+TAX_ANALYTIC_DEBIT4,
+TAX_ANALYTIC_DEBIT5,
+TAX_ACCOUNT_CREDIT,
+TAX_ANALYTIC_CREDIT1,
+TAX_ANALYTIC_CREDIT2,
+TAX_ANALYTIC_CREDIT3,
+TAX_ANALYTIC_CREDIT4,
+TAX_ANALYTIC_CREDIT5,
+I.TAX_GROUP,I.BALUNIT
+ from  INVENTORY I
+where   I.TAX_A_COST_END>0-- and I.TAX_ACCOUNT_DEBIT is not null
+and (nBALUNIT is null or (nBALUNIT=I.BALUNIT))
+and (nACCOUNT is null or (TAX_ACCOUNT_DEBIT=nACCOUNT))
+and (nTAXGROUP is null or (nTAXGROUP=I.TAX_GROUP))
+  and not exists (select * from invhist II where II.PRN=I.RN and
+II.ACTION_DATE=dDATE and II.ACTION_TYPE=11)
+ group by I.TAX_ACCOUNT_DEBIT,
+TAX_ANALYTIC_DEBIT1,
+TAX_ANALYTIC_DEBIT2,
+TAX_ANALYTIC_DEBIT3,
+TAX_ANALYTIC_DEBIT4,
+TAX_ANALYTIC_DEBIT5,
+TAX_ACCOUNT_CREDIT,
+TAX_ANALYTIC_CREDIT1,
+TAX_ANALYTIC_CREDIT2,
+TAX_ANALYTIC_CREDIT3,
+TAX_ANALYTIC_CREDIT4,
+TAX_ANALYTIC_CREDIT5,TAX_GROUP,BALUNIT )
+loop*/
+
+P_INVAMORV_GETIDENT(NIDENT);
+
+for C in (
+select RN from INVENTORY I
+where
+/*((I.TAX_ACCOUNT_DEBIT=F.TAX_ACCOUNT_DEBIT
+  and I.TAX_ACCOUNT_DEBIT is not null and F.TAX_ACCOUNT_DEBIT is not null) or
+   (I.TAX_ACCOUNT_DEBIT is null and F.TAX_ACCOUNT_DEBIT is null)) and
+((I.TAX_ANALYTIC_DEBIT1=F.TAX_ANALYTIC_DEBIT1
+  and I.TAX_ANALYTIC_DEBIT1 is not null and F.TAX_ANALYTIC_DEBIT1 is not null)
+or
+   (I.TAX_ANALYTIC_DEBIT1 is null and F.TAX_ANALYTIC_DEBIT1 is null)) and
+((I.TAX_ANALYTIC_DEBIT2=F.TAX_ANALYTIC_DEBIT2
+  and I.TAX_ANALYTIC_DEBIT2 is not null and F.TAX_ANALYTIC_DEBIT2 is not null)
+or
+   (I.TAX_ANALYTIC_DEBIT2 is null and F.TAX_ANALYTIC_DEBIT2 is null)) and
+((I.TAX_ANALYTIC_DEBIT3=F.TAX_ANALYTIC_DEBIT3
+  and I.TAX_ANALYTIC_DEBIT3 is not null and F.TAX_ANALYTIC_DEBIT3 is not null)
+or
+   (I.TAX_ANALYTIC_DEBIT3 is null and F.TAX_ANALYTIC_DEBIT3 is null)) and
+((I.TAX_ANALYTIC_DEBIT4=F.TAX_ANALYTIC_DEBIT4
+  and I.TAX_ANALYTIC_DEBIT4 is not null and F.TAX_ANALYTIC_DEBIT4 is not null)
+or
+   (I.TAX_ANALYTIC_DEBIT4 is null and F.TAX_ANALYTIC_DEBIT4 is null)) and
+((I.TAX_ANALYTIC_DEBIT5=F.TAX_ANALYTIC_DEBIT5
+  and I.TAX_ANALYTIC_DEBIT5 is not null and F.TAX_ANALYTIC_DEBIT5 is not null)
+or
+   (I.TAX_ANALYTIC_DEBIT5 is null and F.TAX_ANALYTIC_DEBIT5 is null)) and
+((I.TAX_ACCOUNT_CREDIT=F.TAX_ACCOUNT_CREDIT
+  and I.TAX_ACCOUNT_CREDIT is not null and F.TAX_ACCOUNT_CREDIT is not null) or
+   (I.TAX_ACCOUNT_CREDIT is null and F.TAX_ACCOUNT_CREDIT is null)) and
+((I.TAX_ANALYTIC_DEBIT1=F.TAX_ANALYTIC_DEBIT1
+  and I.TAX_ANALYTIC_CREDIT1 is not null and F.TAX_ANALYTIC_CREDIT1 is not null)
+or
+   (I.TAX_ANALYTIC_CREDIT1 is null and F.TAX_ANALYTIC_CREDIT1 is null)) and
+((I.TAX_ANALYTIC_CREDIT2=F.TAX_ANALYTIC_CREDIT2
+  and I.TAX_ANALYTIC_CREDIT2 is not null and F.TAX_ANALYTIC_CREDIT2 is not null)
+or
+   (I.TAX_ANALYTIC_CREDIT2 is null and F.TAX_ANALYTIC_CREDIT2 is null)) and
+((I.TAX_ANALYTIC_CREDIT3=F.TAX_ANALYTIC_CREDIT3
+  and I.TAX_ANALYTIC_CREDIT3 is not null and F.TAX_ANALYTIC_CREDIT3 is not null)
+or
+   (I.TAX_ANALYTIC_CREDIT3 is null and F.TAX_ANALYTIC_CREDIT3 is null)) and
+((I.TAX_ANALYTIC_CREDIT4=F.TAX_ANALYTIC_CREDIT4
+  and I.TAX_ANALYTIC_CREDIT4 is not null and F.TAX_ANALYTIC_CREDIT4 is not null)
+or
+   (I.TAX_ANALYTIC_CREDIT4 is null and F.TAX_ANALYTIC_CREDIT4 is null)) and
+((I.TAX_ANALYTIC_CREDIT5=F.TAX_ANALYTIC_CREDIT5
+  and I.TAX_ANALYTIC_CREDIT5 is not null and F.TAX_ANALYTIC_CREDIT5 is not null)
+or
+   (I.TAX_ANALYTIC_CREDIT5 is null and F.TAX_ANALYTIC_CREDIT5 is null))
+  and ((I.TAX_GROUP=F.TAX_GROUP and I.TAX_GROUP is not null and F.TAX_GROUP is
+not null) or (I.TAX_GROUP is null and F.TAX_GROUP is null) )
+  and ((I.BALUNIT=F.BALUNIT and I.BALUNIT is not null and F.BALUNIT is not null
+) or (I.BALUNIT is null and F.BALUNIT is null))*/
+I.TAX_A_COST_END>0
+  and not exists (select * from invhist II where II.PRN=I.RN and
+II.ACTION_DATE=dDATE and II.ACTION_TYPE=11) )
+loop
+
+select count(*) into nCNT_IN from INVHIST INH where PRN=C.RN and
+INH.ACTION_TYPE=6 and INH.ACTION_DATE<=dDATE;
+select count(*) into nCNT_OUT from INVHIST INH where PRN=C.RN and
+INH.ACTION_TYPE=7 and INH.ACTION_DATE<=dDATE;
+
+if nCNT_OUT>=nCNT_IN then
+P_INVAMORV_INI_VAMOR(NCOMPANY,NIDENT,C.RN,dDATE,0,0,10,10,0,1,1);
+end if;
+
+end loop;
+
+select count(*) into nCOUNT from INVAMORV where ident=nident;
+
+if nCOUNT>0 then
+
+P_INVHPR_GETIDENT(NIDENT_);
+
+for D in (select Rn from INVAMORV where ident=nident)
+loop
+P_INVHPR_INS_INV_RN(NCOMPANY,NIDENT_,D.RN);
+end loop;
+
+P_INVAMORV_CALC_AMOR(NCOMPANY,NIDENT_,null,0);
+P_INVHPR_PACK_BY_IDENT(NIDENT_);
+
+for D1 in (select Rn from INVAMORV where ident=nident)
+loop
+P_INVHPR_INS_INV_RN(NCOMPANY,NIDENT_,D1.RN);
+end loop;
+
+P_INVHIST_AMOR_EXEC(NCOMPANY,NIDENT_,null,SOPER_PREF,SOPER_CONT,null,
+SCRN_NAME,0,0,0);
+P_INVHPR_PACK_BY_IDENT(NIDENT_);
+P_INVAMORV_PACK_BY_IDENT(NIDENT);
+commit;
+
+end if;
+
+--ónd loop;
+
+end ;
+/
+

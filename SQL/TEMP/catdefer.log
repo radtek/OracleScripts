@@ -1,0 +1,1605 @@
+SQL> @D:\oracle\ora81\RDBMS\ADMIN\catdefer.sql
+SQL> rem
+SQL> rem $Header: catdefer.sql 08-nov-96.09:40:50 ato Exp $
+SQL> rem
+SQL> Rem  Copyright (c) 1992, 1996, 1997 by Oracle Corporation
+SQL> Rem    NAME
+SQL> Rem      catdefer.sql - catalog of deferred rpc queues
+SQL> Rem    DESCRIPTION
+SQL> Rem      catalog of deferred rpc queues
+SQL> Rem      This file contains sql which creates the base tables
+SQL> Rem      used to store deferred remote procedure calls for used in
+SQL> Rem      transaction replication.
+SQL> Rem      Tables:
+SQL> Rem	 defTran
+SQL> Rem	 defTranDest
+SQL> Rem	 defError
+SQL> Rem	 defCallDest
+SQL> Rem	 defDefaultDest
+SQL> Rem	 defCall
+SQL> Rem	 defSchedule
+SQL> Rem    RETURNS
+SQL> Rem
+SQL> Rem    NOTES
+SQL> Rem      Tables created in this file are owned by user system (not) sys
+SQL> Rem      views are owned by sys.
+SQL> Rem      The defcall view is implemented by the prvtdfri.plb script.
+SQL> Rem      The defcalldest view is implemented by the catrepc.sql script.
+SQL> Rem      The deftrandest view is reimplemented by the catrepc.sql script.
+SQL> Rem      If the repcat tables are installed,
+SQL> Rem      the catrepc.sql script should always be run after this script is run.
+SQL> Rem
+SQL> Rem      Tables are created in catdefrt.sql.  All other objects created here
+SQL> Rem
+SQL> Rem    MODIFIED   (MM/DD/YY)
+SQL> Rem     jingliu	07/29/97 -  change deflob.enq_tid to deferred_tran_id
+SQL> Rem     jstamos	04/04/97 -  tighter AQ integration
+SQL> Rem     liwong	03/07/97 -  merge 433785 manually
+SQL> Rem     liwong	02/10/97 -  Comment out defcalldest,
+SQL> Rem			 -  modify deftrandest, add queue_batch to deftran
+SQL> Rem     liwong	01/15/97 -  Modified delete statement for expact$ and added
+SQL> Rem			 -  def$_aqcall and def$_aqerror
+SQL> Rem     jstamos	01/03/97 -  add drop user cascade support
+SQL> Rem     jstamos	12/23/96 -  comment on nclob_col
+SQL> Rem     jstamos	11/21/96 -  nchar support
+SQL> Rem     ato	11/08/96 -  remove catqueue.sql
+SQL> Rem     sjain	11/06/96 -  Change defcall and deftran for backwards compata
+SQL> Rem     sjain	11/05/96 -  Fix type in defcall
+SQL> Rem     mluong	10/28/96 -  remove dup calls to build AQ package
+SQL> Rem     sjain	10/17/96 -  AQ Conversion
+SQL> Rem     sjain	10/15/96 -  aq conversion
+SQL> Rem     sjain	10/14/96 -  Aq conversion
+SQL> Rem     sjain	10/01/96 -  AQ conversion
+SQL> Rem     sjain	09/04/96 -  AQ cont.
+SQL> Rem     sjain	07/25/96 -  continue with the aq conversion
+SQL> Rem     sjain	07/22/96 -  Convert to AQ
+SQL> Rem     jstamos	06/12/96 -  LOB support for deferred RPCs
+SQL> Rem     ldoo	05/09/96 -  New security model
+SQL> Rem     mmonajje	05/21/96 -  Replace interval col name with interval#
+SQL> Rem     ixhu	04/11/96 -  AQ support: add obj_type in expact$
+SQL> Rem     asurpur	04/08/96 -  Dictionary Protection Implementation
+SQL> Rem     jstamos	08/17/95 -  code review changes
+SQL> Rem     jstamos	08/16/95 -  add comments to views
+SQL> Rem     hasun	01/23/95 -  Modify views for Rep3 - Object Groups
+SQL> Rem     dsdaniel	01/25/95 -  merge changes from branch 1.5.720.4
+SQL> Rem     dsdaniel	01/23/95 -  merge changes from branch 1.1.710.11
+SQL> Rem     dsdaniel	01/05/95 -  need extra at sign
+SQL> Rem     dsdaniel	12/23/94 -  merge changes from branch 1.5.720.1-3
+SQL> Rem     dsdaniel	12/21/94 -  merge changes from branch 1.1.710.8-10
+SQL> Rem     dsdaniel	12/08/94 -  revise defcalldest, deftrandest views
+SQL> Rem     dsdaniel	11/22/94 -  split out table creations
+SQL> Rem     dsdaniel	11/18/94 -  deftran-ectomy, deftrandest-ectomy
+SQL> Rem     dsdaniel	11/17/94 -  merge changes from branch 1.1.710.7
+SQL> Rem     dsdaniel	11/09/94 -  defcalldest, deftrandest changes
+SQL> Rem     dsdaniel	08/04/94 -  make it a cluster (again)
+SQL> Rem     dsdaniel	08/04/94 -  create a version without the cluster
+SQL> Rem     dsdaniel	08/03/94 -  eliminate ON DELETE CASCADE *again
+SQL> Rem     dsdaniel	08/02/94 -  make it a cluster
+SQL> Rem     dsdaniel	07/28/94 -  restore ON DELETE CASCADE
+SQL> Rem     dsdaniel	07/27/94 -  eliminate ON DELETE CASCADE
+SQL> Rem     dsdaniel	07/19/94 -  export support changes
+SQL> Rem     rjenkins	03/22/94 -  merge changes from branch 1.1.710.4
+SQL> Rem     rjenkins	01/19/94 -  merge changes from branch 1.1.710.3
+SQL> Rem     dsdaniel	01/18/94 -  merge changes from branch 1.1.710.2
+SQL> Rem     rjenkins	01/17/94 -  changing jq to job
+SQL> Rem     rjenkins	12/17/93 -  creating job queue
+SQL> Rem     dsdaniel	10/31/93 -  merge changes from branch 1.1.710.1
+SQL> Rem     dsdaniel	10/28/93 -  deferred rpc dblink security
+SQL> Rem			 -  also removed table drops, since shouldnt
+SQL> Rem			 -  loose data on upgrade
+SQL> Rem     dsdaniel	10/26/93 -  merge changes from branch 1.1.400.1
+SQL> Rem     dsdaniel	10/10/93 -  Creation from dbmsdefr
+SQL> rem create base tables
+SQL> 
+SQL> -- Sys is granted privileges through roles, which don't apply to
+SQL> -- packages owned by sys.	Explicitly grant permissions.
+SQL> grant select any table to sys with admin option
+  2  /
+
+Grant succeeded.
+
+SQL> grant insert any table to sys
+  2  /
+
+Grant succeeded.
+
+SQL> grant update any table to sys
+  2  /
+
+Grant succeeded.
+
+SQL> grant delete any table to sys
+  2  /
+
+Grant succeeded.
+
+SQL> 
+SQL> rem drop existing synonyms from sys -system
+SQL> 
+SQL> DROP SYNONYM def$_tran
+  2  /
+DROP SYNONYM def$_tran
+             *
+ERROR at line 1:
+ORA-01434: private synonym to be dropped does not exist 
+
+
+SQL> DROP SYNONYM def$_call
+  2  /
+DROP SYNONYM def$_call
+             *
+ERROR at line 1:
+ORA-01434: private synonym to be dropped does not exist 
+
+
+SQL> DROP SYNONYM def$_calldest
+  2  /
+
+Synonym dropped.
+
+SQL> DROP SYNONYM def$_error
+  2  /
+
+Synonym dropped.
+
+SQL> DROP SYNONYM def$_defaultdest
+  2  /
+
+Synonym dropped.
+
+SQL> DROP SYNONYM def$_schedule
+  2  /
+
+Synonym dropped.
+
+SQL> 
+SQL> --
+SQL> --
+SQL> @@catdefrt
+SQL> rem
+SQL> rem $Header: catdefrt.sql 21-dec-1999.21:20:44 alakshmi Exp $
+SQL> rem
+SQL> Rem  Copyright (c) 1992, 1996, 1997, 1998, 1999 by Oracle Corporation
+SQL> Rem    NAME
+SQL> Rem      catdefrt.sql - CATalog DEFeRred rpc Tables
+SQL> Rem    DESCRIPTION
+SQL> Rem      create deferred rpc tables
+SQL> Rem    RETURNS
+SQL> Rem
+SQL> Rem    NOTES
+SQL> Rem      This is called from catdefer.sql
+SQL> Rem    MODIFIED   (MM/DD/YY)
+SQL> Rem     alakshmi	12/02/99  - Bug 979398: Before-row insert trigger on
+SQL> Rem			    def$_propagator
+SQL> Rem     wesmith	10/31/98 -  change shape of table def$_pushed_transactions
+SQL> Rem     jnath	02/23/98 -  bug 601972: split anonymous pl/sql blocks
+SQL> Rem     wesmith	01/21/98 -  create def$_pushed_transactions table for
+SQL> Rem			    server-side RepAPI
+SQL> Rem     nbhatt	07/27/97 -  change create_queuetable -> create_queue_table
+SQL> Rem     nbhatt	04/21/97 -  change 'TRACKING' in CREATE_QUEUE to 'DEPENDENCY
+SQL> Rem     nbhatt	04/21/97 -  change syntax of create_queue
+SQL> Rem     liwong	04/16/97 -  Alter view system.AQ$DEF$_AQ{CALL,ERROR}
+SQL> Rem     liwong	04/11/97 -  Fixing defaultdest_primary typo
+SQL> Rem     jstamos	04/10/97 -  remove unneeded indexes
+SQL> Rem     nbhatt	04/08/97 -  change create_qtable to create_queuetable
+SQL> Rem     jstamos	04/04/97 -  tighter AQ integration
+SQL> Rem     liwong	04/02/97 -  Add schema_name, package_name in def$_calldest
+SQL> Rem     ato	03/31/97 -  create_qtable interface change
+SQL> Rem     liwong	03/25/97 -  remove batch_no from def$_tranorder
+SQL> Rem     liwong	02/24/97 -  pctversion --> 0 for def$_aqcall, def$_aqerror
+SQL> Rem     liwong	02/22/97 -  Remove dropping view aq$def$_aqcall
+SQL> Rem     ademers	02/07/97 -  Remove constraint def$_calldest_call
+SQL> Rem     liwong	01/11/97 -  drop and create aq$def$_aqcall (temporary)
+SQL> Rem     liwong	01/10/97 -  Alter view aq$def$_aqcall
+SQL> Rem     liwong	01/07/97 -  Alter default value for batch_no
+SQL> Rem     jstamos	12/23/96 -  change temp$nclob col
+SQL> Rem     jstamos	11/21/96 -  nchar support
+SQL> Rem     sjain	11/11/96 -  Remove dummy buffer # comment
+SQL> Rem     asgoel	11/05/96 -  Disable misc_tracking in def$_aqerror
+SQL> Rem     sjain	11/06/96 -  deferror changes
+SQL> Rem     vkrishna	10/28/96 -  change STORED IN to STORE AS for lob
+SQL> Rem     sjain	10/02/96 -  Aq conversion
+SQL> Rem     sbalaram	09/24/96 -  ARPC performance - add foreign key index
+SQL> Rem     jstamos	09/06/96 -  rename temp$lob and temporarily change nclob
+SQL> Rem     sjain	09/03/96 -  AQ converson
+SQL> Rem     ademers	08/02/96 -  queue_batch default in def_destination
+SQL> Rem     ademers	07/29/96 -  queue_batch default in def_call
+SQL> Rem     ademers	07/29/96 -  queue_batch default
+SQL> Rem     jstamos	07/24/96 -  add system.temp$lob
+SQL> Rem     sbalaram	07/22/96 -  create def$_aqcall and def$_aqerror tables
+SQL> Rem     jstamos	06/12/96 -  LOB support for deferred RPCs
+SQL> Rem     ldoo	06/28/96 -  Comment out queue_table from def_tranorder
+SQL> Rem     ademers	05/30/96 -  create def_origin
+SQL> Rem     ademers	05/28/96 -  fix def_destination col names
+SQL> Rem     ldoo	05/09/96 -  New security model
+SQL> Rem     sjain	05/01/96 -  add seq col to def_destination
+SQL> Rem     ademers	04/29/96 -  add batch_no, dep_scn to def_call
+SQL> Rem     jstamos	12/04/95 -  324303: use index to avoid sorting the queue
+SQL> Rem     jstamos	08/17/95 -  code review changes
+SQL> Rem     jstamos	08/16/95 -  add comments to tables
+SQL> Rem     wmaimone	01/04/96 -  7.3 merge
+SQL> Rem     hasun	01/31/95 -  Modify tables for Rep3 - Object Groups
+SQL> Rem     hasun	01/31/95 -  merge changes from branch 1.1.720.2
+SQL> Rem     hasun	01/11/95 -  Add fix to resolve duplicate SCNs
+SQL> Rem     dsdaniel	12/08/94 -  add def _destinaton constraint
+SQL> Rem     dsdaniel	12/08/94 -  name defcall primary
+SQL> Rem     dsdaniel	11/25/94 -  eliminate deftrandest, ect
+SQL> Rem     dsdaniel	11/25/94 -  Branch_for_patch
+SQL> Rem     dsdaniel	11/22/94 -  Creation
+SQL> 
+SQL> -- create def$_aqcall table. This contains one row for each deferred call.
+SQL> 
+SQL> -- bug 601972: split anonymous pl/sql blocks
+SQL> BEGIN
+  2    dbms_aqadm.create_queue_table(QUEUE_TABLE => 'SYSTEM.DEF$_AQCALL',
+  3  	 QUEUE_PAYLOAD_TYPE => 'ANY',
+  4  	 STORAGE_CLAUSE =>' lob (user_data) store as (pctversion 0)');
+  5  END;
+  6  /
+BEGIN
+*
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+ORA-06512: at "SYS.DBMS_AQADM_SYS", line 2012 
+ORA-06512: at "SYS.DBMS_AQADM", line 55 
+ORA-06512: at line 2 
+
+
+SQL> BEGIN
+  2    dbms_aqadm.create_queue(QUEUE_NAME => 'DEF$_AQCALL',
+  3  	 QUEUE_TABLE => 'SYSTEM.DEF$_AQCALL',
+  4  	 DEPENDENCY_TRACKING => TRUE,
+  5  	 COMMENT => 'Deferred RPC Queue');
+  6  END;
+  7  /
+BEGIN
+*
+ERROR at line 1:
+ORA-24002: QUEUE_TABLE SYSTEM.DEF$_AQCALL does not exist 
+ORA-06512: at "SYS.DBMS_AQADM_SYS", line 2309 
+ORA-06512: at "SYS.DBMS_AQADM", line 114 
+ORA-06512: at line 2 
+
+
+SQL> BEGIN
+  2    dbms_aqadm.start_queue(QUEUE_NAME => 'SYSTEM.DEF$_AQCALL',
+  3  	 ENQUEUE => TRUE, DEQUEUE => TRUE);
+  4  END;
+  5  /
+BEGIN
+*
+ERROR at line 1:
+ORA-24010: QUEUE SYSTEM.DEF$_AQCALL does not exist 
+ORA-06512: at "SYS.DBMS_AQADM_SYS", line 2737 
+ORA-06512: at "SYS.DBMS_AQADM", line 212 
+ORA-06512: at line 2 
+
+
+SQL> 
+SQL> rem create an index on delivery order to speed things up
+SQL> create index system.def$_tranorder on system.def$_aqcall(
+  2   cscn, enq_tid)
+  3  /
+create index system.def$_tranorder on system.def$_aqcall(
+                    *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> 
+SQL> drop index system.aq$_def$_aqcall_i
+  2  /
+drop index system.aq$_def$_aqcall_i
+                  *
+ERROR at line 1:
+ORA-01418: specified index does not exist 
+
+
+SQL> drop index system.aq$_def$_aqcall_t
+  2  /
+drop index system.aq$_def$_aqcall_t
+                  *
+ERROR at line 1:
+ORA-01418: specified index does not exist 
+
+
+SQL> 
+SQL> alter view system.aq$def$_aqcall compile
+  2  /
+
+View altered.
+
+SQL> 
+SQL> 
+SQL> --  create the table def$_aqerror where the exceptions get logged. This
+SQL> --  contains one row for each deferred call.
+SQL> 
+SQL> BEGIN
+  2    dbms_aqadm.create_queue_table(QUEUE_TABLE => 'SYSTEM.DEF$_AQERROR',
+  3  	 QUEUE_PAYLOAD_TYPE => 'ANY',
+  4  	 STORAGE_CLAUSE =>' lob (user_data) store as (pctversion 0)');
+  5  END;
+  6  /
+BEGIN
+*
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+ORA-06512: at "SYS.DBMS_AQADM_SYS", line 2012 
+ORA-06512: at "SYS.DBMS_AQADM", line 55 
+ORA-06512: at line 2 
+
+
+SQL> BEGIN
+  2    dbms_aqadm.create_queue(QUEUE_NAME => 'DEF$_AQERROR',
+  3  	 QUEUE_TABLE => 'SYSTEM.DEF$_AQERROR',
+  4  	 DEPENDENCY_TRACKING => TRUE,
+  5  	 COMMENT => 'Error Queue for Deferred RPCs');
+  6  END;
+  7  /
+BEGIN
+*
+ERROR at line 1:
+ORA-24002: QUEUE_TABLE SYSTEM.DEF$_AQERROR does not exist 
+ORA-06512: at "SYS.DBMS_AQADM_SYS", line 2309 
+ORA-06512: at "SYS.DBMS_AQADM", line 114 
+ORA-06512: at line 2 
+
+
+SQL> BEGIN
+  2    dbms_aqadm.start_queue(QUEUE_NAMe => 'SYSTEM.DEF$_AQERROR',
+  3  	 ENQUEUE => TRUE, DEQUEUE => TRUE);
+  4  END;
+  5  /
+BEGIN
+*
+ERROR at line 1:
+ORA-24010: QUEUE SYSTEM.DEF$_AQERROR does not exist 
+ORA-06512: at "SYS.DBMS_AQADM_SYS", line 2737 
+ORA-06512: at "SYS.DBMS_AQADM", line 212 
+ORA-06512: at line 2 
+
+
+SQL> 
+SQL> drop index system.aq$_def$_aqerror_i
+  2  /
+drop index system.aq$_def$_aqerror_i
+                  *
+ERROR at line 1:
+ORA-01418: specified index does not exist 
+
+
+SQL> drop index system.aq$_def$_aqerror_t
+  2  /
+drop index system.aq$_def$_aqerror_t
+                  *
+ERROR at line 1:
+ORA-01418: specified index does not exist 
+
+
+SQL> 
+SQL> alter view system.aq$def$_aqerror compile
+  2  /
+
+View altered.
+
+SQL> 
+SQL> --  create the table where the exceptions get logged. One row for each
+SQL> --  transactionXorigin_node when the execution of the transaction at
+SQL> --  this  node encountered  an error.  The transaction is always re-executed
+SQL> --  in the security context of the original receiver.
+SQL> CREATE TABLE system.def$_error(
+  2    enq_tid		VARCHAR2(22),	-- Tid of error creation txn
+  3  	  CONSTRAINT def$_error_primary
+  4  	     PRIMARY KEY(enq_tid),
+  5    origin_tran_db	VARCHAR2(128),	-- node which originated this txn
+  6    origin_enq_tid	VARCHAR2(22),	-- original tid of the txn
+  7    destination	VARCHAR2(128),	-- dblink transaction destined to
+  8    step_no		NUMBER, 	-- UID of call
+  9    receiver 	NUMBER, 	-- User ID of the original receiver
+ 10    enq_time 	DATE,		-- time at which transaction enqueued
+ 11    error_number	NUMBER, 	-- error number reported
+ 12    error_msg	VARCHAR2(2000)) -- error message
+ 13  /
+CREATE TABLE system.def$_error(
+                    *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> 
+SQL> comment on table SYSTEM.DEF$_ERROR is
+  2  'Information about all deferred transactions that caused an error'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_ERROR.ENQ_TID is
+  2  'The ID of the transaction that created the error'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_ERROR.ORIGIN_TRAN_DB is
+  2  'The database originating the deferred transaction'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_ERROR.ORIGIN_ENQ_TID is
+  2  'The original ID of the transaction'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_ERROR.DESTINATION is
+  2  'Database link used to address destination'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_ERROR.STEP_NO is
+  2  'Unique ID of call that caused an error'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_ERROR.RECEIVER is
+  2  'User ID of the original receiver'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_ERROR.ENQ_TIME is
+  2  'Time original transaction enqueued'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_ERROR.ERROR_NUMBER is
+  2  'Oracle error number'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_ERROR.ERROR_MSG is
+  2  'Error message text'
+  3  /
+
+Comment created.
+
+SQL> 
+SQL> 
+SQL> CREATE TABLE system.def$_destination(
+  2    dblink		 VARCHAR2(128)	 -- queue name
+  3  	 CONSTRAINT def$_destination_primary PRIMARY KEY,
+  4    last_delivered	  NUMBER	 -- scn(from deliver_order column of def$_call)
+  5  			      DEFAULT 0 NOT NULL,
+  6    last_enq_tid	  VARCHAR2(22),  -- transaction id last delivered
+  7    last_seq 	  NUMBER,	 -- last delivered txn seq, 0 on clean termination
+  8    disabled 	  CHAR(1),	 -- T = propogation to dest disabled F = enabled
+  9    job		  NUMBER,	 -- number of job which does the push
+ 10    last_txn_count	  NUMBER,	 -- number of transactions executed lat push
+ 11    last_error_number  NUMBER,	 -- sqlcode from last push
+ 12    last_error_message VARCHAR2(2000))-- error message from last push
+ 13  /
+CREATE TABLE system.def$_destination(
+                    *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> 
+SQL> comment on table SYSTEM.DEF$_DESTINATION is
+  2  'Information about propagation to different destinations'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_DESTINATION.DBLINK is
+  2  'Destination'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_DESTINATION.LAST_DELIVERED is
+  2  'Value of delivery_order of last transaction propagated'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_DESTINATION.LAST_ENQ_TID is
+  2  'Transaction ID of last transaction propagated'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_DESTINATION.LAST_SEQ is
+  2  'Parallel prop seq number of last transaction propagated'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_DESTINATION.DISABLED is
+  2  'Is propagation to destination disabled'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_DESTINATION.JOB is
+  2  'Number of job that pushes queue'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_DESTINATION.LAST_TXN_COUNT is
+  2  'Number of transactions pushed during last attempt'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_DESTINATION.LAST_ERROR_NUMBER is
+  2  'Oracle error number from last push'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_DESTINATION.LAST_ERROR_MESSAGE is
+  2  'Error message from last push'
+  3  /
+
+Comment created.
+
+SQL> 
+SQL> 
+SQL> --  create the  table that identifies a call to be executed
+SQL> --  at a remote node. One row for each callsXnode when the
+SQL> --  destination_list is D
+SQL> CREATE TABLE system.def$_calldest(
+  2    enq_tid		VARCHAR2(22),  -- deferred transaction id
+  3    step_no		NUMBER,        -- call id
+  4    dblink		VARCHAR2(128), -- dblink to destination
+  5  	 CONSTRAINT def$_calldest_primary
+  6  	   PRIMARY KEY(enq_tid, dblink, step_no),
+  7  	CONSTRAINT def$_call_destination  -- Destination table must have a row
+  8  	   FOREIGN KEY(dblink)
+  9  	   REFERENCES system.def$_destination(dblink),
+ 10    schema_name	VARCHAR2(30),
+ 11    package_name	VARCHAR2(30))
+ 12  /
+CREATE TABLE system.def$_calldest(
+                    *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> 
+SQL> comment on table SYSTEM.DEF$_CALLDEST is
+  2  'Information about call destinations for D-type and error transactions'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_CALLDEST.ENQ_TID is
+  2  'Transaction ID'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_CALLDEST.STEP_NO is
+  2  'Unique ID of call within transaction'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_CALLDEST.DBLINK is
+  2  'The destination database'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_CALLDEST.SCHEMA_NAME is
+  2  'The schema of the deferred remote procedure call'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_CALLDEST.PACKAGE_NAME is
+  2  'The package of the deferred remote procedure call'
+  3  /
+
+Comment created.
+
+SQL> 
+SQL> -- make inserting rows into def$_calldest faster
+SQL> CREATE INDEX system.def$_calldest_n2 ON system.def$_calldest(
+  2    dblink)
+  3  /
+CREATE INDEX system.def$_calldest_n2 ON system.def$_calldest(
+                    *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> 
+SQL> 
+SQL> CREATE TABLE system.def$_defaultdest (
+  2    dblink VARCHAR2(128)  -- dblink
+  3  	 CONSTRAINT def$_defaultdest_primary
+  4  	 PRIMARY KEY)
+  5  /
+CREATE TABLE system.def$_defaultdest (
+                    *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> 
+SQL> comment on table SYSTEM.DEF$_DEFAULTDEST is
+  2  'Default destinations for deferred remote procedure calls'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_DEFAULTDEST.DBLINK is
+  2  'Default destination'
+  3  /
+
+Comment created.
+
+SQL> COMMIT
+  2  /
+
+Commit complete.
+
+SQL> 
+SQL> CREATE TABLE system.def$_lob(
+  2    id RAW(16) CONSTRAINT def$_lob_primary PRIMARY KEY,
+  3    enq_tid	  VARCHAR2(22), -- transaction id
+  4    blob_col   BLOB, -- either BLOB, CLOB, or NCLOB is meaningful
+  5    clob_col   CLOB,
+  6    nclob_col  NCLOB)
+  7    lob (blob_col, clob_col, nclob_col) store as (pctversion 0)
+  8  /
+CREATE TABLE system.def$_lob(
+                    *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> 
+SQL> comment on table SYSTEM.DEF$_LOB is
+  2  'Storage for LOB parameters to deferred RPCs'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_LOB.ID is
+  2  'Identifier of LOB parameter'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_LOB.ENQ_TID is
+  2  'Transaction identifier for deferred RPC with this LOB parameter'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_LOB.BLOB_COL is
+  2  'Binary LOB parameter'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_LOB.CLOB_COL is
+  2  'Character LOB parameter'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_LOB.NCLOB_COL is
+  2  'National Character LOB parameter'
+  3  /
+
+Comment created.
+
+SQL> 
+SQL> -- make deletes fast
+SQL> CREATE INDEX system.def$_lob_n1 ON system.def$_lob(
+  2    enq_tid)
+  3  /
+CREATE INDEX system.def$_lob_n1 ON system.def$_lob(
+                    *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> 
+SQL> create table system.def$_temp$lob(
+  2    temp$blob blob,
+  3    temp$clob clob,
+  4    temp$nclob nclob)
+  5    nologging					-- no logging for rows
+  6    lob (temp$blob, temp$clob, temp$nclob) store as (
+  7  	 nocache nologging
+  8  	 pctversion 0)
+  9  /
+create table system.def$_temp$lob(
+                    *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> 
+SQL> drop public synonym temp$lob
+  2  /
+
+Synonym dropped.
+
+SQL> create public synonym temp$lob for system.def$_temp$lob
+  2  /
+
+Synonym created.
+
+SQL> 
+SQL> comment on table SYSTEM.DEF$_TEMP$LOB is
+  2  'Storage for LOB parameters to RPCs'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_TEMP$LOB.TEMP$BLOB is
+  2  'Binary LOB (deferred) RPC parameter'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_TEMP$LOB.TEMP$CLOB is
+  2  'Character LOB (deferred) RPC parameter'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_TEMP$LOB.TEMP$NCLOB is
+  2  'National Character LOB (deferred) RPC parameter'
+  3  /
+
+Comment created.
+
+SQL> 
+SQL> CREATE TABLE system.def$_propagator(
+  2    userid	     NUMBER	      -- User ID of the propagator
+  3  	 CONSTRAINT def$_propagator_primary PRIMARY KEY,
+  4    username      VARCHAR2(30)     -- Name of the propagator
+  5  	 NOT NULL,
+  6    created	     DATE	      -- the time when the propagator is registered
+  7  	 DEFAULT SYSDATE NOT NULL)
+  8  /
+CREATE TABLE system.def$_propagator(
+                    *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> 
+SQL> comment on table SYSTEM.DEF$_PROPAGATOR is
+  2  'The propagator for deferred remote procedure calls'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_PROPAGATOR.USERID is
+  2  'User ID of the propagator'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_PROPAGATOR.USERNAME is
+  2  'User name of the propagator'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_PROPAGATOR.CREATED is
+  2  'The time when the propagator is registered'
+  3  /
+
+Comment created.
+
+SQL> 
+SQL> -- Bug 979398: Have a before-row insert trigger on def$_propagator
+SQL> -- which raises an exception if there is 1 or more rows in def$_propagator
+SQL> GRANT EXECUTE ON dbms_sys_error TO system
+  2  /
+
+Grant succeeded.
+
+SQL> CREATE OR REPLACE TRIGGER system.def$_propagator_trig
+  2    BEFORE INSERT ON system.def$_propagator
+  3  DECLARE
+  4    prop_count  NUMBER;
+  5  BEGIN
+  6    SELECT count(*) into prop_count
+  7  	 FROM system.def$_propagator;
+  8  
+  9    IF (prop_count > 0) THEN
+ 10  	 -- Raise duplicate propagator error
+ 11  	 sys.dbms_sys_error.raise_system_error(-23394);
+ 12    END IF;
+ 13  END;
+ 14  /
+
+Trigger created.
+
+SQL> 
+SQL> -- Create table of transactions that have been applied at destination site.
+SQL> -- One row per applied transaction, committed with the transaction.
+SQL> -- This allows us to stream deferred transactions w/o 2PC and still do
+SQL> -- failure recovery.
+SQL> 
+SQL> CREATE TABLE system.def$_origin(
+  2    origin_db      VARCHAR2(128),	     -- global name of pushing site
+  3    origin_dblink  VARCHAR2(128),	    -- dblink: pushing site -> here
+  4    inusr	      NUMBER,			-- receiving connected user
+  5    -- data to identify committed txns during recovery:
+  6    cscn	      NUMBER,			 -- origin site prepare scn
+  7    enq_tid	      VARCHAR2(22),	      -- origin site transaction id
+  8    reco_seq_no    NUMBER)	   -- transaction seq number when committed
+  9  /
+CREATE TABLE system.def$_origin(
+                    *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> 
+SQL> comment on table SYSTEM.DEF$_ORIGIN is
+  2  'Information about deferred transactions pushed to this site'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_ORIGIN.ORIGIN_DB is
+  2  'Originating database for the deferred transaction'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_ORIGIN.ORIGIN_DBLINK is
+  2  'Database link from deferred transaction origin to this site'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_ORIGIN.INUSR is
+  2  'Connected user receiving the deferred transaction'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_ORIGIN.CSCN is
+  2  'Prepare SCN assigned at origin site'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_ORIGIN.ENQ_TID is
+  2  'Transaction id assigned at origin site'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_ORIGIN.RECO_SEQ_NO is
+  2  'Deferred transaction sequence number for recovery'
+  3  /
+
+Comment created.
+
+SQL> 
+SQL> CREATE TABLE system.def$_pushed_transactions
+  2  (
+  3    source_site_id NUMBER,					    -- sending site
+  4  	 CONSTRAINT def$_pushed_tran_primary
+  5  	   PRIMARY KEY(source_site_id),
+  6    last_tran_id   NUMBER DEFAULT 0, 	      -- last committed transaction
+  7    disabled       VARCHAR2(1) DEFAULT 'F',		     -- disable propagation
+  8  	 CHECK (disabled IN ('T', 'F')),
+  9    source_site    VARCHAR2(128)					-- OBSOLETE
+ 10  )
+ 11  /
+CREATE TABLE system.def$_pushed_transactions
+                    *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> comment on table SYSTEM.DEF$_PUSHED_TRANSACTIONS is
+  2  'Information about deferred transactions pushed to this site by RepAPI clients'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_PUSHED_TRANSACTIONS.SOURCE_SITE_ID is
+  2  'Originating database identifier for the deferred transaction'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_PUSHED_TRANSACTIONS.LAST_TRAN_ID is
+  2  'Last committed transaction'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_PUSHED_TRANSACTIONS.DISABLED is
+  2  'Disable propagation'
+  3  /
+
+Comment created.
+
+SQL> comment on column SYSTEM.DEF$_PUSHED_TRANSACTIONS.SOURCE_SITE is
+  2  'Obsolete - do not use'
+  3  /
+
+Comment created.
+
+SQL> 
+SQL> COMMIT
+  2  /
+
+Commit complete.
+
+SQL> --
+SQL> --
+SQL> -- Create a synonym for the new deferred queue table.
+SQL> -- Note columns in def$_aqcall are different from the old def$_call
+SQL> CREATE SYNONYM def$_aqcall FOR system.def$_aqcall
+  2  /
+CREATE SYNONYM def$_aqcall FOR system.def$_aqcall
+               *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> 
+SQL> CREATE SYNONYM def$_calldest FOR system.def$_calldest
+  2  /
+
+Synonym created.
+
+SQL> CREATE SYNONYM def$_schedule FOR system.def$_schedule
+  2  /
+
+Synonym created.
+
+SQL> CREATE SYNONYM def$_error FOR system.def$_error
+  2  /
+
+Synonym created.
+
+SQL> 
+SQL> CREATE OR REPLACE VIEW defschedule  AS
+  2    SELECT s.dblink, s.job, j.interval# interval, next_date, j.last_date, s.disabled,
+  3  	      s.last_txn_count, s.last_error_number, s.last_error_message
+  4  	 FROM system.def$_destination s, sys.job$ j where s.job = j.job(+)
+  5  /
+
+View created.
+
+SQL> grant select on defschedule to select_catalog_role
+  2  /
+
+Grant succeeded.
+
+SQL> 
+SQL> comment on table DEFSCHEDULE is
+  2  'Information about propagation to different destinations'
+  3  /
+
+Comment created.
+
+SQL> comment on column DEFSCHEDULE.DBLINK is
+  2  'Destination'
+  3  /
+
+Comment created.
+
+SQL> comment on column DEFSCHEDULE.JOB is
+  2  'Number of job that pushes queue'
+  3  /
+
+Comment created.
+
+SQL> comment on column DEFSCHEDULE.INTERVAL is
+  2  'Function used to calculate the next time to push the queue to destination'
+  3  /
+
+Comment created.
+
+SQL> comment on column DEFSCHEDULE.NEXT_DATE is
+  2  'Next date that job is scheduled to be executed'
+  3  /
+
+Comment created.
+
+SQL> comment on column DEFSCHEDULE.LAST_DATE is
+  2  'Last time queue was (attempted to be) pushed to destination'
+  3  /
+
+Comment created.
+
+SQL> comment on column DEFSCHEDULE.DISABLED is
+  2  'Is propagation to destination disabled'
+  3  /
+
+Comment created.
+
+SQL> comment on column DEFSCHEDULE.LAST_TXN_COUNT is
+  2  'Number of transactions pushed during last attempt'
+  3  /
+
+Comment created.
+
+SQL> comment on column DEFSCHEDULE.LAST_ERROR_NUMBER is
+  2  'Oracle error number from last push'
+  3  /
+
+Comment created.
+
+SQL> comment on column DEFSCHEDULE.LAST_ERROR_MESSAGE is
+  2  'Error message from last push'
+  3  /
+
+Comment created.
+
+SQL> 
+SQL> DROP PUBLIC SYNONYM defschedule
+  2  /
+
+Synonym dropped.
+
+SQL> CREATE PUBLIC SYNONYM defschedule FOR defschedule
+  2  /
+
+Synonym created.
+
+SQL> 
+SQL> CREATE OR REPLACE VIEW deferror AS SELECT
+  2  	e.enq_tid deferred_tran_id,
+  3  	e.origin_tran_db,
+  4  	e.origin_enq_tid origin_tran_id,
+  5  	e.step_no callno,
+  6  	e.destination,
+  7  	e.enq_time start_time, e.error_number, e.error_msg, u.name receiver
+  8  	 FROM system.def$_error e, sys.user$ u
+  9  	 WHERE e.receiver = u.user# (+)
+ 10  /
+
+View created.
+
+SQL> grant select on deferror to select_catalog_role
+  2  /
+
+Grant succeeded.
+
+SQL> 
+SQL> comment on table DEFERROR is
+  2  'Information about all deferred transactions that caused an error'
+  3  /
+
+Comment created.
+
+SQL> comment on column DEFERROR.DEFERRED_TRAN_ID is
+  2  'The ID of the transaction that created the error'
+  3  /
+
+Comment created.
+
+SQL> comment on column DEFERROR.ORIGIN_TRAN_DB is
+  2  'The database originating the deferred transaction'
+  3  /
+
+Comment created.
+
+SQL> comment on column DEFERROR.ORIGIN_TRAN_ID is
+  2  'The original ID of the transaction'
+  3  /
+
+Comment created.
+
+SQL> comment on column DEFERROR.CALLNO is
+  2  'Unique ID of call that caused an error'
+  3  /
+
+Comment created.
+
+SQL> comment on column DEFERROR.DESTINATION is
+  2  'Database link used to address destination'
+  3  /
+
+Comment created.
+
+SQL> comment on column DEFERROR.START_TIME is
+  2  'Time original transaction enqueued'
+  3  /
+
+Comment created.
+
+SQL> comment on column DEFERROR.ERROR_NUMBER is
+  2  'Oracle error number'
+  3  /
+
+Comment created.
+
+SQL> comment on column DEFERROR.ERROR_MSG is
+  2  'Error message text'
+  3  /
+
+Comment created.
+
+SQL> comment on column DEFERROR.RECEIVER is
+  2  'The original receiver of the deferred transaction'
+  3  /
+
+Comment created.
+
+SQL> 
+SQL> DROP PUBLIC SYNONYM deferror
+  2  /
+
+Synonym dropped.
+
+SQL> CREATE PUBLIC SYNONYM deferror for deferror
+  2  /
+
+Synonym created.
+
+SQL> 
+SQL> CREATE OR REPLACE VIEW deferrcount AS
+  2    SELECT count(1) errcount, destination
+  3  	 FROM deferror GROUP BY destination
+  4  /
+
+View created.
+
+SQL> grant select on deferrcount to select_catalog_role
+  2  /
+
+Grant succeeded.
+
+SQL> 
+SQL> comment on table DEFERRCOUNT is
+  2  'Summary information about deferred transactions that caused an error'
+  3  /
+
+Comment created.
+
+SQL> comment on column DEFERRCOUNT.ERRCOUNT is
+  2  'Number of existing transactions that caused an error for given destination'
+  3  /
+
+Comment created.
+
+SQL> comment on column DEFERRCOUNT.DESTINATION is
+  2  'Database link used to address destination'
+  3  /
+
+Comment created.
+
+SQL> 
+SQL> DROP PUBLIC SYNONYM deferrcount
+  2  /
+
+Synonym dropped.
+
+SQL> CREATE PUBLIC SYNONYM deferrcount for deferrcount
+  2  /
+
+Synonym created.
+
+SQL> GRANT SELECT ON deferrcount TO PUBLIC
+  2  /
+
+Grant succeeded.
+
+SQL> 
+SQL> CREATE OR REPLACE VIEW deftran AS SELECT
+  2    enq_tid deferred_tran_id,
+  3    cscn delivery_order,
+  4    decode(recipient_key, 0, 'D', 'R') destination_list,
+  5    enq_time start_time
+  6    FROM system.def$_aqcall t
+  7    WHERE cscn is NOT NULL
+  8  UNION ALL
+  9  SELECT enq_tid deferred_tran_id,
+ 10    cscn delivery_order,
+ 11    'D' destination_list,
+ 12    enq_time start_time
+ 13    FROM system.def$_aqerror t
+ 14    WHERE cscn is NOT NULL
+ 15  /
+
+View created.
+
+SQL> grant select on deftran to select_catalog_role
+  2  /
+
+Grant succeeded.
+
+SQL> 
+SQL> comment on table DEFTRAN is
+  2  'Information about all deferred transactions'
+  3  /
+
+Comment created.
+
+SQL> comment on column DEFTRAN.DEFERRED_TRAN_ID is
+  2  'The transaction that enqueued the calls'
+  3  /
+
+Comment created.
+
+SQL> comment on column DEFTRAN.DELIVERY_ORDER is
+  2  'Total ordering on transactions'
+  3  /
+
+Comment created.
+
+SQL> comment on column DEFTRAN.DESTINATION_LIST is
+  2  'Determine destinations from deftrandest (D) or repcat (R)'
+  3  /
+
+Comment created.
+
+SQL> comment on column DEFTRAN.START_TIME is
+  2  'Time original transaction enqueued'
+  3  /
+
+Comment created.
+
+SQL> 
+SQL> DROP PUBLIC SYNONYM deftran
+  2  /
+
+Synonym dropped.
+
+SQL> CREATE PUBLIC SYNONYM deftran FOR deftran
+  2  /
+
+Synonym created.
+
+SQL> 
+SQL> --- just select from def$_calldest (D-type txn). We need repcat$_repprop
+SQL> --- to determine destination for R-type txn. We can't remove this one
+SQL> --- because dbms_snapshot needs it
+SQL> create or replace view deftrandest as SELECT
+  2  C.enq_tid deferred_tran_id,
+  3  C.cscn delivery_order,
+  4  D.dblink
+  5  from system.def$_aqcall C, system.def$_destination D
+  6  where C.cscn IS NOT NULL
+  7  AND C.cscn >= D.last_delivered
+  8  AND
+  9    (C.cscn > D.last_delivered
+ 10    OR
+ 11  	(C.cscn = D.last_delivered AND (C.enq_tid > D.last_enq_tid)))
+ 12  AND EXISTS (
+ 13   select /*+ index(def$_calldest_primary) */ NULL
+ 14   from system.def$_calldest CD
+ 15   where CD.enq_tid = C.enq_tid
+ 16  	AND CD.dblink = D.dblink)
+ 17  /
+
+View created.
+
+SQL> 
+SQL> Rem The deftrandest view defined above is replaced in catrepc.
+SQL> grant select on deftrandest to select_catalog_role
+  2  /
+
+Grant succeeded.
+
+SQL> 
+SQL> comment on table DEFTRANDEST is
+  2  'Information about destinations for deferred transactions'
+  3  /
+
+Comment created.
+
+SQL> comment on column DEFTRANDEST.DEFERRED_TRAN_ID is
+  2  'Transaction ID'
+  3  /
+
+Comment created.
+
+SQL> comment on column DEFTRANDEST.DELIVERY_ORDER is
+  2  'Total ordering of transactions: second element in the tuple'
+  3  /
+
+Comment created.
+
+SQL> comment on column DEFTRANDEST.DBLINK is
+  2  'The destination database'
+  3  /
+
+Comment created.
+
+SQL> DROP PUBLIC SYNONYM deftrandest
+  2  /
+
+Synonym dropped.
+
+SQL> CREATE PUBLIC SYNONYM deftrandest FOR deftrandest
+  2  /
+
+Synonym created.
+
+SQL> 
+SQL> --  Create table of default nodes for replication targets
+SQL> --  this table is managed by calls in dbms_defer_sys
+SQL> 
+SQL> CREATE SYNONYM def$_defaultdest FOR system.def$_defaultdest
+  2  /
+
+Synonym created.
+
+SQL> CREATE OR REPLACE VIEW defdefaultdest AS
+  2    SELECT * from system.def$_defaultdest
+  3  /
+
+View created.
+
+SQL> grant select on defdefaultdest to select_catalog_role
+  2  /
+
+Grant succeeded.
+
+SQL> 
+SQL> comment on table DEFDEFAULTDEST is
+  2  'Default destinations for deferred remote procedure calls'
+  3  /
+
+Comment created.
+
+SQL> comment on column DEFDEFAULTDEST.DBLINK is
+  2  'Default destination'
+  3  /
+
+Comment created.
+
+SQL> 
+SQL> DROP PUBLIC SYNONYM defdefaultdest
+  2  /
+
+Synonym dropped.
+
+SQL> CREATE PUBLIC SYNONYM defdefaultdest for defdefaultdest
+  2  /
+
+Synonym created.
+
+SQL> 
+SQL> DROP SYNONYM def$_lob
+  2  /
+
+Synonym dropped.
+
+SQL> CREATE SYNONYM def$_lob FOR system.def$_lob
+  2  /
+
+Synonym created.
+
+SQL> 
+SQL> CREATE OR REPLACE VIEW DefLOB
+  2    (id, deferred_tran_id, blob_col, clob_col, nclob_col)
+  3    AS SELECT
+  4  	  d.id,
+  5  	  d.enq_tid,
+  6  	  d.blob_col,
+  7  	  d.clob_col,
+  8  	  d.nclob_col
+  9    FROM sys.def$_lob d
+ 10  /
+
+View created.
+
+SQL> 
+SQL> grant select on deflob to select_catalog_role
+  2  /
+
+Grant succeeded.
+
+SQL> 
+SQL> comment on table DEFLOB is
+  2  'Storage for LOB parameters to deferred RPCs'
+  3  /
+
+Comment created.
+
+SQL> comment on column DEFLOB.ID is
+  2  'Identifier of LOB parameter'
+  3  /
+
+Comment created.
+
+SQL> comment on column DEFLOB.DEFERRED_TRAN_ID is
+  2  'Transaction identifier for deferred RPC with this LOB parameter'
+  3  /
+
+Comment created.
+
+SQL> comment on column DEFLOB.BLOB_COL is
+  2  'Binary LOB parameter'
+  3  /
+
+Comment created.
+
+SQL> comment on column DEFLOB.CLOB_COL is
+  2  'Character LOB parameter'
+  3  /
+
+Comment created.
+
+SQL> comment on column DEFLOB.NCLOB_COL is
+  2  'National Character LOB parameter'
+  3  /
+
+Comment created.
+
+SQL> 
+SQL> DROP PUBLIC SYNONYM DefLOB
+  2  /
+
+Synonym dropped.
+
+SQL> CREATE PUBLIC SYNONYM DefLOB for DefLOB
+  2  /
+
+Synonym created.
+
+SQL> 
+SQL> CREATE OR REPLACE VIEW defpropagator
+  2    (username, userid, status, created)
+  3    AS SELECT
+  4  	    p.username,
+  5  	    p.userid,
+  6  	    DECODE(u.name, NULL, 'INVALID', 'VALID'),
+  7  	    p.created
+  8  	  FROM system.def$_propagator p, sys.user$ u
+  9  	  WHERE p.userid = u.user# (+)
+ 10  /
+
+View created.
+
+SQL> grant select on defpropagator to select_catalog_role
+  2  /
+
+Grant succeeded.
+
+SQL> 
+SQL> comment on table DEFPROPAGATOR is
+  2  'Information about the propagator for all deferred remote procedure calls'
+  3  /
+
+Comment created.
+
+SQL> comment on column DEFPROPAGATOR.USERNAME is
+  2  'Username of the propagator'
+  3  /
+
+Comment created.
+
+SQL> comment on column DEFPROPAGATOR.USERID is
+  2  'User ID of the propagator'
+  3  /
+
+Comment created.
+
+SQL> comment on column DEFPROPAGATOR.STATUS is
+  2  'Status of the propagator'
+  3  /
+
+Comment created.
+
+SQL> comment on column DEFPROPAGATOR.CREATED is
+  2  'Time when the propagator is registered'
+  3  /
+
+Comment created.
+
+SQL> 
+SQL> DROP PUBLIC SYNONYM defpropagator
+  2  /
+
+Synonym dropped.
+
+SQL> CREATE PUBLIC SYNONYM defpropagator FOR defpropagator
+  2  /
+
+Synonym created.
+
+SQL> 
+SQL> REM Set up export actions for deferred rpc tables.
+SQL> rem delete existing export data
+SQL> 
+SQL> DELETE FROM expact$ WHERE name like 'DEF$_%'
+  2    AND func_package = 'DBMS_DEFER_IMPORT_INTERNAL'
+  3  /
+
+6 rows deleted.
+
+SQL> 
+SQL> insert into expact$ (owner, name, func_schema, func_package, func_proc, code,
+  2  obj_type)
+  3  values('SYSTEM','DEF$_AQERROR','SYS','DBMS_DEFER_IMPORT_INTERNAL',
+  4  	     'QUEUE_EXPORT_CHECK',1,2)
+  5  /
+
+1 row created.
+
+SQL> insert into expact$ (owner, name, func_schema, func_package, func_proc, code,
+  2  obj_type)
+  3  values('SYSTEM','DEF$_AQCALL','SYS','DBMS_DEFER_IMPORT_INTERNAL',
+  4  	     'QUEUE_EXPORT_CHECK',1,2)
+  5  /
+
+1 row created.
+
+SQL> insert into expact$ (owner, name, func_schema, func_package, func_proc, code,
+  2  obj_type)
+  3  values('SYSTEM','DEF$_CALLDEST','SYS','DBMS_DEFER_IMPORT_INTERNAL',
+  4  	     'QUEUE_EXPORT_CHECK',1,2)
+  5  /
+
+1 row created.
+
+SQL> insert into expact$ (owner, name, func_schema, func_package, func_proc, code,
+  2  obj_type)
+  3  values('SYSTEM','DEF$_ERROR','SYS','DBMS_DEFER_IMPORT_INTERNAL',
+  4  	     'QUEUE_EXPORT_CHECK',1,2)
+  5  /
+
+1 row created.
+
+SQL> insert into expact$ (owner, name, func_schema, func_package, func_proc, code,
+  2  obj_type)
+  3  values('SYSTEM','DEF$_DEFAULTDEST','SYS','DBMS_DEFER_IMPORT_INTERNAL',
+  4  	     'QUEUE_EXPORT_CHECK',1,2)
+  5  /
+
+1 row created.
+
+SQL> insert into expact$ (owner, name, func_schema, func_package, func_proc, code,
+  2  obj_type)
+  3  values('SYSTEM','DEF$_DESTINATION','SYS','DBMS_DEFER_IMPORT_INTERNAL',
+  4  	     'QUEUE_EXPORT_CHECK',1,2)
+  5  /
+
+1 row created.
+
+SQL> COMMIT
+  2  /
+
+Commit complete.
+
+SQL> 
+SQL> DELETE FROM sys.duc$
+  2    WHERE owner = 'SYS' AND pack = 'DBMS_DEFER_IMPORT_INTERNAL'
+  3  	 AND proc = 'DROP_PROPAGATOR_CASCADE' AND operation# = 1
+  4  /
+
+1 row deleted.
+
+SQL> INSERT INTO sys.duc$ (owner, pack, proc, operation#, seq, com)
+  2    VALUES('SYS', 'DBMS_DEFER_IMPORT_INTERNAL', 'DROP_PROPAGATOR_CASCADE', 1, 1,
+  3  	      'Remove propagator if necessary')
+  4  /
+
+1 row created.
+
+SQL> COMMIT
+  2  /
+
+Commit complete.
+
+SQL> spool off

@@ -1,0 +1,69 @@
+SQL> SELECT member FROM v$logfile;
+
+MEMBER                                                                          
+--------------------------------------------------------------------------------
+M:\DB_ORCL\LOG11.ORA                                                            
+D:\DB_ORCL\LOG12.ORA                                                            
+E:\DB_ORCL\LOG21.ORA                                                            
+K:\DB_ORCL\LOG22.ORA                                                            
+M:\DB_ORCL\LOG31.ORA                                                            
+D:\DB_ORCL\LOG32.ORA                                                            
+E:\DB_ORCL\LOG41.ORA                                                            
+K:\DB_ORCL\LOG42.ORA                                                            
+M:\DB_ORCL\LOG51.ORA                                                            
+D:\DB_ORCL\LOG52.ORA                                                            
+E:\DB_ORCL\LOG61.ORA                                                            
+
+MEMBER                                                                          
+--------------------------------------------------------------------------------
+K:\DB_ORCL\LOG62.ORA                                                            
+
+12 rows selected.
+
+SQL> SELECT name FROM v$datafile;
+
+NAME                                                                            
+--------------------------------------------------------------------------------
+G:\DB_ORCL\SYSTEM1.ORA                                                          
+E:\DB_ORCL\PRSRLB1.ORA                                                          
+M:\DB_ORCL\PRSRLB2.ORA                                                          
+D:\DB_ORCL\PARUS01.ORA                                                          
+K:\DB_ORCL\PARUS07.ORA                                                          
+L:\DB_ORCL\PARUS_INST.ORA                                                       
+G:\DB_ORCL\TOOLS1.ORA                                                           
+L:\DB_ORCL\PARUS06.ORA                                                          
+L:\DB_ORCL\PARUS02.ORA                                                          
+H:\DB_ORCL\PARIDX02.ORA                                                         
+H:\DB_ORCL\PARIDX07.ORA                                                         
+
+NAME                                                                            
+--------------------------------------------------------------------------------
+J:\DB_ORCL\PARIDX01.ORA                                                         
+H:\DB_ORCL\PARIDX06.ORA                                                         
+F:\DB_ORCL\PARUS03.ORA                                                          
+J:\DB_ORCL\PARIDX03.ORA                                                         
+J:\DB_ORCL\PARIDX04.ORA                                                         
+J:\DB_ORCL\PARIDX08_1.ORA                                                       
+F:\DB_ORCL\PARUS04.ORA                                                          
+H:\DB_ORCL\PARIDX05.ORA                                                         
+L:\DB_ORCL\PARUS05.ORA                                                          
+N:\DB_ORCL\PARUS00.ORA                                                          
+H:\DB_ORCL\PARIDX00.ORA                                                         
+
+NAME                                                                            
+--------------------------------------------------------------------------------
+H:\DB_ORCL\PARIDX08_2.ORA                                                       
+K:\DB_ORCL\PARUS08.ORA                                                          
+
+24 rows selected.
+
+SQL> SELECT name from v$controlfile;
+
+NAME                                                                            
+--------------------------------------------------------------------------------
+G:\DB_ORCL\CTL1ORCL.ORA                                                         
+F:\DB_ORCL\CTL2ORCL.ORA                                                         
+J:\DB_ORCL\CTL3ORCL.ORA                                                         
+I:\DB_ORCL\CTL4ORCL.ORA                                                         
+
+SQL> SPOOL OFF

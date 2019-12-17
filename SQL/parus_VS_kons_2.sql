@@ -1,0 +1,43 @@
+SELECT 
+  fg.CODE,
+  skl.AZS_NUMBER,
+  n.NOMEN_NAME,
+  /*RusMonth(t.DOCDATE) AS MON_DATE,*/
+--  a.AGNNAME AS PLAT_NAME,
+  /*f.NAME AS POLUCH_NAME,NamePoluchReady(f.NAME) AS KEY_NAME,n.NOMEN_NAME AS PRODUCT_NAME,pt.GSMPAYMENTS_MNEMO AS PAYTYPE_NAME,
+	   ts.QUANTALT/1000 AS VES_TN,ROUND(rp.PRICE*1.2*1000,2) AS POKUP_PRICE,ROUND(ts.PRICE*1000,2) AS REALIZ_PRICE,
+	   so.GSMWAYS_MNEMO AS TIP_TRANSP*/
+  SUM(DECODE(t.AGENT,65093872,0,DECODE(so.GSMWAYS_MNEMO,'ÂÎÇÂÐÀÒ',-ts.QUANTALT,ts.QUANTALT)))/1000 AS SOBS_TRAN,
+  SUM(DECODE(t.AGENT,65093872,DECODE(so.GSMWAYS_MNEMO,'ÂÎÇÂÐÀÒ',-ts.QUANTALT,ts.QUANTALT),0))/1000 AS VNUT_TRAN
+FROM agnlist a,AGNFIFO f,transinvcust t,transinvcustspecs ts,dicnomns n,nommodif m,AZSGSMPAYMENTSTYPES pt,faceacc fa,
+	 GOODSPARTIES gp,/*GOODSSUPPLY gs,REGPRICE rp,*/AZSAZSLISTMT skl,AZSGSMWAYSTYPES so,  
+	 FCACGR fg, DICGNOMN tmc_gr
+WHERE t.RN=ts.PRN (+) 
+  AND t.AGENT=a.RN (+)
+  AND t.AGNFIFO=f.RN(+) 
+  AND ts.NOMMODIF=m.RN (+) 
+  AND m.PRN=n.RN (+)
+  AND t.PAYTYPE=pt.RN (+) 
+  AND n.NOMEN_TYPE=1 
+  AND t.FACEACC=fa.RN (+)
+  AND fa.FCACGR=fg.RN (+)
+--  AND (gs.STORE=t.STORE OR gs.STORE IS NULL) 
+  AND ts.GOODSPARTY=gp.RN(+) 
+--  AND gp.RN=gs.PRN(+) 
+--  AND gs.RN=rp.PRN(+) 
+  AND ts.NOMMODIF=gp.NOMMODIF(+)
+--  AND (rp.ADATE=t.DOCDATE OR rp.ADATE IS NULL) 
+  AND t.STORE=skl.RN (+) 
+  AND trim(skl.AZS_NUMBER) IN ('ÓÕÒÈÍÑÊÀß_ÍÁ','ÓÕÒÀ_ÖÀ','ÒÐÀÍÇÈÒ','ÀÐÕÀÍ_ÒÐÀÍÇÈÒ_ÍÀËÈÂ','ÀÐÕÀÍ_ÔÀÑ')   
+  AND t.STOPER=so.RN (+)
+  AND t.DOCDATE>=TO_DATE('01.04.2002','dd.mm.yyyy') AND t.DOCDATE<=TO_DATE('31.09.2002','dd.mm.yyyy')
+  AND fg.CODE IN ('ÒÐÀÍÇÈÒÍÛÅ','ÔÀÑÎÂÊÀ','ÔÀÑÒÐÀÍ')
+  AND n.GROUP_CODE=tmc_gr.RN(+)
+  AND n.GROUP_CODE NOT IN (1,53030254,92887455)
+  AND NOT (RTRIM(LTRIM(T.PREF))='02' AND LTRIM(RTRIM(T.NUMB)) IN ('62','293','499','495','41','232','418','419') AND t.DOCDATE>=TO_DATE('01.01.2002','dd.mm.yyyy') AND t.DOCDATE<=TO_DATE('28.02.2002','dd.mm.yyyy'))
+GROUP BY fa.FCACGR,fg.CODE,skl.AZS_NUMBER, n.NOMEN_NAME
+  
+
+
+
+

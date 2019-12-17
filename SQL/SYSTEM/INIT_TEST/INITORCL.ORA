@@ -1,0 +1,43 @@
+db_name = oracle
+db_domain = world
+SERVICE_NAMES = "oracle.WORLD"
+db_files = 1024
+compatible = 8.1.7
+control_files = (c:\db_orcl\ctl1orcl.ora, e:\db_orcl\ctl2orcl.ora)
+GLobal_names = false
+#_system_trig_enabled=false
+open_cursors = 1500   
+max_enabled_roles = 30
+db_file_multiblock_read_count = 32                                  # LARGE
+db_block_buffers = 65536
+db_block_lru_latches=2
+#max_rollback_segments=80
+#db_writer_processes=2
+
+shared_pool_size = 104857600
+
+large_pool_size = 0
+java_pool_size = 4500000
+log_checkpoint_interval = 100000
+log_checkpoint_timeout = 1800
+processes = 100                                                       # LARGE
+log_buffer = 524288
+max_dump_file_size = 10240      # limit trace file size to 5 Meg each
+
+# define directories to store trace and alert files
+background_dump_dest=%RDBMS80%\trace
+user_dump_dest=e:\dump
+
+db_block_size = 8192
+
+remote_login_passwordfile = shared
+
+sort_area_size = 819200
+sort_area_retained_size = 204800
+hash_multiblock_io_count = 32
+
+JOB_QUEUE_PROCESSES = 5
+JOB_QUEUE_INTERVAL = 60
+
+##### For archiving if ARCHIVELOG is on ########
+log_archive_start = false      # if you want automatic archiving

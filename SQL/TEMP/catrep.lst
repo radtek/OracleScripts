@@ -1,0 +1,6540 @@
+@D:\oracle\ora81\RDBMS\ADMIN\catrep.sql
+
+Package created.
+
+No errors.
+
+Grant succeeded.
+
+
+Grant succeeded.
+
+
+Grant succeeded.
+
+
+Grant succeeded.
+
+
+Grant succeeded.
+
+
+Table created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Table created.
+
+
+Index created.
+
+
+Index created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Sequence created.
+
+
+Sequence altered.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Grant succeeded.
+
+
+Table created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Grant succeeded.
+
+
+Table created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Index created.
+
+
+View created.
+
+
+Synonym dropped.
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Table created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Index created.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Grant succeeded.
+
+
+Table created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Table created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Table created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Index created.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Grant succeeded.
+
+
+Table created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Index created.
+
+
+Index created.
+
+
+Sequence created.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Grant succeeded.
+
+
+Table created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Index created.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Grant succeeded.
+
+
+Table created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Index created.
+
+
+Table created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Index created.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Synonym dropped.
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Synonym dropped.
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Synonym dropped.
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+Sequence created.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+View created.
+
+drop public synonym USER_REPCAT
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+drop public synonym USER_REPGROUP
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+View created.
+
+drop public synonym ALL_REPCAT
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+drop public synonym ALL_REPGROUP
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Grant succeeded.
+
+
+View created.
+
+drop public synonym DBA_REPCAT
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+drop public synonym DBA_REPGROUP
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym USER_REPSITES
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym ALL_REPSITES
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym DBA_REPSITES
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym USER_REPSCHEMA
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym ALL_REPSCHEMA
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym DBA_REPSCHEMA
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym USER_REPOBJECT
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym ALL_REPOBJECT
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym DBA_REPOBJECT
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym DBA_REPCOLUMN
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym ALL_REPCOLUMN
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym USER_REPCOLUMN
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym USER_REPPROP
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym ALL_REPPROP
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym DBA_REPPROP
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym USER_REPKEY_COLUMNS
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym ALL_REPKEY_COLUMNS
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym DBA_REPKEY_COLUMNS
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym USER_REPGENOBJECTS
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym ALL_REPGENOBJECTS
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym DBA_REPGENOBJECTS
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym USER_REPGENERATED
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym ALL_REPGENERATED
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym DBA_REPGENERATED
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym USER_REPCATLOG
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym ALL_REPCATLOG
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym DBA_REPCATLOG
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym USER_REPDDL
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym ALL_REPDDL
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym DBA_REPDDL
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+Table created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym dba_reppriority_group
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym all_reppriority_group
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym user_reppriority_group
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+Table created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym dba_reppriority
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym all_reppriority
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym user_reppriority
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+Table created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym dba_repcolumn_group
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym all_repcolumn_group
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym user_repcolumn_group
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+Table created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym dba_repgrouped_column
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym all_repgrouped_column
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym user_repgrouped_column
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+Table created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym dba_repconflict
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym all_repconflict
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym user_repconflict
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+Table created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym dba_represolution_method
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym all_represolution_method
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym user_represolution_method
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+Table created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym dba_represolution
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym all_represolution
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym user_represolution
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+Table created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym dba_represolution_statistics
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym all_represolution_statistics
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym user_represolution_statistics
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+Index created.
+
+
+Table created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym dba_represol_stats_control
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym all_represol_stats_control
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym user_represol_stats_control
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+Table created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym dba_repparameter_column
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym all_repparameter_column
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym user_repparameter_column
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+Table created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym dba_repaudit_attribute
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym all_repaudit_attribute
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym user_repaudit_attribute
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+Table created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym dba_repaudit_column
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym all_repaudit_column
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym user_repaudit_column
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+0 rows deleted.
+
+
+1 row created.
+
+
+1 row created.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Synonym dropped.
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Synonym dropped.
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Synonym dropped.
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+Table created.
+
+
+Index created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Synonym dropped.
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Synonym dropped.
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Synonym dropped.
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Synonym dropped.
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Synonym dropped.
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Synonym dropped.
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+0 rows deleted.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+0 rows deleted.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+0 rows deleted.
+
+
+1 row created.
+
+
+1 row created.
+
+
+Commit complete.
+
+
+View created.
+
+
+Grant succeeded.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Synonym dropped.
+
+
+Synonym created.
+
+
+View created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Grant succeeded.
+
+
+Procedure created.
+
+
+PL/SQL procedure successfully completed.
+
+
+Table created.
+
+
+Sequence created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+Table created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Sequence created.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym all_repcat_user_authorizations
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym user_repcat_user_authorization
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym all_repcat_refresh_templates
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym user_repcat_refresh_templates
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+Table created.
+
+
+Index created.
+
+
+Index created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Sequence created.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym all_repcat_template_objects
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym user_repcat_template_objects
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+Table created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Sequence created.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym all_repcat_template_parms
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym user_repcat_template_parms
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+Table created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Table created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Sequence created.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym all_repcat_user_parm_values
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym user_repcat_user_parm_values
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+Table created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Sequence created.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym all_repcat_template_sites
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+drop public synonym user_repcat_template_sites
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+Sequence created.
+
+
+Table created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Index created.
+
+
+Sequence created.
+
+
+Package body created.
+
+No errors.
+
+Synonym dropped.
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+Package created.
+
+DROP PUBLIC SYNONYM dbms_repcat_decl
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+Package created.
+
+
+Package body created.
+
+
+Package created.
+
+DROP PUBLIC SYNONYM dbms_repcat_internal_package
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Library created.
+
+
+Package created.
+
+DROP PUBLIC SYNONYM dbms_repcat_internal
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Package created.
+
+
+Package created.
+
+DROP PUBLIC SYNONYM dbms_reputil
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+Package created.
+
+DROP PUBLIC SYNONYM dbms_reputil2
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+Package created.
+
+DROP PUBLIC SYNONYM dbms_defer
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+Package created.
+
+DROP PUBLIC SYNONYM dbms_defer_query
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+Package created.
+
+DROP PUBLIC SYNONYM dbms_defer_sys
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+Package created.
+
+DROP PUBLIC SYNONYM dbms_defergen
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Sequence created.
+
+
+Package created.
+
+
+Package body created.
+
+
+Package created.
+
+
+Package body created.
+
+
+Package created.
+
+
+Package body created.
+
+
+Package created.
+
+
+Package body created.
+
+
+Package created.
+
+
+Package body created.
+
+
+Package created.
+
+
+Package body created.
+
+
+Package created.
+
+
+Package body created.
+
+
+Package body created.
+
+
+Package body created.
+
+
+Package body created.
+
+
+Package created.
+
+
+Package body created.
+
+
+Package created.
+
+
+Package body created.
+
+
+Package created.
+
+
+Library created.
+
+
+Package body created.
+
+
+View created.
+
+
+Grant succeeded.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Synonym dropped.
+
+
+Synonym created.
+
+
+Package created.
+
+
+Package body created.
+
+
+Package created.
+
+
+Package created.
+
+
+Grant succeeded.
+
+
+Package created.
+
+
+Package body created.
+
+
+Package created.
+
+
+Package created.
+
+
+Package body created.
+
+
+Package body created.
+
+
+Package body created.
+
+
+Package body created.
+
+
+Package body created.
+
+
+Package created.
+
+
+Package body created.
+
+
+Grant succeeded.
+
+
+Procedure created.
+
+
+PL/SQL procedure successfully completed.
+
+
+Procedure dropped.
+
+
+Grant succeeded.
+
+
+Package created.
+
+
+Package created.
+
+
+Package body created.
+
+
+Package body created.
+
+
+Package body created.
+
+
+Package body created.
+
+
+Package body created.
+
+
+Package created.
+
+SQL> Rem The following synonym makes it look like the dbms_repcat package
+SQL> Rem is installed even though it is not.
+SQL> create public synonym dbms_repcat for dbms_repcat_sna
+  2  /
+
+Synonym created.
+
+SQL> Rem Another synomym to hide missing package.  This synonym makes
+SQL> Rem the dbms_repcat_rgt package look like it is installed even
+SQL> Rem though it is not. None of the dbms_repcat_rgt procedures
+SQL> Rem are available at a snapshot site.
+SQL> create public synonym dbms_repcat_rgt for dbms_repcat_sna
+  2  /
+
+Synonym created.
+
+SQL> set echo off;
+
+Package created.
+
+
+Package created.
+
+
+Package created.
+
+DROP PUBLIC SYNONYM dbms_repcat_admin
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+Package created.
+
+
+Package created.
+
+drop synonym dbms_offline_snapshot
+             *
+ERROR at line 1:
+ORA-01434: private synonym to be dropped does not exist 
+
+
+
+Package created.
+
+
+Grant succeeded.
+
+
+Package body created.
+
+
+Package body created.
+
+
+Package body created.
+
+
+Package body created.
+
+
+Package body created.
+
+
+Package body created.
+
+
+System altered.
+
+
+Package body created.
+
+DROP PUBLIC SYNONYM dbms_offline_snapshot
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Package body created.
+
+
+Package body created.
+
+
+Package body created.
+
+
+Package created.
+
+
+Synonym dropped.
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+Package body created.
+
+
+Package body altered.
+
+
+Synonym created.
+
+
+Synonym created.
+
+
+Synonym created.
+
+
+Synonym created.
+
+
+Synonym created.
+
+create synonym dbmsobjgwrapper for dbms_repcat_sna
+               *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+
+Synonym created.
+
+
+Synonym created.
+
+create synonym dbms_offline_snapshot for dbms_repcat_sna
+               *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+
+1 row deleted.
+
+
+1 row created.
+
+
+1 row deleted.
+
+
+1 row created.
+
+
+Commit complete.
+
+
+Synonym dropped.
+
+
+Synonym dropped.
+
+
+Package created.
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+Synonym dropped.
+
+
+Synonym dropped.
+
+
+Package created.
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+Package created.
+
+DROP PUBLIC SYNONYM dbms_repcat_auth
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Package body created.
+
+
+Grant succeeded.
+
+
+System altered.
+
+
+Package created.
+
+
+Synonym dropped.
+
+
+Synonym created.
+
+
+Package created.
+
+
+Package created.
+
+
+Synonym dropped.
+
+
+Package created.
+
+
+Package created.
+
+
+Synonym dropped.
+
+
+Package created.
+
+
+Package created.
+
+
+Package created.
+
+DROP PUBLIC synonym dbms_repcat_validate
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Package created.
+
+
+Synonym created.
+
+DROP SYNONYM dbmsobjgwrapper
+             *
+ERROR at line 1:
+ORA-01434: private synonym to be dropped does not exist 
+
+
+
+Package created.
+
+DROP PUBLIC SYNONYM dbmsobjgwrapper
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Package created.
+
+
+Package created.
+
+DROP PUBLIC SYNONYM dbms_repcat_mig
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+Package body created.
+
+
+Package body created.
+
+
+Package body created.
+
+
+Package body created.
+
+
+Package body created.
+
+
+Package body created.
+
+
+Package body created.
+
+
+Package body created.
+
+
+Package body created.
+
+
+Package body created.
+
+
+Package body created.
+
+
+Package body created.
+
+
+Package created.
+
+
+Package body created.
+
+
+Package body created.
+
+
+Package body created.
+
+
+Synonym dropped.
+
+
+Package created.
+
+
+Grant succeeded.
+
+
+Package created.
+
+
+Package body created.
+
+
+Package body created.
+
+DROP PUBLIC SYNONYM dbms_rectifier_diff
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Synonym dropped.
+
+
+Package created.
+
+
+Grant succeeded.
+
+
+Package created.
+
+
+Package created.
+
+
+Package body created.
+
+
+Package body created.
+
+
+Package body created.
+
+DROP PUBLIC SYNONYM dbms_offline_og
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Synonym dropped.
+
+
+Synonym dropped.
+
+
+Package created.
+
+
+Synonym created.
+
+
+Package created.
+
+
+Package created.
+
+
+Package created.
+
+
+Package created.
+
+
+Package created.
+
+
+Package created.
+
+
+Grant succeeded.
+
+
+Package body created.
+
+
+Package body created.
+
+
+Package body created.
+
+
+Package body created.
+
+
+Package body created.
+
+
+Package body created.
+
+
+Package body created.
+
+
+Commit complete.
+
+
+Package created.
+
+drop public synonym dbms_repcat_instantiate
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+Package body created.
+
+
+Grant succeeded.
+
+
+Trigger created.
+
+
+1 row deleted.
+
+
+1 row created.
+
+
+Grant succeeded.
+
+
+1 row deleted.
+
+
+1 row created.
+
+
+1 row deleted.
+
+
+1 row created.
+
+INSERT INTO sys.duc$ (owner, pack, proc, operation#, seq, com)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SYS.I_DUC) violated 
+
+
+
+Commit complete.
+
+
+1 row deleted.
+
+
+1 row created.
+
+
+Commit complete.
+
+
+Table altered.
+
+
+Table altered.
+
+drop constraint repcat$_template_objects_u1
+                *
+ERROR at line 2:
+ORA-02443: Cannot drop constraint  - nonexistent constraint 
+
+
+
+Index created.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Table altered.
+
+
+View created.
+
+drop public synonym dba_ias_templates
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+drop public synonym dba_ias_templates
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Grant succeeded.
+
+
+View created.
+
+drop public synonym dba_ias_objects
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+drop public synonym dba_ias_sites
+                    *
+ERROR at line 1:
+ORA-01432: public synonym to be dropped does not exist 
+
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Grant succeeded.
+
+
+Package created.
+
+
+Synonym dropped.
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Synonym dropped.
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Grant succeeded.
+
+
+Package body created.
+
+
+Package created.
+
+
+Grant succeeded.
+
+
+Synonym dropped.
+
+
+Synonym created.
+
+
+Package body created.
+
+
+View created.
+
+
+View created.
+
+
+Synonym dropped.
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+View created.
+
+
+Synonym dropped.
+
+
+Synonym created.
+
+
+Grant succeeded.
+
+
+Package created.
+
+
+Grant succeeded.
+
+
+Synonym dropped.
+
+
+Synonym created.
+
+
+Package created.
+
+
+Grant succeeded.
+
+
+Synonym dropped.
+
+
+Synonym created.
+
+
+Package body created.
+
+
+Package body created.
+
+SQL> 

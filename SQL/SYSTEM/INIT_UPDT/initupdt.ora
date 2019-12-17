@@ -1,0 +1,36 @@
+db_name = "updt"
+db_domain = world
+instance_name = updt
+service_names = updt.world
+db_files = 1024
+control_files = ("k:\db_updt\control01.ctl","k:\db_updt\control02.ctl")
+open_cursors = 300
+max_enabled_roles = 30
+db_file_multiblock_read_count = 8
+db_block_buffers = 5286
+shared_pool_size = 14435840
+large_pool_size = 0
+java_pool_size = 0
+log_checkpoint_interval = 10000
+log_checkpoint_timeout = 1800
+processes = 150
+parallel_max_servers = 5
+log_buffer = 32768
+max_dump_file_size = 10240  # limit trace file size to 5M each
+# Global Naming -- enforce that a dblink has same name as the db it connects to
+global_names = false
+oracle_trace_collection_name = ""
+# define directories to store trace and alert files
+background_dump_dest = k:\db_updt\dump
+#Uncomment this parameter to enable resource management for your database.
+#The SYSTEM_PLAN is provided by default with the database.
+#Change the plan name if you have created your own resource plan.# resource_manager_plan = system_plan
+user_dump_dest = k:\db_updt\dump
+db_block_size = 8192
+remote_login_passwordfile = exclusive
+os_authent_prefix = ""
+
+distributed_transactions = 10
+compatible = 8.1.0
+sort_area_size = 65536
+

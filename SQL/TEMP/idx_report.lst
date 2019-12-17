@@ -1,0 +1,15 @@
+SQL> 
+SQL> select distinct
+  2  name c1,
+  3  most_repeated_key c2,
+  4  distinct_keys c3,
+  5  del_lf_Rows c4,
+  6  height c5,
+  7  blks_gets_per_access c6
+  8  from temp_stats
+  9  where
+ 10  height > 3
+ 11  or
+ 12  del_lf_rows > 10
+ 13  order by name;
+SQL> spool off;

@@ -1,0 +1,57 @@
+db_name = oracle
+db_domain = world
+SERVICE_NAMES = "oracle.WORLD"
+db_files = 1024
+compatible = 8.1.7
+control_files = (g:\db_orcl\ctl1orcl.ora, f:\db_orcl\ctl2orcl.ora,
+                 j:\db_orcl\ctl3orcl.ora, i:\db_orcl\ctl4orcl.ora)
+GLobal_names = false
+#_system_trig_enabled=false
+open_cursors = 1500   
+max_enabled_roles = 30
+db_file_multiblock_read_count = 32                                  # LARGE
+db_block_buffers = 131072                         # 102400
+db_block_lru_latches=2
+db_writer_processes=2
+
+shared_pool_size = 262144000    # 367001600
+shared_pool_reserved_size = 50000      # 100000
+
+large_pool_size = 0
+java_pool_size = 26214400
+log_checkpoint_interval = 100000         # Заведомо больше Redo Log'a
+log_checkpoint_timeout = 1800            # 30 минут
+processes = 300
+log_buffer = 1048576 # 786432
+max_dump_file_size = 10240      # limit trace file size to 5 Meg each
+
+timed_statistics=false
+transaction_auditing=false
+
+# define directories to store trace and alert files
+background_dump_dest=%RDBMS80%\trace
+user_dump_dest=I:\userdump
+
+db_block_size = 8192
+
+remote_login_passwordfile = shared
+
+sort_area_size = 409600 # 819200
+sort_area_retained_size = 102400 # 204800
+
+hash_multiblock_io_count = 32
+
+session_cached_cursors=200
+#star_transformation_enabled=true
+#query_rewrite_enabled=true
+
+JOB_QUEUE_PROCESSES = 5
+JOB_QUEUE_INTERVAL = 60
+
+##### For archiving if ARCHIVELOG is on ########
+log_archive_start = true
+
+LOG_ARCHIVE_DEST_STATE_1 = ENABLE
+LOG_ARCHIVE_DEST_1 = 'LOCATION=I:\ARCHIVE'
+# LOG_ARCHIVE_DEST_STATE_2 = ENABLE
+# LOG_ARCHIVE_DEST_2 = 'SERVICE=SB_P5 REOPEN=60'

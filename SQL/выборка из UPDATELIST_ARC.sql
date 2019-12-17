@@ -1,0 +1,1 @@
+select * from updatelist_arc PARTITION (P_2004_04)

@@ -1,0 +1,2125 @@
+
+STATSPACK report for
+
+DB Name         DB Id    Instance     Inst Num Release     OPS Host
+------------ ----------- ------------ -------- ----------- --- ------------
+ORACLE        1307164038 orcl                1 8.1.7.4.1   NO  ORCL2
+
+                Snap Id     Snap Time      Sessions
+                ------- ------------------ --------
+ Begin Snap:        215 11-Mar-04 14:00:03      133
+   End Snap:        216 11-Mar-04 14:10:03      133
+    Elapsed:                  10.00 (mins)
+
+Cache Sizes
+~~~~~~~~~~~
+           db_block_buffers:     131072          log_buffer:     786432
+              db_block_size:       8192    shared_pool_size:  367001600
+
+Load Profile
+~~~~~~~~~~~~                            Per Second       Per Transaction
+                                   ---------------       ---------------
+                  Redo size:            216,455.15              3,283.11
+              Logical reads:            127,224.66              1,929.69
+              Block changes:              1,325.61                 20.11
+             Physical reads:                519.65                  7.88
+            Physical writes:                149.35                  2.27
+                 User calls:                 43.56                  0.66
+                     Parses:                 44.47                  0.67
+                Hard parses:                  0.86                  0.01
+                      Sorts:                 26.24                  0.40
+                     Logons:                  0.08                  0.00
+                   Executes:              1,738.57                 26.37
+               Transactions:                 65.93
+
+  % Blocks changed per Read:    1.04    Recursive Call %:   98.26
+ Rollback per transaction %:    0.02       Rows per Sort:  241.16
+
+Instance Efficiency Percentages (Target 100%)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            Buffer Nowait %:   99.98       Redo NoWait %:  100.00
+            Buffer  Hit   %:   99.59    In-memory Sort %:   99.85
+            Library Hit   %:   99.86        Soft Parse %:   98.08
+         Execute to Parse %:   97.44         Latch Hit %:   99.98
+Parse CPU to Parse Elapsd %:   28.08     % Non-Parse CPU:   98.77
+
+ Shared Pool Statistics        Begin   End
+                               ------  ------
+             Memory Usage %:   76.77   89.27
+    % SQL with executions>1:   49.16   49.82
+  % Memory for SQL w/exec>1:   40.14   40.93
+
+Top 5 Wait Events
+~~~~~~~~~~~~~~~~~                                             Wait     % Total
+Event                                               Waits  Time (cs)   Wt Time
+-------------------------------------------- ------------ ------------ -------
+db file sequential read                           150,849      420,337   85.55
+db file scattered read                              5,564       15,600    3.17
+log file parallel write                            19,647       15,467    3.15
+direct path read                                   12,195       11,843    2.41
+buffer busy waits                                  11,368        4,795     .98
+          -------------------------------------------------------------
+Wait Events for DB: ORACLE  Instance: orcl  Snaps: 215 -216
+-> cs - centisecond -  100th of a second
+-> ms - millisecond - 1000th of a second
+-> ordered by wait time desc, waits desc (idle events last)
+
+                                                                    Avg
+                                                     Total Wait    wait  Waits
+Event                               Waits   Timeouts  Time (cs)    (ms)   /txn
+---------------------------- ------------ ---------- ----------- ------ ------
+db file sequential read           150,849          0     420,337     28    3.8
+db file scattered read              5,564          0      15,600     28    0.1
+log file parallel write            19,647          0      15,467      8    0.5
+direct path read                   12,195          0      11,843     10    0.3
+buffer busy waits                  11,368          0       4,795      4    0.3
+latch free                          1,248      1,191       4,521     36    0.0
+log file sync                         484          0       3,528     73    0.0
+control file sequential read        2,612          0       3,172     12    0.1
+log file sequential read            1,944          0       3,069     16    0.0
+db file parallel write                581          0       2,385     41    0.0
+file open                             841          0       2,367     28    0.0
+direct path write                   4,773          0       1,795      4    0.1
+refresh controlfile command            94          1       1,514    161    0.0
+SQL*Net more data to client        16,088          0         377      0    0.4
+log file switch completion             14          0         303    216    0.0
+control file parallel write           270          0         130      5    0.0
+enqueue                               105          0          64      6    0.0
+log buffer space                       28          0          39     14    0.0
+file identify                          48          0          27      6    0.0
+LGWR wait for redo copy                67          1           9      1    0.0
+SQL*Net break/reset to clien           40          0           2      1    0.0
+log file single write                  24          0           0      0    0.0
+SQL*Net message from client        19,443          0   1,873,670    964    0.5
+SQL*Net more data from clien          755          0          14      0    0.0
+SQL*Net message to client          19,472          0           3      0    0.5
+          -------------------------------------------------------------
+Background Wait Events for DB: ORACLE  Instance: orcl  Snaps: 215 -216
+-> ordered by wait time desc, waits desc (idle events last)
+
+                                                                    Avg
+                                                     Total Wait    wait  Waits
+Event                               Waits   Timeouts  Time (cs)    (ms)   /txn
+---------------------------- ------------ ---------- ----------- ------ ------
+log file parallel write            19,641          0      15,495      8    0.5
+log file sequential read            1,944          0       3,069     16    0.0
+db file parallel write                582          0       2,385     41    0.0
+file open                             528          0         836     16    0.0
+control file sequential read          619          0         690     11    0.0
+direct path read                      120          0         345     29    0.0
+db file scattered read                114          0         181     16    0.0
+control file parallel write           270          0         130      5    0.0
+enqueue                                 3          0          64    213    0.0
+file identify                          48          0          27      6    0.0
+direct path write                     120          0          11      1    0.0
+db file sequential read                35          0          10      3    0.0
+LGWR wait for redo copy                67          1           9      1    0.0
+log file single write                  24          0           0      0    0.0
+latch free                              1          1           0      0    0.0
+rdbms ipc message                  47,819        677     262,542     55    1.2
+pmon timer                            194        194      60,841   3136    0.0
+smon timer                              2          2      30,721 ######    0.0
+          -------------------------------------------------------------
+SQL ordered by Gets for DB: ORACLE  Instance: orcl  Snaps: 215 -216
+-> End Buffer Gets Threshold:   10000
+-> Note that resources reported for PL/SQL includes the resources used by
+   all SQL statements called within the PL/SQL code.  As individual SQL
+   statements are also reported, it is possible and valid for the summed
+   total % to exceed 100
+
+  Buffer Gets    Executions  Gets per Exec  % Total  Hash Value
+--------------- ------------ -------------- ------- ------------
+     19,446,293           70      277,804.2    25.5   2685191655
+SELECT /*+ RULE  */(LEAST(RESTFACT,RESTPLAN) - RESERV ) QUANT,S.
+RN SUPPLY   FROM NOMMODIF M,GOODSPARTIES P,GOODSSUPPLY S,INCOMDO
+C D,AZSAZSLISTMT T,DOCS_PROPS_VALS DPV  WHERE DPV.STR_VALUE = :b
+1  AND M.RN = P.NOMMODIF  AND P.COMPANY = :b2  AND P.RN = S.PRN
+ AND S.STORE = T.RN  AND T.AZS_NUMBER LIKE  :b3 || '%'   AND P.I
+
+     18,688,560           11    1,698,960.0    24.5   1768609032
+BEGIN "P_USERPROCS_EXECUTE" (NRN => :NRN,NIDENT => :NIDENT,NCOMP
+ANY => :NCOMPANY); END;
+
+     18,529,090            8    2,316,136.3    24.3    835860355
+declare NRESULT_r number; SMSG_r varchar2 ( 2000 ); begin SNP_P_
+AZSSREPORT_SET_STATE_NL (:NCOMPANY, :NRN, :DSTATE_DATE, NRESULT_
+r, SMSG_r); :NRESULT:=NRESULT_r; :SMSG:=SMSG_r; end;
+
+     10,059,238            3    3,353,079.3    13.2     52766030
+BEGIN "P_ANLTURNS_CREATE" (COMPANY => :COMPANY,IDENT => :IDENT,B
+LANK => :BLANK,DELIMITER => :DELIMITER,DATE_FROM => :DATE_FROM,D
+ATE_TO => :DATE_TO,PRM_ACCOUNT => :PRM_ACCOUNT,PRM_BALUNIT => :P
+RM_BALUNIT,SJUR_PERS => :SJUR_PERS,PRM_CURRENCY => :PRM_CURRENCY
+,SBAL_ELEMENT => :SBAL_ELEMENT,RESULT => :RESULT); END;
+
+      6,033,432            3    2,011,144.0     7.9    675641488
+SELECT /*+ ORDERED  */M.ACCOUNT ACCOUNT,TO_NUMBER( NULL ) ANALYT
+IC1,TO_NUMBER( NULL ) ANALYTIC2,TO_NUMBER( NULL ) ANALYTIC3,TO_N
+UMBER( NULL ) ANALYTIC4,TO_NUMBER( NULL ) ANALYTIC5,M.JUR_PERS J
+UR_PERS,M.BALUNIT BALUNIT,M.CURRENCY CURRENCY   FROM ACCREMNS M,
+DICACCS AC  WHERE M.COMPANY = :b1  AND M.REMN_DATE = :b2  AND M.
+
+      5,488,749            2    2,744,374.5     7.2   1347341186
+BEGIN "P_VALTURNS_CREATE" (COMPANY => :COMPANY,IDENT => :IDENT,B
+LANK => :BLANK,DELIMITER => :DELIMITER,DATE_FROM => :DATE_FROM,D
+ATE_TO => :DATE_TO,PRM_ACCOUNT => :PRM_ACCOUNT,PRM_BALUNIT => :P
+RM_BALUNIT,PRM_JUR_PERS => :PRM_JUR_PERS,PRM_CURRENCY => :PRM_CU
+RRENCY,PRM_AGN_CRN => :PRM_AGN_CRN,PRM_AGENT => :PRM_AGENT,PRM_N
+
+      5,121,357        2,185        2,343.9     6.7   2278746118
+SELECT /*+ INDEX(I_OPRSPECS_COMPDATDB)  */SUM(SP.ACNT_SUM),SUM(S
+P.ACNT_BASE_SUM),SUM(SP.CTRL_SUM),SUM(SP.CTRL_BASE_SUM)   FROM O
+PRSPECS SP  WHERE SP.COMPANY = :b1  AND SP.OPERATION_DATE >= :b2
+  AND SP.OPERATION_DATE <= :b3  AND SP.ACCOUNT_DEBIT = :b4  AND
+SP.JUR_PERS = :b5  AND (:b6 IS NULL  AND SP.BALUNIT_DEBIT IS NUL
+
+      3,616,010            2    1,808,005.0     4.7   3052810209
+SELECT M.ACCOUNT,M.BALUNIT,M.AGENT,M.NOMENCLATURE,M.NOMEN_PARTNO
+,M.NOMEN_INDATE,M.CURRENCY,M.REMN_DATE OPERATION_DATE,M.JUR_PERS
+ JUR_PERS   FROM VALREMNS M  WHERE M.COMPANY = :b1  AND M.REMN_D
+ATE = :b2  AND (RTRIM(:b3) IS NULL  OR STRIN(:b4,:b3,:b6) = 1  A
+ND M.ACCOUNT IS NULL  OR M.ACCOUNT IN (SELECT AC.RN   FROM DICAC
+
+SQL ordered by Gets for DB: ORACLE  Instance: orcl  Snaps: 215 -216
+-> End Buffer Gets Threshold:   10000
+-> Note that resources reported for PL/SQL includes the resources used by
+   all SQL statements called within the PL/SQL code.  As individual SQL
+   statements are also reported, it is possible and valid for the summed
+   total % to exceed 100
+
+  Buffer Gets    Executions  Gets per Exec  % Total  Hash Value
+--------------- ------------ -------------- ------- ------------
+      3,438,396      127,348           27.0     4.5   2642531420
+SELECT SIGN_SHARE,SIGN_ACCREG,PARENTCODE   FROM UNITLIST  WHERE
+UNITCODE = :b1
+
+      3,177,009      117,667           27.0     4.2   3035777367
+SELECT *   FROM UNITLIST  WHERE UNITCODE = :b1
+
+      3,149,106            2    1,574,553.0     4.1   1943974654
+BEGIN "P_TRANSINVCUST_SET_STATUS" (NCOMPANY => :NCOMPANY,NRN =>
+:NRN,NSTATUS => :NSTATUS,DWORK_DATE => :DWORK_DATE,SMSG => :SMSG
+); END;
+
+      3,131,162            2    1,565,581.0     4.1   2896283253
+declare NCOMPANY NUMBER; NRN NUMBER; begin NCOMPANY := :COMPANY;
+ NRN := :DOCUMENT; pr_snp_tics_party_fas_osv(nRn,nCompany); end;
+
+
+      2,087,294            8      260,911.8     2.7    992472405
+SELECT /*+ RULE  */SUM(TZ.QUANT),SUM(TZ.QUANTPACK)   FROM V_SNP_
+TOV_ZAP_OSV2 TZ  WHERE TZ.NNOMNMODIFPACK = :b1  AND TZ.NNOMMODIF
+ = :b2  AND TZ.NSTORE = :b3
+
+      1,815,736       25,044           72.5     2.4   3471874685
+SELECT /*+ ORDERED  */MAX(O.IN_DATE)   FROM DOCINPT I,DOCLINKS L
+,DOCOUTPT O  WHERE I.DOCUMENT = :b1  AND I.UNITCODE = :b2  AND I
+.RN = L.IN_DOC  AND L.OUT_DOC = O.RN  AND (O.UNITCODE = :b3  OR
+:b3 IS NULL )
+
+      1,626,680           17       95,687.1     2.1    577160117
+SELECT * FROM V_SALESREPORTMAIN M where NCRN=:1 and NCOMPANY=:2
+ and (DRPT_DATE>=TO_DATE('01/02/2004','dd/mm/yyyy')) and (DRPT_D
+ATE<=TO_DATE('29/02/2004','dd/mm/yyyy')) order by SRPT_PREFIX, S
+RPT_NUMBER
+
+      1,564,728            6      260,788.0     2.0   1684101279
+SELECT /*+ RULE  */TZ.NRN NPARTY,TZ.NNOMMODIF NMODIF,TZ.SNOMMODI
+F SMODIF,TZ.QUANT,TZ.NEQUAL,TZ.EQUAL,TZ.SCODE SPARTY   FROM V_SN
+P_TOV_ZAP_OSV2 TZ  WHERE TZ.NNOMNMODIFPACK = :b1  AND TZ.NNOMMOD
+IF = :b2  AND TZ.NSTORE = :b3  AND TZ.QUANT > 0
+
+      1,332,433        1,847          721.4     1.7    311005538
+SELECT /*+ RULE  */DATA_TYPE,DATA_LENGTH   FROM ALL_TAB_COLUMNS
+ WHERE TABLE_NAME = :b1  AND COLUMN_NAME = :b2
+
+      1,275,043            7      182,149.0     1.7   2501989404
+BEGIN "P_TRADERPT_DEL_EOPER" (NCOMPANY => :NCOMPANY,NRN => :NRN)
+; END;
+
+      1,202,451        1,297          927.1     1.6   4225825944
+SELECT /*+ INDEX(I_OPRSPECS_COMPDATDB)  */SUM(SP.ACNT_SUM),SUM(S
+
+SQL ordered by Gets for DB: ORACLE  Instance: orcl  Snaps: 215 -216
+-> End Buffer Gets Threshold:   10000
+-> Note that resources reported for PL/SQL includes the resources used by
+   all SQL statements called within the PL/SQL code.  As individual SQL
+   statements are also reported, it is possible and valid for the summed
+   total % to exceed 100
+
+  Buffer Gets    Executions  Gets per Exec  % Total  Hash Value
+--------------- ------------ -------------- ------- ------------
+          -------------------------------------------------------------
+SQL ordered by Reads for DB: ORACLE  Instance: orcl  Snaps: 215 -216
+-> End Disk Reads Threshold:    1000
+
+ Physical Reads  Executions  Reads per Exec % Total  Hash Value
+--------------- ------------ -------------- ------- ------------
+         45,835            7        6,547.9    14.7   3133160234
+BEGIN "P_SALESRPTMAIN_CREATE_REAL" (NCOMPANY => :NCOMPANY,NCRN =
+> :NCRN,SRPT_PREFIX => :SRPT_PREFIX,SRPT_NUMBER => :SRPT_NUMBER,
+SRPT_UNIT => :SRPT_UNIT,DRPT_DATE => :DRPT_DATE,DB_DATE => :DB_D
+ATE,DE_DATE => :DE_DATE,SSTOREOPER => :SSTOREOPER,SJUR_PERS => :
+SJUR_PERS,NCOURSEFROM => :NCOURSEFROM,NGROUP2NOMEN => :NGROUP2NO
+
+         44,448            2       22,224.0    14.3    837964752
+BEGIN "P_DICACCFO_AVANS_AUTO_SAL" (NCOMPANY => :NCOMPANY,NRN =>
+:NRN,DPAY_DATE => :DPAY_DATE); END;
+
+         44,291            2       22,145.5    14.2   3854291178
+SELECT /*+ RULE  */S_ALL.NRATE_NDS,S_ALL.NONE_GSM_TAX,S_ALL.NONE
+_NSP,S_ALL.NCOUNTRY,S_ALL.SGTD,S_ALL.NSUM_WOUT ALL_SUM_WOUT,S_AL
+L.NSUM_NDS ALL_SUM_NDS,S_ALL.NGSM_TAX ALL_GSM_TAX,S_ALL.NNSP ALL
+_SUM_NSP,S_ALL.NSUM_TOTAL ALL_SUM_TOTAL,M_AV.RN AV_RN,S_ALL_AV.N
+RATE_NDS AV_RATE_NDS,S_ALL_AV.NONE_GSM_TAX AV_ONE_GSM_TAX,S_ALL_
+
+         26,986            6        4,497.7     8.7   4077086596
+SELECT MAX(OPERATION_NUMB)   FROM ECONOPRS  WHERE COMPANY = :b1
+ AND OPERATION_PREF = :b2
+
+         26,308            2       13,154.0     8.4   1943974654
+BEGIN "P_TRANSINVCUST_SET_STATUS" (NCOMPANY => :NCOMPANY,NRN =>
+:NRN,NSTATUS => :NSTATUS,DWORK_DATE => :DWORK_DATE,SMSG => :SMSG
+); END;
+
+         25,751            2       12,875.5     8.3   2896283253
+declare NCOMPANY NUMBER; NRN NUMBER; begin NCOMPANY := :COMPANY;
+ NRN := :DOCUMENT; pr_snp_tics_party_fas_osv(nRn,nCompany); end;
+
+
+         20,049            7        2,864.1     6.4   3602597739
+(SELECT /*+ RULE  */TR.RN RN_M,TRS.RN RN_S,TR.DOCTYPE UK_NTYPE,T
+R.JUR_PERS,LTRIM(TR.PREF) UK_PREF,LTRIM(TR.NUMB) UK_NUMB,TR.DOCD
+ATE UK_DATE,TRS.NOMMODIF,SOJ.QUANT,SOJ.QUANTALT,TRS.QUANT DOCQUA
+NT,TRS.QUANTALT DOCQUANTALT,TRS.NOMNMODIFPACK,TRS.PRICEMEAS,SOJ.
+GOODSSUPPLY,TRS.SUMMWITHNDS,TRS.TAXGR,TR.STOPER,TR.AGENT,TR.WORK
+
+         17,307            8        2,163.4     5.6    992472405
+SELECT /*+ RULE  */SUM(TZ.QUANT),SUM(TZ.QUANTPACK)   FROM V_SNP_
+TOV_ZAP_OSV2 TZ  WHERE TZ.NNOMNMODIFPACK = :b1  AND TZ.NNOMMODIF
+ = :b2  AND TZ.NSTORE = :b3
+
+         14,249           59          241.5     4.6   1581619759
+SELECT NVL(SUM(NACC_SUM * NFINOPER ),0)   FROM KOMI_VR_RLINCOMOU
+TCOM_NL  WHERE NFACEACC = :b1  AND DPAY_DATE >= :b2
+
+         14,166            7        2,023.7     4.5   2446705714
+(SELECT /*+ RULE  */TR.RN RN_M,TRS.RN RN_S,TR.DOCTYPE UK_NTYPE,T
+R.JUR_PERS,LTRIM(TR.PREF) UK_PREF,LTRIM(TR.NUMB) UK_NUMB,TR.DOCD
+ATE UK_DATE,TRS.NOMMODIF,SOJ.QUANT,TRS.QUANT DOCQUANT,SOJ.QUANTA
+LT,TRS.QUANTALT DOCQUANTALT,TRS.NOMNMODIFPACK,TRS.PRICEMEAS,SOJ.
+GOODSSUPPLY,TRS.SUMMWITHNDS,TR.STOPER,TR.WORK_DATE,TR.SHEEPVIEW,
+
+SQL ordered by Reads for DB: ORACLE  Instance: orcl  Snaps: 215 -216
+-> End Disk Reads Threshold:    1000
+
+ Physical Reads  Executions  Reads per Exec % Total  Hash Value
+--------------- ------------ -------------- ------- ------------
+         13,845           18          769.2     4.4   2414925139
+SELECT /*+ RULE  */NVL(SUM(NACC_SUM * NFINOPER ),0)   FROM KOMI_
+VR_RLINCOMOUTCOM_NL  WHERE NFACEACC = :b1  AND NSIGN_FROM = 1  A
+ND DPAY_DATE >= :b2  AND DPAY_DATE <= :b3
+
+         13,496            3        4,498.7     4.3   4047670300
+BEGIN "P_ECONOPRS_GETNEXTNUMB" (NCOMPANY => :NCOMPANY,SOPER_PREF
+ => :SOPER_PREF,SOPER_NUMB => :SOPER_NUMB); END;
+
+         12,661            6        2,110.2     4.1   1684101279
+SELECT /*+ RULE  */TZ.NRN NPARTY,TZ.NNOMMODIF NMODIF,TZ.SNOMMODI
+F SMODIF,TZ.QUANT,TZ.NEQUAL,TZ.EQUAL,TZ.SCODE SPARTY   FROM V_SN
+P_TOV_ZAP_OSV2 TZ  WHERE TZ.NNOMNMODIFPACK = :b1  AND TZ.NNOMMOD
+IF = :b2  AND TZ.NSTORE = :b3  AND TZ.QUANT > 0
+
+         11,417            5        2,283.4     3.7    628308533
+BEGIN "KOMI_PR_DEBT_TURN" (NCOMPANY => :NCOMPANY,DBEGINDATE => :
+DBEGINDATE,DENDDATE => :DENDDATE,SAGENT => :SAGENT,SFACEACC => :
+SFACEACC,SMANAGER => :SMANAGER,SSUBDIV => :SSUBDIV,SFACEGR => :S
+FACEGR,NIS_DET => :NIS_DET,NIS_FA_CLOSE => :NIS_FA_CLOSE); END;
+
+          9,082            3        3,027.3     2.9    675641488
+SELECT /*+ ORDERED  */M.ACCOUNT ACCOUNT,TO_NUMBER( NULL ) ANALYT
+IC1,TO_NUMBER( NULL ) ANALYTIC2,TO_NUMBER( NULL ) ANALYTIC3,TO_N
+UMBER( NULL ) ANALYTIC4,TO_NUMBER( NULL ) ANALYTIC5,M.JUR_PERS J
+UR_PERS,M.BALUNIT BALUNIT,M.CURRENCY CURRENCY   FROM ACCREMNS M,
+DICACCS AC  WHERE M.COMPANY = :b1  AND M.REMN_DATE = :b2  AND M.
+
+          9,080           18          504.4     2.9    916246221
+SELECT /*+ RULE  */NVL(SUM(NACC_SUM * NFINOPER ),0)   FROM KOMI_
+VR_RLINCOMOUTCOM_NL  WHERE NFACEACC = :b1  AND DPAY_DATE >= :b2
+
+          8,797            3        2,932.3     2.8     52766030
+BEGIN "P_ANLTURNS_CREATE" (COMPANY => :COMPANY,IDENT => :IDENT,B
+LANK => :BLANK,DELIMITER => :DELIMITER,DATE_FROM => :DATE_FROM,D
+ATE_TO => :DATE_TO,PRM_ACCOUNT => :PRM_ACCOUNT,PRM_BALUNIT => :P
+RM_BALUNIT,SJUR_PERS => :SJUR_PERS,PRM_CURRENCY => :PRM_CURRENCY
+,SBAL_ELEMENT => :SBAL_ELEMENT,RESULT => :RESULT); END;
+
+          8,669            2        4,334.5     2.8   2058605756
+BEGIN "P_TRANSINVDEPT_SET_STATUS" (NCOMPANY => :NCOMPANY,NRN =>
+:NRN,NSTATUS => :NSTATUS,NIN_STATUS => :NIN_STATUS,DIN_WORK_DATE
+ => :DIN_WORK_DATE,DWORK_DATE => :DWORK_DATE,SMSG => :SMSG,SCONF
+IRM => :SCONFIRM); END;
+
+          -------------------------------------------------------------
+SQL ordered by Executions for DB: ORACLE  Instance: orcl  Snaps: 215 -216
+-> End Executions Threshold:     100
+
+ Executions   Rows Processed    Rows per Exec   Hash Value
+------------ ---------------- ---------------- ------------
+     127,348          127,347              1.0   2642531420
+SELECT SIGN_SHARE,SIGN_ACCREG,PARENTCODE   FROM UNITLIST  WHERE
+UNITCODE = :b1
+
+     127,277          127,277              1.0   3149130616
+SELECT VERSION   FROM COMPVERLIST  WHERE COMPANY = :b1  AND UNIT
+CODE = :b2
+
+     122,756          122,756              1.0   1641953811
+SELECT RN   FROM COMPANIES  WHERE RN = :b1
+
+     117,667          117,667              1.0   3035777367
+SELECT *   FROM UNITLIST  WHERE UNITCODE = :b1
+
+     117,648              218              0.0   2192127498
+SELECT RN,STR_VALUE,NUM_VALUE,DATE_VALUE   FROM OPTIONS  WHERE C
+ODE = :b1  AND OPT_LOAD = 0  AND (:b2 IS NULL  OR AUTHID = :b2 )
+ AND (:b4 IS NULL  OR COMPANY = :b4 ) AND (:b6 IS NULL  OR VERSI
+ON = :b6 )
+
+     117,042          117,042              1.0   3660810936
+SELECT *   FROM OPTIONS  WHERE CODE = :b1  AND OPT_LOAD = 1
+
+      42,669           42,668              1.0   3720616768
+SELECT SEQ_IDENT.NEXTVAL   FROM DUAL
+
+      38,966           38,966              1.0   2016510618
+SELECT USER   FROM SYS.DUAL
+
+      34,835           34,835              1.0   2267889419
+SELECT ACC_NUMBER   FROM DICACCS  WHERE RN = :b1
+
+      25,044           25,044              1.0   3471874685
+SELECT /*+ ORDERED  */MAX(O.IN_DATE)   FROM DOCINPT I,DOCLINKS L
+,DOCOUTPT O  WHERE I.DOCUMENT = :b1  AND I.UNITCODE = :b2  AND I
+.RN = L.IN_DOC  AND L.OUT_DOC = O.RN  AND (O.UNITCODE = :b3  OR
+:b3 IS NULL )
+
+      17,420           17,420              1.0   2680052022
+INSERT INTO MAINBOOK ( GROUP_IDENT,IDENT,COMPANY,TYPE,LINK,PR_FR
+OM,PR_TO,PERIOD,ACCOUNT,IS_ACCOUNTS,MAIN_ACCOUNT,BALUNIT,CURRENC
+Y,BCURRENCY,CORR_DATE,CORR_ACCOUNT,MAIN_CORR_ACCOUNT,CORR_BALUNI
+T,ACNT_CORR_TURN_SUM,ACNT_CORR_TURN_BASE_SUM,CTRL_CORR_TURN_SUM,
+CTRL_CORR_TURN_BASE_SUM )  VALUES ( :b1,:b2,:b3,1,:b4,:b5,:b6,:b
+
+      17,415           17,415              1.0   2622100073
+INSERT INTO MAINBOOK ( GROUP_IDENT,IDENT,COMPANY,TYPE,LINK,PR_FR
+OM,PR_TO,PERIOD,ACCOUNT,IS_ACCOUNTS,MAIN_ACCOUNT,BALUNIT,CURRENC
+Y,BCURRENCY,CORR_DATE,CORR_ACCOUNT,MAIN_CORR_ACCOUNT,CORR_BALUNI
+T,ACNT_CORR_TURN_SUM,ACNT_CORR_TURN_BASE_SUM,CTRL_CORR_TURN_SUM,
+CTRL_CORR_TURN_BASE_SUM )  VALUES ( :b1,:b2,:b3,0,:b4,:b5,:b6,:b
+
+      11,490           11,490              1.0   3037017896
+SELECT REG_INS,REG_UPD,REG_DEL   FROM TABLELIST  WHERE TABLENAME
+ = :b1
+SQL ordered by Executions for DB: ORACLE  Instance: orcl  Snaps: 215 -216
+-> End Executions Threshold:     100
+
+ Executions   Rows Processed    Rows per Exec   Hash Value
+------------ ---------------- ---------------- ------------
+
+      11,412           11,412              1.0   1208389272
+SELECT /*+ ORDERED  */MAX(O.DOCUMENT)   FROM DOCINPT I,DOCLINKS
+L,DOCOUTPT O  WHERE I.DOCUMENT = :b1  AND I.UNITCODE = :b2  AND
+I.RN = L.IN_DOC  AND L.OUT_DOC = O.RN  AND (O.UNITCODE = :b3  OR
+ :b3 IS NULL )
+
+       9,730            9,730              1.0   1425443843
+update seq$ set increment$=:2,minvalue=:3,maxvalue=:4,cycle#=:5,
+order$=:6,cache=:7,highwater=:8,audit$=:9 where obj#=:1
+
+       9,595            9,595              1.0    744000718
+SELECT /*+ ORDERED  */MAX(I.IN_DATE)   FROM DOCOUTPT O,DOCLINKS
+L,DOCINPT I  WHERE O.DOCUMENT = :b1  AND O.UNITCODE = :b2  AND O
+.RN = L.OUT_DOC  AND L.IN_DOC = I.RN  AND (I.UNITCODE = :b3  OR
+:b3 IS NULL )
+
+       9,291            9,291              1.0   1378696934
+SELECT PARENTCODE   FROM UNITLIST  WHERE UNITCODE = :b1
+
+       5,193            5,193              1.0   3576929440
+SELECT SIGN_SHARE,SIGN_ACCREG   FROM UNITLIST  WHERE UNITCODE =
+:b1
+
+       5,099            5,099              1.0   2989693110
+INSERT INTO UPDATELIST ( TABLENAME,COMPANY,VERSION,TABLERN,MODIF
+DATE,OPERATION,BUSPROCHIST,BUSPROCACTHIST,AUTHID,OSUSER,MACHINE,
+TERMINAL,PROGRAM,NOTE )  VALUES ( :b1,:b2,:b3,:b4,SYSDATE,:b5,PK
+G_BPH.RN_PROCESS,PKG_BPH.RN_ACTION,GET_SESSION_AUTHID,GET_SESSIO
+N_OSUSER,GET_SESSION_MACHINE,GET_SESSION_TERMINAL,GET_SESSION_PR
+
+       4,879            4,879              1.0   1006126218
+SELECT SEQ_UPDATELIST.NEXTVAL   FROM DUAL
+
+       4,750            4,750              1.0   3999397567
+SELECT RN   FROM DOCS_PROPS  WHERE VERSION = :b1  AND CODE = :b2
+
+
+       4,704            4,704              1.0   2457584443
+SELECT COUNT(*)   FROM DOCS_PROPS_LINKS  WHERE PRN = :b1  AND UN
+ITCODE = :b2
+
+       4,541                0              0.0    156802472
+SELECT RN   FROM VERSIONS  WHERE RN = :b1  AND UNITCODE = :b2
+
+       4,358            4,358              1.0   1863461770
+SELECT ACC_CURRENCY   FROM DICACCS  WHERE RN = :b1
+
+       3,993            3,993              1.0   3805214728
+UPDATE FACEACC H SET H.NUMB=:b1,H.ACC_KIND=:b2,H.VALID_DOCNUMB=:
+b3 WHERE H.RN = :b4
+
+       3,885            3,885              1.0    957519749
+SELECT NUM_VALUE   FROM DOCS_PROPS_VALS  WHERE UNITCODE = :b1  A
+ND DOCS_PROP_RN = :b2  AND UNIT_RN = :b3
+SQL ordered by Executions for DB: ORACLE  Instance: orcl  Snaps: 215 -216
+-> End Executions Threshold:     100
+
+ Executions   Rows Processed    Rows per Exec   Hash Value
+------------ ---------------- ---------------- ------------
+
+       2,924            2,924              1.0   3816765495
+SELECT UNITNAME   FROM UNITLIST  WHERE UNITCODE = :b1
+
+       2,816            2,816              1.0   3194186483
+SELECT COND_TYPE,COND_NAME,SPECIAL_MARK,SPECIAL_MARK_EMPTY,VDOCT
+YPE,VDOCTYPE_EMPTY,FDOCTYPE,FDOCTYPE_EMPTY,AGENT_FROM,AGENT_FROM
+_EMPTY,AGENT_TO,AGENT_TO_EMPTY,DATE_FROM,DATE_TO,ACCOUNT_DEBIT,B
+ALUNIT_DEBIT,BALUNIT_DEBIT_EMPTY,ANALYTIC_DEBIT1,ANALYTIC_DEBIT1
+
+          -------------------------------------------------------------
+SQL ordered by Sharable Memory for DB: ORACLE  Instance: orcl  Snaps: 215 -216
+-> End Sharable Memory Threshold:   1048576
+
+Sharable Mem (b)  Executions  % Total  Hash Value
+---------------- ------------ ------- ------------
+       4,862,740            2     1.2   3052810209
+SELECT M.ACCOUNT,M.BALUNIT,M.AGENT,M.NOMENCLATURE,M.NOMEN_PARTNO
+,M.NOMEN_INDATE,M.CURRENCY,M.REMN_DATE OPERATION_DATE,M.JUR_PERS
+ JUR_PERS   FROM VALREMNS M  WHERE M.COMPANY = :b1  AND M.REMN_D
+ATE = :b2  AND (RTRIM(:b3) IS NULL  OR STRIN(:b4,:b3,:b6) = 1  A
+ND M.ACCOUNT IS NULL  OR M.ACCOUNT IN (SELECT AC.RN   FROM DICAC
+
+          -------------------------------------------------------------
+Instance Activity Stats for DB: ORACLE  Instance: orcl  Snaps: 215 -216
+
+Statistic                                    Total   per Second    per Trans
+--------------------------------- ---------------- ------------ ------------
+CPU used by this session                    61,385        102.3          1.6
+CPU used when call started                  61,308        102.2          1.6
+CR blocks created                            3,054          5.1          0.1
+DBWR buffers scanned                       102,096        170.2          2.6
+DBWR checkpoint buffers written              7,963         13.3          0.2
+DBWR checkpoints                                 6          0.0          0.0
+DBWR free buffers found                     99,347        165.6          2.5
+DBWR lru scans                                 247          0.4          0.0
+DBWR make free requests                        247          0.4          0.0
+DBWR summed scan depth                     102,096        170.2          2.6
+DBWR transaction table writes                  434          0.7          0.0
+DBWR undo block writes                       6,070         10.1          0.2
+SQL*Net roundtrips to/from client           19,391         32.3          0.5
+background checkpoints completed                 6          0.0          0.0
+background checkpoints started                   6          0.0          0.0
+background timeouts                            782          1.3          0.0
+branch node splits                               3          0.0          0.0
+buffer is not pinned count              67,873,336    113,122.2      1,715.8
+buffer is pinned count                 290,817,186    484,695.3      7,351.7
+bytes received via SQL*Net from c        5,193,740      8,656.2        131.3
+bytes sent via SQL*Net to client        46,011,278     76,685.5      1,163.1
+calls to get snapshot scn: kcmgss        2,150,784      3,584.6         54.4
+calls to kcmgas                             50,468         84.1          1.3
+calls to kcmgcs                              4,129          6.9          0.1
+change write time                              760          1.3          0.0
+cleanouts and rollbacks - consist            1,009          1.7          0.0
+cleanouts only - consistent read               245          0.4          0.0
+cluster key scan block gets                 43,329         72.2          1.1
+cluster key scans                           13,533         22.6          0.3
+commit cleanout failures: block l              198          0.3          0.0
+commit cleanout failures: buffer                 2          0.0          0.0
+commit cleanout failures: callbac                0          0.0          0.0
+commit cleanout failures: cannot                 7          0.0          0.0
+commit cleanouts                           243,954        406.6          6.2
+commit cleanouts successfully com          243,747        406.3          6.2
+consistent changes                          10,959         18.3          0.3
+consistent gets                         71,748,349    119,580.6      1,813.8
+current blocks converted for CR
+cursor authentications                         320          0.5          0.0
+data blocks consistent reads - un           10,958         18.3          0.3
+db block changes                           795,365      1,325.6         20.1
+db block gets                            4,586,455      7,644.1        115.9
+deferred (CURRENT) block cleanout          178,981        298.3          4.5
+dirty buffers inspected                        163          0.3          0.0
+enqueue conversions                             39          0.1          0.0
+enqueue releases                           111,269        185.5          2.8
+enqueue requests                           111,276        185.5          2.8
+enqueue waits                                    1          0.0          0.0
+exchange deadlocks                               0          0.0          0.0
+execute count                            1,043,144      1,738.6         26.4
+free buffer inspected                          373          0.6          0.0
+free buffer requested                      258,363        430.6          6.5
+hot buffers moved to head of LRU           334,093        556.8          8.5
+immediate (CR) block cleanout app            1,254          2.1          0.0
+immediate (CURRENT) block cleanou            5,838          9.7          0.2
+index fast full scans (full)                    43          0.1          0.0
+Instance Activity Stats for DB: ORACLE  Instance: orcl  Snaps: 215 -216
+
+Statistic                                    Total   per Second    per Trans
+--------------------------------- ---------------- ------------ ------------
+leaf node splits                               738          1.2          0.0
+logons cumulative                               50          0.1          0.0
+logons current
+messages received                           22,037         36.7          0.6
+messages sent                               22,036         36.7          0.6
+no buffer to keep pinned count                   0          0.0          0.0
+no work - consistent read gets          20,818,185     34,697.0        526.3
+opened cursors cumulative                   25,351         42.3          0.6
+opened cursors current
+parse count (hard)                             513          0.9          0.0
+parse count (total)                         26,682         44.5          0.7
+parse time cpu                                 754          1.3          0.0
+parse time elapsed                           2,685          4.5          0.1
+physical reads                             311,787        519.7          7.9
+physical reads direct                       65,049        108.4          1.6
+physical writes                             89,611        149.4          2.3
+physical writes direct                      78,786        131.3          2.0
+physical writes non checkpoint              88,550        147.6          2.2
+pinned buffers inspected                        13          0.0          0.0
+prefetched blocks                           90,337        150.6          2.3
+prefetched blocks aged out before                0          0.0          0.0
+process last non-idle time          53,950,693,536 ############  1,363,837.8
+recursive calls                          1,471,785      2,453.0         37.2
+recursive cpu usage                         81,580        136.0          2.1
+redo blocks written                        274,149        456.9          6.9
+redo buffer allocation retries                  40          0.1          0.0
+redo entries                               399,386        665.6         10.1
+redo log space requests                         14          0.0          0.0
+redo log space wait time                       303          0.5          0.0
+redo ordering marks                              9          0.0          0.0
+redo size                              129,873,088    216,455.2      3,283.1
+redo synch time                              3,545          5.9          0.1
+redo synch writes                              452          0.8          0.0
+redo wastage                             6,063,428     10,105.7        153.3
+redo write time                             31,795         53.0          0.8
+redo writer latching time                        9          0.0          0.0
+redo writes                                 19,629         32.7          0.5
+rollback changes - undo records a           17,448         29.1          0.4
+rollbacks only - consistent read             2,050          3.4          0.1
+rows fetched via callback               23,147,649     38,579.4        585.2
+session connect time                53,950,693,536 ############  1,363,837.8
+session cursor cache count                     592          1.0          0.0
+session cursor cache hits                   19,033         31.7          0.5
+session logical reads                   76,334,796    127,224.7      1,929.7
+session pga memory                     135,752,648    226,254.4      3,431.7
+session pga memory max                 145,071,660    241,786.1      3,667.3
+session uga memory                      17,312,996     28,855.0        437.7
+session uga memory max                  74,028,124    123,380.2      1,871.4
+sorts (disk)                                    24          0.0          0.0
+sorts (memory)                              15,721         26.2          0.4
+sorts (rows)                             3,797,123      6,328.5         96.0
+summed dirty queue length                        2          0.0          0.0
+switch current to new buffer
+table fetch by rowid                   162,972,927    271,621.6      4,119.9
+table fetch continued row                    2,843          4.7          0.1
+table scan blocks gotten                 3,953,773      6,589.6        100.0
+Instance Activity Stats for DB: ORACLE  Instance: orcl  Snaps: 215 -216
+
+Statistic                                    Total   per Second    per Trans
+--------------------------------- ---------------- ------------ ------------
+table scan rows gotten                 255,660,802    426,101.3      6,462.9
+table scans (long tables)                       12          0.0          0.0
+table scans (short tables)                 388,893        648.2          9.8
+total file opens                               840          1.4          0.0
+transaction rollbacks                            7          0.0          0.0
+transaction tables consistent rea                0          0.0          0.0
+transaction tables consistent rea                0          0.0          0.0
+user calls                                  26,134         43.6          0.7
+user commits                                39,552         65.9          1.0
+user rollbacks                                   6          0.0          0.0
+write clones created in foregroun              144          0.2          0.0
+          -------------------------------------------------------------
+Tablespace IO Stats for DB: ORACLE  Instance: orcl  Snaps: 215 -216
+->ordered by IOs (Reads + Writes) desc
+
+Tablespace
+------------------------------
+                 Av      Av     Av                    Av        Buffer Av Buf
+         Reads Reads/s Rd(ms) Blks/Rd       Writes Writes/s      Waits Wt(ms)
+-------------- ------- ------ ------- ------------ -------- ---------- ------
+PARUS5
+        39,436      66   37.1     1.0           30        0         37   31.4
+TEMP
+        16,247      27  123.4     4.0       15,300       26          7    2.9
+PARUS3
+        21,909      37   37.5     1.2          206        0        113   17.1
+PARUS
+        21,730      36   21.2     1.0           16        0     10,172    4.1
+PARIDX03
+        20,121      34   16.6     1.0          115        0          0    0.0
+PARUS03
+        17,001      28   19.9     3.1           23        0         22    0.9
+PARIDX5
+        11,289      19   32.8     3.4          488        1         34    5.9
+PARIDX4
+         7,610      13   29.9     1.0           75        0         16    3.8
+PARUSTMP
+         3,740       6   16.6     5.7        1,637        3          0    0.0
+PARIDX2
+         4,305       7   21.6     1.0           61        0        890    2.3
+SYSTEM
+         3,999       7   16.9     1.6           19        0          7    2.9
+PRSRLB2
+            24       0  352.5     1.0        3,412        6          0    0.0
+PARIDX
+         3,274       5   41.8     1.0           20        0         47    5.5
+PRSRLB
+            23       0  351.3     1.0        3,176        5          9    0.0
+PARIDXTMP
+         1,311       2   35.3     1.4        1,459        2          0    0.0
+TOOLS
+           574       1   29.4     1.0          257        0          0    0.0
+PARIDX1
+             6       0 ######     1.0            6        0          0    0.0
+PARIDXTMP1
+             6       0 ######     1.0            6        0          0    0.0
+PARUS1
+             6       0 ######     1.0            6        0          0    0.0
+PARUS2
+             6       0 ######     1.0            6        0          0    0.0
+PARUSTMP1
+             6       0 ######     1.0            6        0          0    0.0
+          -------------------------------------------------------------
+File IO Stats for DB: ORACLE  Instance: orcl  Snaps: 215 -216
+->ordered by Tablespace, File
+
+Tablespace               Filename
+------------------------ ----------------------------------------------------
+                 Av      Av     Av                    Av        Buffer Av Buf
+         Reads Reads/s Rd(ms) Blks/Rd       Writes Writes/s      Waits Wt(ms)
+-------------- ------- ------ ------- ------------ -------- ---------- ------
+PARIDX                   J:\DB_ORCL\PARIDX.ORA
+         3,274       5   41.8     1.0           20        0         47    5.5
+
+PARIDX03                 J:\DB_ORCL\PARIDX03.ORA
+        20,121      34   16.6     1.0          115        0          0
+
+PARIDX1                  H:\DB_ORCL\PARIDX1.ORA
+             6       0 ######     1.0            6        0          0
+
+PARIDX2                  H:\DB_ORCL\PARIDX2.ORA
+         4,305       7   21.6     1.0           61        0        890    2.3
+
+PARIDX4                  H:\DB_ORCL\PARIDX4.ORA
+         7,610      13   29.9     1.0           75        0         16    3.8
+
+PARIDX5                  J:\DB_ORCL\PARIDX5.ORA
+        11,289      19   32.8     3.4          488        1         34    5.9
+
+PARIDXTMP                H:\DB_ORCL\PARIDXTMP.ORA
+         1,311       2   35.3     1.4        1,459        2          0
+
+PARIDXTMP1               H:\DB_ORCL\PARIDXTMP1.ORA
+             6       0 ######     1.0            6        0          0
+
+PARUS                    L:\DB_ORCL\PARUS.ORA
+        21,730      36   21.2     1.0           16        0     10,172    4.1
+
+PARUS03                  F:\DB_ORCL\PARUS03.ORA
+        17,001      28   19.9     3.1           23        0         22    0.9
+
+PARUS1                   L:\DB_ORCL\PARUS1.ORA
+             6       0 ######     1.0            6        0          0
+
+PARUS2                   L:\DB_ORCL\PARUS2.ORA
+             6       0 ######     1.0            6        0          0
+
+PARUS3                   L:\DB_ORCL\PARUS3.ORA
+        21,909      37   37.5     1.2          206        0        113   17.1
+
+PARUS5                   L:\DB_ORCL\PARUS5.ORA
+        39,436      66   37.1     1.0           30        0         37   31.4
+
+PARUSTMP                 I:\DB_ORCL\PARUSTMP.ORA
+         3,740       6   16.6     5.7        1,637        3          0
+
+PARUSTMP1                I:\DB_ORCL\PARUSTMP1.ORA
+             6       0 ######     1.0            6        0          0
+
+PRSRLB                   N:\DB_ORCL\PRSRLB1.ORA
+            23       0  351.3     1.0        3,176        5          9    0.0
+
+PRSRLB2                  N:\DB_ORCL\PRSRLB2.ORA
+File IO Stats for DB: ORACLE  Instance: orcl  Snaps: 215 -216
+->ordered by Tablespace, File
+
+Tablespace               Filename
+------------------------ ----------------------------------------------------
+                 Av      Av     Av                    Av        Buffer Av Buf
+         Reads Reads/s Rd(ms) Blks/Rd       Writes Writes/s      Waits Wt(ms)
+-------------- ------- ------ ------- ------------ -------- ---------- ------
+            24       0  352.5     1.0        3,412        6          0
+
+SYSTEM                   G:\DB_ORCL\SYSTEM1.ORA
+         3,999       7   16.9     1.6           19        0          7    2.9
+
+TEMP                     G:\DB_ORCL\TEMP1.ORA
+        16,247      27  123.4     4.0       15,300       26          7    2.9
+
+TOOLS                    G:\DB_ORCL\TOOLS1.ORA
+           574       1   29.4     1.0          257        0          0
+
+          -------------------------------------------------------------
+Buffer Pool Statistics for DB: ORACLE  Instance: orcl  Snaps: 215 -216
+-> Pools   D: default pool,  K: keep pool,  R: recycle pool
+
+                                                      Free    Write     Buffer
+       Buffer    Consistent    Physical   Physical  Buffer Complete       Busy
+P        Gets          Gets       Reads     Writes   Waits    Waits      Waits
+- ----------- ------------- ----------- ---------- ------- -------- ----------
+D     258,054    24,541,283     246,428     10,875       0        0     11,368
+          -------------------------------------------------------------
+
+
+
+
+
+Buffer wait Statistics for DB: ORACLE  Instance: orcl  Snaps: 215 -216
+-> ordered by wait time desc, waits desc
+
+                                 Tot Wait    Avg
+Class                    Waits  Time (cs) Time (cs)
+------------------ ----------- ---------- ---------
+data block              11,476      4,893         0
+undo header                 10          0         0
+          -------------------------------------------------------------
+
+
+
+
+
+Enqueue activity for DB: ORACLE  Instance: orcl  Snaps: 215 -216
+-> ordered by waits desc, gets desc
+
+Enqueue            Gets      Waits
+---------- ------------ ----------
+CF                  121          1
+          -------------------------------------------------------------
+Rollback Segment Stats for DB: ORACLE  Instance: orcl  Snaps: 215 -216
+->A high value for "Pct Waits" suggests more rollback segments may be required
+
+       Trans Table      Pct   Undo Bytes
+RBS No     Gets       Waits     Written        Wraps  Shrinks  Extends
+------ ------------ ------- --------------- -------- -------- --------
+     0         52.0    0.00               0        0        0        0
+     1      1,880.0    0.00         537,130        0        0        0
+     2      2,147.0    0.00         596,240        1        0        0
+     3      1,888.0    0.00         556,610        0        0        0
+     4      1,720.0    0.00         514,652        0        0        0
+     5      1,874.0    0.00         595,608        0        0        0
+     6      1,872.0    0.00         568,330        0        0        0
+     7      1,963.0    0.00         506,244        0        0        0
+     8      1,890.0    0.00         495,330        0        0        0
+     9      1,821.0    0.00         533,318        0        0        0
+    10      1,836.0    0.00         475,592        0        0        0
+    11      1,777.0    0.00         499,060        0        0        0
+    12      2,146.0    0.00         574,704        0        0        0
+    13      1,796.0    0.00         533,164        0        0        0
+    14      1,859.0    0.00         616,964        0        0        0
+    15      1,759.0    0.00         517,544        0        0        0
+    16    958,785.0    0.00         545,166        0        0        0
+    17      1,742.0    0.00         491,002        0        0        0
+    18      1,759.0    0.00         509,568        0        0        0
+    19      2,651.0    0.00       1,734,746        0        0        0
+    20      1,898.0    0.00         612,160        0        0        0
+    21      1,952.0    0.00         608,724        0        0        0
+    22      2,041.0    0.00         546,416        0        0        0
+    23      1,891.0    0.00         563,740        0        0        0
+    24      2,082.0    0.05         963,026        0        0        0
+    25      1,816.0    0.00         522,734        0        0        0
+    26      1,859.0    0.00         560,718        0        0        0
+    27      2,000.0    0.00         944,196        0        0        0
+    28      1,832.0    0.00         590,232        0        0        0
+    29      1,741.0    0.00         485,910        0        0        0
+    30      1,678.0    0.00         464,690        0        0        0
+    31      1,729.0    0.00         486,802        0        0        0
+    32      1,752.0    0.00         518,186        0        0        0
+    33      1,707.0    0.00         521,380        0        0        0
+    34      1,659.0    0.00         480,892        0        0        0
+    35      2,178.0    0.00       1,314,752        0        0        0
+    36      2,806.0    0.00         574,180        0        0        0
+    37      1,745.0    0.00         642,406        0        0        0
+    38      1,875.0    0.00         504,504        0        0        0
+    39     36,855.0    0.00       1,607,252        0        0        0
+    40      1,709.0    0.00         522,990        0        0        0
+    41      1,832.0    0.00         941,104        1        0        0
+    42      1,733.0    0.00         522,356        1        0        0
+    43      1,797.0    0.00         784,306        0        0        0
+    44      1,820.0    0.00         643,446        0        0        0
+    45      1,710.0    0.00         528,588        0        0        0
+    46      2,140.0    0.00       1,450,744        0        0        0
+    47      1,059.0    0.00         291,108        0        0        0
+    48      1,683.0    0.00         468,780        0        0        0
+    49      2,108.0    0.00       1,863,196        1        0        0
+    50      1,857.0    0.00         469,084        0        0        0
+    51      1,675.0    0.00         459,688        0        0        0
+    52      1,674.0    0.00         487,484        0        0        0
+    53      1,773.0    0.00         651,878        0        0        0
+Rollback Segment Stats for DB: ORACLE  Instance: orcl  Snaps: 215 -216
+->A high value for "Pct Waits" suggests more rollback segments may be required
+
+       Trans Table      Pct   Undo Bytes
+RBS No     Gets       Waits     Written        Wraps  Shrinks  Extends
+------ ------------ ------- --------------- -------- -------- --------
+    54      1,934.0    0.00       1,750,422        0        0        0
+    55      2,776.0    0.00       2,488,396        0        0        0
+    56      2,061.0    0.00         586,898        1        0        0
+    57      2,714.0    0.00         530,852        0        0        0
+    58      2,003.0    0.00       1,044,320        0        0        0
+    59      2,225.0    0.00       1,476,298        0        0        0
+    60      1,909.0    0.00         526,540        0        0        0
+          -------------------------------------------------------------
+Rollback Segment Storage for DB: ORACLE  Instance: orcl  Snaps: 215 -216
+->Optimal Size should be larger than Avg Active
+
+RBS No    Segment Size      Avg Active    Optimal Size    Maximum Size
+------ --------------- --------------- --------------- ---------------
+     0         401,408           8,192                         401,408
+     1      20,963,328               0                      20,963,328
+     2      20,963,328       1,047,756                      20,963,328
+     3      20,963,328               0                      20,963,328
+     4      20,963,328               0                      20,963,328
+     5      20,963,328               0                      20,963,328
+     6      20,963,328       1,047,756                      20,963,328
+     7      20,963,328               0                      20,963,328
+     8      20,963,328       1,047,756                      20,963,328
+     9      20,963,328               0                      20,963,328
+    10      20,963,328               0                      20,963,328
+    11      20,963,328               0                      20,963,328
+    12      20,963,328               0                      20,963,328
+    13      83,877,888               0                      83,877,888
+    14      20,963,328               0                      20,963,328
+    15      41,934,848               0                      41,934,848
+    16      20,963,328               0                      20,963,328
+    17      20,963,328               0                      20,963,328
+    18      20,963,328               0                      20,963,328
+    19      20,963,328               0                      20,963,328
+    20      20,963,328               0                      20,963,328
+    21      20,963,328       1,047,756                      20,963,328
+    22      20,963,328               0                      20,963,328
+    23      20,963,328               0                      20,963,328
+    24      20,963,328               0                      20,963,328
+    25      20,963,328               0                      20,963,328
+    26      20,963,328               0                      20,963,328
+    27      20,963,328               0                      20,963,328
+    28      20,963,328       1,047,756                      20,963,328
+    29      20,963,328               0                      20,963,328
+    30      20,963,328       1,047,756                      20,963,328
+    31      20,963,328       1,047,756                      20,963,328
+    32      20,963,328               0                      20,963,328
+    33      20,963,328               0                      20,963,328
+    34      20,963,328               0                      20,963,328
+    35      20,963,328       1,047,756                      20,963,328
+    36      20,963,328       1,047,756                      20,963,328
+    37      20,963,328               0                      20,963,328
+    38      52,420,608               0                      52,420,608
+    39      20,963,328               0                      20,963,328
+    40      20,963,328               0                      20,963,328
+    41      20,963,328       1,047,756                      20,963,328
+    42      20,963,328       1,047,756                      20,963,328
+    43      20,963,328               0                      20,963,328
+    44      20,963,328               0                      20,963,328
+    45      20,963,328               0                      20,963,328
+    46      20,963,328       1,047,756                      20,963,328
+    47      20,963,328               0                      20,963,328
+    48      20,963,328               0                      20,963,328
+    49      20,963,328       1,047,756                      20,963,328
+    50      62,906,368      13,782,048                      62,906,368
+    51      20,963,328       1,047,756                      20,963,328
+    52      31,449,088       1,048,576                      31,449,088
+    53      20,963,328       1,047,756                      20,963,328
+    54      31,449,088               0                      31,449,088
+Rollback Segment Storage for DB: ORACLE  Instance: orcl  Snaps: 215 -216
+->Optimal Size should be larger than Avg Active
+
+RBS No    Segment Size      Avg Active    Optimal Size    Maximum Size
+------ --------------- --------------- --------------- ---------------
+    55      20,963,328               0                      20,963,328
+    56      20,963,328       1,047,756                      20,963,328
+    57      20,963,328               0                      20,963,328
+    58      20,963,328               0                      20,963,328
+    59      20,963,328       1,048,576                      20,963,328
+    60      20,963,328               0                      20,963,328
+          -------------------------------------------------------------
+Latch Activity for DB: ORACLE  Instance: orcl  Snaps: 215 -216
+->"Get Requests", "Pct Get Miss" and "Avg Slps/Miss" are statistics for
+  willing-to-wait latch get requests
+->"NoWait Requests", "Pct NoWait Miss" are for no-wait latch get requests
+->"Pct Misses" for both should be very close to 0.0
+
+                                                Pct    Avg                 Pct
+                                   Get          Get   Slps       NoWait NoWait
+Latch Name                       Requests      Miss  /Miss     Requests   Miss
+----------------------------- -------------- ------ ------ ------------ ------
+Token Manager                            552    0.0                   0
+active checkpoint queue latch          2,714    0.0                   0
+archive control                           17    0.0                   0
+archive process latch                     12    0.0                   0
+cache buffer handles                  89,381    0.0    0.0            0
+cache buffers chains             107,937,915    0.0    0.0      351,252    0.1
+cache buffers lru chain               61,326    0.0    0.4      255,970    0.1
+channel handle pool latch                 65    0.0                   0
+channel operations parent lat            115    0.0                   0
+checkpoint queue latch                46,095    0.0    0.0            0
+dml lock allocation                   99,612    0.0    0.5            0
+enqueue hash chains                  222,709    0.0    0.0            0
+enqueues                             232,433    0.0    0.2            0
+event group latch                         50    0.0                   0
+file number translation table             45    0.0                   0
+global transaction                       419    0.0                   0
+global tx free list                        5    0.0                   0
+global tx hash mapping                    23    0.0                   0
+job_queue_processes parameter             10    0.0                   0
+ktm global data                            2    0.0                   0
+latch wait list                          431    0.0                 432    0.0
+library cache                      3,134,212    0.1    0.1            0
+library cache load lock                1,662    0.0                   0
+list of block allocation             101,291    0.0                   0
+loader state object freelist             185    0.0                   0
+longop free list                       1,931    0.0                   0
+messages                             143,878    0.0    0.4            0
+multiblock read objects               14,976    0.0                   0
+ncodef allocation latch                   10    0.0                   0
+process allocation                        50    0.0                  50    0.0
+process group creation                    65    0.0                   0
+redo allocation                      438,677    0.0    0.0            0
+redo writing                          91,407    0.0    0.0            0
+row cache objects                  1,085,903    0.0    0.1            0
+sequence cache                       161,042    0.0    0.1            0
+session allocation                   373,794    0.0    0.0            0
+session idle bit                      59,848    0.0                   0
+session switching                         10    0.0                   0
+shared pool                           97,693    0.0    0.4            0
+sort extent pool                         741    0.0                   0
+transaction allocation               151,510    0.0    0.0            0
+transaction branch allocation            151    0.0                   0
+undo global data                   1,181,840    0.0    0.0            0
+user lock                                130    0.0                   0
+          -------------------------------------------------------------
+Latch Sleep breakdown for DB: ORACLE  Instance: orcl  Snaps: 215 -216
+-> ordered by misses desc
+
+                                Get                                  Spin &
+Latch Name                    Requests         Misses      Sleeps Sleeps 1->4
+-------------------------- -------------- ----------- ----------- ------------
+cache buffers chains          107,937,915      18,382         766 17742/524/10
+                                                                  6/10/0
+library cache                   3,134,212       4,051         452 3629/400/15/
+                                                                  7/0
+undo global data                1,181,840         156           2 154/2/0/0/0
+row cache objects               1,085,903         102           7 95/7/0/0/0
+redo allocation                   438,677          57           2 55/2/0/0/0
+session allocation                373,794          34           1 33/1/0/0/0
+sequence cache                    161,042          31           2 29/2/0/0/0
+enqueue hash chains               222,709          21           1 20/1/0/0/0
+cache buffers lru chain            61,326          14           5 10/3/1/0/0
+enqueues                          232,433          13           2 11/2/0/0/0
+messages                          143,878           8           3 5/3/0/0/0
+shared pool                        97,693           8           3 5/3/0/0/0
+dml lock allocation                99,612           2           1 1/1/0/0/0
+          -------------------------------------------------------------
+Latch Miss Sources for DB: ORACLE  Instance: orcl  Snaps: 215 -216
+-> only latches with sleeps are shown
+-> ordered by name, sleeps desc
+
+                                                     NoWait             Waiter
+Latch Name               Where                       Misses     Sleeps  Sleeps
+------------------------ -------------------------- ------- ---------- -------
+cache buffers chains     kcbgtcr: kslbegin                0        667     657
+cache buffers chains     kcbrls: kslbegin                 0         38      45
+cache buffers chains     kcbgcur: kslbegin                0         24      28
+cache buffers chains     kcbzwb                           0         11       0
+cache buffers chains     kcbgtcr                          0          6       0
+cache buffers chains     kcbchg: kslbegin: call CR        0          4       1
+cache buffers chains     kcbzib: multi-block read:        0          4       0
+cache buffers chains     kcbget: pin buffer               0          3      12
+cache buffers chains     kcbzgb: scan from tail. no       0          3       0
+cache buffers chains     kcbchg: kslbegin: bufs not       0          2       1
+cache buffers chains     kcbzib: finish free bufs         0          2      13
+cache buffers chains     kcbget: exchange rls             0          1       0
+cache buffers lru chain  kcbzgb: multiple sets nowa       0          5       0
+dml lock allocation      ktaidm                           0          1       0
+enqueue hash chains      ksqgtl3                          0          1       1
+enqueues                 ksqgtl2                          0          2       0
+library cache            kglget: child: KGLDSBRD          0         97       0
+library cache            kglhdgn: child:                  0         86      10
+library cache            kglpnc: child                    0         56     207
+library cache            kglpnal: child: alloc spac       0         54      19
+library cache            kglupc: child                    0         54     154
+library cache            kglget: child: KGLDSBYD          0         33       2
+library cache            kglic                            0         33       2
+library cache            kglpnal: child: before pro       0         18      21
+library cache            kglpnp: child                    0          9      24
+library cache            kglhdgc: child:                  0          4       1
+library cache            kglati                           0          2       0
+library cache            kgldti: 2child                   0          2       5
+library cache            kglrtl                           0          2       0
+library cache            kglpin                           0          2       2
+library cache            kgllkdl: child: cleanup          0          1       1
+messages                 ksaamb: after wakeup             0          1       3
+messages                 ksarcv: after wait               0          1       0
+messages                 ksarcv                           0          1       0
+redo allocation          kcrfwr: redo allocation          0          1       2
+redo allocation          kcrfwi: more space               0          1       2
+row cache objects        kqrpre: find obj                 0          5       2
+row cache objects        kqreqd: rel enqueue              0          1       1
+row cache objects        kqrpup                           0          1       0
+sequence cache           kdnnxt: cached seq               0          2       1
+session allocation       ksudlc                           0          1       2
+shared pool              kghalo                           0          3       2
+undo global data         ktudba: KSLBEGIN                 0          2       1
+          -------------------------------------------------------------
+Parent Latch Statistics DB: ORACLE  Instance: orcl  Snaps: 215 -216
+-> only latches with sleeps are shown
+-> ordered by name
+
+                              Get                                 Spin &
+Latch Name                  Requests         Misses     Sleeps Sleeps 1->4
+------------------------ -------------- ----------- ---------- ------------
+dml lock allocation             102,287           2          1 1/1/0/0/0
+enqueues                        240,994          13          2 11/2/0/0/0
+messages                        147,035           7          3 4/3/0/0/0
+redo allocation                 465,525          59          2 57/2/0/0/0
+row cache objects             1,262,708         204         10 194/10/0/0/0
+sequence cache                  173,959          31          2 29/2/0/0/0
+session allocation              434,133          38          1 37/1/0/0/0
+shared pool                     117,221          10          3 7/3/0/0/0
+undo global data              1,456,139         201          2 199/2/0/0/0
+          -------------------------------------------------------------
+Child Latch Statistics DB: ORACLE  Instance: orcl  Snaps: 215 -216
+-> only latches with sleeps are shown
+-> ordered by name, gets desc
+
+                        Child      Get
+Latch Name                Num    Requests         Misses     Sleeps
+---------------------- ------ -------------- ----------- ----------
+   Spin &
+ Sleeps 1->4
+-------------
+cache buffers chains      789      7,411,530       6,714         19
+6697/16/0/1/0
+cache buffers chains      700      3,769,897       1,298         53
+1253/37/8/0/0
+cache buffers chains      419      2,593,046         683         10
+674/8/1/0/0
+cache buffers chains      504      1,612,935         602         12
+590/12/0/0/0
+cache buffers chains      492      1,584,407         370         30
+347/16/7/0/0
+cache buffers chains      734      1,254,600         224         23
+206/14/3/1/0
+cache buffers chains      685      1,215,820         234          5
+229/5/0/0/0
+cache buffers chains      839      1,139,103          98         24
+78/16/4/0/0
+cache buffers chains      341      1,091,078         342          5
+337/5/0/0/0
+cache buffers chains      999      1,037,429         202          4
+198/4/0/0/0
+cache buffers chains      372        993,693         344          7
+338/5/1/0/0
+cache buffers chains      489        960,861         224         16
+214/4/6/0/0
+cache buffers chains      993        810,441         352          8
+345/6/1/0/0
+cache buffers chains       39        778,907         136          8
+130/4/2/0/0
+cache buffers chains      790        737,613         178          8
+170/8/0/0/0
+cache buffers chains      990        733,380          23          6
+17/6/0/0/0
+cache buffers chains      490        703,338         179          4
+176/2/1/0/0
+cache buffers chains      699        698,806          46          7
+41/3/2/0/0
+cache buffers chains      791        695,984          94          1
+93/1/0/0/0
+cache buffers chains      792        689,946          89          2
+87/2/0/0/0
+cache buffers chains      793        684,223          85          4
+81/4/0/0/0
+cache buffers chains      794        679,881          78          2
+76/2/0/0/0
+cache buffers chains      795        678,357          79          2
+77/2/0/0/0
+cache buffers chains      798        672,978          67          2
+65/2/0/0/0
+cache buffers chains      796        672,641          70          4
+66/4/0/0/0
+Child Latch Statistics DB: ORACLE  Instance: orcl  Snaps: 215 -216
+-> only latches with sleeps are shown
+-> ordered by name, gets desc
+
+                        Child      Get
+Latch Name                Num    Requests         Misses     Sleeps
+---------------------- ------ -------------- ----------- ----------
+   Spin &
+ Sleeps 1->4
+-------------
+cache buffers chains      797        668,800          86         10
+77/8/1/0/0
+cache buffers chains      799        660,626          59          4
+56/2/1/0/0
+cache buffers chains      893        642,425         216          6
+211/4/1/0/0
+cache buffers chains      748        613,978         139          5
+135/3/1/0/0
+cache buffers chains      982        605,489          84          8
+78/4/2/0/0
+cache buffers chains      973        569,806          73          6
+69/2/2/0/0
+cache buffers chains      494        514,582          80          2
+78/2/0/0/0
+cache buffers chains      491        494,654          81          8
+73/8/0/0/0
+cache buffers chains       13        493,133          55          5
+51/3/1/0/0
+cache buffers chains      894        492,699         120         14
+111/6/1/2/0
+cache buffers chains      485        488,321          63          2
+61/2/0/0/0
+cache buffers chains      355        457,692          52          1
+51/1/0/0/0
+cache buffers chains      493        455,778          66          3
+64/1/1/0/0
+cache buffers chains      173        441,056         133         14
+120/12/1/0/0
+cache buffers chains      373        399,022          59          6
+54/4/1/0/0
+cache buffers chains      689        397,675          49          3
+46/3/0/0/0
+cache buffers chains      377        395,240         482          4
+479/2/1/0/0
+cache buffers chains      995        394,449         144          2
+142/2/0/0/0
+cache buffers chains      273        392,983          13          1
+12/1/0/0/0
+cache buffers chains      923        389,109          47          3
+44/3/0/0/0
+cache buffers chains      356        374,841          75          7
+69/5/1/0/0
+cache buffers chains      557        367,675          99         24
+82/11/5/1/0
+cache buffers chains      571        365,038         116          7
+109/7/0/0/0
+cache buffers chains      343        340,030          40          1
+39/1/0/0/0
+cache buffers chains      837        338,949          40          4
+37/2/1/0/0
+Child Latch Statistics DB: ORACLE  Instance: orcl  Snaps: 215 -216
+-> only latches with sleeps are shown
+-> ordered by name, gets desc
+
+                        Child      Get
+Latch Name                Num    Requests         Misses     Sleeps
+---------------------- ------ -------------- ----------- ----------
+   Spin &
+ Sleeps 1->4
+-------------
+cache buffers chains      991        334,855          18          6
+16/0/0/2/0
+cache buffers chains      437        330,642          61          6
+56/4/1/0/0
+cache buffers chains      297        326,788          25          1
+24/1/0/0/0
+cache buffers chains      347        325,518          49          3
+46/3/0/0/0
+cache buffers chains      271        316,554          12          1
+11/1/0/0/0
+cache buffers chains      128        314,617          86          6
+81/4/1/0/0
+cache buffers chains      825        309,084       1,470         20
+1454/12/4/0/0
+cache buffers chains      754        307,038          14          1
+13/1/0/0/0
+cache buffers chains      994        303,857          22          2
+20/2/0/0/0
+cache buffers chains      981        300,126          59          1
+58/1/0/0/0
+cache buffers chains     1003        299,200          38          3
+36/1/1/0/0
+cache buffers chains      486        293,317          43          7
+38/3/2/0/0
+cache buffers chains      345        293,207          26          2
+24/2/0/0/0
+cache buffers chains      300        289,785          64          6
+59/4/1/0/0
+cache buffers chains      577        286,855          59         11
+50/7/2/0/0
+cache buffers chains      998        280,060          15          3
+13/1/1/0/0
+cache buffers chains      380        279,258          33          3
+30/3/0/0/0
+cache buffers chains      487        277,324          39          3
+36/3/0/0/0
+cache buffers chains     1004        269,033          25          2
+23/2/0/0/0
+cache buffers chains      388        261,731          61          8
+56/2/3/0/0
+cache buffers chains      975        261,330          12          2
+10/2/0/0/0
+cache buffers chains      974        260,785          24          3
+23/0/0/1/0
+cache buffers chains       53        258,051          39          2
+37/2/0/0/0
+cache buffers chains      348        256,196          10          2
+9/0/1/0/0
+cache buffers chains      992        255,704           5          2
+4/0/1/0/0
+Child Latch Statistics DB: ORACLE  Instance: orcl  Snaps: 215 -216
+-> only latches with sleeps are shown
+-> ordered by name, gets desc
+
+                        Child      Get
+Latch Name                Num    Requests         Misses     Sleeps
+---------------------- ------ -------------- ----------- ----------
+   Spin &
+ Sleeps 1->4
+-------------
+cache buffers chains      738        251,820          61          5
+56/5/0/0/0
+cache buffers chains      755        251,450          53          2
+52/0/1/0/0
+cache buffers chains      989        246,661          10          5
+7/2/0/1/0
+cache buffers chains      371        245,949          33          2
+32/0/1/0/0
+cache buffers chains      987        244,268          15          5
+10/5/0/0/0
+cache buffers chains      284        243,807          37          1
+36/1/0/0/0
+cache buffers chains      986        236,021           6          1
+5/1/0/0/0
+cache buffers chains      369        232,813          23          4
+19/4/0/0/0
+cache buffers chains      972        231,488           7          1
+6/1/0/0/0
+cache buffers chains       88        231,261         131          1
+130/1/0/0/0
+cache buffers chains      868        230,593          15          2
+14/0/1/0/0
+cache buffers chains      344        228,959          21          2
+19/2/0/0/0
+cache buffers chains      384        228,641          22          5
+18/3/1/0/0
+cache buffers chains      976        221,530          14          1
+13/1/0/0/0
+cache buffers chains       26        221,131          37          2
+36/0/1/0/0
+cache buffers chains       49        218,415          93         12
+81/12/0/0/0
+cache buffers chains      386        217,912          22          2
+20/2/0/0/0
+cache buffers chains      930        217,400          27          5
+25/0/1/1/0
+cache buffers chains      931        216,630          24          4
+22/0/2/0/0
+cache buffers chains      342        215,298          22          1
+21/1/0/0/0
+cache buffers chains       12        212,894          10          3
+9/0/0/1/0
+cache buffers chains     1001        212,743          20          3
+19/0/0/1/0
+cache buffers chains      381        212,455          23          1
+22/1/0/0/0
+cache buffers chains      997        211,769          18          5
+14/3/1/0/0
+cache buffers chains      484        210,989          24          6
+20/2/2/0/0
+Child Latch Statistics DB: ORACLE  Instance: orcl  Snaps: 215 -216
+-> only latches with sleeps are shown
+-> ordered by name, gets desc
+
+                        Child      Get
+Latch Name                Num    Requests         Misses     Sleeps
+---------------------- ------ -------------- ----------- ----------
+   Spin &
+ Sleeps 1->4
+-------------
+cache buffers chains       22        204,753          27          2
+25/2/0/0/0
+cache buffers chains      362        202,975          16          2
+14/2/0/0/0
+cache buffers chains      382        202,198          15          5
+12/2/0/1/0
+cache buffers chains      370        200,558           7          2
+5/2/0/0/0
+cache buffers chains      479        197,397          21          1
+20/1/0/0/0
+cache buffers chains      374        195,722          18          4
+14/4/0/0/0
+cache buffers chains      497        195,651          21          1
+20/1/0/0/0
+cache buffers chains      895        194,132          97          5
+94/1/2/0/0
+cache buffers chains      361        193,369          21          4
+18/2/1/0/0
+cache buffers chains      756        192,804          30          2
+28/2/0/0/0
+cache buffers chains      985        191,813           9          1
+8/1/0/0/0
+cache buffers chains      408        189,973          21          1
+20/1/0/0/0
+cache buffers chains      365        189,907           7          2
+6/0/1/0/0
+cache buffers chains       37        189,332          23          4
+21/1/0/1/0
+cache buffers chains      363        188,665          20          6
+15/4/1/0/0
+cache buffers chains      385        186,812          30          1
+29/1/0/0/0
+cache buffers chains      108        186,603          32          3
+29/3/0/0/0
+cache buffers chains      359        182,914          10          2
+9/0/1/0/0
+cache buffers chains      390        181,912          26          4
+24/1/0/1/0
+cache buffers chains      984        178,672          10          2
+8/2/0/0/0
+cache buffers chains      295        177,777          14          2
+12/2/0/0/0
+cache buffers chains      525        175,969          10          1
+9/1/0/0/0
+cache buffers chains      358        175,572           9          2
+8/0/1/0/0
+cache buffers chains       89        175,569          52          1
+51/1/0/0/0
+cache buffers chains      841        174,388           9          1
+8/1/0/0/0
+Child Latch Statistics DB: ORACLE  Instance: orcl  Snaps: 215 -216
+-> only latches with sleeps are shown
+-> ordered by name, gets desc
+
+                        Child      Get
+Latch Name                Num    Requests         Misses     Sleeps
+---------------------- ------ -------------- ----------- ----------
+   Spin &
+ Sleeps 1->4
+-------------
+cache buffers chains      977        170,717          10          3
+8/1/1/0/0
+cache buffers chains      624        166,606          36          4
+32/4/0/0/0
+cache buffers chains      667        165,152          21          1
+20/1/0/0/0
+cache buffers chains      495        164,725          17          4
+13/4/0/0/0
+cache buffers chains     1014        163,428          13          4
+9/4/0/0/0
+cache buffers chains      954        158,276          20          3
+17/3/0/0/0
+cache buffers chains      272        157,262          13          1
+12/1/0/0/0
+cache buffers chains      630        156,098          16          3
+13/3/0/0/0
+cache buffers chains      549        150,614          17          1
+16/1/0/0/0
+cache buffers chains      357        150,510          10          3
+7/3/0/0/0
+cache buffers chains      978        150,315          14          5
+11/1/2/0/0
+cache buffers chains     1024        149,994          12          3
+10/1/1/0/0
+cache buffers chains      360        149,223          14          3
+12/1/1/0/0
+cache buffers chains      129        148,573           7          1
+6/1/0/0/0
+cache buffers chains      836        148,446           9          3
+6/3/0/0/0
+cache buffers chains      649        142,881         128          6
+122/6/0/0/0
+cache buffers chains      274        142,856          14          2
+12/2/0/0/0
+cache buffers chains      286        141,890          10          1
+9/1/0/0/0
+cache buffers chains      688        141,564          20          2
+18/2/0/0/0
+cache buffers chains      205        139,991          11          1
+10/1/0/0/0
+cache buffers chains      718        138,708          11          1
+10/1/0/0/0
+cache buffers chains     1023        135,578           9          3
+7/1/1/0/0
+cache buffers chains      391        133,980           9          2
+7/2/0/0/0
+cache buffers chains      285        132,496           8          1
+7/1/0/0/0
+cache buffers chains        4        132,470          12          4
+10/0/2/0/0
+Child Latch Statistics DB: ORACLE  Instance: orcl  Snaps: 215 -216
+-> only latches with sleeps are shown
+-> ordered by name, gets desc
+
+                        Child      Get
+Latch Name                Num    Requests         Misses     Sleeps
+---------------------- ------ -------------- ----------- ----------
+   Spin &
+ Sleeps 1->4
+-------------
+cache buffers chains     1010        131,526          35          2
+33/2/0/0/0
+cache buffers chains     1005        131,474          11          1
+10/1/0/0/0
+cache buffers chains     1013        128,815           5          2
+4/0/1/0/0
+cache buffers chains      422        126,452          11          2
+9/2/0/0/0
+cache buffers chains       11        125,696           6          1
+5/1/0/0/0
+cache buffers chains      478        124,899          14          1
+13/1/0/0/0
+cache buffers chains      909        124,384           6          1
+5/1/0/0/0
+cache buffers chains      927        123,935          11          4
+8/2/1/0/0
+cache buffers chains      912        122,494           6          5
+3/1/2/0/0
+cache buffers chains      948        121,689           4          1
+3/1/0/0/0
+cache buffers chains      124        121,043           6          3
+5/0/0/1/0
+cache buffers chains        8        121,000          13          1
+12/1/0/0/0
+cache buffers chains       18        120,869           7          1
+6/1/0/0/0
+cache buffers chains      713        119,931           9          2
+7/2/0/0/0
+cache buffers chains       16        118,897          13          1
+12/1/0/0/0
+cache buffers chains      407        114,499          16          2
+14/2/0/0/0
+cache buffers chains      913        114,166           5          1
+4/1/0/0/0
+cache buffers chains       27        113,716          12          4
+10/1/0/1/0
+cache buffers chains     1011        113,334           9          1
+8/1/0/0/0
+cache buffers chains      933        113,168          17          1
+16/1/0/0/0
+cache buffers chains      710        112,094          12          1
+11/1/0/0/0
+cache buffers chains      136        110,915          18          1
+17/1/0/0/0
+cache buffers chains      140        110,206           7          1
+6/1/0/0/0
+cache buffers chains      202        109,162           9          1
+8/1/0/0/0
+cache buffers chains      305        108,977           6          4
+3/2/1/0/0
+Child Latch Statistics DB: ORACLE  Instance: orcl  Snaps: 215 -216
+-> only latches with sleeps are shown
+-> ordered by name, gets desc
+
+                        Child      Get
+Latch Name                Num    Requests         Misses     Sleeps
+---------------------- ------ -------------- ----------- ----------
+   Spin &
+ Sleeps 1->4
+-------------
+cache buffers chains     1009        107,185          11          2
+10/0/1/0/0
+cache buffers chains      283        106,985           6          1
+5/1/0/0/0
+cache buffers chains      255        105,286           3          1
+2/1/0/0/0
+cache buffers chains       90        105,116          20          2
+18/2/0/0/0
+cache buffers chains      599        104,537          10          1
+9/1/0/0/0
+cache buffers chains      131        104,436           6          1
+5/1/0/0/0
+cache buffers chains      714        103,419          12          1
+11/1/0/0/0
+cache buffers chains      352        102,805           7          2
+5/2/0/0/0
+cache buffers chains      310        100,143           4          1
+3/1/0/0/0
+cache buffers chains     1012         99,325          10          1
+9/1/0/0/0
+cache buffers chains      932         98,663          13          2
+12/0/1/0/0
+cache buffers chains      413         98,411           7          1
+6/1/0/0/0
+cache buffers chains       21         98,178          12          1
+11/1/0/0/0
+cache buffers chains     1007         97,695          13          2
+11/2/0/0/0
+cache buffers chains      815         97,071           6          1
+5/1/0/0/0
+cache buffers chains      406         95,464           6          2
+4/2/0/0/0
+cache buffers chains      719         94,468          17          2
+15/2/0/0/0
+cache buffers chains       40         93,017           2          2
+1/0/1/0/0
+cache buffers chains      402         92,416           9          1
+8/1/0/0/0
+cache buffers chains      215         91,841           2          1
+1/1/0/0/0
+cache buffers chains      280         91,780           4          2
+2/2/0/0/0
+cache buffers chains      399         91,360           4          1
+3/1/0/0/0
+cache buffers chains      720         91,337          14          2
+13/0/1/0/0
+cache buffers chains      207         91,288           8          2
+6/2/0/0/0
+cache buffers chains      644         90,109           7          1
+6/1/0/0/0
+Child Latch Statistics DB: ORACLE  Instance: orcl  Snaps: 215 -216
+-> only latches with sleeps are shown
+-> ordered by name, gets desc
+
+                        Child      Get
+Latch Name                Num    Requests         Misses     Sleeps
+---------------------- ------ -------------- ----------- ----------
+   Spin &
+ Sleeps 1->4
+-------------
+cache buffers chains      307         89,912           7          2
+5/2/0/0/0
+cache buffers chains      482         89,251           2          1
+1/1/0/0/0
+cache buffers chains      291         88,981           6          2
+4/2/0/0/0
+cache buffers chains      353         88,910           7          1
+6/1/0/0/0
+cache buffers chains      813         87,805           5          1
+4/1/0/0/0
+cache buffers chains      224         85,693           4          2
+2/2/0/0/0
+cache buffers chains       45         85,648           5          2
+3/2/0/0/0
+cache buffers chains     1015         85,358           6          3
+3/3/0/0/0
+cache buffers chains      282         85,306           4          1
+3/1/0/0/0
+cache buffers chains      696         85,025           5          1
+4/1/0/0/0
+cache buffers chains      193         84,548           3          1
+2/1/0/0/0
+cache buffers chains      287         84,547           4          2
+2/2/0/0/0
+cache buffers chains      597         84,480          22          1
+21/1/0/0/0
+cache buffers chains      290         84,042           3          1
+2/1/0/0/0
+cache buffers chains      580         83,792           3          2
+1/2/0/0/0
+cache buffers chains      628         83,278           5          2
+3/2/0/0/0
+cache buffers chains      217         83,205           2          2
+0/2/0/0/0
+cache buffers chains      867         83,079          14          3
+11/3/0/0/0
+cache buffers chains      934         82,810           6          1
+5/1/0/0/0
+cache buffers chains       51         82,017          11          1
+10/1/0/0/0
+cache buffers chains      430         81,504           2          2
+0/2/0/0/0
+cache buffers chains      354         81,116           4          1
+3/1/0/0/0
+cache buffers chains      467         80,097          12          2
+11/0/1/0/0
+cache buffers chains      455         79,360           5          1
+4/1/0/0/0
+cache buffers chains      277         79,253           4          1
+3/1/0/0/0
+Child Latch Statistics DB: ORACLE  Instance: orcl  Snaps: 215 -216
+-> only latches with sleeps are shown
+-> ordered by name, gets desc
+
+                        Child      Get
+Latch Name                Num    Requests         Misses     Sleeps
+---------------------- ------ -------------- ----------- ----------
+   Spin &
+ Sleeps 1->4
+-------------
+cache buffers chains      908         78,404           4          2
+3/0/1/0/0
+cache buffers chains      910         78,390           4          1
+3/1/0/0/0
+cache buffers chains      706         78,123           3          1
+2/1/0/0/0
+cache buffers chains      434         76,665           2          1
+1/1/0/0/0
+cache buffers chains      228         76,535           1          1
+0/1/0/0/0
+cache buffers chains      705         76,400           5          2
+3/2/0/0/0
+cache buffers chains       52         76,061          10          3
+7/3/0/0/0
+cache buffers chains      101         75,188           5          1
+4/1/0/0/0
+cache buffers chains       55         75,134           4          1
+3/1/0/0/0
+cache buffers chains     1020         72,993           9          2
+8/0/1/0/0
+cache buffers chains      736         72,217           8          2
+7/0/1/0/0
+cache buffers chains      420         72,150           4          2
+3/0/1/0/0
+cache buffers chains      176         70,283           2          1
+1/1/0/0/0
+cache buffers chains      622         70,223          15          1
+14/1/0/0/0
+cache buffers chains      439         70,068           2          1
+1/1/0/0/0
+cache buffers chains      331         69,333           6          3
+4/1/1/0/0
+cache buffers chains      619         69,182           3          3
+1/1/1/0/0
+cache buffers chains       14         68,995           2          1
+1/1/0/0/0
+cache buffers chains      730         68,771          10          5
+6/3/1/0/0
+cache buffers chains      805         68,013           2          1
+1/1/0/0/0
+cache buffers chains      301         67,895           2          1
+1/1/0/0/0
+cache buffers chains      625         67,441          26          1
+25/1/0/0/0
+cache buffers chains      785         67,079           3          1
+2/1/0/0/0
+cache buffers chains      309         66,795           3          1
+2/1/0/0/0
+cache buffers chains     1017         66,003           2          2
+1/0/1/0/0
+Child Latch Statistics DB: ORACLE  Instance: orcl  Snaps: 215 -216
+-> only latches with sleeps are shown
+-> ordered by name, gets desc
+
+                        Child      Get
+Latch Name                Num    Requests         Misses     Sleeps
+---------------------- ------ -------------- ----------- ----------
+   Spin &
+ Sleeps 1->4
+-------------
+cache buffers chains      442         65,893           3          1
+2/1/0/0/0
+cache buffers chains       28         65,570           4          2
+2/2/0/0/0
+cache buffers chains       46         64,744           4          2
+2/2/0/0/0
+cache buffers chains        1         64,669           3          1
+2/1/0/0/0
+cache buffers chains      855         64,117           3          1
+2/1/0/0/0
+cache buffers chains      440         63,746           6          2
+4/2/0/0/0
+cache buffers chains      643         63,138           8          1
+7/1/0/0/0
+cache buffers chains      635         63,039           8          2
+6/2/0/0/0
+cache buffers chains      708         62,509          19          1
+18/1/0/0/0
+cache buffers chains      516         62,357           3          2
+2/0/1/0/0
+cache buffers chains      936         62,206           2          1
+1/1/0/0/0
+cache buffers chains      315         62,148           5          1
+4/1/0/0/0
+cache buffers chains      443         61,392           7          1
+6/1/0/0/0
+cache buffers chains      441         61,273           3          1
+2/1/0/0/0
+cache buffers chains      648         60,818           8          2
+6/2/0/0/0
+cache buffers chains      474         60,376           4          1
+3/1/0/0/0
+cache buffers chains      560         60,221           3          1
+2/1/0/0/0
+cache buffers chains      955         60,004           4          2
+2/2/0/0/0
+cache buffers chains      711         59,731           5          1
+4/1/0/0/0
+cache buffers chains      767         59,129           2          1
+1/1/0/0/0
+cache buffers chains      639         59,038           7          2
+5/2/0/0/0
+cache buffers chains      637         59,011           7          1
+6/1/0/0/0
+cache buffers chains      503         58,205           8          1
+7/1/0/0/0
+cache buffers chains       30         58,191           3          1
+2/1/0/0/0
+cache buffers chains      642         58,185          13          1
+12/1/0/0/0
+Child Latch Statistics DB: ORACLE  Instance: orcl  Snaps: 215 -216
+-> only latches with sleeps are shown
+-> ordered by name, gets desc
+
+                        Child      Get
+Latch Name                Num    Requests         Misses     Sleeps
+---------------------- ------ -------------- ----------- ----------
+   Spin &
+ Sleeps 1->4
+-------------
+cache buffers chains      773         58,169           5          1
+4/1/0/0/0
+cache buffers chains      435         58,057           4          1
+3/1/0/0/0
+cache buffers chains      500         57,866          11          2
+10/0/1/0/0
+cache buffers chains      898         57,739          20          1
+19/1/0/0/0
+cache buffers chains      652         57,707           1          1
+0/1/0/0/0
+cache buffers chains      672         57,556           2          1
+1/1/0/0/0
+cache buffers chains      294         57,534           2          2
+1/0/1/0/0
+cache buffers chains      189         57,280           2          1
+1/1/0/0/0
+cache buffers chains      854         57,178           3          1
+2/1/0/0/0
+cache buffers chains      903         56,189          16          2
+14/2/0/0/0
+cache buffers chains      704         55,876           3          1
+2/1/0/0/0
+cache buffers chains      673         55,726           3          1
+2/1/0/0/0
+cache buffers chains      528         55,287           5          1
+4/1/0/0/0
+cache buffers chains      679         55,140           2          1
+1/1/0/0/0
+cache buffers chains      267         54,527           2          2
+0/2/0/0/0
+cache buffers chains       93         54,491           2          1
+1/1/0/0/0
+cache buffers chains      527         53,983          10          2
+8/2/0/0/0
+cache buffers chains       60         53,967           1          1
+0/1/0/0/0
+cache buffers chains      321         53,662           1          1
+0/1/0/0/0
+cache buffers chains      513         53,364           3          1
+2/1/0/0/0
+cache buffers chains      314         53,261           2          1
+1/1/0/0/0
+cache buffers chains      771         51,718           1          1
+0/1/0/0/0
+cache buffers chains      530         51,523           2          1
+1/1/0/0/0
+cache buffers chains      559         51,138           1          1
+0/1/0/0/0
+cache buffers chains      640         50,783           4          1
+3/1/0/0/0
+Child Latch Statistics DB: ORACLE  Instance: orcl  Snaps: 215 -216
+-> only latches with sleeps are shown
+-> ordered by name, gets desc
+
+                        Child      Get
+Latch Name                Num    Requests         Misses     Sleeps
+---------------------- ------ -------------- ----------- ----------
+   Spin &
+ Sleeps 1->4
+-------------
+cache buffers chains      595         50,743           6          1
+5/1/0/0/0
+cache buffers chains      675         50,584           3          1
+2/1/0/0/0
+cache buffers chains      526         50,566           5          2
+3/2/0/0/0
+cache buffers chains      588         50,402           3          1
+2/1/0/0/0
+cache buffers chains      531         50,338           1          1
+0/1/0/0/0
+cache buffers chains      874         49,834           3          1
+2/1/0/0/0
+cache buffers chains      552         49,408           4          1
+3/1/0/0/0
+cache buffers chains      598         49,175           3          1
+2/1/0/0/0
+cache buffers chains      939         49,147           2          1
+1/1/0/0/0
+cache buffers chains      317         49,000           5          2
+3/2/0/0/0
+cache buffers chains      904         48,551           2          1
+1/1/0/0/0
+cache buffers chains      265         48,159           4          1
+3/1/0/0/0
+cache buffers chains      199         48,015           1          2
+0/0/1/0/0
+cache buffers chains      537         47,560           3          3
+1/1/1/0/0
+cache buffers chains      906         47,546           3          2
+1/2/0/0/0
+cache buffers chains      676         46,837           5          2
+3/2/0/0/0
+cache buffers chains      961         46,618           4          1
+3/1/0/0/0
+cache buffers chains      245         46,513           1          1
+0/1/0/0/0
+cache buffers chains      778         46,362           3          1
+2/1/0/0/0
+cache buffers chains      629         46,251           2          2
+1/0/1/0/0
+cache buffers chains      535         46,199           1          1
+0/1/0/0/0
+cache buffers chains      268         46,149           2          1
+1/1/0/0/0
+cache buffers chains      338         45,953           2          1
+1/1/0/0/0
+cache buffers chains      882         44,802           3          1
+2/1/0/0/0
+cache buffers chains      546         44,753           8          1
+7/1/0/0/0
+Child Latch Statistics DB: ORACLE  Instance: orcl  Snaps: 215 -216
+-> only latches with sleeps are shown
+-> ordered by name, gets desc
+
+                        Child      Get
+Latch Name                Num    Requests         Misses     Sleeps
+---------------------- ------ -------------- ----------- ----------
+   Spin &
+ Sleeps 1->4
+-------------
+cache buffers chains      917         44,282           2          1
+1/1/0/0/0
+cache buffers chains      857         44,111           2          1
+1/1/0/0/0
+cache buffers chains       63         43,999           2          1
+1/1/0/0/0
+cache buffers chains      521         43,741          12          2
+10/2/0/0/0
+cache buffers chains      554         43,535           2          1
+1/1/0/0/0
+cache buffers chains      523         43,193          10          1
+9/1/0/0/0
+cache buffers chains      971         42,852           3          1
+2/1/0/0/0
+cache buffers chains      609         42,371           1          1
+0/1/0/0/0
+cache buffers chains       68         42,348           2          1
+1/1/0/0/0
+cache buffers chains      824         42,088           4          2
+3/0/1/0/0
+cache buffers chains      188         41,868           1          1
+0/1/0/0/0
+cache buffers chains      545         41,780           2          2
+1/0/1/0/0
+cache buffers chains      150         41,695           1          1
+0/1/0/0/0
+cache buffers chains      349         41,692           7          1
+6/1/0/0/0
+cache buffers chains      608         41,687           6          1
+5/1/0/0/0
+cache buffers chains      623         41,510          10          1
+9/1/0/0/0
+cache buffers chains      900         40,072          21          1
+20/1/0/0/0
+cache buffers chains      100         38,269           1          1
+0/1/0/0/0
+cache buffers chains      115         37,439           2          1
+1/1/0/0/0
+cache buffers chains      879         37,190           5          1
+4/1/0/0/0
+cache buffers chains      871         35,275          11          3
+8/3/0/0/0
+cache buffers chains      869         35,129          13          1
+12/1/0/0/0
+cache buffers chains      881         34,619           2          1
+1/1/0/0/0
+cache buffers chains       76         34,110           3          2
+1/2/0/0/0
+cache buffers chains      195         29,409           2          2
+1/0/1/0/0
+Child Latch Statistics DB: ORACLE  Instance: orcl  Snaps: 215 -216
+-> only latches with sleeps are shown
+-> ordered by name, gets desc
+
+                        Child      Get
+Latch Name                Num    Requests         Misses     Sleeps
+---------------------- ------ -------------- ----------- ----------
+   Spin &
+ Sleeps 1->4
+-------------
+cache buffers chains      102         29,018           1          1
+0/1/0/0/0
+cache buffers lru chai      1         36,946           9          1
+8/1/0/0/0
+cache buffers lru chai      2         36,652          11          6
+6/4/1/0/0
+enqueue hash chains         2        131,839          10          1
+9/1/0/0/0
+library cache               1      1,449,458       1,865        167
+1705/155/3/2/
+0
+library cache               2      1,238,011       1,628        163
+1478/140/7/3/
+0
+library cache               3      1,233,804       1,577        216
+1376/191/6/4/
+0
+          -------------------------------------------------------------
+Dictionary Cache Stats for DB: ORACLE  Instance: orcl  Snaps: 215 -216
+->"Pct Misses"  should be very low (< 2% in most cases)
+->"Cache Usage" is the number of cache entries being used
+->"Pct SGA"     is the ratio of usage to allocated size for that cache
+
+                           Get         Pct     Scan   Pct      Mod  Final  Pct
+Cache                    Requests     Miss Requests  Miss      Req  Usage  SGA
+---------------------- ------------ ------ -------- ----- -------- ------ ----
+dc_constraints                    0               0              0      0    0
+dc_database_links                 0               0              0      0    0
+dc_files                          0               0              0      2   25
+dc_free_extents                  19   31.6        5   0.0       15      6   25
+dc_global_oids                    0               0              0      0    0
+dc_histogram_data                 0               0              0      0    0
+dc_histogram_data_valu            0               0              0      0    0
+dc_histogram_defs            13,418    2.0        0              0  4,417  100
+dc_object_ids               199,945    0.1        0              0  2,688  100
+dc_objects                   11,231    8.2        0              0  5,815  100
+dc_outlines                       0               0              0      0    0
+dc_profiles                      49    0.0        0              0      1   10
+dc_rollback_segments            260    0.0        0              0     66   92
+dc_segments                  51,923    0.6        0              5  3,252  100
+dc_sequence_grants                0               0              0      0    0
+dc_sequences                  9,476    0.0        0          9,476      8   53
+dc_synonyms                   1,405    2.3        0              0    281   98
+dc_tablespace_quotas             20   10.0        0              5      5   22
+dc_tablespaces               17,506    0.0        0              0     14   88
+dc_used_extents                   5  100.0        0              5     13   57
+dc_user_grants               31,361    0.0        0              0     93   80
+dc_usernames                  2,327    0.6        0              0     78   95
+dc_users                     37,315    0.0        0              0     97   89
+ifs_acl_cache_entries             0               0              0      0    0
+          -------------------------------------------------------------
+
+
+Library Cache Activity for DB: ORACLE  Instance: orcl  Snaps: 215 -216
+->"Pct Misses"  should be very low
+
+                    Get       Pct        Pin        Pct               Invali-
+Namespace         Requests    Miss     Requests     Miss     Reloads  dations
+--------------- ------------ ------ -------------- ------ ---------- --------
+SQL AREA               5,189    9.1      1,083,437    0.1          3        1
+TABLE/PROCEDURE       19,215    4.8        250,818    0.4          0        0
+BODY                     232    1.3            232    1.3          0        0
+TRIGGER                  173    5.8            173    5.8          0        0
+INDEX                      0                     0                 0        0
+CLUSTER                   34    0.0             44    0.0          0        0
+OBJECT                     0                     0                 0        0
+PIPE                       0                     0                 0        0
+          -------------------------------------------------------------
+SGA Memory Summary for DB: ORACLE  Instance: orcl  Snaps: 215 -216
+
+SGA regions                       Size in Bytes
+------------------------------ ----------------
+Database Buffers                  1,073,741,824
+Fixed Size                               75,804
+Redo Buffers                            794,624
+Variable Size                       441,700,352
+                               ----------------
+sum                               1,516,312,604
+          -------------------------------------------------------------
+
+
+SGA breakdown difference for DB: ORACLE  Instance: orcl  Snaps: 215 -216
+
+Pool        Name                        Begin value      End value  Difference
+----------- ------------------------ -------------- -------------- -----------
+java pool   free memory                  47,026,176     47,026,176           0
+java pool   memory in use                 2,977,792      2,977,792           0
+shared pool Checkpoint queue                147,528        147,528           0
+shared pool DML locks                       165,120        165,120           0
+shared pool KGFF heap                        16,332         16,332           0
+shared pool KGK heap                         17,560         17,560           0
+shared pool KQLS heap                    33,331,296     34,072,204     740,908
+shared pool PL/SQL DIANA                  8,606,348      9,550,044     943,696
+shared pool PL/SQL MPCODE                 5,745,136      6,334,540     589,404
+shared pool PL/SQL PPCODE                    12,308         18,380       6,072
+shared pool PLS non-lib hp                    2,096          2,096           0
+shared pool State objects                   396,080        396,080           0
+shared pool db_block_buffers             17,825,792     17,825,792           0
+shared pool db_block_hash_buckets         2,228,248      2,228,248           0
+shared pool db_files                        370,988        370,988           0
+shared pool db_handles                      140,000        140,000           0
+shared pool dictionary cache              6,120,740      6,883,148     762,408
+shared pool enqueue_resources               174,240        174,240           0
+shared pool event statistics per ses      1,076,720      1,076,720           0
+shared pool fixed allocation callbac            640            640           0
+shared pool free memory                  90,984,508     42,031,956 -48,952,552
+shared pool joxlod: in ehe                   56,928         56,928           0
+shared pool joxlod: in phe                    4,144          4,144           0
+shared pool joxs heap init                    4,248          4,248           0
+shared pool ktlbk state objects             147,232        147,232           0
+shared pool library cache                26,137,648     29,960,344   3,822,696
+shared pool message pool freequeue          124,552        124,552           0
+shared pool miscellaneous                 1,669,784      1,823,216     153,432
+shared pool processes                       226,240        226,240           0
+shared pool sessions                        674,828        674,828           0
+shared pool sql area                    194,674,112    236,590,804  41,916,692
+shared pool table columns                    33,144         34,488       1,344
+shared pool table definiti                   46,368         49,984       3,616
+shared pool transactions                    306,848        306,848           0
+shared pool trigger defini                  207,308        218,472      11,164
+shared pool trigger inform                    4,352          5,472       1,120
+shared pool trigger source                       88             88           0
+            db_block_buffers          1,073,741,824  1,073,741,824           0
+            fixed_sga                        75,804         75,804           0
+            log_buffer                      786,432        786,432           0
+          -------------------------------------------------------------
+init.ora Parameters for DB: ORACLE  Instance: orcl  Snaps: 215 -216
+
+                                                                  End value
+Parameter Name                Begin value                       (if different)
+----------------------------- --------------------------------- --------------
+processes                     280
+timed_statistics              TRUE
+shared_pool_size              367001600
+shared_pool_reserved_size     50000
+large_pool_size               0
+java_pool_size                50000000
+control_files                 g:\db_orcl\ctl1orcl.ora, f:\db_or
+db_block_buffers              131072
+db_block_size                 8192
+db_block_lru_latches          2
+db_writer_processes           2
+compatible                    8.1.7
+log_archive_start             TRUE
+log_archive_dest_1            LOCATION=I:\ARCHIVE
+log_archive_dest_state_1      ENABLE
+log_buffer                    786432
+log_checkpoint_interval       100000
+log_checkpoint_timeout        1800
+db_files                      1024
+db_file_multiblock_read_count 32
+transaction_auditing          FALSE
+max_enabled_roles             30
+remote_login_passwordfile     SHARED
+db_domain                     world
+global_names                  FALSE
+service_names                 oracle.WORLD
+sort_area_size                819200
+sort_area_retained_size       204800
+db_name                       oracle
+open_cursors                  1500
+session_cached_cursors        200
+hash_multiblock_io_count      32
+background_dump_dest          %RDBMS80%\trace
+user_dump_dest                I:\userdump
+max_dump_file_size            10240
+          -------------------------------------------------------------
+
+End of Report
+
